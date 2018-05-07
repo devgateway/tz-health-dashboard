@@ -27,7 +27,7 @@
     </properties>
 
     <modules>
-
+            <module>dashboard-api</module>
     </modules>
 
 
