@@ -7,4 +7,8 @@ package org.devgateway.rdi.tanzania.controllers;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Boundaries {
+
+    public void getBoundaries(){
+
+    }
 }
