@@ -4,19 +4,9 @@ import { bindActionCreators } from 'redux'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 
-const component = (props) => (<div>
-  <header>
-    <nav>
-      <ul>
-        <li>
-          <Link to='/dashboard/facilities'>Facilities</Link>
-        </li>
-        <li>
-          <Link to='/dashboard/landing'>Landing</Link>
-        </li>
-      </ul>
-    </nav>
-  </header>
+const component = (props) => (
+  <div className="dashboard">
+
   {props.children}
 </div>)
 
