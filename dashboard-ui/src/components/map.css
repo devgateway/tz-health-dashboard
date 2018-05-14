@@ -1,0 +1,10 @@
+svg {
+  pointer-events: all;
+}
+
+path.clickeable {
+  cursor: pointer; }
+
+.background {
+  background-color: #EEE;
+  fill: #EEE; }
