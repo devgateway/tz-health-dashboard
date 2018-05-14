@@ -11,7 +11,7 @@ const  createRoute=()=>{
 
          <DashboardRoute></DashboardRoute>
          <ReportsRoute></ReportsRoute>
-
+          <Redirect from="/" to="/dashboard/landing"></Redirect>
       </div>
     </Route>)
 }

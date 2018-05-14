@@ -7,7 +7,7 @@ import DefaultLayout from './layouts/defaultLayout'
 class AppContainer extends React.Component {
   render () {
     const {history,store} = this.props
-    debugger;
+
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>

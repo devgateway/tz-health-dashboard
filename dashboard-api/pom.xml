@@ -7,13 +7,21 @@
     <groupId>org.devgateway.rdi.tanzania</groupId>
     <artifactId>dashboard-api</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <parent>
         <groupId>org.devgateway.rdi.tanzania</groupId>
         <artifactId>dashboard</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <dependencies>
 
+        <dependency>
+            <groupId>org.devgateway.geo</groupId>
+            <artifactId>geo-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <build>
         <resources>
             <resource>

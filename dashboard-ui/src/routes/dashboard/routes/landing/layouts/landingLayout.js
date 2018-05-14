@@ -1,7 +1,7 @@
 import React from 'react'
-
+import Map from '../components/map'
 
 export default (props) =>(
   <div>
-      <h1>Landing</h1>
+        <Map></Map>
   </div>)

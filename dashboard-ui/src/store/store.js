@@ -2,12 +2,13 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createHashHistory'
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutable'
 import { routerReducer } from 'react-router-redux'
-
+import Immutable from 'immutable';
+// ---------------------------------
 
 export const history = createHistory()
-const initialState = {}
+const initialState =Immutable.Map({})
 const enhancers = []
 const middleware = [
   thunk,

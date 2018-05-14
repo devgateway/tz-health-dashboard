@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 
 const component = (props) => (<div>
-  <h1>Dashboard {props.name}</h1>
   <header>
     <nav>
       <ul>
@@ -26,7 +25,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 const mapStateToProps = state => {
-  debugger;
     return {}
 }
 

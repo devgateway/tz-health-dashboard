@@ -1,12 +1,35 @@
 import Immutable from 'immutable';
+import  * as api from '../../../api'
+const FIND_BOUNDARY = "FIND_BOUNDARY"
+const FIND_BOUNDARY_DONE = "FIND_BOUNDARY_DONE"
+const FIND_BOUNDARY_FAILED = "FIND_BOUNDARY_FAILED"
 
 
+export const findDistricts = () => {
+  return (dispatch, getState) => {
+    api.findDistricts().then(data => {
+      dispatch({ 'type': FIND_BOUNDARY_DONE,'category':'districts', data })
+    })
+  }
+}
+
+
+export const findWards = (params) => {
+
+  return (dispatch, getState) => {
+    api.findDWards(params).then(data => {
+      dispatch({ 'type': FIND_BOUNDARY_DONE, 'category':'wards', data })
+    })
+  }
+}
 
 
 // ------------------------------------ Action Handlers ------------------------------------
 const ACTION_HANDLERS = {
-  ['DO_SOMETHING']: (state, action) => {
-    return state.setIn(['data'], null)
+  ['FIND_BOUNDARY_DONE']: (state, action) => {
+    const { data, category } = action
+
+    return state.setIn([category], data)
   }
 };
 

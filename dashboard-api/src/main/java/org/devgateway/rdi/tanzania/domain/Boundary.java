@@ -27,4 +27,44 @@ public abstract class Boundary {
     Long populationFemale;
     Long populationMale;
     String source;
+
+    public Long getGid() {
+        return gid;
+    }
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Geometry getGeom() {
+        return geom;
+    }
+
+    public Long getShapeLeng() {
+        return shapeLeng;
+    }
+
+    public Long getShapeArea() {
+        return shapeArea;
+    }
+
+    public Long getPopulation() {
+        return population;
+    }
+
+    public Long getPopulationFemale() {
+        return populationFemale;
+    }
+
+    public Long getPopulationMale() {
+        return populationMale;
+    }
+
+    public String getSource() {
+        return source;
+    }
 }
