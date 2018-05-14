@@ -16,7 +16,7 @@ class MapView extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="maps-container">
 
         <D3Map width="500" height="500" colors={["#FFF275" ,'#6C8EAD']} onFeatureClick={f=>{
               const districtId=f.properties.ID

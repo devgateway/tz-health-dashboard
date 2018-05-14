@@ -6,8 +6,8 @@ import {push} from 'react-router-redux'
 
 const component = (props) => (
   <div className="dashboard">
-
-  {props.children}
+    <h2>RDI Tanzania</h2>
+      {props.children}
 </div>)
 
 const mapDispatchToProps = dispatch => bindActionCreators({

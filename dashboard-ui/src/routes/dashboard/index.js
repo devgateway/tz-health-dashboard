@@ -1,10 +1,10 @@
 import React from 'react'
-import {Route, Redirect} from 'react-router'
+import {Route, Redirect,Switch} from 'react-router'
 
 import Routes from './routes'
 import {injectReducer} from '../../store/store'
 import {asyncComponent} from 'react-async-component';
-
+import './dashboard.css'
 const DashboardComponent = asyncComponent({
   resolve: () => new Promise(resolve => require.ensure([], (require) => {
 
@@ -17,11 +17,9 @@ const DashboardComponent = asyncComponent({
 })
 
 const createRoute = (props) => {
-  return (<div>
-    <Route component={DashboardComponent} path='/dashboard'/>
-    <Routes></Routes>
-
-  </div>)
+  return (<DashboardComponent>
+            <Routes/>
+      </DashboardComponent>)
 
 }
 

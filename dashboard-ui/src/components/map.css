@@ -1,6 +1,5 @@
 svg {
-  pointer-events: all;
-  border: 1px solid red; }
+  pointer-events: all; }
 
 path.clickeable {
   cursor: pointer; }

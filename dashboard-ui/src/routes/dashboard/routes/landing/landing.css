@@ -1,3 +1,7 @@
-.map {
-  border: 3px solid blue;
-  width: 50%; }
+.maps-container {
+  margin: 0 auto;
+  width: 100%; }
+
+.map-container {
+  width: 40%;
+  float: left; }
