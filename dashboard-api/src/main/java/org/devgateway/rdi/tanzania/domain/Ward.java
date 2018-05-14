@@ -20,15 +20,19 @@ public class Ward extends Boundary {
     String wardType;
     Long populationRural;
     Long populationRuralMale;
+    Long populationRuralFemale;
 
     Long populationUrban;
     Long populationUrbanMale;
+    Long populationUrbanFemale;
+
     Long pop;
     Long ruralFema;
     Double areakm2;
     Integer precision;
     Double popDen;
     String comments;
+
 
     public Ward() {
     }
@@ -141,5 +145,21 @@ public class Ward extends Boundary {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public Long getPopulationRuralFemale() {
+        return populationRuralFemale;
+    }
+
+    public void setPopulationRuralFemale(Long populationRuralFemale) {
+        this.populationRuralFemale = populationRuralFemale;
+    }
+
+    public Long getPopulationUrbanFemale() {
+        return populationUrbanFemale;
+    }
+
+    public void setPopulationUrbanFemale(Long populationUrbanFemale) {
+        this.populationUrbanFemale = populationUrbanFemale;
     }
 }
