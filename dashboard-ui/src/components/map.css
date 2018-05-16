@@ -1,5 +1,5 @@
-svg {
-  pointer-events: all; }
+svg, g, path {
+  pointer-events: fill; }
 
 path.clickeable {
   cursor: pointer; }
@@ -7,3 +7,10 @@ path.clickeable {
 .background {
   background-color: #EEE;
   fill: #EEE; }
+
+.tooltip {
+  border: 1px solid #FFF;
+  position: absolute;
+  background-color: #CCC;
+  padding: 4px;
+  border-radius: 7px; }

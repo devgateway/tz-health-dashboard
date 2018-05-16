@@ -1,5 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.Geometry;
 
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public abstract class Boundary {
     private String dtype;
 
     String name;
+
+    @JsonIgnore
     Geometry geom;
     Long shapeLeng;
     Long shapeArea;

@@ -1,7 +1,5 @@
 .maps-container {
-  margin: 0 auto;
-  width: 100%; }
+  clear: both; }
 
 .map-container {
-  width: 40%;
   float: left; }

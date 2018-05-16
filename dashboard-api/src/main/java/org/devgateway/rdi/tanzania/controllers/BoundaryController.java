@@ -6,9 +6,11 @@ package org.devgateway.rdi.tanzania.controllers;
 
 import org.devgateway.rdi.tanzania.request.BoundaryRequest;
 import org.devgateway.rdi.tanzania.services.BoundaryService;
+import org.devgateway.rdi.tanzania.services.WardService;
 import org.geojson.FeatureCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +21,10 @@ public class BoundaryController {
 
     @Autowired
     private BoundaryService boundaryService;
+
+
+    @Autowired
+    private WardService wardService;
 
 
     @RequestMapping("/region/find")
@@ -35,4 +41,5 @@ public class BoundaryController {
     public FeatureCollection getWards(BoundaryRequest boundaryRequest){
         return boundaryService.getWards(boundaryRequest);
     }
+
 }
