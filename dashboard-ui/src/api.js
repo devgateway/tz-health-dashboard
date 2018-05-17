@@ -1,7 +1,7 @@
 const API_ROOT_URL = (document.location.hostname === 'localhost') ? 'http://localhost:8083' : '';
 const API_DISTRICT = API_ROOT_URL + '/district/find'
 const API_WARDS = API_ROOT_URL + '/ward/find'
-const API_WARD_INFO = API_ROOT_URL + '/wards'
+const API_WARD_INFO = API_ROOT_URL + '/wards  '
 
 export const findDistricts = () => {
   return new Promise((resolve, reject) => {

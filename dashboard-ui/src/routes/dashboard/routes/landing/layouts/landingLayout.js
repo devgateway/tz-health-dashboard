@@ -1,5 +1,5 @@
 import React from 'react'
-import Map from '../components/landingMaps'
+import Map from '../components/landingMaps.jsx'
 
 export default (props) =>(
   <div>
