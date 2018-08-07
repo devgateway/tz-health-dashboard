@@ -1,7 +1,7 @@
 package org.devgateway.rdi.tanzania.repositories;
 
-import org.devgateway.rdi.tanzania.domain.Facility;
-import org.devgateway.rdi.tanzania.domain.Facility_;
+import org.devgateway.rdi.tanzania.domain.orgs.Facility;
+import org.devgateway.rdi.tanzania.domain.orgs.Facility_;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.springframework.data.jpa.domain.Specification;
 

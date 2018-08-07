@@ -1,6 +1,6 @@
 package org.devgateway.rdi.tanzania.controllers;
 
-import org.devgateway.rdi.tanzania.domain.Facility;
+import org.devgateway.rdi.tanzania.domain.orgs.Facility;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class FacilityController {
     FacilityService facilityService;
 
     @RequestMapping("/facility")
-    public List<Facility> getWard(FacilityRequest facilityRequest) {
+    public List<Facility> getFacility(FacilityRequest facilityRequest) {
         return facilityService.getFacilities(facilityRequest);
 
     }

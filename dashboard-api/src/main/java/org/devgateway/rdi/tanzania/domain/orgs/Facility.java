@@ -1,11 +1,10 @@
-package org.devgateway.rdi.tanzania.domain;
+package org.devgateway.rdi.tanzania.domain.orgs;
 
 import com.vividsolutions.jts.geom.Point;
+import org.devgateway.rdi.tanzania.domain.Ward;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Sebastian Dimunzio
@@ -14,15 +13,20 @@ import javax.persistence.ManyToOne;
 public class Facility {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
-    private Long id;
-    private String name;
-    private String code;
+    Long id;
 
-    private Point point;
 
-    private String dhis2Id;
-    private String dhis2ParentId;
+    String name;
+    String code;
 
+    Point point;
+
+    String dhis2Id;
+    String dhis2ParentId;
+
+
+    @ManyToMany(targetEntity = FacilityGroup.class, cascade = CascadeType.MERGE)
+    List<FacilityGroup> facilityGroups;
 
     @ManyToOne(targetEntity = Ward.class)
     private Ward ward;
@@ -126,5 +130,13 @@ public class Facility {
 
     public void setDetailedType(DetailedType detailedType) {
         this.detailedType = detailedType;
+    }
+
+    public List<FacilityGroup> getFacilityGroups() {
+        return facilityGroups;
+    }
+
+    public void setFacilityGroups(List<FacilityGroup> facilityGroups) {
+        this.facilityGroups = facilityGroups;
     }
 }

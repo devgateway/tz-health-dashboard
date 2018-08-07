@@ -1,6 +1,8 @@
 package org.devgateway.rdi.tanzania.services;
 
-import org.devgateway.rdi.tanzania.domain.Facility;
+import org.devgateway.rdi.tanzania.domain.orgs.Facility;
+import org.devgateway.rdi.tanzania.repositories.FacilityRepository;
+import org.devgateway.rdi.tanzania.repositories.FacilitySpecifications;
 import org.devgateway.rdi.tanzania.repositories.WardRepository;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,10 @@ public class FacilityService {
 
 
     @Autowired
-    WardRepository wardRepository;
+    FacilityRepository facilityRepository;
 
     public List<Facility> getFacilities(FacilityRequest facilityRequest) {
-       // return facilityRepository.findAll(FacilitySpecifications.facilityByWard(facilityRequest));
-        return null;
+        return facilityRepository.findAll(FacilitySpecifications.facilityByWard(facilityRequest));
+
     }
 }
