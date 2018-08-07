@@ -7,7 +7,7 @@ import javax.persistence.Entity;
  * @author Sebastian Dimunzio
  */
 @Entity
- @DiscriminatorValue("REGION")
+@DiscriminatorValue("REGION")
 public class Region extends Boundary {
 
 

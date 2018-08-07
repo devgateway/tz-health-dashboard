@@ -1,13 +1,10 @@
 package org.devgateway.rdi.tanzania.repositories;
 
 import com.vividsolutions.jts.geom.Geometry;
-import org.devgateway.rdi.tanzania.domain.District;
-import org.devgateway.rdi.tanzania.domain.District_;
+import com.vividsolutions.jts.geom.Point;
 import org.devgateway.rdi.tanzania.domain.Ward;
 import org.devgateway.rdi.tanzania.domain.Ward_;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,8 +17,8 @@ import java.util.List;
  * @author Sebastian Dimunzio
  */
 
-@Repository
-public class WardGeoRepository {
+
+public class WardRepositoryImpl implements WardRepositoryCustom {
 
     @PersistenceContext
     private EntityManager em;
@@ -51,6 +48,32 @@ public class WardGeoRepository {
         query.setParameter("factor", simplifyFactor);
 
         return query.getResultList();
+    }
+
+
+    public Ward findWardByPoint(Point point) {
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery criteriaQuery = em.getCriteriaBuilder().createQuery(Ward.class);
+
+        Root<Ward> root = criteriaQuery.from(Ward.class);
+
+        ParameterExpression<Point> geometryParam = criteriaBuilder.parameter(Point.class, "point");
+
+        Expression function = criteriaBuilder.function("ST_Contains", Boolean.class, root.get(Ward_.geom), geometryParam);
+
+        criteriaQuery.where(criteriaBuilder.isTrue(function));
+        TypedQuery<Ward> q = em.createQuery(criteriaQuery);
+
+        q.setParameter(geometryParam, point);
+
+        List<Ward> wards = q.getResultList();
+
+        if (wards.size() > 0) {
+            return wards.iterator().next();
+        } else {
+            return null;
+        }
     }
 
 
