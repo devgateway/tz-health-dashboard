@@ -22,13 +22,13 @@ public class FacilityController {
     @Autowired
     FacilityService facilityService;
 
-    @RequestMapping("/facility")
+    @RequestMapping("/facilities")
     public List<Facility> getFacility(FacilityRequest facilityRequest) {
         return facilityService.getFacilities(facilityRequest);
 
     }
 
-    @RequestMapping("/facility/{id}")
+    @RequestMapping("/facilities/{id}")
     public Facility getFacility(@PathVariable Long id) {
         return facilityService.getFacility(id);
     }
