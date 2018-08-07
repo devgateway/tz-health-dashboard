@@ -25,4 +25,9 @@ public class FacilityService {
         return facilityRepository.findAll(FacilitySpecifications.facilityByWard(facilityRequest));
 
     }
+
+    public Facility getFacility(Long id) {
+        return facilityRepository.getOne(id);
+
+    }
 }

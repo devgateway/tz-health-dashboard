@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 
 import javax.annotation.PreDestroy;
 
@@ -18,8 +20,11 @@ import javax.annotation.PreDestroy;
  * @author Sebastian Dimunzio
  */
 
-@SpringBootApplication
+@Configuration
+@ComponentScan
 @EnableAutoConfiguration(exclude = {WebServicesAutoConfiguration.class})
+@ComponentScan(excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = Application.class)})
 
 public class Dhis2Import implements CommandLineRunner {
 
@@ -33,8 +38,10 @@ public class Dhis2Import implements CommandLineRunner {
     @Autowired
     private ConfigurableApplicationContext context;
 
+
     @Override
     public void run(String... strings) throws Exception {
+        dhis2MetaDataImportService.clean();
         dhis2MetaDataImportService.orgUnitsRelatedDimensionsImport();
         dhis2MetaDataImportService.diagnosisImport();
         dhis2MetaDataImportService.orgUnitsGroupsImport();

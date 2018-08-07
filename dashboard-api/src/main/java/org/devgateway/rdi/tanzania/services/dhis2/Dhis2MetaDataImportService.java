@@ -53,6 +53,15 @@ public class Dhis2MetaDataImportService {
     FacilityGroupRepository facilityGroupRepository;
 
 
+    //deleta all data and import it again
+    public void clean(){
+        facilityRepository.deleteAllInBatch();
+        facilityGroupRepository.deleteAllInBatch();
+        categoryRepository.deleteAllInBatch();
+
+    }
+
+
     public void orgUnitsImport() throws Exception {
         List<Facility> facilities = dhis2Facility.getOrgUnitsList();
         LOGGER.info("Got " + facilities.size() + " Facilities");

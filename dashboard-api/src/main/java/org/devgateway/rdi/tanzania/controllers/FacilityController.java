@@ -5,6 +5,7 @@ import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,4 +27,10 @@ public class FacilityController {
         return facilityService.getFacilities(facilityRequest);
 
     }
+
+    @RequestMapping("/facility/{id}")
+    public Facility getFacility(@PathVariable Long id) {
+        return facilityService.getFacility(id);
+    }
+
 }
