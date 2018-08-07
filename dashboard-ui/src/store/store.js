@@ -49,6 +49,7 @@ export const injectReducer = ({ key, reducer }) => {
   if (Object.hasOwnProperty.call(store.asyncReducers, key)) return
   store.asyncReducers[key] = reducer
   store.replaceReducer(makeRootReducer(store.asyncReducers))
+  store.dispatch({type:'NONE'})
 }
 
 
