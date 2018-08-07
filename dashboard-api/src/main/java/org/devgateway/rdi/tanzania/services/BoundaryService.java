@@ -8,7 +8,7 @@ import org.devgateway.rdi.tanzania.geojson.BoundaryTrasnfomer;
 import org.devgateway.rdi.tanzania.repositories.BoundarySpecifications;
 import org.devgateway.rdi.tanzania.repositories.DistrictRepository;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
-import org.devgateway.rdi.tanzania.repositories.WardGeoRepository;
+import org.devgateway.rdi.tanzania.repositories.WardRepositoryImpl;
 import org.devgateway.rdi.tanzania.request.BoundaryRequest;
 import org.geojson.FeatureCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class BoundaryService {
 
 
     @Autowired
-    WardGeoRepository wardRepository;
+    WardRepositoryImpl wardRepository;
 
 
     @Cacheable("regions")

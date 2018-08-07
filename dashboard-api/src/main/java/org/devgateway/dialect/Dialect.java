@@ -12,5 +12,6 @@ public class Dialect extends org.hibernate.spatial.dialect.postgis.PostgisPG9Dia
         super();
         this.registerFunction("simplify", new StandardSQLFunction("ST_Simplify"));
         this.registerFunction("simplifyPreserve", new StandardSQLFunction("ST_SimplifyPreserveTopology"));
+        this.registerFunction("contains", new StandardSQLFunction("ST_Contains"));
    }
 }
