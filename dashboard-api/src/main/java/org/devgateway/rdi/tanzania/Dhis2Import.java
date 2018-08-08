@@ -41,10 +41,10 @@ public class Dhis2Import implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         dhis2MetaDataImportService.clean();
-        dhis2MetaDataImportService.orgUnitsRelatedDimensionsImport();
-        dhis2MetaDataImportService.diagnosisImport();
-        dhis2MetaDataImportService.orgUnitsGroupsImport();
-        dhis2MetaDataImportService.orgUnitsImport();
+        dhis2MetaDataImportService.dimensions();
+        dhis2MetaDataImportService.orgUnitsGroups();
+
+        dhis2MetaDataImportService.orgUnits();
         System.exit(3);
     }
 
