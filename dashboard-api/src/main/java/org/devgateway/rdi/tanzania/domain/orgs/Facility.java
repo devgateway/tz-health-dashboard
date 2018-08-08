@@ -22,6 +22,7 @@ public class Facility {
     Point point;
 
     String dhis2Id;
+
     String dhis2ParentId;
 
 
@@ -32,17 +33,17 @@ public class Facility {
     private Ward ward;
 
 
-    @ManyToOne(targetEntity = Ownership.class)
-    private Ownership ownership;
+    @ManyToOne(targetEntity = Item.class)
+    private Item ownership;
 
-    @ManyToOne(targetEntity = Type.class)
-    private Type type;
+    @ManyToOne(targetEntity = Item.class)
+    private Item type;
 
-    @ManyToOne(targetEntity = DetailedOwnership.class)
-    private DetailedOwnership detailedOwnership;
+    @ManyToOne(targetEntity = Item.class)
+    private Item detailedOwnership;
 
-    @ManyToOne(targetEntity = DetailedType.class)
-    private DetailedType detailedType;
+    @ManyToOne(targetEntity = Item.class)
+    private Item detailedType;
 
     public Long getId() {
         return id;
@@ -92,6 +93,14 @@ public class Facility {
         this.dhis2ParentId = dhis2ParentId;
     }
 
+    public List<FacilityGroup> getFacilityGroups() {
+        return facilityGroups;
+    }
+
+    public void setFacilityGroups(List<FacilityGroup> facilityGroups) {
+        this.facilityGroups = facilityGroups;
+    }
+
     public Ward getWard() {
         return ward;
     }
@@ -100,43 +109,35 @@ public class Facility {
         this.ward = ward;
     }
 
-    public Ownership getOwnership() {
+    public Item getOwnership() {
         return ownership;
     }
 
-    public void setOwnership(Ownership ownership) {
+    public void setOwnership(Item ownership) {
         this.ownership = ownership;
     }
 
-    public Type getType() {
+    public Item getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(Item type) {
         this.type = type;
     }
 
-    public DetailedOwnership getDetailedOwnership() {
+    public Item getDetailedOwnership() {
         return detailedOwnership;
     }
 
-    public void setDetailedOwnership(DetailedOwnership detailedOwnership) {
+    public void setDetailedOwnership(Item detailedOwnership) {
         this.detailedOwnership = detailedOwnership;
     }
 
-    public DetailedType getDetailedType() {
+    public Item getDetailedType() {
         return detailedType;
     }
 
-    public void setDetailedType(DetailedType detailedType) {
+    public void setDetailedType(Item detailedType) {
         this.detailedType = detailedType;
-    }
-
-    public List<FacilityGroup> getFacilityGroups() {
-        return facilityGroups;
-    }
-
-    public void setFacilityGroups(List<FacilityGroup> facilityGroups) {
-        this.facilityGroups = facilityGroups;
     }
 }

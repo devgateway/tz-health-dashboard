@@ -1,10 +1,8 @@
 package org.devgateway.rdi.tanzania.services.dhis2;
 
 import org.devgateway.rdi.tanzania.dhis.pojo.Results;
-import org.devgateway.rdi.tanzania.domain.orgs.DetailedOwnership;
-import org.devgateway.rdi.tanzania.domain.orgs.DetailedType;
-import org.devgateway.rdi.tanzania.domain.orgs.Ownership;
-import org.devgateway.rdi.tanzania.domain.orgs.Type;
+import org.devgateway.rdi.tanzania.dhis.pojo.dimensions.Dimensions;
+import org.devgateway.rdi.tanzania.domain.orgs.*;
 import org.geojson.FeatureCollection;
 import org.hisp.dhis.Dhis2;
 import org.hisp.dhis.Dhis2Config;
@@ -41,18 +39,20 @@ public class Dhis2DimensionService {
     private static String DETAILED_OWNERSHIP_DIMENSION_ID = "EaSVpHl8C4J";
 
 
-    public Results getDimension(String key) {
+    public Results getDimensionItems(String key) {
         Dhis2 dhis2 = new Dhis2(dhis2Config);
 
         Results results = dhis2.getObject(UriComponentsBuilder.fromPath(PATH)
                 .pathSegment(key)
                 .pathSegment("items.json")
+                .queryParam("paging", "false")
                 .toUriString(), Results.class);
         return results;
     }
 
+    /**
     public List<Type> getTypes() {
-        List<Type> types = getDimension(TYPE_DIMENSION_ID).getDataElements().stream()
+        List<Type> types = getDimensionItems(TYPE_DIMENSION_ID).getDataElements().stream()
                 .map(singleObject -> new Type(singleObject.getId(), singleObject.getDisplayName())
                 ).collect(Collectors.toList());
 
@@ -60,13 +60,13 @@ public class Dhis2DimensionService {
     }
 
     public List<Ownership> getOwnerships() {
-        List<Ownership> list = getDimension(OWNERSHIP_DIMENSION_ID).getDataElements().stream()
+        List<Ownership> list = getDimensionItems(OWNERSHIP_DIMENSION_ID).getDataElements().stream()
                 .map(singleObject -> new Ownership(singleObject.getId(), singleObject.getDisplayName())).collect(Collectors.toList());
         return list;
     }
 
     public List<DetailedType> getDetailedTypes() {
-        List<DetailedType> list = getDimension(DETAILED_TYPE_DIMENSION_ID).getDataElements().stream()
+        List<DetailedType> list = getDimensionItems(DETAILED_TYPE_DIMENSION_ID).getDataElements().stream()
                 .map(singleObject ->
                         new DetailedType(singleObject.getId(), singleObject.getDisplayName())
                 ).collect(Collectors.toList());
@@ -75,11 +75,42 @@ public class Dhis2DimensionService {
     }
 
     public List<DetailedOwnership> getDetailedOwnerships() {
-        List<DetailedOwnership> list = getDimension(DETAILED_OWNERSHIP_DIMENSION_ID).getDataElements()
+        List<DetailedOwnership> list = getDimensionItems(DETAILED_OWNERSHIP_DIMENSION_ID).getDataElements()
                 .stream().map(singleObject ->
                         new DetailedOwnership(singleObject.getId(), singleObject.getDisplayName())
                 ).collect(Collectors.toList());
 
         return list;
+    }
+     */
+
+    public List<Dimension> getAllDimensions(final boolean withItems) {
+        Dhis2 dhis2 = new Dhis2(dhis2Config);
+
+        Dimensions dhis2Dimensions = dhis2.getObject(UriComponentsBuilder.fromPath(PATH)
+                .queryParam("paging", "false")
+                .queryParam("fields", "displayName,id")
+                .toUriString(), Dimensions.class);
+
+        List<Dimension> dimensions = dhis2Dimensions.getDimensions().stream().map(dimension -> {
+            Dimension d = new Dimension(dimension.getId(), dimension.getDisplayName());
+
+            if (withItems) {
+
+                LOGGER.info("Getting dimensions items");
+                List<Item> items = getDimensionItems(dimension.getId())
+                        .getDataElements()
+                        .stream().map(singleObject -> new Item(singleObject.getId(), singleObject.getDisplayName(),d))
+                        .collect(Collectors.toList());
+                d.setItems(items);
+
+            }
+
+            return d;
+
+        }).collect(Collectors.toList());
+
+        return dimensions;
+
     }
 }

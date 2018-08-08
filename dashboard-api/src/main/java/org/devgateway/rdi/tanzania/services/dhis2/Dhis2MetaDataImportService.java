@@ -2,7 +2,9 @@ package org.devgateway.rdi.tanzania.services.dhis2;
 
 import org.devgateway.rdi.tanzania.domain.Diagnostic;
 import org.devgateway.rdi.tanzania.domain.Ward;
-import org.devgateway.rdi.tanzania.domain.orgs.*;
+import org.devgateway.rdi.tanzania.domain.orgs.Dimension;
+import org.devgateway.rdi.tanzania.domain.orgs.Facility;
+import org.devgateway.rdi.tanzania.domain.orgs.FacilityGroup;
 import org.devgateway.rdi.tanzania.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import java.util.List;
 @Service
 @Transactional
 public class Dhis2MetaDataImportService {
+
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2MetaDataImportService.class);
 
@@ -40,8 +43,6 @@ public class Dhis2MetaDataImportService {
     @Autowired
     DiagnosticRepository diagnosticRepository;
 
-    @Autowired
-    CategoryRepository categoryRepository;
 
     @Autowired
     Dhis2OrgGroupService dhis2OrgGroupService;
@@ -49,22 +50,38 @@ public class Dhis2MetaDataImportService {
     @Autowired
     FacilityRepository facilityRepository;
 
+
+    @Autowired
+    ItemRepository itemRepository;
+
+
     @Autowired
     FacilityGroupRepository facilityGroupRepository;
 
 
     //deleta all data and import it again
-    public void clean(){
+    public void clean() {
+        itemRepository.deleteAll();
+        dimensionRepository.deleteAll();
+
         facilityRepository.deleteAllInBatch();
         facilityGroupRepository.deleteAllInBatch();
-        categoryRepository.deleteAllInBatch();
+
+    }
+
+    public void dimensions() {
+
+        LOGGER.info("Getting dimensions");
+        List<Dimension> dimensions = dhis2DimensionService.getAllDimensions(true);
+        dimensionRepository.save(dimensions);
 
     }
 
 
-    public void orgUnitsImport() throws Exception {
+    public void orgUnits() throws Exception {
         List<Facility> facilities = dhis2Facility.getOrgUnitsList();
         LOGGER.info("Got " + facilities.size() + " Facilities");
+
         facilities.forEach(facility -> {
             //LOGGER.info("Getting ward by point for facility " + f.getName());
             Ward ward = wardRepository.findWardByPoint(facility.getPoint());
@@ -81,20 +98,24 @@ public class Dhis2MetaDataImportService {
 
         facilities.stream().forEach(facility -> {
                     facility.getFacilityGroups().forEach(facilityGroup -> {
-                                facilityGroup.getItems().forEach(dhis2Item -> {
-                                    if (dhis2Item instanceof Type) {
-                                        facility.setType((Type) dhis2Item);
-                                    }
-                                    if (dhis2Item instanceof DetailedType) {
-                                        facility.setDetailedType((DetailedType) dhis2Item);
+                                facilityGroup.getItems().forEach(item -> {
+                                    if (item.getDimension().getName().equalsIgnoreCase("Type")) {
+                                        facility.setType(item);
                                     }
 
-                                    if (dhis2Item instanceof Ownership) {
-                                        facility.setOwnership((Ownership) dhis2Item);
+                                    if (item.getDimension().getName().equalsIgnoreCase("Detailed Type")) {
+                                        facility.setDetailedType(item);
                                     }
-                                    if (dhis2Item instanceof DetailedOwnership) {
-                                        facility.setDetailedOwnership((DetailedOwnership) dhis2Item);
+
+                                    if (item.getDimension().getName().equalsIgnoreCase("Ownership")) {
+                                        facility.setOwnership(item);
                                     }
+
+
+                                    if (item.getDimension().getName().equalsIgnoreCase("Detailed Ownership")) {
+                                        facility.setDetailedOwnership(item);
+                                    }
+
                                 });
                             }
 
@@ -105,7 +126,7 @@ public class Dhis2MetaDataImportService {
         );
 
         facilityRepository.save(facilities);
-        facilityRepository.flush();
+
 
     }
 
@@ -114,7 +135,7 @@ public class Dhis2MetaDataImportService {
         diagnosticRepository.save(diagnostics);
     }
 
-    public void orgUnitsRelatedDimensionsImport() {
+   /* public void orgUnitsRelatedDimensionsImport() {
         dimensionRepository.deleteAll();
         dimensionRepository.flush();
 
@@ -126,10 +147,10 @@ public class Dhis2MetaDataImportService {
         categoryRepository.save(ownerships);
         categoryRepository.save(detailedOwnershipList);
         categoryRepository.save(detailedTypeList);
-        categoryRepository.flush();
-    }
+       categoryRepository.flush();
+    }*/
 
-    public void orgUnitsGroupsImport() {
+    public void orgUnitsGroups() {
         List<FacilityGroup> facilityGroups = dhis2OrgGroupService.getOrgGroups();
         facilityGroupRepository.save(facilityGroups);
     }
