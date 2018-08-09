@@ -1,6 +1,6 @@
 package org.devgateway.rdi.tanzania;
 
-import org.devgateway.rdi.tanzania.services.dhis2.Dhis2MetaDataImportService;
+import org.devgateway.rdi.tanzania.services.dhis2.MetaDataImportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class Dhis2Import implements CommandLineRunner {
 
 
     @Autowired
-    Dhis2MetaDataImportService dhis2MetaDataImportService;
+    MetaDataImportService dhis2MetaDataImportService;
 
 
     @Autowired
@@ -43,8 +43,8 @@ public class Dhis2Import implements CommandLineRunner {
         dhis2MetaDataImportService.clean();
         dhis2MetaDataImportService.dimensions();
         dhis2MetaDataImportService.orgUnitsGroups();
-
         dhis2MetaDataImportService.orgUnits();
+        dhis2MetaDataImportService.dataElementGroups();
         System.exit(3);
     }
 

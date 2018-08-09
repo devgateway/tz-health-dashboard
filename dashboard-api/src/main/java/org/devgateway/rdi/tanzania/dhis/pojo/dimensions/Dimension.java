@@ -1,28 +1,12 @@
 package org.devgateway.rdi.tanzania.dhis.pojo.dimensions;
 
+import org.devgateway.rdi.tanzania.dhis.pojo.Dhis2Object;
+
 /**
  * @author Sebastian Dimunzio
  */
 
-public class Dimension {
+public class Dimension extends Dhis2Object{
 
 
-    String id;
-    String displayName;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
 }
