@@ -4,7 +4,7 @@ package org.devgateway.rdi.tanzania.dhis.pojo;
  * @author Sebastian Dimunzio
  */
 
-public class SingleObject {
+public class Dhis2Object {
 
     String id;
     String displayName;

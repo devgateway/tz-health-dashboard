@@ -1,6 +1,9 @@
-package org.devgateway.rdi.tanzania.domain.orgs;
+package org.devgateway.rdi.tanzania.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -8,44 +11,32 @@ import java.util.List;
  */
 
 @Entity
-public class FacilityGroup {
+public class DataElementGroup {
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
     Long id;
     String dhis2Id;
     String name;
 
-    @OneToMany(targetEntity = Item.class)
-    List<Item> item;
-
-    public FacilityGroup() {
+    public DataElementGroup() {
     }
 
-    public FacilityGroup(String dhis2Id, String name) {
+    public DataElementGroup(String dhis2Id, String name) {
         this.dhis2Id = dhis2Id;
         this.name = name;
     }
 
-    @ManyToMany(targetEntity = Facility.class, fetch = FetchType.LAZY)
-    private List<Facility> facilities;
-
+    @OneToMany(targetEntity = DataElement.class, mappedBy = "dataElementGroup")
+    List<DataElement> dataElements;
 
     public Long getId() {
         return id;
     }
 
-    public List<Item> getItems() {
-        return item;
-    }
-
-    public void setItems(List<Item> item) {
-        this.item = item;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getDhis2Id() {
         return dhis2Id;
@@ -63,12 +54,11 @@ public class FacilityGroup {
         this.name = name;
     }
 
-
-    public List<Facility> getFacilities() {
-        return facilities;
+    public List<DataElement> getDataElements() {
+        return dataElements;
     }
 
-    public void setFacilities(List<Facility> facilities) {
-        this.facilities = facilities;
+    public void setDataElements(List<DataElement> dataElements) {
+        this.dataElements = dataElements;
     }
 }
