@@ -14,5 +14,9 @@ import java.util.List;
 
 @Repository
 public interface RegionRepository extends JpaRepository<Region,Long> {
-    List<Boundary> findAll(Specification<Region> spec);
+    List<Region> findAll(Specification<Region> spec);
+
+    Region findOneByName(String name);
+
+
 }

@@ -1,9 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -27,7 +24,7 @@ public class DataElementGroup {
         this.name = name;
     }
 
-    @OneToMany(targetEntity = DataElement.class, mappedBy = "dataElementGroup")
+    @OneToMany(targetEntity = DataElement.class, mappedBy = "dataElementGroup", cascade = CascadeType.ALL)
     List<DataElement> dataElements;
 
     public Long getId() {
