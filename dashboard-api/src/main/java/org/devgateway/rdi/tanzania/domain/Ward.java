@@ -5,6 +5,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 /**
  * @author Sebastian Dimunzio
@@ -14,8 +16,11 @@ import javax.persistence.ManyToOne;
 @DiscriminatorValue("WARD")
 public class Ward extends Boundary {
 
+
     @ManyToOne(targetEntity = District.class)
     District district;
+
+
     String division;
     String wardType;
     Long populationRural;
@@ -33,6 +38,9 @@ public class Ward extends Boundary {
     Double popDen;
     String comments;
 
+
+    @OneToMany(targetEntity = Facility.class, mappedBy = "ward")
+    List<Facility> facilities;
 
     public Ward() {
     }
@@ -161,5 +169,13 @@ public class Ward extends Boundary {
 
     public void setPopulationUrbanFemale(Long populationUrbanFemale) {
         this.populationUrbanFemale = populationUrbanFemale;
+    }
+
+    public List<Facility> getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(List<Facility> facilities) {
+        this.facilities = facilities;
     }
 }

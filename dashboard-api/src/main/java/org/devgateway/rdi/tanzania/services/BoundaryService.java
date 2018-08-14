@@ -6,7 +6,7 @@ import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.domain.Ward;
 import org.devgateway.rdi.tanzania.geojson.BoundaryTrasnfomer;
 import org.devgateway.rdi.tanzania.repositories.BoundarySpecifications;
-import org.devgateway.rdi.tanzania.repositories.DistrictRepository;
+import org.devgateway.rdi.tanzania.repositories.DistrictRepositoryCustom;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
 import org.devgateway.rdi.tanzania.repositories.WardRepositoryImpl;
 import org.devgateway.rdi.tanzania.request.BoundaryRequest;
@@ -30,7 +30,7 @@ public class BoundaryService {
 
 
     @Autowired
-    DistrictRepository districtRepository;
+    DistrictRepositoryCustom districtRepository;
 
 
     @Autowired

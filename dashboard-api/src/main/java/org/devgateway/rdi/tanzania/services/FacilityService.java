@@ -51,5 +51,8 @@ public class FacilityService {
     public void cleanFacilities(){
         facilityRepository.deleteAll();
     }
+    public void cleanGroups(){
+        facilityGroupRepository.deleteAll();
+    }
 
 }

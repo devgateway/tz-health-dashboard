@@ -1,12 +1,14 @@
 package org.devgateway.rdi.tanzania.services.dhis2;
 
 import org.devgateway.rdi.tanzania.dhis.pojo.Results;
+import org.devgateway.rdi.tanzania.domain.DataElement;
 import org.devgateway.rdi.tanzania.domain.DataElementGroup;
 import org.devgateway.rdi.tanzania.repositories.DataElementGroupRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +24,7 @@ public class DataElementService extends AbstractService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataElementService.class);
 
 
-    private static String PATH = "/29/dataElementGroups.json";
+    private static String PATH = "/29/dataElementGroups";
 
     @Autowired
     DataElementGroupRepository dataElementGroupRepository;
@@ -36,11 +38,28 @@ public class DataElementService extends AbstractService {
 
     }
 
+
+    public List<DataElement> getDataElements(String key) {
+
+        Results results = getObjects(Results.class,
+                UriComponentsBuilder.fromPath(PATH)
+                        .pathSegment(key)
+                        .pathSegment("dataElements")
+                        .toUriString(),
+                false, "*");
+
+
+        return results.getDataElements().stream().map(dhis2Object ->
+                new DataElement(dhis2Object.getId(), dhis2Object.getDisplayName())).collect(Collectors.toList());
+
+    }
+
     public List<DataElementGroup> saveGroups(List<DataElementGroup> dataElementGroups) {
         return dataElementGroupRepository.save(dataElementGroups);
     }
 
-    public void cleanDataElements(){
+    public void cleanDataElements() {
         dataElementGroupRepository.deleteAll();
     }
+
 }

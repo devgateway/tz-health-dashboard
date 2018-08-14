@@ -12,8 +12,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.8.RELEASE</version>
-
-
     </parent>
 
     <properties>
@@ -25,7 +23,6 @@
         <postgresql.version>42.1.4</postgresql.version>
         <hibernate.spatial.version>5.2.12.Final</hibernate.spatial.version>
         <vividsolutions.version>1.13</vividsolutions.version>
-
     </properties>
 
     <modules>
