@@ -4,11 +4,10 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import org.devgateway.rdi.tanzania.dhis.Dhis2TClient;
-import org.devgateway.rdi.tanzania.domain.orgs.Facility;
-import org.devgateway.rdi.tanzania.domain.orgs.FacilityGroup;
+import org.devgateway.rdi.tanzania.domain.Facility;
+import org.devgateway.rdi.tanzania.domain.FacilityGroup;
 import org.devgateway.rdi.tanzania.repositories.FacilityGroupRepository;
 import org.geojson.FeatureCollection;
-import org.hisp.dhis.Dhis2Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +32,16 @@ import java.util.stream.IntStream;
 
 @Component
 @Transactional
-public class Dhis2OrgUnitService {
+public class OrgUnitService extends AbstractService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeatureCollection.class);
-
-
-    @Autowired
-    Dhis2Config dhis2Config;
 
     @Autowired
     FacilityGroupRepository facilityGroupRepository;
 
-    public List<Facility> getOrgUnitsList() throws Exception {
-        //Custom dhis2Client
+
+    public List<Facility> getOrgUnitsList() {
+        //this use a custom client since there were some parsing issues
         Dhis2TClient dhis2TClient = new Dhis2TClient(dhis2Config);
 
         ArrayList<Facility> facilities = new ArrayList<>();
@@ -69,11 +65,11 @@ public class Dhis2OrgUnitService {
 
                     if (groups != null) {
 
-                        List<FacilityGroup> facilityGroups = groups.stream().map(id -> facilityGroupRepository.findOneByDhis2Id(id))
+                        List<FacilityGroup> facilityGroups = groups.stream()
+                                .map(id -> facilityGroupRepository.findOneByDhis2Id(id))
                                 .filter(g -> g != null).collect(Collectors.toList());
                         f.setFacilityGroups(facilityGroups);
                     }
-
 
 
                     f.setDhis2Id((String) feature.get("id"));

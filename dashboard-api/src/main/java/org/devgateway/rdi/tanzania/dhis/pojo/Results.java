@@ -11,20 +11,25 @@ import java.util.List;
 public class Results {
 
 
-    List<SingleObject> dataElements;
+    List<Dhis2Object> dataElements;
 
-    public List<SingleObject> getDataElements() {
+    public List<Dhis2Object> getDataElements() {
         return dataElements;
     }
 
-    public void setDataElements(List<SingleObject> dataElements) {
+    public void setDataElements(List<Dhis2Object> dataElements) {
         this.dataElements = dataElements;
     }
 
 
     @JsonSetter("items")
-    public void setItems(List<SingleObject> dataElements) {
-        this.dataElements = dataElements;
+    public void setItems(List<Dhis2Object> items) {
+        this.dataElements = items;
+    }
+
+    @JsonSetter("dataElementGroups")
+    public void setDataElementGroups(List<Dhis2Object> dataElementGroups) {
+        this.dataElements = dataElementGroups;
     }
 
 }
