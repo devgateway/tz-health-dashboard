@@ -9,9 +9,14 @@ const defWidth = 400,
 class D3Map extends React.Component {
 
   componentWillReceiveProps(nexProps) {
-    debugger
     if (nexProps.features) {
       this.generateMap(nexProps.features)
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.features) {
+      this.generateMap(this.props.features)
     }
   }
 
@@ -71,7 +76,6 @@ class D3Map extends React.Component {
   }
 
   render() {
-
     return (<div className="map-container" ref="mapElement">
       {
         this.props.features

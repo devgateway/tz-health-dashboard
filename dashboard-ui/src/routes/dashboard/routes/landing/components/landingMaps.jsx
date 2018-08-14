@@ -5,11 +5,21 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import {findDistricts, wardSelected, districtSelected, CATEGORY_WARD, CATEGORY_DISTRICT} from '../../../modules/dashboard'
 import D3Map from '../../../../../components/d3Map.jsx'
+import PropTypes from 'prop-types'
 
 class MapView extends React.Component {
+  
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   componentWillMount() {
     this.props.onLoad()
+  }
+
+  onWardSelected(feature) {
+    this.context.router.history.push(`/wardReport/${feature.properties.ID}/y`)
+    this.props.onWardSelected(feature)
   }
 
   render() {
@@ -24,7 +34,7 @@ class MapView extends React.Component {
         district
           ? <div className="infoBlock district">
               <h2>{district.properties['NAME']}</h2>
-              <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.props.onWardSelected(f)} features={this.props.wards}></D3Map>
+              <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardSelected(f)} features={this.props.wards}></D3Map>
             </div>
           : null
       }

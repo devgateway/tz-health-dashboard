@@ -14,11 +14,9 @@ export const FEATURE_SELECTED = 'FEATURE_SELECTED';
 
 
 export const wardSelected = (feature) => {
-  const { properties: { ID: id } } = feature
   return (dispatch, getState) => {
-    dispatch(getWard(id))
+    dispatch({ 'type': FEATURE_SELECTED, 'category': CATEGORY_WARD, feature })
   }
-
 }
 
 export const districtSelected = (feature) => {
