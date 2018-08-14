@@ -8,7 +8,7 @@ const createRoute = (props) => {
   const {store} = props
   return (
   	<div>
-      <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+      <Route exact path="/" render={() => <Redirect to="/dashboard/landing" />} />
       <Route path="/" render={() => <DashboardRoute store={store}/>} />
     </div>
   )

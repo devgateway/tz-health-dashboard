@@ -2,6 +2,9 @@ const API_ROOT_URL = (document.location.hostname === 'localhost') ? 'http://loca
 const API_DISTRICT = API_ROOT_URL + '/district/find'
 const API_WARDS = API_ROOT_URL + '/ward/find'
 const API_WARD_INFO = API_ROOT_URL + '/wards'
+const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wardReport`
+const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facilityReport`
+
 
 export const findDistricts = () => {
   return new Promise((resolve, reject) => {
@@ -24,7 +27,6 @@ export const findDistricts = () => {
 
 
 export const getWard = (id) => {
-  debugger
   const url = API_WARD_INFO + '/'+id
   return new Promise((resolve, reject) => {
     fetch(url)
@@ -45,6 +47,45 @@ export const getWard = (id) => {
   })
 }
 
+export const getWardInfo = (id, period) => {
+  const url = `${API_WARD_REPORT_INFO}/${id}/${period}`
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            reject(response)
+          }
+          response.json().then(function(data) {
+            resolve(data);
+          });
+        }
+      )
+      .catch(function(err) {
+        reject('Fetch Error :-S', err);
+      });
+  })
+}
+
+export const getFacilityInfo = (id, period) => {
+  const url = `${API_FACILITY_REPORT_INFO}/${id}/${period}`
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            reject(response)
+          }
+          response.json().then(function(data) {
+            resolve(data);
+          });
+        }
+      )
+      .catch(function(err) {
+        reject('Fetch Error :-S', err);
+      });
+  })
+}
 
 const prepareQuery = (params) => {
   return Object.keys(params)
