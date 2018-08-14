@@ -1,12 +1,10 @@
 package org.devgateway.rdi.tanzania.services;
 
-import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
 import org.devgateway.rdi.tanzania.domain.Ward;
 import org.devgateway.rdi.tanzania.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.awt.*;
 
 /**
  * @author Sebastian Dimunzio
@@ -25,9 +23,8 @@ public class WardService {
         return ward;
     }
 
-
-    public void findContains(Geometry geometry){
-
+    public Ward wadByPoint(Point point) {
+        return wardRepository.findWardByPoint(point);
     }
 
 }
