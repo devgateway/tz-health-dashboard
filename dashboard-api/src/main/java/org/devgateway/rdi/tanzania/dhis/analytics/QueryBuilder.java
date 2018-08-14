@@ -60,7 +60,6 @@ public class QueryBuilder {
         StringBuilder dxBuilder = new StringBuilder();
         dxBuilder.append("dx:");
 
-
         //UriComponentsBuilder.fromPath("").queryParam("dimension","dx:")
 
         return null;
