@@ -1,5 +1,6 @@
 package org.devgateway.rdi.tanzania;
 
+import org.devgateway.rdi.tanzania.domain.DataElementGroup;
 import org.devgateway.rdi.tanzania.services.dhis2.MetaDataImportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,16 +15,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
 import javax.annotation.PreDestroy;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sebastian Dimunzio
  */
 
+
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration(exclude = {WebServicesAutoConfiguration.class})
 @ComponentScan(excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = Application.class)})
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {Application.class, Dhis2AnalitycImport.class})})
 
 public class Dhis2Import implements CommandLineRunner {
 
@@ -39,18 +43,28 @@ public class Dhis2Import implements CommandLineRunner {
 
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
+
         dhis2MetaDataImportService.clean();
         dhis2MetaDataImportService.dimensions();
         dhis2MetaDataImportService.orgUnitsGroups();
         dhis2MetaDataImportService.orgUnits();
-        dhis2MetaDataImportService.dataElementGroups();
+
+        List<DataElementGroup> dataElementGroups = dhis2MetaDataImportService.dataElementGroups();
+
+        List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
+                .filter(dataElementGroup -> dataElementGroup.getName()
+                        .equalsIgnoreCase("Population"))
+                .collect(Collectors.toList());
+
+
+        dhis2MetaDataImportService.dataElements(dataElementGroups1);
+
         System.exit(3);
     }
 
 
     public static void main(String[] args) throws Exception {
-
         new SpringApplicationBuilder(Dhis2Import.class).web(false).build().run(args);
     }
 

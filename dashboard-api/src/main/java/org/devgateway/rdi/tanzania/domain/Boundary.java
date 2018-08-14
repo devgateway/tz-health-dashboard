@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
+
 public abstract class Boundary {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
