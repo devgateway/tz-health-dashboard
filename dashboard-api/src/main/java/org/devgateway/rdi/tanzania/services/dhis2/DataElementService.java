@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class DataElementService extends AbstractService {
+public class DataElementService extends Dhis2Service {
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataElementService.class);

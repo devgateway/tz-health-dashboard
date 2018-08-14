@@ -24,7 +24,7 @@ import java.util.List;
  * */
 
 @Component
-public class DiagnosesService extends AbstractService {
+public class DiagnosesService extends Dhis2Service {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeatureCollection.class);
 

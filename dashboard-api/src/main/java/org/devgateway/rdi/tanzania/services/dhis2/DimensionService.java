@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @author Sebastian Dimunzio
  */
 @Service
-public class DimensionService extends AbstractService {
+public class DimensionService extends Dhis2Service {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeatureCollection.class);
 

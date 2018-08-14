@@ -9,13 +9,9 @@ import java.util.List;
 
 public class QueryDimension {
 
-    String dimension;
-    String name;
-    List<Item> items;
-
-    ///public static QueryDimension DX = new QueryDimension("DX", "Data");
-    ///public static QueryDimension PE = new QueryDimension("PE", "Period");
-    ///public static QueryDimension OU = new QueryDimension("PE", "Period");
+    private String dimension;
+    private String name;
+    private List<Item> items;
 
 
     public QueryDimension(String dimension, String name) {
@@ -47,7 +43,6 @@ public class QueryDimension {
     public void setItems(List<Item> items) {
         this.items = items;
     }
-
 
 
     public QueryDimension adItem(String id, String name) {
