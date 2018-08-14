@@ -1,6 +1,5 @@
 package org.devgateway.rdi.tanzania.repositories;
 
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 import org.devgateway.rdi.tanzania.domain.Ward;
 import org.springframework.data.jpa.domain.Specification;

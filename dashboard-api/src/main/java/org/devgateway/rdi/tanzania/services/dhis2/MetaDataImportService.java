@@ -44,25 +44,39 @@ public class MetaDataImportService {
     //deleta all data and import it again
     public void clean() {
         dhis2DataElementGroupService.cleanDataElements();
-        dhis2DimensionService.cleanDimensions();
+        facilityService.cleanGroups();
         facilityService.cleanFacilities();
+        dhis2DimensionService.cleanDimensions();
 
     }
 
-    public void dimensions() {
+    public List<Dimension> dimensions() {
         LOGGER.info("Getting dimensions");
         List<Dimension> dimensions = dhis2DimensionService.getAllDimensions(true);
         dhis2DimensionService.save(dimensions);
+        return dimensions;
     }
 
 
-    public void dataElementGroups() {
+    public List<DataElementGroup> dataElementGroups() {
         List<DataElementGroup> dataElementGroups = dhis2DataElementGroupService.getDataElementGroups();
         dhis2DataElementGroupService.saveGroups(dataElementGroups);
-        LOGGER.info(dataElementGroups.toString());
+        return dataElementGroups;
     }
 
-    public void orgUnits() throws Exception {
+    public List<DataElementGroup> dataElements(List<DataElementGroup> groups) {
+        groups.forEach(dataElementGroup -> {
+            List<DataElement> dataElements = dhis2DataElementGroupService.getDataElements(dataElementGroup.getDhis2Id());
+            dataElements.forEach(dataElement -> dataElement.setDataElementGroup(dataElementGroup));
+            dataElementGroup.setDataElements(dataElements);
+        });
+
+
+        dhis2DataElementGroupService.saveGroups(groups);
+        return groups;
+    }
+
+    public void orgUnits() {
         List<Facility> facilities = dhisOrgUnitService.getOrgUnitsList();
         LOGGER.info("Got " + facilities.size() + " Facilities");
 
@@ -73,6 +87,7 @@ public class MetaDataImportService {
             if (ward != null) {
                 facility.setWard(ward);
                 LOGGER.info("Ward found was" + ward.getName());
+
             } else {
                 LOGGER.warn("No war found for " + facility.getCode() + " - " + facility.getName()
                         + "  with coordinates (" + facility.getPoint() + ")");
@@ -105,7 +120,6 @@ public class MetaDataImportService {
         );
 
         facilityService.save(facilities);
-
 
     }
 

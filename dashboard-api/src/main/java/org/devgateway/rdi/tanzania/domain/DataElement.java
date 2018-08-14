@@ -16,8 +16,24 @@ public class DataElement {
     String dhis2Id;
     String name;
 
+    public DataElement() {
+    }
+
+    public DataElement(String dhis2Id, String name) {
+        this.dhis2Id = dhis2Id;
+        this.name = name;
+    }
+
     @ManyToOne(targetEntity = DataElementGroup.class)
     DataElementGroup  dataElementGroup;
+
+    public DataElementGroup getDataElementGroup() {
+        return dataElementGroup;
+    }
+
+    public void setDataElementGroup(DataElementGroup dataElementGroup) {
+        this.dataElementGroup = dataElementGroup;
+    }
 
     public Long getId() {
         return id;

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DimensionRepository extends JpaRepository<Dimension, Long> {
 
+    Dimension findOneByDhis2Id(String dId);
 
 }
 
