@@ -1,5 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.Geometry;
 
 import javax.persistence.DiscriminatorValue;
@@ -39,6 +40,7 @@ public class Ward extends Boundary {
     String comments;
 
 
+    @JsonIgnore
     @OneToMany(targetEntity = Facility.class, mappedBy = "ward")
     List<Facility> facilities;
 

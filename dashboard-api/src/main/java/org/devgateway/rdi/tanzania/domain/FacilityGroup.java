@@ -1,5 +1,7 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class FacilityGroup {
         this.name = name;
     }
 
+    @JsonIgnore
     @ManyToMany(targetEntity = Facility.class, fetch = FetchType.LAZY)
     private List<Facility> facilities;
 

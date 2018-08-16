@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
 
 @Component
 @Transactional
-public class OrgUnitService extends AbstractService {
+public class OrgUnitService extends Dhis2Service {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeatureCollection.class);
 

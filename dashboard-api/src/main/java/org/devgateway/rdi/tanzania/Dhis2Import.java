@@ -33,33 +33,24 @@ public class Dhis2Import implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2Import.class);
 
-
     @Autowired
     MetaDataImportService dhis2MetaDataImportService;
-
 
     @Autowired
     private ConfigurableApplicationContext context;
 
-
     @Override
     public void run(String... strings) {
-
         dhis2MetaDataImportService.clean();
         dhis2MetaDataImportService.dimensions();
         dhis2MetaDataImportService.orgUnitsGroups();
         dhis2MetaDataImportService.orgUnits();
-
         List<DataElementGroup> dataElementGroups = dhis2MetaDataImportService.dataElementGroups();
-
         List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
                 .filter(dataElementGroup -> dataElementGroup.getName()
                         .equalsIgnoreCase("Population"))
                 .collect(Collectors.toList());
-
-
         dhis2MetaDataImportService.dataElements(dataElementGroups1);
-
         System.exit(3);
     }
 
