@@ -1,0 +1,31 @@
+#tooltip text {
+  font-family: "Open Sans";
+  font-size: 12px;
+  fill: white;
+}
+
+#tooltip {
+  z-index: 2600;
+  opacity: 1;
+  position: absolute;
+  min-width: 60px;
+  height: auto;
+  padding: 10px;
+  color: #080808;
+  background-color: rgb(245, 245, 245);
+  border-radius: 8px;
+  margin-left: 10px;
+  pointer-events: none;
+  font-size: 11px;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  -mox-box-shadow: 4px 4px 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 4px 4px 10px rbga(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+#tooltip p {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}
