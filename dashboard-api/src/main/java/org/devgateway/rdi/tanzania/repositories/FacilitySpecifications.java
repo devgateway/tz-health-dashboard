@@ -28,6 +28,12 @@ public class FacilitySpecifications {
 
                 if (facilityRequest.getDistricts() != null && facilityRequest.getDistricts().size() > 0) {
 
+                    //predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));
+                }
+
+
+                if (facilityRequest.getWards() != null && facilityRequest.getWards().size() > 0) {
+
                     predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));
                 }
 
