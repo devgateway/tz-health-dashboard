@@ -1,5 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.Point;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Facility {
     @ManyToMany(targetEntity = FacilityGroup.class, cascade = CascadeType.ALL)
     List<FacilityGroup> facilityGroups;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Ward.class)
     private Ward ward;
 

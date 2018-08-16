@@ -1,5 +1,7 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Dimension {
     private String dhis2Id;
     private String name;
 
+    @JsonIgnore
     @OneToMany(targetEntity = Item.class, mappedBy = "dimension", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Item> items;
 
