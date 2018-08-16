@@ -25,8 +25,8 @@ public class FacilityController {
     @RequestMapping("/facilities")
     public List<Facility> getFacility(FacilityRequest facilityRequest) {
         return facilityService.getFacilities(facilityRequest);
-
     }
+
 
     @RequestMapping("/facilities/{id}")
     public Facility getFacility(@PathVariable Long id) {
