@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import D3Map from '../../../../../components/d3Map.jsx'
+import D3Map from '../../../../../components/d3Map'
+import D3PieChart from '../../../../../components/d3PieChart'
 import TopTenDeseases from '../../facilityReport/layouts/topTenDeseasesTable'
 
 export default class WardLayout extends React.Component {
@@ -22,7 +23,7 @@ export default class WardLayout extends React.Component {
     const reportPeriod = 'August-October 2017'
     const totalPopulation = '13,944'
     const totalFacilities = '4'
-
+    const d3PieChartData = [{category: 'aaa', value: 2}, {category: 'bbb', value: 3}, {category: 'ccc', value: 4}, {category: 'ddd', value: 5}, ]
     debugger
     return (
       <div>
@@ -102,15 +103,7 @@ export default class WardLayout extends React.Component {
               <div className="value-item"><div>Kiteo</div><div>20</div></div>
             </div> 
           </div>
-          {/*}
-          <PieChart
-            size={100}
-            data={[
-              { key: 'A', value: 100, color: '#aaac84' },
-              { key: 'B', value: 200, color: '#dce7c5' },
-              { key: 'C', value: 50, color: '#e3a51a' }
-            ]}
-          />*/}
+          <D3PieChart title={"Test Pie Chart"} width={600} height={400} data={d3PieChartData} chartClassName={"pie-chart"} legend={true}/>
         </div>
 	    </div>
     )
