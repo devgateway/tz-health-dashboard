@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class OrgGroupService extends AbstractService {
+public class OrgGroupService extends Dhis2Service {
 
 
     @Autowired

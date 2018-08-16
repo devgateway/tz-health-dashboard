@@ -1,7 +1,13 @@
 package org.devgateway.rdi.tanzania.dhis.analytics;
 
+import org.devgateway.rdi.tanzania.Dhis2AnalitycImport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sebastian Dimunzio
@@ -9,42 +15,29 @@ import java.util.List;
 
 public class QueryBuilder {
 
-    boolean showColTotals = false;
-    boolean showRowTotals = false;
-    boolean showColSubTotals = false;
-    boolean showRowSubTotals = false;
+    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2AnalitycImport.class);
 
-    String measureCriteria = null;
+    private static String PATH = "/29/analytics";
+    private String displayProperty = "NAME";
+    private boolean skipRounding = true;
 
-    String legendDisplayStyle = "FILL";
-
-    String legendDisplayStrategy = "FIXED";
-
-
-    List columns;
-    List rows;
-    List filters;
+    //&tableLayout=true&columns=ou;pe&rows=ou;pe
+    List<QueryDimension> filters;
+    List<QueryDimension> dimensions;
 
 
     public static QueryBuilder geInstance() {
         return new QueryBuilder();
     }
 
-    public QueryBuilder addColumn(QueryDimension querySection) {
-        if (columns == null) {
-            columns = new ArrayList<>();
+    public QueryBuilder addDimension(QueryDimension querySection) {
+        if (dimensions == null) {
+            dimensions = new ArrayList<>();
         }
-        columns.add(querySection);
+        dimensions.add(querySection);
         return this;
     }
 
-    public QueryBuilder addRow(QueryDimension querySection) {
-        if (rows == null) {
-            rows = new ArrayList<>();
-        }
-        rows.add(querySection);
-        return this;
-    }
 
     public QueryBuilder addFilter(QueryDimension querySection) {
         if (filters == null) {
@@ -56,13 +49,29 @@ public class QueryBuilder {
 
 
     public String build() {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromPath(PATH);
+        if (this.dimensions != null) {
+            this.dimensions.forEach(queryDimension -> {
 
-        StringBuilder dxBuilder = new StringBuilder();
-        dxBuilder.append("dx:");
+                String items = queryDimension.getItems().stream().map(Item::getId).collect(Collectors.joining(";"));
+                builder.queryParam("dimension", queryDimension.getDimension() + ":" + items);
 
-        //UriComponentsBuilder.fromPath("").queryParam("dimension","dx:")
 
-        return null;
+            });
+        }
+
+        if (this.filters != null) {
+            this.filters.forEach(queryDimension -> {
+                String items = queryDimension.getItems().stream().map(Item::getId).collect(Collectors.joining(";"));
+                builder.queryParam("filter", queryDimension.getDimension() + ":" + items);
+
+            });
+        }
+
+        builder.queryParam("skipRounding", skipRounding);
+        builder.queryParam("displayProperty", displayProperty);
+
+        return builder.toUriString();
     }
 
 }
