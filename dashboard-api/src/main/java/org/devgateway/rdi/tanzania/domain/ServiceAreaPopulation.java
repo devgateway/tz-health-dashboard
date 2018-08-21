@@ -1,5 +1,7 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,19 +12,27 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
-public class Population {
+public class ServiceAreaPopulation {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Facility.class)
     private Facility facility;
-    private Short month;
     private Integer year;
     private Double value;
     private String gender;
     private String age;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Facility getFacility() {
         return facility;
@@ -30,14 +40,6 @@ public class Population {
 
     public void setFacility(Facility facility) {
         this.facility = facility;
-    }
-
-    public Short getMonth() {
-        return month;
-    }
-
-    public void setMonth(Short month) {
-        this.month = month;
     }
 
     public Integer getYear() {

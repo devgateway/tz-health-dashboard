@@ -25,7 +25,7 @@ public class Facility {
 
     String dhis2ParentId;
 
-
+    @JsonIgnore
     @ManyToMany(targetEntity = FacilityGroup.class, cascade = CascadeType.ALL)
     List<FacilityGroup> facilityGroups;
 
