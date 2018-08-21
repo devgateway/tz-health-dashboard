@@ -9,13 +9,16 @@ const GET_FEATURE_DONE = "GET_FEATURE_DONE"
 
 export const CATEGORY_DISTRICT = "district"
 export const CATEGORY_WARD = "ward"
+export const CATEGORY_FACILITY = "facility"
 
-export const FEATURE_SELECTED = 'FEATURE_SELECTED';
-
+export const FEATURE_SELECTED = 'FEATURE_SELECTED'
+export const FIND_FACILITIES_DONE = 'FIND_FACILITIES_DONE'
 
 export const wardSelected = (feature) => {
+  const { properties: { ID: id } } = feature
   return (dispatch, getState) => {
     dispatch({ 'type': FEATURE_SELECTED, 'category': CATEGORY_WARD, feature })
+    dispatch(findFacilities({ wards: id }))
   }
 }
 
@@ -27,8 +30,6 @@ export const districtSelected = (feature) => {
   }
 }
 
-
-
 export const findDistricts = () => {
   return (dispatch, getState) => {
     api.findDistricts().then(data => {
@@ -39,14 +40,20 @@ export const findDistricts = () => {
 
 
 export const findWards = (params) => {
-
   return (dispatch, getState) => {
-    api.findDWards(params).then(data => {
+    api.findWards(params).then(data => {
       dispatch({ 'type': FIND_BOUNDARY_DONE, 'category': CATEGORY_WARD, data })
     })
   }
 }
 
+export const findFacilities = (params) => {
+  return (dispatch, getState) => {
+    api.findFacilities(params).then(data => {
+      dispatch({ 'type': FIND_FACILITIES_DONE, 'category': CATEGORY_FACILITY, data })
+    })
+  }
+}
 
 export const getWard = (id) => {
   return (dispatch, getState) => {
@@ -69,7 +76,11 @@ const ACTION_HANDLERS = {
   ['FEATURE_SELECTED']: (state, action) => {
     const { feature, category } = action
     return state.setIn([category, 'selected'], feature)
-  }
+  },
+  ['FIND_FACILITIES_DONE']: (state, action) => {
+    const { data, category } = action
+    return state.setIn([category, 'list'], data)
+  },
 };
 
 // ------------------------------------ Reducer ------------------------------------

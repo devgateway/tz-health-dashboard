@@ -10,17 +10,17 @@ class D3Map extends React.Component {
 
   componentWillReceiveProps(nexProps) {
     if (nexProps.features) {
-      this.generateMap(nexProps.features)
+      this.generateMap(nexProps.features, nexProps.pointFeatures)
     }
   }
 
   componentDidMount() {
     if (this.props.features) {
-      this.generateMap(this.props.features)
+      this.generateMap(this.props.features, this.props.pointFeatures)
     }
   }
 
-  generateMap(featureCollection) {
+  generateMap(featureCollection, pointFeatures) {
     const parent = this;
     const {features} = featureCollection
     const element = this.refs.mapElement
@@ -33,6 +33,7 @@ class D3Map extends React.Component {
 
     var center = d3.geoCentroid(featureCollection)
     var scale = 2900;
+    var scale0 = (width - 1) / 2 / Math.PI;
     var offset = [
       width / 2,
       height / 2
@@ -45,7 +46,7 @@ class D3Map extends React.Component {
         width, height
       ]
     ], featureCollection);
-    //.center(center).translate(offset);
+    
     var path = d3.geoPath().projection(projection);
     var color = d3.scaleLinear().domain([0, features.length]).interpolate(d3.interpolateHcl).range(colors);
 
@@ -73,6 +74,31 @@ class D3Map extends React.Component {
       tooltip.style("opacity", 0);
     })
 
+    if (pointFeatures) {
+      geoemetries.selectAll("circle").data(pointFeatures).enter().append("circle")
+        .attr("cx", d => projection(d.geometry.coordinates)[0])
+        .attr("cy", d => projection(d.geometry.coordinates)[1])
+        .attr('class', 'clickeable')
+        .attr("r", "6px")
+        .attr("fill", "#6C8EAD")
+        .on('click', (d) => {parent.props.onPointClick(d)})
+        .on('mouseover', (d) => {
+          console.log('mouseover')
+          tooltip.html('<div>' + d.properties['NAME'] + '</div>').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
+          tooltip.style("opacity", .9)})
+        .on('mousemove', (d) => {
+          tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px")})
+        .on('mouseout', (d) => {
+          tooltip.style("opacity", 0);})
+        
+    }
+    const zoom = d3.zoom()
+      .on('zoom', () => {
+          geoemetries.style('stroke-width', `${1.5 / d3.event.transform.k}px`)
+          geoemetries.attr('transform', d3.event.transform) // updated for d3 v4
+      })
+
+    svg.call(zoom)
   }
 
   render() {
