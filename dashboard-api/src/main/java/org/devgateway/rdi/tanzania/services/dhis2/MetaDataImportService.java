@@ -89,8 +89,8 @@ public class MetaDataImportService {
                 LOGGER.info("Ward found was" + ward.getName());
 
             } else {
-                LOGGER.warn("No war found for " + facility.getCode() + " - " + facility.getName()
-                        + "  with coordinates (" + facility.getPoint() + ")");
+                LOGGER.warn("No ward found for " + facility.getCode() + " - " + facility.getName()
+                        + "   coordinates are (" + facility.getPoint() + ")");
             }
         });
 

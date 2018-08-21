@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,9 +23,9 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PopulationService {
+public class Dhis2PopulationService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PopulationService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2PopulationService.class);
 
     @Autowired
     Dhis2Config dhis2Config;
@@ -51,17 +50,16 @@ public class PopulationService {
     FacilityRepository facilityRepository;
 
     @Autowired
-    PopulationRepository populationRepository;
+    ServiceAreaPopulationRepository serviceAreaPopulation;
 
     public void clean() {
-        populationRepository.deleteAll();
+        serviceAreaPopulation.deleteAll();
     }
 
 
-    public List<Population> importPopulation() {
-        List<Population> populations = new ArrayList<>();
+    public List<ServiceAreaPopulation> importPopulation() {
+        List<ServiceAreaPopulation> populations = new ArrayList<>();
         List<Region> regions = regionRepository.findAll();
-
         regions.forEach(region -> {
                     LOGGER.info("Importing region " + region.getName());
                     populations.addAll(importPopulationByRegion(region));
@@ -71,8 +69,14 @@ public class PopulationService {
         return populations;
     }
 
-    public List<Population> importPopulationByRegion(Region region) {
-        List<Population> populations = new ArrayList<>();
+
+    public List<ServiceAreaPopulation> importPopulationByRegionName(String name) {
+        Region r = regionRepository.findOneByName(name);
+        return importPopulationByRegion(r);
+    }
+
+    public List<ServiceAreaPopulation> importPopulationByRegion(Region region) {
+        List<ServiceAreaPopulation> populations = new ArrayList<>();
         region.getDistricts().forEach(district -> {
             LOGGER.info("Importing district " + region.getName());
             populations.addAll(importPopulationByDistrict(district));
@@ -81,16 +85,16 @@ public class PopulationService {
     }
 
 
-    public List<Population> importPopulationByDistrict(District district) {
-        List<Population> populations = new ArrayList<>();
+    public List<ServiceAreaPopulation> importPopulationByDistrict(District district) {
+        List<ServiceAreaPopulation> populations = new ArrayList<>();
         district.getWards().forEach(ward -> populations.addAll(importPopulationByWard(ward)));
         return populations;
     }
 
 
-    public List<Population> importPopulationByWard(Ward ward) {
+    public List<ServiceAreaPopulation> importPopulationByWard(Ward ward) {
         LOGGER.info("Importing district " + ward.getName());
-        List<Population> populations = new ArrayList<>();
+        List<ServiceAreaPopulation> populations = new ArrayList<>();
         Dhis2 dhis2 = new Dhis2(dhis2Config);
 
         //8713;"ykShMtNgDB1";"Idadi ya Watu"
@@ -100,16 +104,6 @@ public class PopulationService {
 
         //727;"Cow9nZikDgD";"Age Population"
         Dimension age = dimensionRepository.findOneByDhis2Id("Cow9nZikDgD");
-
-        /*
-        "h8JRv8POdfy";"< 1"
-        "LBipXEMD6mq";"1-4"
-        "c5LtGjbHKgf";"Miaka 5-9"
-        "aZcKJ9XxvaF";"10 -14"
-        "FfN1mqXvpR7";"15-49"
-        "HKU7NijIEIH";"50 - 60"
-        "p1b4SYcdjJw";"60+"
-        */
 
         QueryDimension ageDimension = new QueryDimension(age.getDhis2Id(), age.getName());
 
@@ -141,42 +135,41 @@ public class PopulationService {
                     .addDimension(dx)
                     .addDimension(genderDimension)
                     .addDimension(ageDimension)
-                    .addDimension(QueryUtil.MONTHS_OF_2017())
+                    .addDimension(QueryUtil.LAST_5_YEARS())
                     .addDimension(ouDimension);
 
             try {
+
                 AnalyticsResultsTable results = dhis2.getObject(queryBuilder.build(), AnalyticsResultsTable.class);
 
-                LOGGER.info("Got " + results.getRows().size() + " results");
+                LOGGER.info("Got " + results.getRows().size() + " - "
+                        + ward.getDistrict().getRegion().getName() + " - "
+                        + ward.getDistrict().getName() + " - "
+                        + ward.getDistrict().getName() + " - " + ward.getName());
 
                 results.getRows().forEach(row -> {
-
                     Double value = Double.parseDouble(row[5]);
                     String genderValue = results.getMetaData().getItems().get(row[1]).getName();
                     String ageValue = results.getMetaData().getItems().get(row[2]).getName();
-                    String yearMonthValue = row[3];
+                    String year = row[3];
                     Facility facility = facilityRepository.findOneByDhis2Id(row[4]);
-
-                    Population p = new Population();
+                    ServiceAreaPopulation p = new ServiceAreaPopulation();
                     p.setFacility(facility);
                     p.setValue(value);
                     p.setAge(ageValue);
                     p.setGender(genderValue);
-                    p.setYear(Integer.valueOf(yearMonthValue.substring(0, 4)));
-                    p.setMonth(Short.valueOf(yearMonthValue.substring(4)));
+                    p.setYear(Integer.valueOf(year));
 
                     populations.add(p);
-
-                    LOGGER.info(Arrays.toString(row));
-
                 });
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
 
-        populationRepository.save(populations);
+        serviceAreaPopulation.save(populations);
         return populations;
     }
 }

@@ -1,6 +1,6 @@
 package org.devgateway.rdi.tanzania;
 
-import org.devgateway.rdi.tanzania.services.dhis2.PopulationService;
+import org.devgateway.rdi.tanzania.services.dhis2.Dhis2PopulationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,12 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
 
     @Autowired
-    PopulationService populationService;
+    Dhis2PopulationService populationService;
 
 
     public void importPopuationData() {
         populationService.clean();
-
-        populationService.importPopulation();
-
+        populationService.importPopulationByRegionName("Dodoma");
     }
 
 
