@@ -97,6 +97,10 @@ public class QueryUtil {
         return new QueryDimension("pe", "Period").adItem("LAST_5_YEARS", "LAST_5_YEARS");
     }
 
+    public static QueryDimension Y2017() {
+        return new QueryDimension("pe", "Period").adItem("2017", "2017");
+    }
+
     public static QueryDimension LAST_12_MONTHS() {
         return new QueryDimension("pe", "Period").adItem("LAST_12_MONTHS", "LAST_12_MONTHS");
     }
