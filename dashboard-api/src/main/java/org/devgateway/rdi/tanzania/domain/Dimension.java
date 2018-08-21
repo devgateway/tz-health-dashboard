@@ -20,7 +20,7 @@ public class Dimension {
     private String name;
 
     @JsonIgnore
-    @OneToMany(targetEntity = Item.class, mappedBy = "dimension", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Item.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Item> items;
 
     public Dimension() {

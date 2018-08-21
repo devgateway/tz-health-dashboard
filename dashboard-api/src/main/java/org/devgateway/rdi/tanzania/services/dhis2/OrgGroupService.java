@@ -28,20 +28,17 @@ public class OrgGroupService extends Dhis2Service {
     private static String PATH = "/29/organisationUnitGroups.json";
 
     public List<FacilityGroup> getOrgGroups() {
-        OrgUnitsGroupsResults results = getObjects(OrgUnitsGroupsResults.class,
-                PATH, false, "id,organisationUnits,displayName,dimensionItem");
 
+        OrgUnitsGroupsResults results = getObjects(OrgUnitsGroupsResults.class, PATH, false, "id,organisationUnits,displayName,dimensionItem");
         return results.getOrganisationUnitGroups().stream().map(orgUnitGroup -> {
 
                     FacilityGroup facilityGroup = new FacilityGroup(orgUnitGroup.getId(), orgUnitGroup.getDisplayName());
                     facilityGroup.setDhis2Id(orgUnitGroup.getId());
-                    try {
-                        List<Item> items = itemRepository.findByDhis2Id(orgUnitGroup.getDimensionItem());
 
-                        facilityGroup.setItems(items);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    Item item = itemRepository.findByDhis2Id(orgUnitGroup.getDimensionItem());
+                    facilityGroup.setItem(item);
+
+
                     return facilityGroup;
                 }
         ).collect(Collectors.toList());

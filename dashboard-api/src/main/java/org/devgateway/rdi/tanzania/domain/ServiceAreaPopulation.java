@@ -26,6 +26,12 @@ public class ServiceAreaPopulation {
     private String gender;
     private String age;
 
+    @ManyToOne(targetEntity = Item.class)
+    Item genderItem;
+
+    @ManyToOne(targetEntity = Item.class)
+    Item ageItem;
+
     public Long getId() {
         return id;
     }
@@ -72,5 +78,21 @@ public class ServiceAreaPopulation {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public Item getGenderItem() {
+        return genderItem;
+    }
+
+    public void setGenderItem(Item genderItem) {
+        this.genderItem = genderItem;
+    }
+
+    public Item getAgeItem() {
+        return ageItem;
+    }
+
+    public void setAgeItem(Item ageItem) {
+        this.ageItem = ageItem;
     }
 }

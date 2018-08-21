@@ -17,10 +17,18 @@ public class FacilityGroup {
     String dhis2Id;
     String name;
 
-    @OneToMany(targetEntity = Item.class)
-    List<Item> item;
+    @ManyToOne(targetEntity = Item.class)
+    Item item;
 
     public FacilityGroup() {
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public FacilityGroup(String dhis2Id, String name) {
@@ -35,14 +43,6 @@ public class FacilityGroup {
 
     public Long getId() {
         return id;
-    }
-
-    public List<Item> getItems() {
-        return item;
-    }
-
-    public void setItems(List<Item> item) {
-        this.item = item;
     }
 
     public void setId(Long id) {

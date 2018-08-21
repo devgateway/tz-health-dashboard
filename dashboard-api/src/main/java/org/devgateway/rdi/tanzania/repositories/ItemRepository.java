@@ -12,5 +12,5 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
 
-    List<Item> findByDhis2Id(String dhis2Id);
+    Item findByDhis2Id(String dhis2Id);
 }
