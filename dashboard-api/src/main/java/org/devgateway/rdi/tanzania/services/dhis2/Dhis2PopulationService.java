@@ -30,7 +30,6 @@ public class Dhis2PopulationService {
     @Autowired
     Dhis2Config dhis2Config;
 
-
     @Autowired
     DimensionRepository dimensionRepository;
 
@@ -51,6 +50,11 @@ public class Dhis2PopulationService {
 
     @Autowired
     ServiceAreaPopulationRepository serviceAreaPopulation;
+
+
+    @Autowired
+    ItemRepository itemRepository;
+
 
     public void clean() {
         serviceAreaPopulation.deleteAll();
