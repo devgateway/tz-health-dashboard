@@ -135,7 +135,7 @@ public class Dhis2PopulationService {
                     .addDimension(dx)
                     .addDimension(genderDimension)
                     .addDimension(ageDimension)
-                    .addDimension(QueryUtil.LAST_5_YEARS())
+                    .addDimension(QueryUtil.Y2017())
                     .addDimension(ouDimension);
 
             try {
