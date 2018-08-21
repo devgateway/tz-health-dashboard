@@ -30,7 +30,7 @@ public class FacilityService {
     }
 
     public Facility getFacility(Long id) {
-        return facilityRepository.getOne(id);
+        return facilityRepository.findOne(id);
 
     }
 
