@@ -1,5 +1,7 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +29,7 @@ public class Item {
     public Item() {
     }
 
+    @JsonIgnore
     @ManyToMany(targetEntity = Dimension.class)
     List<Dimension> dimensions;
 
