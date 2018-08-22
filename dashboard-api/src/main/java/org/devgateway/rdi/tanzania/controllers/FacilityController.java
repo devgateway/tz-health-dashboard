@@ -31,7 +31,8 @@ public class FacilityController {
 
     @RequestMapping("/facilities/{id}")
     public FacilityResponse getFacility(@PathVariable Long id) {
-        return ResponseUtils.facilityToResponse(facilityService.getFacility(id));
+        FacilityResponse facilityResponse = ResponseUtils.facilityToResponse(facilityService.getFacility(id));
+        return facilityResponse;
     }
 
     @Autowired
