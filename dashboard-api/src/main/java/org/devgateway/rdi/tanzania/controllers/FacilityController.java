@@ -3,6 +3,8 @@ package org.devgateway.rdi.tanzania.controllers;
 import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.ServiceAreaPopulation;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
+import org.devgateway.rdi.tanzania.response.FacilityResponse;
+import org.devgateway.rdi.tanzania.response.ResponseUtils;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.devgateway.rdi.tanzania.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,9 @@ public class FacilityController {
 
 
     @RequestMapping("/facilities/{id}")
-    public Facility getFacility(@PathVariable Long id) {
-        return facilityService.getFacility(id);
+    public FacilityResponse getFacility(@PathVariable Long id) {
+        FacilityResponse facilityResponse = ResponseUtils.facilityToResponse(facilityService.getFacility(id));
+        return facilityResponse;
     }
 
     @Autowired

@@ -1,9 +1,13 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Sebastian Dimunzio
@@ -17,17 +21,17 @@ public class Item {
     String name;
     String dhis2Id;
 
-    public Item(String dhis2Id, String name, Dimension dimension) {
+    public Item(String dhis2Id, String name) {
         this.name = name;
         this.dhis2Id = dhis2Id;
-        this.dimension = dimension;
     }
 
     public Item() {
     }
 
-    @ManyToOne(targetEntity = Dimension.class)
-    Dimension dimension;
+    @JsonIgnore
+    @ManyToMany(targetEntity = Dimension.class)
+    List<Dimension> dimensions;
 
     public Long getId() {
         return id;
@@ -53,11 +57,19 @@ public class Item {
         this.dhis2Id = dhis2Id;
     }
 
-    public Dimension getDimension() {
-        return dimension;
+    public List<Dimension> getDimensions() {
+        return dimensions;
     }
 
-    public void setDimension(Dimension dimension) {
-        this.dimension = dimension;
+    public void setDimensions(List<Dimension> dimensions) {
+        this.dimensions = dimensions;
     }
+    public void addDimension(Dimension dimension) {
+        if (this.dimensions==null){
+            this.dimensions=new ArrayList<>();
+        }
+        this.dimensions.add(dimension);
+    }
+
+
 }
