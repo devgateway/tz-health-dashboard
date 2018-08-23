@@ -1,8 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -10,6 +8,9 @@ import java.util.List;
  */
 @Entity
 @DiscriminatorValue("REGION")
+@NamedEntityGraph(name = "districtsJoin", attributeNodes = @NamedAttributeNode("districts"))
+
+
 public class Region extends Boundary {
 
     @OneToMany(targetEntity = District.class, mappedBy = "region")

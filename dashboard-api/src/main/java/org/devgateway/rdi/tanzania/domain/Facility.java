@@ -34,6 +34,11 @@ public class Facility {
     private Ward ward;
 
 
+    @JsonIgnore
+    @OneToMany(targetEntity = ServiceAreaPopulation.class, mappedBy = "facility", cascade = CascadeType.ALL)
+    List<ServiceAreaPopulation> areaPopulations;
+
+
     @ManyToOne(targetEntity = Item.class)
     private Item ownership;
 
@@ -140,5 +145,13 @@ public class Facility {
 
     public void setDetailedType(Item detailedType) {
         this.detailedType = detailedType;
+    }
+
+    public List<ServiceAreaPopulation> getAreaPopulations() {
+        return areaPopulations;
+    }
+
+    public void setAreaPopulations(List<ServiceAreaPopulation> areaPopulations) {
+        this.areaPopulations = areaPopulations;
     }
 }
