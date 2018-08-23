@@ -20,6 +20,7 @@ public class QueryBuilder {
     private static String PATH = "/29/analytics";
     private String displayProperty = "NAME";
     private boolean skipRounding = true;
+    private boolean skipMeta = true;
 
     //&tableLayout=true&columns=ou;pe&rows=ou;pe
     List<QueryDimension> filters;
@@ -70,7 +71,7 @@ public class QueryBuilder {
 
         builder.queryParam("skipRounding", skipRounding);
         builder.queryParam("displayProperty", displayProperty);
-
+        builder.queryParam("skipMeta", skipMeta);
         return builder.toUriString();
     }
 

@@ -200,7 +200,17 @@ public class QueryUtil {
     }
 
 
+    public static List<Item> dataElemenst2Items
+            (List<org.devgateway.rdi.tanzania.domain.DataElement>
+                     dataElements) {
+        return dataElements.stream().map(dataElement -> dataElement2Item(dataElement)).collect(Collectors.toList());
+    }
+
     public static Item org2Item(Facility facility) {
         return new Item(facility.getDhis2Id(), facility.getName());
+    }
+
+    public static List<Item> org2sItems(List<Facility> facilities) {
+        return facilities.stream().map(facility -> org2Item(facility)).collect(Collectors.toList());
     }
 }

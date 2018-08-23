@@ -1,5 +1,7 @@
 package org.devgateway.rdi.tanzania.dhis.analytics;
 
+import org.devgateway.rdi.tanzania.domain.Dimension;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,12 @@ public class QueryDimension {
     public QueryDimension(String dimension, String name) {
         this.dimension = dimension;
         this.name = name;
+    }
+
+
+    public QueryDimension(Dimension d) {
+        this.dimension = d.getDhis2Id();
+        this.name = d.getName();
     }
 
 
@@ -40,8 +48,9 @@ public class QueryDimension {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public QueryDimension setItems(List<Item> items) {
         this.items = items;
+        return this;
     }
 
 

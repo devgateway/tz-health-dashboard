@@ -10,5 +10,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface FacilityRepository extends JpaRepository<Facility, Long>, JpaSpecificationExecutor {
 
+
+
     Facility findOneByDhis2Id(String dId);
 }

@@ -18,7 +18,7 @@ import org.springframework.context.annotation.FilterType;
 @SpringBootApplication
 @EnableCaching
 @ComponentScan(excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {Dhis2Import.class,Dhis2AnalitycImport.class})})
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {Dhis2MetadataImport.class,Dhis2AnalitycImport.class})})
 public class Application {
 
     public static void main(String[] args) throws Exception {

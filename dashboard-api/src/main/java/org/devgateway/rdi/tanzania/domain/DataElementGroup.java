@@ -8,6 +8,7 @@ import java.util.List;
  */
 
 @Entity
+@NamedEntityGraph(name = "dataElementJoin", attributeNodes = @NamedAttributeNode("dataElements"))
 public class DataElementGroup {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
