@@ -14,3 +14,9 @@ path.clickeable {
   background-color: #CCC;
   padding: 4px;
   border-radius: 7px; }
+
+.map-container image {
+  z-index: 1000; }
+
+.map-container g {
+  z-index: 1005; }

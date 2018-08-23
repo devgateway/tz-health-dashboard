@@ -37,22 +37,23 @@ class MapView extends React.Component {
     if (facilities) {
       facilities.forEach(f => facilitiesFeatures.push({properties: {ID: f.id, NAME: f.name}, geometry: f.point}))
     }
+    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     return (<div className="maps-container">
       <div className="infoBlock country">
         <h2>Tanzania</h2>
-        <D3Map width="500" height="500" colors={["#FFF275", '#6C8EAD']} onFeatureClick={f => this.props.onDistricSelected(f)} features={districts}></D3Map>
+        <D3Map width="500" height="500" colors={["#FFF275", '#6C8EAD']} onFeatureClick={f => this.props.onDistricSelected(f)} shapeFeatures={districts} zoomeable={true}></D3Map>
       </div>
       
       {district ? 
         <div className="infoBlock district">
           <h2>{district.properties['NAME']}</h2>
-          <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardSelected(f)} features={wards}></D3Map>
+          <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardSelected(f)} shapeFeatures={wards} zoomeable={true}></D3Map>
         </div>
       : null}
       {ward ? 
         <div className="infoBlock district">
           <h2>{ward.properties['NAME']}</h2>
-          <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardClicked(f)} onPointClick={f => this.onFacilityClicked(f)} features={wardFeature} pointFeatures={facilitiesFeatures}></D3Map>
+          <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardClicked(f)} onPointClick={f => this.onFacilityClicked(f)} shapeFeatures={wardFeature} pointFeatures={pointFeatures} zoomeable={true}></D3Map>
         </div>
       : null}
 
