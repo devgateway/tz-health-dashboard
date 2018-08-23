@@ -61,7 +61,7 @@ export default class WardLayout extends React.Component {
 
             </div>
             <div className="map">
-              <D3Map width="300" height="300" colors={["#FF8C42", '#0C4700']} features={features}></D3Map>
+              <D3Map width="450" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={features} showBasemap={true}></D3Map>
             </div>
           </div>
 

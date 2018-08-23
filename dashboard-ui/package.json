@@ -5,6 +5,7 @@
   "dependencies": {
     "css-loader": "^0.28.11",
     "d3": "^5.3.0",
+    "d3-tile": "0.0.4",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "node-sass-chokidar": "^1.2.2",
