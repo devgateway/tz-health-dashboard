@@ -23,8 +23,14 @@ public class ServiceAreaPopulation {
     private Facility facility;
     private Integer year;
     private Double value;
-    private String gender;
-    private String age;
+    private String genderValue;
+    private String ageValue;
+
+    @ManyToOne(targetEntity = Item.class)
+    Item gender;
+
+    @ManyToOne(targetEntity = Item.class)
+    Item age;
 
     public Long getId() {
         return id;
@@ -58,19 +64,35 @@ public class ServiceAreaPopulation {
         this.value = value;
     }
 
-    public String getGender() {
+    public String getGenderValue() {
+        return genderValue;
+    }
+
+    public void setGenderValue(String genderValue) {
+        this.genderValue = genderValue;
+    }
+
+    public String getAgeValue() {
+        return ageValue;
+    }
+
+    public void setAgeValue(String ageValue) {
+        this.ageValue = ageValue;
+    }
+
+    public Item getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Item gender) {
         this.gender = gender;
     }
 
-    public String getAge() {
+    public Item getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(Item age) {
         this.age = age;
     }
 }

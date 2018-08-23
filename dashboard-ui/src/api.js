@@ -1,9 +1,9 @@
 const API_ROOT_URL = (document.location.hostname === 'localhost') ? 'http://localhost:8083' : '';
-const API_DISTRICT = API_ROOT_URL + '/district/find'
-const API_WARDS = API_ROOT_URL + '/ward/find'
+const API_DISTRICT = API_ROOT_URL + '/districts'
+const API_WARDS = API_ROOT_URL + '/wards'
 const API_WARD_INFO = API_ROOT_URL + '/wards'
 const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wardReport`
-const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facilityReport`
+const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facility`
 const API_FACILITIES= `${API_ROOT_URL}/facilities`
 
 

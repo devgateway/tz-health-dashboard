@@ -97,23 +97,27 @@ public class MetaDataImportService {
 
         facilities.stream().forEach(facility -> {
                     facility.getFacilityGroups().forEach(facilityGroup -> {
-                                facilityGroup.getItems().forEach(item -> {
-                                    if (item.getDimension().getName().equalsIgnoreCase("Type")) {
-                                        facility.setType(item);
-                                    }
-                                    if (item.getDimension().getName().equalsIgnoreCase("Detailed Type")) {
-                                        facility.setDetailedType(item);
-                                    }
-                                    if (item.getDimension().getName().equalsIgnoreCase("Ownership")) {
-                                        facility.setOwnership(item);
-                                    }
-                                    if (item.getDimension().getName().equalsIgnoreCase("Detailed Ownership")) {
-                                        facility.setDetailedOwnership(item);
-                                    }
-                                });
-                            }
 
-                    );
+                        if (facilityGroup.getItem() != null) {
+                            if (facilityGroup.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Type")).findFirst().isPresent()) {
+                                facility.setType(facilityGroup.getItem());
+                            }
+                            if (facilityGroup.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Detailed Type")).findFirst().isPresent()) {
+                                facility.setDetailedType(facilityGroup.getItem());
+                            }
+                            if (facilityGroup.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Ownership")).findFirst().isPresent()) {
+                                facility.setOwnership(facilityGroup.getItem());
+                            }
+                            if (facilityGroup.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Detailed Ownership")).findFirst().isPresent()) {
+                                facility.setDetailedOwnership(facilityGroup.getItem());
+                            }
+                        }
+
+                    });
                 }
 
 

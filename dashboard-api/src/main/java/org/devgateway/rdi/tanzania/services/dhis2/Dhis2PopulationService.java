@@ -30,7 +30,6 @@ public class Dhis2PopulationService {
     @Autowired
     Dhis2Config dhis2Config;
 
-
     @Autowired
     DimensionRepository dimensionRepository;
 
@@ -51,6 +50,11 @@ public class Dhis2PopulationService {
 
     @Autowired
     ServiceAreaPopulationRepository serviceAreaPopulation;
+
+
+    @Autowired
+    ItemRepository itemRepository;
+
 
     public void clean() {
         serviceAreaPopulation.deleteAll();
@@ -156,9 +160,14 @@ public class Dhis2PopulationService {
                     ServiceAreaPopulation p = new ServiceAreaPopulation();
                     p.setFacility(facility);
                     p.setValue(value);
-                    p.setAge(ageValue);
-                    p.setGender(genderValue);
+
                     p.setYear(Integer.valueOf(year));
+
+                    p.setGender(itemRepository.findByDhis2Id(row[1]));
+                    p.setGenderValue(genderValue);
+
+                    p.setAge(itemRepository.findByDhis2Id(row[2]));
+                    p.setAgeValue(ageValue);
 
                     populations.add(p);
                 });

@@ -31,7 +31,6 @@ public class FacilityService {
 
     public Facility getFacility(Long id) {
         return facilityRepository.findOne(id);
-
     }
 
     public Facility save(Facility f) {
@@ -48,10 +47,11 @@ public class FacilityService {
     }
 
 
-    public void cleanFacilities(){
+    public void cleanFacilities() {
         facilityRepository.deleteAll();
     }
-    public void cleanGroups(){
+
+    public void cleanGroups() {
         facilityGroupRepository.deleteAll();
     }
 
