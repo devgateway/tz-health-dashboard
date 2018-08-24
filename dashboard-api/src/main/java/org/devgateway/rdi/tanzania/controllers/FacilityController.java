@@ -10,6 +10,7 @@ import org.devgateway.rdi.tanzania.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.tools.Diagnostic;
 import java.util.List;
 
 /**
@@ -42,4 +43,14 @@ public class FacilityController {
     public List<ServiceAreaPopulation> serviceAreaPopulations(@PathVariable Long id, @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year) {
         return populationService.getServiceAreaPopulation(id, year);
     }
+
+
+    @RequestMapping("/facilities/{id}/diagnoses")
+    public List<Diagnostic> diangoses(@PathVariable Long id,
+                                      @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                        @RequestParam(name = "m", required = false) Integer month) {
+        return null;
+    }
+
+
 }
