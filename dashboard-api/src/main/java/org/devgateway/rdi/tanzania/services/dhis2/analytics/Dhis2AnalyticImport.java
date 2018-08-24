@@ -1,4 +1,4 @@
-package org.devgateway.rdi.tanzania.services.dhis2;
+package org.devgateway.rdi.tanzania.services.dhis2.analytics;
 
 import org.devgateway.rdi.tanzania.domain.District;
 import org.devgateway.rdi.tanzania.domain.Facility;
@@ -52,8 +52,6 @@ public abstract class Dhis2AnalyticImport<T> {
 
     public List<T> byRegion(String name, Grouping grouping) {
         Region region = regionRepository.findOneByName(name);
-
-
         return byRegion(region, grouping);
 
     }
@@ -101,5 +99,7 @@ public abstract class Dhis2AnalyticImport<T> {
     }
 
 
-    abstract List<T> byFacilities(List<Facility> facilities);
+    public abstract List<T> byFacilities(List<Facility> facilities);
+
+    public abstract void clean();
 }

@@ -1,4 +1,4 @@
-package org.devgateway.rdi.tanzania.services.dhis2;
+package org.devgateway.rdi.tanzania.services.dhis2.metadata;
 
 import org.hisp.dhis.Dhis2;
 import org.hisp.dhis.Dhis2Config;

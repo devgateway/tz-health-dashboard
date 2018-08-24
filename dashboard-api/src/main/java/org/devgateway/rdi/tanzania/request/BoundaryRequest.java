@@ -8,11 +8,11 @@ import java.util.List;
 
 public class BoundaryRequest {
 
-    private List<String> types;
 
     private String q;
-
-    private Long districtId;
+    private List<Long> districts;
+    private List<Long> wards;
+    private List<Long> regions;
 
 
     public String getQ() {
@@ -33,19 +33,27 @@ public class BoundaryRequest {
 
     private Double simplifyFactor = 0.005;
 
-    public List<String> getTypes() {
-        return types;
+    public List<Long> getDistricts() {
+        return districts;
     }
 
-    public void setTypes(List<String> types) {
-        this.types = types;
+    public void setDistricts(List<Long> districts) {
+        this.districts = districts;
     }
 
-    public Long getDistrictId() {
-        return districtId;
+    public List<Long> getWards() {
+        return wards;
     }
 
-    public void setDistrictId(Long districtId) {
-        this.districtId = districtId;
+    public void setWards(List<Long> wards) {
+        this.wards = wards;
+    }
+
+    public List<Long> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<Long> regions) {
+        this.regions = regions;
     }
 }

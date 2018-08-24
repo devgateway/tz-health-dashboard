@@ -1,7 +1,7 @@
-package org.devgateway.rdi.tanzania.services.dhis2;
+package org.devgateway.rdi.tanzania.services.dhis2.metadata;
 
-import org.devgateway.rdi.tanzania.dhis.pojo.Results;
-import org.devgateway.rdi.tanzania.dhis.pojo.dimensions.Dimensions;
+import org.devgateway.rdi.tanzania.dhis.pojo.MetaDataResponse;
+import org.devgateway.rdi.tanzania.dhis.pojo.Dimensions;
 import org.devgateway.rdi.tanzania.domain.Dimension;
 import org.devgateway.rdi.tanzania.domain.Item;
 import org.devgateway.rdi.tanzania.repositories.DimensionRepository;
@@ -34,8 +34,8 @@ public class DimensionService extends Dhis2Service {
     ItemRepository itemRepository;
 
 
-    public Results getDimensionItems(String key) {
-        return getObjects(Results.class, UriComponentsBuilder.fromPath(PATH)
+    public MetaDataResponse getDimensionItems(String key) {
+        return getObjects(MetaDataResponse.class, UriComponentsBuilder.fromPath(PATH)
                 .pathSegment(key)
                 .pathSegment("items.json").toUriString(), false, "*");
     }
@@ -59,12 +59,6 @@ public class DimensionService extends Dhis2Service {
                 List<Item> items = getDimensionItems(dimension.getId())
                         .getDataElements()
                         .stream().map(singleObject -> {
-
-                            if (singleObject.getId().equals("Bf2IyOkJ3R4")) {
-                                System.out.print("");
-                            }
-
-
                             Item item = cachedItems.get(singleObject.getId());
                             if (item == null) {
                                 item = new Item(singleObject.getId(), singleObject.getDisplayName());
