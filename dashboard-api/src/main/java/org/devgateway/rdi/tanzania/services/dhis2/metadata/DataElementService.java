@@ -1,6 +1,6 @@
-package org.devgateway.rdi.tanzania.services.dhis2;
+package org.devgateway.rdi.tanzania.services.dhis2.metadata;
 
-import org.devgateway.rdi.tanzania.dhis.pojo.Results;
+import org.devgateway.rdi.tanzania.dhis.pojo.MetaDataResponse;
 import org.devgateway.rdi.tanzania.domain.DataElement;
 import org.devgateway.rdi.tanzania.domain.DataElementGroup;
 import org.devgateway.rdi.tanzania.repositories.DataElementGroupRepository;
@@ -30,7 +30,7 @@ public class DataElementService extends Dhis2Service {
     DataElementGroupRepository dataElementGroupRepository;
 
     public List<DataElementGroup> getDataElementGroups() {
-        Results groups = getObjects(Results.class, PATH, false, "id,displayName");
+        MetaDataResponse groups = getObjects(MetaDataResponse.class, PATH, false, "id,displayName");
         return groups.getDataElements()
                 .stream()
                 .map(dhis2Object -> new DataElementGroup(dhis2Object.getId(), dhis2Object.getDisplayName()))
@@ -41,7 +41,7 @@ public class DataElementService extends Dhis2Service {
 
     public List<DataElement> getDataElements(String key) {
 
-        Results results = getObjects(Results.class,
+        MetaDataResponse results = getObjects(MetaDataResponse.class,
                 UriComponentsBuilder.fromPath(PATH)
                         .pathSegment(key)
                         .pathSegment("dataElements")

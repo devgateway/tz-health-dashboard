@@ -1,6 +1,7 @@
 package org.devgateway.rdi.tanzania.services;
 
 import org.devgateway.geo.GeoJsonBuilder;
+import org.devgateway.rdi.tanzania.domain.Boundary;
 import org.devgateway.rdi.tanzania.domain.District;
 import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.domain.Ward;
@@ -22,37 +23,44 @@ import java.util.List;
  */
 
 @Service
-public class BoundaryService {
+public class GeoJsonService {
 
 
     @Autowired
-    RegionRepository regionRepository;
+    private RegionRepository regionRepository;
 
 
     @Autowired
-    DistrictRepository districtRepository;
+    private DistrictRepository districtRepository;
 
 
     @Autowired
-    WardRepository wardRepository;
+    private WardRepository wardRepository;
 
 
     @Cacheable("regions")
-    public FeatureCollection findRegions(BoundaryRequest boundaryRequest) {
-        List<Region> regions = regionRepository.findAll();
+    public FeatureCollection findRegions(final BoundaryRequest boundaryRequest) {
+
+        List<Region> regions = regionRepository.
+                findAll(BoundarySpecifications.getRegionSpecifications(boundaryRequest),
+                boundaryRequest.getSimplifyFactor());
+
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
         regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region)));
         return geoJsonBuilder.getFeatures();
     }
 
     @Cacheable("regions")
-    public Region getRegionById(Long id) {
-        return regionRepository.findOne(id);
+    public FeatureCollection getRegionById(final Long id) {
+        Region region = regionRepository.findOne(id);
+        GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
+        geoJsonBuilder.add(BoundaryTrasnfomer.transform(region));
+        return geoJsonBuilder.getFeatures();
     }
 
 
     @Cacheable("districts")
-    public FeatureCollection getDistricts(BoundaryRequest boundaryRequest) {
+    public FeatureCollection getDistricts(final BoundaryRequest boundaryRequest) {
         List<District> districts = districtRepository.findAll(BoundarySpecifications.getDistricSpecifications(boundaryRequest),
                 boundaryRequest.getSimplifyFactor());
 
@@ -63,26 +71,31 @@ public class BoundaryService {
 
 
     @Cacheable("districts")
-    public District getDistrictById(Long id) {
-        return districtRepository.findOne(id);
-    }
-
-
-    @Cacheable("wards")
-    public FeatureCollection getWards(BoundaryRequest boundaryRequest) {
-
-        List<Ward> wards = wardRepository.findAll(BoundarySpecifications.getWardSpecifications(boundaryRequest),
-                boundaryRequest.getSimplifyFactor());
-
+    public FeatureCollection getDistrictById(final Long id) {
+        District district = districtRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        wards.stream().forEach(ward -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(ward)));
+        geoJsonBuilder.add(BoundaryTrasnfomer.transform(district));
         return geoJsonBuilder.getFeatures();
     }
 
 
     @Cacheable("wards")
-    public Ward getWardById(Long id) {
-        return wardRepository.findOne(id);
+    public FeatureCollection findWards(final BoundaryRequest boundaryRequest) {
+        List<Ward> wards = wardRepository.findAll(BoundarySpecifications.getWardSpecifications(boundaryRequest),
+                boundaryRequest.getSimplifyFactor());
+
+        GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
+        wards.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region)));
+        return geoJsonBuilder.getFeatures();
+    }
+
+
+    @Cacheable("wards")
+    public FeatureCollection getWardById(final Long id) {
+        Ward ward = wardRepository.findOne(id);
+        GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
+        geoJsonBuilder.add(BoundaryTrasnfomer.transform(ward));
+        return geoJsonBuilder.getFeatures();
     }
 
 }

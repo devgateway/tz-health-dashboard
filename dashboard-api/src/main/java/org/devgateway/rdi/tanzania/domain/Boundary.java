@@ -25,11 +25,17 @@ public abstract class Boundary {
 
     @JsonIgnore
     Geometry geom;
+
+    @JsonIgnore
     Long shapeLeng;
+
+    @JsonIgnore
     Long shapeArea;
     Long population;
     Long populationFemale;
     Long populationMale;
+
+    @JsonIgnore
     String source;
 
     public Long getGid() {

@@ -1,6 +1,7 @@
-package org.devgateway.rdi.tanzania.dhis.pojo.dimensions;
+package org.devgateway.rdi.tanzania.dhis.pojo;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.devgateway.rdi.tanzania.dhis.pojo.Dhis2Object;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +12,13 @@ import java.util.List;
 
 public class Dimensions {
 
-    ArrayList<Dimension> dimensions;
+    ArrayList<Dhis2Object> dimensions;
 
-
-    public ArrayList<Dimension> getDimensions() {
+    public ArrayList<Dhis2Object> getDimensions() {
         return dimensions;
     }
 
-    public void setDimensions(ArrayList<Dimension> dimensions) {
+    public void setDimensions(ArrayList<Dhis2Object> dimensions) {
         this.dimensions = dimensions;
     }
 }

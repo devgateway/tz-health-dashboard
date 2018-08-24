@@ -1,4 +1,4 @@
-package org.devgateway.rdi.tanzania.dhis.pojo.orgUnits;
+package org.devgateway.rdi.tanzania.dhis.pojo;
 
 import java.util.List;
 

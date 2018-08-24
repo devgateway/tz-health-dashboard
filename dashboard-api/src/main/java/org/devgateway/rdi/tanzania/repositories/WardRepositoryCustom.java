@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface WardRepositoryCustom {
 
-    List<Ward> findAll(Specification<Ward> specification, Double simplifyFactor);
-
     Ward findWardByPoint(Point point);
+
+    List<Ward> findAll(Specification<Ward> specification, Double simplifyFactor);
 
 }
