@@ -15,7 +15,7 @@ import java.util.List;
 public interface WardRepository extends JpaRepository<Ward, Long>, WardRepositoryCustom {
 
 
-    @EntityGraph(value = "facilityJoin" , type= EntityGraph.EntityGraphType.FETCH)
+    @EntityGraph(value = "facilityJoin", type = EntityGraph.EntityGraphType.FETCH)
     List<Ward> findByDistrict(District district);
 }
 

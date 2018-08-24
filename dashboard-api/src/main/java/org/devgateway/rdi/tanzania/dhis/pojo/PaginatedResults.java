@@ -1,12 +1,10 @@
 package org.devgateway.rdi.tanzania.dhis.pojo;
 
-import java.util.List;
-
 /**
  * @author Sebastian Dimunzio
  */
 
-public class PaginatedResults extends Results {
+public class PaginatedResults extends MetaDataResponse {
 
 
     Pager pager;
