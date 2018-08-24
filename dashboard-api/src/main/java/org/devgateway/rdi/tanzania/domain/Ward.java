@@ -3,10 +3,7 @@ package org.devgateway.rdi.tanzania.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.Geometry;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,6 +12,9 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue("WARD")
+@NamedEntityGraph(name = "facilityJoin", attributeNodes = @NamedAttributeNode("facilities"))
+
+
 public class Ward extends Boundary {
 
 

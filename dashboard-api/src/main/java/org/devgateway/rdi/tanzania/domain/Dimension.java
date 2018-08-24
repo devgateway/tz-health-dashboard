@@ -10,6 +10,7 @@ import java.util.List;
  */
 
 @Entity
+@NamedEntityGraph(name = "itemJoin", attributeNodes = @NamedAttributeNode("items"))
 public class Dimension {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -29,15 +29,17 @@ import java.util.stream.Collectors;
 @ComponentScan(excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {Application.class, Dhis2AnalitycImport.class})})
 
-public class Dhis2Import implements CommandLineRunner {
+public class Dhis2MetadataImport implements CommandLineRunner {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2Import.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2MetadataImport.class);
 
     @Autowired
     MetaDataImportService dhis2MetaDataImportService;
 
     @Autowired
     private ConfigurableApplicationContext context;
+
+
 
     @Override
     public void run(String... strings) {
@@ -46,17 +48,24 @@ public class Dhis2Import implements CommandLineRunner {
         dhis2MetaDataImportService.orgUnitsGroups();
         dhis2MetaDataImportService.orgUnits();
         List<DataElementGroup> dataElementGroups = dhis2MetaDataImportService.dataElementGroups();
+
+        //Import data Element of needed groups
         List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
                 .filter(dataElementGroup -> dataElementGroup.getName()
-                        .equalsIgnoreCase("Population"))
+
+                        .equalsIgnoreCase("Population") ||
+                        dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses"))
+
+
                 .collect(Collectors.toList());
+
         dhis2MetaDataImportService.dataElements(dataElementGroups1);
         System.exit(3);
     }
 
 
     public static void main(String[] args) throws Exception {
-        new SpringApplicationBuilder(Dhis2Import.class).web(false).build().run(args);
+        new SpringApplicationBuilder(Dhis2MetadataImport.class).web(false).build().run(args);
     }
 
     @PreDestroy
