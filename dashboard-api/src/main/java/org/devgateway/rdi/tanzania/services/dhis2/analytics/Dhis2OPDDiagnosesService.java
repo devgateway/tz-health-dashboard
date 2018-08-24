@@ -1,4 +1,4 @@
-package org.devgateway.rdi.tanzania.services.dhis2;
+package org.devgateway.rdi.tanzania.services.dhis2.analytics;
 
 import org.devgateway.rdi.tanzania.dhis.analytics.QueryBuilder;
 import org.devgateway.rdi.tanzania.dhis.analytics.QueryDimension;
@@ -118,11 +118,15 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
 
                 });
 
-
             }
 
 
         }
         return save(opdDiagnostics);
+    }
+
+    @Override
+    public void clean() {
+        opdDiagnosticRepository.deleteAll();
     }
 }

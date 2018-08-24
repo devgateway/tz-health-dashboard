@@ -19,6 +19,5 @@ public interface DistrictRepository extends JpaRepository<District, Long>, Distr
     List<District> findByName(@Param("name") String name);
 
 
-
 }
 

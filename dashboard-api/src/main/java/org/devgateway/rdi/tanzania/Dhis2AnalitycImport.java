@@ -1,12 +1,11 @@
 package org.devgateway.rdi.tanzania;
 
-import org.devgateway.rdi.tanzania.domain.OPDDiagnostic;
 import org.devgateway.rdi.tanzania.repositories.FacilityRepository;
 import org.devgateway.rdi.tanzania.repositories.OPDDiagnosticRepository;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
-import org.devgateway.rdi.tanzania.services.dhis2.Dhis2AnalyticImport;
-import org.devgateway.rdi.tanzania.services.dhis2.Dhis2OPDDiagnosesService;
-import org.devgateway.rdi.tanzania.services.dhis2.Dhis2PopulationService;
+import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2AnalyticImport;
+import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2OPDDiagnosesService;
+import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2PopulationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
-
-import java.util.List;
 
 /**
  * @author Sebastian Dimunzio
@@ -34,10 +31,8 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2AnalitycImport.class);
 
-
     @Autowired
     Dhis2PopulationService populationService;
-
 
     @Autowired
     Dhis2OPDDiagnosesService dhis2OPDDiagnosesService;
@@ -52,12 +47,12 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     FacilityRepository facilityRepository;
 
     public void importPopuationData() {
-        //populationService.clean();
-        //populationService.importPopulationByRegionName("Dodoma");
+        populationService.clean();
+        populationService.fullyImport(Dhis2AnalyticImport.Grouping.REGION);
 
-        List<OPDDiagnostic> opdDiagnostics = dhis2OPDDiagnosesService.
-                byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT);
-        opdDiagnosticRepository.save(opdDiagnostics);
+        dhis2OPDDiagnosesService.clean();
+        dhis2OPDDiagnosesService.fullyImport(Dhis2AnalyticImport.Grouping.REGION);
+
 
     }
 
