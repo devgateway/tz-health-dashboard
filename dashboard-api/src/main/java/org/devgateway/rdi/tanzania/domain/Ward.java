@@ -18,6 +18,7 @@ import java.util.List;
 public class Ward extends Boundary {
 
 
+    @JsonIgnore
     @ManyToOne(targetEntity = District.class)
     District district;
 

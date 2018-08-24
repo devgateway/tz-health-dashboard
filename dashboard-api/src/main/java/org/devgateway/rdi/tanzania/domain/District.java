@@ -1,5 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vividsolutions.jts.geom.Geometry;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.List;
 public class District extends Boundary {
 
 
+    @JsonIgnore
     @ManyToOne(targetEntity = Region.class)
     Region region;
 
@@ -23,6 +25,7 @@ public class District extends Boundary {
     }
 
 
+    @JsonIgnore
     @OneToMany(targetEntity = Ward.class, mappedBy = "district")
     List<Ward> wards;
 
