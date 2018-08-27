@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2PopulationService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2OPDDiagnosesService.class);
 
     @Autowired
     Dhis2Config dhis2Config;
