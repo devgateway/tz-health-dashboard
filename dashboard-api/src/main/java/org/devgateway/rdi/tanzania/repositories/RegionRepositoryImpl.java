@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ public class RegionRepositoryImpl implements RegionRepositoryCustom {
         query.setParameter("factor", simplifyFactor);
         return query.getResultList();
     }
+
+
 
 
 }

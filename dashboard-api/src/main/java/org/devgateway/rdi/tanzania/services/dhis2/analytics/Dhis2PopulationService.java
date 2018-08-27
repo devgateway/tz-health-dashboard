@@ -106,24 +106,25 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
             AnalyticsResultsTable results = dhis2.getObject(queryBuilder.build(), AnalyticsResultsTable.class);
 
             results.getRows().forEach(row -> {
-                Double value = Double.parseDouble(row[5]);
-                String genderValue = results.getMetaData().getItems().get(row[1]).getName();
-                String ageValue = results.getMetaData().getItems().get(row[2]).getName();
-                String year = row[3];
-                Facility facility = facilityRepository.findOneByDhis2Id(row[4]);
-                ServiceAreaPopulation p = new ServiceAreaPopulation();
-                p.setFacility(facility);
-                p.setValue(value);
+                try {
 
-                p.setYear(Integer.valueOf(year));
+                    Double value = Double.parseDouble(row[5]);
+                    String year = row[3];
+                    Facility facility = facilityRepository.findOneByDhis2Id(row[4]);
+                    ServiceAreaPopulation p = new ServiceAreaPopulation();
+                    p.setFacility(facility);
+                    p.setValue(value);
 
-                p.setGender(itemRepository.findByDhis2Id(row[1]));
-                p.setGenderValue(genderValue);
+                    p.setYear(Integer.valueOf(year));
 
-                p.setAge(itemRepository.findByDhis2Id(row[2]));
-                p.setAgeValue(ageValue);
+                    p.setGender(itemRepository.findByDhis2Id(row[1]));
 
-                populations.add(p);
+                    p.setAge(itemRepository.findByDhis2Id(row[2]));
+
+                    populations.add(p);
+                } catch (Exception e) {
+                    LOGGER.error("Error while processing record");
+                }
             });
 
 
