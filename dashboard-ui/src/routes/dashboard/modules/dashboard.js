@@ -26,13 +26,13 @@ export const districtSelected = (feature) => {
   const { properties: { ID: id } } = feature
   return (dispatch, getState) => {
     dispatch({ 'type': FEATURE_SELECTED, 'category': CATEGORY_DISTRICT, feature })
-    dispatch(findWards({ districtId: id }))
+    dispatch(findWards({ districts: id }))
   }
 }
 
-export const findDistricts = () => {
+export const findDistricts = (params) => {
   return (dispatch, getState) => {
-    api.findDistricts().then(data => {
+    api.findDistricts(params).then(data => {
       dispatch({ 'type': FIND_BOUNDARY_DONE, 'category': CATEGORY_DISTRICT, data })
     })
   }
@@ -51,14 +51,6 @@ export const findFacilities = (params) => {
   return (dispatch, getState) => {
     api.findFacilities(params).then(data => {
       dispatch({ 'type': FIND_FACILITIES_DONE, 'category': CATEGORY_FACILITY, data })
-    })
-  }
-}
-
-export const getWard = (id) => {
-  return (dispatch, getState) => {
-    api.getWard(id).then(feature => {
-      dispatch({ 'type': GET_FEATURE_DONE, feature, 'category': CATEGORY_WARD })
     })
   }
 }

@@ -24,7 +24,6 @@ export default class WardLayout extends React.Component {
     const totalPopulation = '13,944'
     const totalFacilities = '4'
     const d3PieChartData = [{category: 'aaa', value: 2}, {category: 'bbb', value: 3}, {category: 'ccc', value: 4}, {category: 'ddd', value: 5}, ]
-    debugger
     return (
       <div>
 	      <div className="ward-report-container">

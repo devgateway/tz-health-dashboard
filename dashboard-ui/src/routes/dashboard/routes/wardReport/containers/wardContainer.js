@@ -9,7 +9,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 const mapStateToProps = state => {
-  debugger
 	return {
 		wardFeature: state.getIn(['dashboard', CATEGORY_WARD, 'selected']),
 	}

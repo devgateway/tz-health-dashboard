@@ -14,7 +14,7 @@ class MapView extends React.Component {
   }
 
   componentWillMount() {
-    this.props.onLoad()
+    this.props.onFindDistricts({})
   }
 
   onWardSelected(feature) {
@@ -62,7 +62,7 @@ class MapView extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onLoad: findDistricts,
+  onFindDistricts: findDistricts,
   onWardSelected: wardSelected,
   onDistricSelected: districtSelected
 }, dispatch)

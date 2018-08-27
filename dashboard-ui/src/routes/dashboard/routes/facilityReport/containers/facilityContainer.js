@@ -9,7 +9,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 const mapStateToProps = state => {
   return {
-  	data: state.getIn(['data'])
+  	mapShape: state.getIn(['facility', 'reportData', 'map', 'shape']).toJS(),
+  	mapPoints: state.getIn(['facility', 'reportData', 'map', 'points']).toJS(),
+  	mainInfo: state.getIn(['facility', 'reportData', 'main']).toJS(),
+  	populationInfo: state.getIn(['facility', 'reportData', 'population']).toJS(),
   }
 }
 
