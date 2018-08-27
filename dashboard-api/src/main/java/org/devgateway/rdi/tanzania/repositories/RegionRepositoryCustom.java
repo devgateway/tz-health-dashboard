@@ -15,4 +15,5 @@ public interface RegionRepositoryCustom {
 
     List<Region> findAll(Specification<Region> specification, Double simplifyFactor);
 
+
 }

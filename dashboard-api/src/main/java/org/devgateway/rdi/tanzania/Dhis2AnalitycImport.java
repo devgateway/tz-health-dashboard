@@ -48,10 +48,10 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     public void importPopuationData() {
         populationService.clean();
-        populationService.fullyImport(Dhis2AnalyticImport.Grouping.REGION);
+        populationService.byRegion("Dodoma",Dhis2AnalyticImport.Grouping.DISTRICT);
 
         dhis2OPDDiagnosesService.clean();
-        dhis2OPDDiagnosesService.fullyImport(Dhis2AnalyticImport.Grouping.REGION);
+        dhis2OPDDiagnosesService.byRegion("Dodoma",Dhis2AnalyticImport.Grouping.DISTRICT);
 
 
     }
