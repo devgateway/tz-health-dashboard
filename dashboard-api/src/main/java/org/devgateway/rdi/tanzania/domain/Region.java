@@ -13,7 +13,6 @@ import java.util.List;
 @DiscriminatorValue("REGION")
 @NamedEntityGraph(name = "districtsJoin", attributeNodes = @NamedAttributeNode("districts"))
 
-
 public class Region extends Boundary {
 
     public Region() {

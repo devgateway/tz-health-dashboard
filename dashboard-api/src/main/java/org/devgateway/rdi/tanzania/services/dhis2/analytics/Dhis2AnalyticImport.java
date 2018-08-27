@@ -5,7 +5,6 @@ import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.domain.Ward;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
-import org.devgateway.rdi.tanzania.repositories.WardRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Service
-
+@Transactional
 public abstract class Dhis2AnalyticImport<T> {
 
     @PersistenceContext
@@ -32,9 +32,6 @@ public abstract class Dhis2AnalyticImport<T> {
     @Autowired
     RegionRepository regionRepository;
 
-
-    @Autowired
-    WardRepository wardRepository;
 
     public enum Grouping {
         REGION,
@@ -77,14 +74,12 @@ public abstract class Dhis2AnalyticImport<T> {
         List<T> data = new ArrayList<>();
         LOGGER.info("Processing district " + district.getName());
 
-        List<Ward> wards = wardRepository.findByDistrict(district);
-
 
         if (grouping.equals(Grouping.WARD)) {
-            wards.forEach(ward -> data.addAll(byWard(ward)));
+            district.getWards().forEach(ward -> data.addAll(byWard(ward)));
         } else {
             List<Facility> facilities = new ArrayList<>();
-            wards.forEach(ward -> facilities.addAll(ward.getFacilities()));
+            district.getWards().forEach(ward -> facilities.addAll(ward.getFacilities()));
             data.addAll(byFacilities(facilities));
 
         }
