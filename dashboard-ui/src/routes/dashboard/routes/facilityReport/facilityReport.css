@@ -1,5 +1,9 @@
 .facility-report-container {
-  padding: 100px; }
+  width: 1150px;
+  max-width: 1150px;
+  align-items: center;
+  margin: auto;
+  overflow-x: auto; }
   .facility-report-container .sub-title {
     padding: 10px;
     color: #2CA4C4;
@@ -16,12 +20,29 @@
       display: inline-block; }
     .facility-report-container .report-header .report-period {
       float: right; }
+  .facility-report-container .location-box > div {
+    width: calc(25% - 2px);
+    height: 50px;
+    background-color: #F4F2EC; }
+  .facility-report-container .location-box > div:not(:last-child) {
+    border-right: 2px solid #CCC; }
+  .facility-report-container .location-box div {
+    display: inline-block;
+    line-height: 30px;
+    text-align: center;
+    color: #2C4856; }
+  .facility-report-container .location-box .location-title {
+    padding: 10px;
+    font-size: 13px; }
+  .facility-report-container .location-box .location-value {
+    font-weight: bold; }
   .facility-report-container .population-box {
     font-weight: bold;
     border-bottom: 3px solid #CCC; }
     .facility-report-container .population-box > div {
       display: inline-block;
-      width: 50%; }
+      width: 50%;
+      vertical-align: text-top; }
     .facility-report-container .population-box .info > div {
       padding: 10px; }
     .facility-report-container .population-box .total-pop {
@@ -32,7 +53,7 @@
         font-size: 30px; }
     .facility-report-container .population-box .value-item {
       display: inline-block;
-      padding: 6px;
+      padding: 14px;
       border-right: 1px solid #CCC; }
       .facility-report-container .population-box .value-item div:first-child {
         font-size: 14px;

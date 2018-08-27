@@ -36,7 +36,6 @@ class D3Map extends React.Component {
       pointFillColor = '#6C8EAD'
       } = this.props
 
-    debugger
     const colors = this.props.colors
       ? this.props.colors.map(it => d3.rgb(it))
       : [d3.rgb("#FFF275"), d3.rgb('#6C8EAD')];
@@ -109,8 +108,8 @@ class D3Map extends React.Component {
         .attr("cy", d => projection(d.geometry.coordinates)[1])
         .attr('class', 'clickeable')
         .attr("r", pointSize)
-        .attr("fill", pointFillColor)
-        .attr('stroke', pointStrokeColor)
+        .attr("fill", (d) => d.properties.fillColor || pointFillColor)
+        .attr('stroke', (d) => d.properties.strokeColor || pointStrokeColor)
         .attr('stroke-width', pointStrokeWidth)
         .on('click', (d) => {parent.props.onPointClick(d)})
         .on('mouseover', (d) => {

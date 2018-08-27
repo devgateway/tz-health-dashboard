@@ -17,7 +17,7 @@ public class FacilityGroup {
     String dhis2Id;
     String name;
 
-    @ManyToOne(targetEntity = Item.class)
+    @ManyToOne(targetEntity = Item.class, cascade = CascadeType.ALL)
     Item item;
 
     public FacilityGroup() {
