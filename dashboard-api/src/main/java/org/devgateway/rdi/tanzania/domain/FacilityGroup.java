@@ -24,7 +24,7 @@ public class FacilityGroup {
     private List<Facility> facilities;
 
 
-    @ManyToOne(targetEntity = Item.class)
+    @ManyToOne(targetEntity = Item.class, cascade = CascadeType.ALL)
     Item item;
 
     public Item getItem() {
