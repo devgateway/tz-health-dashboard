@@ -1,6 +1,10 @@
 
 .facility-report-container{
-	padding: 100px;
+	width: 1150px;
+  max-width: 1150px;
+  align-items: center;
+  margin: auto;
+  overflow-x: auto;
   .sub-title{
     padding: 10px;
     color: #2CA4C4;
@@ -25,12 +29,36 @@
 		}
 	}
 
+  .location-box{
+    >div{
+      width: calc(25% - 2px);
+      height: 50px;
+      background-color: #F4F2EC;
+    }
+    >div:not(:last-child){
+      border-right: 2px solid #CCC;
+    }
+    div{
+      display: inline-block;
+      line-height: 30px;
+      text-align: center;
+      color: #2C4856;
+    }
+    .location-title{
+      padding: 10px;
+      font-size: 13px;
+    }
+    .location-value{
+      font-weight: bold;
+    }
+  }
 	.population-box{
     font-weight: bold;
     border-bottom: 3px solid #CCC;
 		>div{
 			display: inline-block;
 			width: 50%;
+      vertical-align: text-top;
 		}
     .info >div{
       padding: 10px;
@@ -45,7 +73,7 @@
     }
     .value-item{
       display: inline-block;
-      padding: 6px;
+      padding: 14px;
       border-right: 1px solid #CCC;
     
       div:first-child{
