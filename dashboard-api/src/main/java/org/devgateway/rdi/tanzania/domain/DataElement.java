@@ -1,9 +1,6 @@
 package org.devgateway.rdi.tanzania.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * @author Sebastian Dimunzio
@@ -16,6 +13,10 @@ public class DataElement {
     String dhis2Id;
     String name;
 
+    @ManyToOne
+    Translation translation;
+
+
     public DataElement() {
     }
 
@@ -25,7 +26,7 @@ public class DataElement {
     }
 
     @ManyToOne(targetEntity = DataElementGroup.class)
-    DataElementGroup  dataElementGroup;
+    DataElementGroup dataElementGroup;
 
     public DataElementGroup getDataElementGroup() {
         return dataElementGroup;
@@ -57,5 +58,13 @@ public class DataElement {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Translation getTranslation() {
+        return translation;
+    }
+
+    public void setTranslation(Translation translation) {
+        this.translation = translation;
     }
 }

@@ -1,6 +1,5 @@
 package org.devgateway.rdi.tanzania;
 
-import org.devgateway.rdi.tanzania.domain.DataElementGroup;
 import org.devgateway.rdi.tanzania.services.dhis2.MetaDataImportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
 import javax.annotation.PreDestroy;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Sebastian Dimunzio
@@ -40,26 +37,9 @@ public class Dhis2MetadataImport implements CommandLineRunner {
     private ConfigurableApplicationContext context;
 
 
-
     @Override
     public void run(String... strings) {
-        dhis2MetaDataImportService.clean();
-        dhis2MetaDataImportService.dimensions();
-        dhis2MetaDataImportService.orgUnitsGroups();
-        dhis2MetaDataImportService.orgUnits();
-        List<DataElementGroup> dataElementGroups = dhis2MetaDataImportService.dataElementGroups();
-
-        //Import data Element of needed groups
-        List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
-                .filter(dataElementGroup -> dataElementGroup.getName()
-
-                        .equalsIgnoreCase("Population") ||
-                        dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses"))
-
-
-                .collect(Collectors.toList());
-
-        dhis2MetaDataImportService.dataElements(dataElementGroups1);
+        dhis2MetaDataImportService.importMedata();
         System.exit(3);
     }
 

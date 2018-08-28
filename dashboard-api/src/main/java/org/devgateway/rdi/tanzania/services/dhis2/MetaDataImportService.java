@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sebastian Dimunzio
@@ -70,6 +71,7 @@ public class MetaDataImportService {
 
     public List<DataElementGroup> dataElements(List<DataElementGroup> groups) {
         groups.forEach(dataElementGroup -> {
+
             List<DataElement> dataElements = dhis2DataElementGroupService.getDataElements(dataElementGroup.getDhis2Id());
             dataElements.forEach(dataElement -> dataElement.setDataElementGroup(dataElementGroup));
             dataElementGroup.setDataElements(dataElements);
@@ -137,5 +139,26 @@ public class MetaDataImportService {
         facilityService.saveGroups(facilityGroups);
     }
 
+    public void importMedata() {
+        clean();
+        dimensions();
+        orgUnitsGroups();
+        List<DataElementGroup> dataElementGroups = dataElementGroups();
+
+        //Import data Element of needed groups
+        List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
+                .filter(dataElementGroup -> dataElementGroup.getName()
+
+                        .equalsIgnoreCase("Population") ||
+                        dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses"))
+
+
+                .collect(Collectors.toList());
+
+        dataElements(dataElementGroups1);
+
+        orgUnits();
+
+    }
 
 }

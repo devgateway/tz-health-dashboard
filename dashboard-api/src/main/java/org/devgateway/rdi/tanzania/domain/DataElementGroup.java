@@ -1,5 +1,7 @@
 package org.devgateway.rdi.tanzania.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class DataElementGroup {
         this.name = name;
     }
 
+    @JsonIgnore
     @OneToMany(targetEntity = DataElement.class, mappedBy = "dataElementGroup", cascade = CascadeType.ALL)
     List<DataElement> dataElements;
 

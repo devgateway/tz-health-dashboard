@@ -3,7 +3,9 @@ package org.devgateway.rdi.tanzania.services.dhis2.metadata;
 import org.devgateway.rdi.tanzania.dhis.pojo.MetaDataResponse;
 import org.devgateway.rdi.tanzania.domain.DataElement;
 import org.devgateway.rdi.tanzania.domain.DataElementGroup;
+import org.devgateway.rdi.tanzania.domain.Translation;
 import org.devgateway.rdi.tanzania.repositories.DataElementGroupRepository;
+import org.devgateway.rdi.tanzania.repositories.TranslationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class DataElementService extends Dhis2Service {
     private static String PATH = "/29/dataElementGroups";
 
     @Autowired
+    TranslationRepository translationRepository;
+    @Autowired
     DataElementGroupRepository dataElementGroupRepository;
 
     public List<DataElementGroup> getDataElementGroups() {
@@ -49,8 +53,13 @@ public class DataElementService extends Dhis2Service {
                 false, "*");
 
 
-        return results.getDataElements().stream().map(dhis2Object ->
-                new DataElement(dhis2Object.getId(), dhis2Object.getDisplayName())).collect(Collectors.toList());
+        return results.getDataElements().stream().map(dhis2Object -> {
+            Translation t = translationRepository.findByKey(dhis2Object.getId());
+
+            DataElement dataElement = new DataElement(dhis2Object.getId(), dhis2Object.getDisplayName());
+            dataElement.setTranslation(t);
+            return dataElement;
+        }).collect(Collectors.toList());
 
     }
 

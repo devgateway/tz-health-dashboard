@@ -23,6 +23,7 @@ import java.util.List;
  */
 
 @Service
+@Cacheable
 public class GeoJsonService {
 
 

@@ -1,9 +1,16 @@
-psql -Upostgres -d tanzania -c 'truncate table boundary'
+#!/usr/bin/env bash
+
+BASEDIR=$(dirname "$0")
+echo "$BASEDIR"
+
+cd "$BASEDIR"
+
+ psql -Upostgres -d tanzania -c 'truncate table boundary'
 
 
-psql -Upostgres -d tanzania -c 'drop table if exists region'
-psql -Upostgres -d tanzania -c 'drop table if exists district'
-psql -Upostgres -d tanzania -c 'drop table if exists ward'
+ psql -Upostgres -d tanzania -c 'drop table if exists region'
+ psql -Upostgres -d tanzania -c 'drop table if exists district'
+ psql -Upostgres -d tanzania -c 'drop table if exists ward'
 
 
 shp2pgsql  tza_popa_adm1_regions_TNBS2012_OCHA.shp  public.region| psql -Upostgres -d tanzania
