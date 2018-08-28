@@ -11,17 +11,21 @@ import java.util.List;
 
 @Entity
 public class FacilityGroup {
+
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
-    Long id;
-    String dhis2Id;
-    String name;
+
+    private Long id;
+    private String dhis2Id;
+    private String name;
+
+    @JsonIgnore
+    @ManyToMany(targetEntity = Facility.class, fetch = FetchType.LAZY)
+    private List<Facility> facilities;
+
 
     @ManyToOne(targetEntity = Item.class)
     Item item;
-
-    public FacilityGroup() {
-    }
 
     public Item getItem() {
         return item;
@@ -35,10 +39,6 @@ public class FacilityGroup {
         this.dhis2Id = dhis2Id;
         this.name = name;
     }
-
-    @JsonIgnore
-    @ManyToMany(targetEntity = Facility.class, fetch = FetchType.LAZY)
-    private List<Facility> facilities;
 
 
     public Long getId() {

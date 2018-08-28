@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Sebastian Dimunzio
  */
 
-public interface OPDDiagnosticRepository extends JpaRepository<OPDDiagnostic, Long> {
+public interface OPDDiagnosticRepository extends JpaRepository<OPDDiagnostic, Long>, OPDDiagnosticRepositoryCustom {
+
+
 }

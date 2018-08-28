@@ -4,13 +4,14 @@ import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.ServiceAreaPopulation;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.devgateway.rdi.tanzania.response.FacilityResponse;
+import org.devgateway.rdi.tanzania.response.OPDResponse;
 import org.devgateway.rdi.tanzania.response.ResponseUtils;
 import org.devgateway.rdi.tanzania.services.FacilityService;
+import org.devgateway.rdi.tanzania.services.OPDDiagnosesService;
 import org.devgateway.rdi.tanzania.services.PopulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.tools.Diagnostic;
 import java.util.List;
 
 /**
@@ -23,6 +24,9 @@ public class FacilityController {
 
     @Autowired
     FacilityService facilityService;
+
+    @Autowired
+    OPDDiagnosesService opdDiagnosesService;
 
     @RequestMapping("/facilities")
     public List<Facility> getFacility(FacilityRequest facilityRequest) {
@@ -46,11 +50,11 @@ public class FacilityController {
 
 
     @RequestMapping("/facilities/{id}/diagnoses")
-    public List<Diagnostic> diangoses(@PathVariable Long id,
-                                      @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
-                                        @RequestParam(name = "m", required = false) Integer month) {
-        return null;
+    public List<OPDResponse> diangoses(@PathVariable Long id,
+                                       @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                       @RequestParam(name = "m", required = false) Integer month) {
+
+
+        return  opdDiagnosesService.getByYear(id, year);
     }
-
-
 }

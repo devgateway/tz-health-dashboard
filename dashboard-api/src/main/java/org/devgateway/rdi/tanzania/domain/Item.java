@@ -13,7 +13,7 @@ import java.util.List;
  * @author Sebastian Dimunzio
  */
 @Entity
-public class Item {
+public class Item{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
@@ -64,9 +64,10 @@ public class Item {
     public void setDimensions(List<Dimension> dimensions) {
         this.dimensions = dimensions;
     }
+
     public void addDimension(Dimension dimension) {
-        if (this.dimensions==null){
-            this.dimensions=new ArrayList<>();
+        if (this.dimensions == null) {
+            this.dimensions = new ArrayList<>();
         }
         this.dimensions.add(dimension);
     }
