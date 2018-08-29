@@ -71,7 +71,7 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
             List<Predicate> queryFilter = new ArrayList();
             queryFilter.add(cb.equal(from.get(OPDDiagnostic_.facility), f));
             queryFilter.add(cb.equal(from.get(OPDDiagnostic_.year), year));
-            queryFilter.add(queryJoin.get(DataElement_.id).in());
+            queryFilter.add(queryJoin.get(DataElement_.id).in(ids));
 
             query.where(cb.and(queryFilter.toArray(new Predicate[queryFilter.size()])));
             return em.createQuery(query).getResultList();

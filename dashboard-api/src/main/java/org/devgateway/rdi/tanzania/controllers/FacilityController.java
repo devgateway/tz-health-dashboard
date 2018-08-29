@@ -4,7 +4,7 @@ import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.ServiceAreaPopulation;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.devgateway.rdi.tanzania.response.FacilityResponse;
-import org.devgateway.rdi.tanzania.response.OPDResponse;
+import org.devgateway.rdi.tanzania.response.OPDByAgeResponse;
 import org.devgateway.rdi.tanzania.response.ResponseUtils;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.devgateway.rdi.tanzania.services.OPDDiagnosesService;
@@ -50,11 +50,11 @@ public class FacilityController {
 
 
     @RequestMapping("/facilities/{id}/diagnoses")
-    public List<OPDResponse> diangoses(@PathVariable Long id,
-                                       @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
-                                       @RequestParam(name = "m", required = false) Integer month) {
+    public List<OPDByAgeResponse> diangoses(@PathVariable Long id,
+                                            @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                            @RequestParam(name = "m", required = false) Integer month) {
 
 
-        return  opdDiagnosesService.getByYear(id, year);
+        return opdDiagnosesService.getByYear(id, year);
     }
 }
