@@ -8,7 +8,7 @@ const API_FACILITIES= `${API_ROOT_URL}/facilities`
 
 
 export const findDistricts = (params) => {
-  const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({ 'simplifyFactor': 0 }, params))
+  const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({ }, params))
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -28,7 +28,7 @@ export const findDistricts = (params) => {
 }
 
 export const findWards = (params) => {
-  const url = API_WARDS + '?' + prepareQuery(Object.assign({ 'simplifyFactor': 0 }, params))
+  const url = API_WARDS + '?' + prepareQuery(Object.assign({ }, params))
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -50,7 +50,7 @@ export const findWards = (params) => {
 }
 
 export const findFacilities = (params) => {
-  const url = API_FACILITIES + '?' + prepareQuery(Object.assign({ 'simplifyFactor': 0 }, params))
+  const url = API_FACILITIES + '?' + prepareQuery(Object.assign({ }, params))
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -90,8 +90,8 @@ export const getWardInfo = (id, period) => {
   })
 }
 
-export const getFacilityInfo = (id, infoType) => {
-  const url = `${API_FACILITY_REPORT_INFO}/${id}/${infoType || ''}`
+export const getFacilityData = (id, type) => {
+  const url = `${API_FACILITY_REPORT_INFO}/${id}/${type || ''}`
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(

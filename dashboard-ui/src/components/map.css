@@ -4,6 +4,9 @@ svg, g, path {
 path.clickeable {
   cursor: pointer; }
 
+circle.clickeable {
+  cursor: pointer; }
+
 .background {
   background-color: #EEE;
   fill: #EEE; }
