@@ -133,22 +133,17 @@ public class QueryUtil {
         return new QueryDimension("pe", "Period").adItem("LAST_5_FINANCIAL_YEARS", "LAST_5_FINANCIAL_YEARS");
     }
 
+    public static QueryDimension MONTHS_OFF(Integer year) {
+        QueryDimension queryDimension = new QueryDimension("pe", "Period");
 
-    public static QueryDimension MONTHS_OF_2017() {
-        return new QueryDimension("pe", "Period")
-                .adItem("201701", "January")
-                .adItem("201702", "February")
-                .adItem("201703", "March")
-                .adItem("201704", "April")
-                .adItem("201705", "May")
-                .adItem("201706", "June")
-                .adItem("201707", "July")
-                .adItem("201708", "August")
-                .adItem("201709", "September")
-                .adItem("201710", "October")
-                .adItem("201711", "November")
-                .adItem("201712", "December");
-
+        for (int i = 1; i < 13; i++) {
+            String month = "" + i;
+            if (i < 10) {
+                month = "0" + month;
+            }
+            queryDimension.adItem(year + month, "month " + i);
+        }
+        return queryDimension;
     }
 
 

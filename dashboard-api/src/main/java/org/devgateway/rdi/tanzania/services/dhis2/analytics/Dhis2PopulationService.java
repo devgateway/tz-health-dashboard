@@ -66,7 +66,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
 
 
     @Override
-    public List<ServiceAreaPopulation> byFacilities(List<Facility> list) {
+    public List<ServiceAreaPopulation> byFacilities(List<Facility> list, QueryDimension period) {
         List<ServiceAreaPopulation> populations = new ArrayList<>();
         Dhis2 dhis2 = new Dhis2(dhis2Config);
 
@@ -99,7 +99,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
                     .addDimension(dx)
                     .addDimension(genderDimension)
                     .addDimension(ageDimension)
-                    .addDimension(QueryUtil.Y2017())
+                    .addDimension(period)
                     .addDimension(ouDimension);
 
 

@@ -21,6 +21,12 @@ public class OPDResponse {
     public OPDResponse() {
     }
 
+    public OPDResponse(DataElement diagnostic, Integer year, Long value) {
+        this.diagnostic = diagnostic;
+        this.year = year;
+        this.value = value;
+    }
+
     public OPDResponse(DataElement diagnostic, Item age, Integer year, Long value) {
         this.diagnostic = diagnostic;
         this.age = age;
