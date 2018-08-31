@@ -15,6 +15,7 @@ public class OPDByAgeResponse {
 
     private DataElement diagnostic;
     private Integer year;
+    private Long totalPrevPeriod;
     private List<AgeValue> values = new ArrayList<>();
 
     public List<AgeValue> getValues() {
@@ -44,6 +45,14 @@ public class OPDByAgeResponse {
     public void addValue(Item age, Long value) {
         this.values.add(new AgeValue(age, value));
 
+    }
+
+    public Long getTotalPrevPeriod() {
+        return totalPrevPeriod;
+    }
+
+    public void setTotalPrevPeriod(Long totalPrevPeriod) {
+        this.totalPrevPeriod = totalPrevPeriod;
     }
 
     public class AgeValue {

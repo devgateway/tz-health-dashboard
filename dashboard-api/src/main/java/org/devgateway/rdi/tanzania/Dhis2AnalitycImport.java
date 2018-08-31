@@ -1,5 +1,6 @@
 package org.devgateway.rdi.tanzania;
 
+import org.devgateway.rdi.tanzania.dhis.analytics.QueryUtil;
 import org.devgateway.rdi.tanzania.repositories.FacilityRepository;
 import org.devgateway.rdi.tanzania.repositories.OPDDiagnosticRepository;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
@@ -48,10 +49,11 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     public void importPopuationData() {
         populationService.clean();
-        populationService.byRegion("Dodoma",Dhis2AnalyticImport.Grouping.DISTRICT);
+        populationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y2017());
 
         dhis2OPDDiagnosesService.clean();
-        dhis2OPDDiagnosesService.byRegion("Dodoma",Dhis2AnalyticImport.Grouping.DISTRICT);
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2016));
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2017));
 
 
     }

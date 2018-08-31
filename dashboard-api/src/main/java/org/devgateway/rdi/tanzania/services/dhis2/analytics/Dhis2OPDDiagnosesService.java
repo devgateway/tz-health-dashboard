@@ -55,7 +55,7 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
     }
 
     @Override
-    public List<OPDDiagnostic> byFacilities(List<Facility> facilities) {
+    public List<OPDDiagnostic> byFacilities(List<Facility> facilities, QueryDimension period) {
 
         List<OPDDiagnostic> opdDiagnostics = new ArrayList<>();
 
@@ -78,7 +78,6 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
             QueryDimension ageDimension = new QueryDimension(age).
                     setItems(QueryUtil.items2Items(age.getItems()));
 
-            QueryDimension period = QueryUtil.MONTHS_OF_2017();
 
             QueryDimension ouDimension = QueryUtil.ouDimension(QueryUtil.org2sItems(facilities));
 

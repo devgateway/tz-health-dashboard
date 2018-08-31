@@ -17,7 +17,7 @@ const mapStateToProps = state => {
   	mapPoints: state.getIn(['facility', 'reportData', 'map', 'points']).toJS(),
   	info: state.getIn(['facility', 'reportData', 'info']).toJS(),
   	population: state.getIn(['facility', 'reportData', 'population']).toJS(),
-  	diagnoses: state.getIn(['facility', 'reportData', 'diagnoses']).toJS(),
+  	diagnoses: state.getIn(['facility', 'reportData', 'diagnoses']),
   }
 }
 
