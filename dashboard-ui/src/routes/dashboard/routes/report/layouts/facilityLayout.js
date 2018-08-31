@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
-import TopTenDeseases from '../components/topTenDeseasesTable.jsx'
+import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 
 export default class WardLayout extends React.Component {
@@ -19,30 +19,28 @@ export default class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.info.ward.id !== prevProps.info.ward.id) {
+    if (this.props.info.getIn(['ward', 'id']) !== prevProps.info.getIn(['ward', 'id'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
       onGetMapShape(info)
     }
   }
 
-
   render() {
-    const {params: {id, period}, mapShape, mapPoints, info = {}, population = {}} = this.props
+    const {params: {id, period}, mapShape, mapPoints, info, population} = this.props
     const facilitiesFeatures = []
     if (mapPoints) {
-      mapPoints.forEach(f => facilitiesFeatures.push({properties: {ID: f.id, NAME: f.name, fillColor: f.id == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.point}))
+      mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
     }
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
-
-    const facilityName = info.name
-    const facilityType = info.type.name
-    const watdName = info.ward.name
-    const districtName = info.district.name
-    const regionName = info.region.name
-
+    
+    const facilityName = info.getIn(['name'])
+    const facilityType = info.getIn(['type', 'name'])
+    const watdName = info.getIn(['ward', 'name'])
+    const districtName = info.getIn(['district', 'name'])
+    const regionName = info.getIn(['region', 'name'])
     const reportPeriod = 'Year 2017'
-
+    
     return (
       <div>
         <div className="facility-report-container">
@@ -59,43 +57,24 @@ export default class WardLayout extends React.Component {
           <div className="population-box">
             <div className="info">
               <div className="sub-title">Availability of Health Services in {regionName} region</div>
-              <div className="total-pop"><span>{population.data.total}</span> Total Population</div>
-
+              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> Total Population</div>
+              
               <div className="ages">
                 <div className="value-label"><div>by Gender</div></div>
-                <div className="value-item"><div>Male</div><div>{population.data.totalMale}</div></div>
-                <div className="value-item"><div>Female</div><div>{population.data.totalFemale}</div></div>
+                <div className="value-item"><div>Male</div><div>{population.getIn(['data', 'totalMale'])}</div></div>
+                <div className="value-item"><div>Female</div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
               </div>
 
               <div className="ages">
                 <div className="value-label"><div>by Age</div></div>
-                <div className="value-item"><div>{'<5'}</div><div>{population.data.totalUnder5}</div></div>
-                <div className="value-item"><div>{'5-60'}</div><div>{population.data.total5to60}</div></div>
-                <div className="value-item"><div>{'>60'}</div><div>{population.data.totalAbove60}</div></div>
+                <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
+                <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
+                <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
               </div>
-              {/*}
-              <div className="financing">
-                <div className="financing-header">
-                  <div className="">Financing</div>
-                  <div className="">% of Patients Enrolled </div>
-                  <div className="">Target</div>
-                </div>
-                <div className="financing-row">
-                  <div className="">NHIF</div>
-                  <div className="">22</div>
-                  <div className="">80<span>below</span></div>
-                </div>
-                <div className="financing-row">
-                  <div className="">CHF</div>
-                  <div className="">9</div>
-                  <div className="">15<span>below</span></div>
-                </div>
-              </div>
-              */}
             </div>
             <div className="map">
-              {facilitiesFeatures.length > 0 && mapShape.features ?
-                <D3Map width="570" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+              {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
+                <D3Map width="570" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
             </div>
           </div>

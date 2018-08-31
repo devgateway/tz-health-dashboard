@@ -1,0 +1,229 @@
+.facility-report-container {
+  width: 1150px;
+  max-width: 1150px;
+  align-items: center;
+  margin: auto;
+  overflow-x: auto; }
+
+.sub-title {
+  padding: 10px;
+  color: #2CA4C4;
+  font-size: 20px;
+  font-weight: bold; }
+
+.report-header {
+  color: #9C8568;
+  font-size: 30px;
+  font-weight: bold;
+  border-top: 1px solid #CCC;
+  border-bottom: 2px solid #CCC;
+  padding: 5px; }
+  .report-header > div {
+    display: inline-block; }
+  .report-header .report-period {
+    float: right; }
+
+.location-box > div {
+  width: calc(25% - 2px);
+  height: 50px;
+  background-color: #F4F2EC; }
+
+.location-box > div:not(:last-child) {
+  border-right: 2px solid #CCC; }
+
+.location-box div {
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+  color: #2C4856; }
+
+.location-box .location-title {
+  padding: 10px;
+  font-size: 13px; }
+
+.location-box .location-value {
+  font-weight: bold; }
+
+.population-box {
+  font-weight: bold;
+  border-bottom: 3px solid #CCC; }
+  .population-box > div {
+    display: inline-block;
+    width: 50%;
+    vertical-align: text-top; }
+  .population-box .info > div {
+    padding: 10px; }
+  .population-box .total-pop {
+    color: #2C4856;
+    font-size: 20px;
+    font-weight: bold; }
+    .population-box .total-pop span {
+      font-size: 30px; }
+  .population-box .value-item {
+    display: inline-block;
+    padding: 14px;
+    border-right: 1px solid #CCC; }
+    .population-box .value-item div:first-child {
+      font-size: 14px;
+      color: #B4B5A8; }
+    .population-box .value-item div:last-child {
+      font-size: 20px;
+      color: #6D7280; }
+  .population-box .financing {
+    width: 80%; }
+    .population-box .financing .financing-header {
+      height: 40px;
+      text-align: center; }
+      .population-box .financing .financing-header > div {
+        width: 33%;
+        display: inline-block;
+        border-bottom: 1px solid #CCC;
+        border-right: 1px solid #CCC;
+        font-size: 14px;
+        color: #B4B5A8; }
+      .population-box .financing .financing-header > div:last-child {
+        border-right: none; }
+    .population-box .financing .financing-row {
+      height: 40px;
+      text-align: center; }
+      .population-box .financing .financing-row > div:first-child {
+        font-size: 20px;
+        text-align: left; }
+      .population-box .financing .financing-row > div {
+        width: 33%;
+        display: inline-block;
+        border-right: 1px solid #CCC;
+        color: #2C4856;
+        font-size: 30px;
+        font-weight: bold;
+        height: 40px; }
+      .population-box .financing .financing-row > div:last-child {
+        border-right: none;
+        color: #6D7280; }
+        .population-box .financing .financing-row > div:last-child span {
+          padding-left: 5px;
+          color: #cc1a1a;
+          font-size: 16px; }
+
+.top-ten-deseases {
+  padding-top: 30px;
+  font-weight: bold;
+  border-bottom: 3px solid #CCC; }
+  .top-ten-deseases .top-ten-diagnosis-table {
+    font-size: 20px; }
+    .top-ten-deseases .top-ten-diagnosis-table table {
+      width: 100%;
+      text-align: center;
+      vertical-align: top;
+      border-collapse: collapse; }
+    .top-ten-deseases .top-ten-diagnosis-table .diagnosis-header {
+      color: #135897;
+      border-bottom: 2px solid #CCC; }
+    .top-ten-deseases .top-ten-diagnosis-table .previous-period-header {
+      color: #6D7280; }
+    .top-ten-deseases .top-ten-diagnosis-table .current-period-header {
+      background-color: #F4F2EC;
+      color: #9C8568; }
+    .top-ten-deseases .top-ten-diagnosis-table .previous-period-sub-header {
+      color: #6D7280;
+      font-size: 14px;
+      border-bottom: 2px solid #CCC; }
+    .top-ten-deseases .top-ten-diagnosis-table .current-period-sub-header-partial {
+      color: #B4B5A8;
+      font-size: 14px;
+      background-color: #F4F2EC;
+      border-bottom: 2px solid #CCC; }
+    .top-ten-deseases .top-ten-diagnosis-table .current-period-sub-header {
+      color: #6D7280;
+      font-size: 14px;
+      background-color: #F4F2EC;
+      border-bottom: 2px solid #CCC; }
+    .top-ten-deseases .top-ten-diagnosis-table .desease-name {
+      text-align: left;
+      color: #2C4856; }
+    .top-ten-deseases .top-ten-diagnosis-table .prevoius-value {
+      color: #2C4856; }
+    .top-ten-deseases .top-ten-diagnosis-table .current-value-partial {
+      color: #B4B5A8;
+      background-color: #F4F2EC; }
+    .top-ten-deseases .top-ten-diagnosis-table .current-value {
+      color: #2C4856;
+      background-color: #F4F2EC; }
+    .top-ten-deseases .top-ten-diagnosis-table .total-values td {
+      border-top: 2px solid #CCC; }
+    .top-ten-deseases .top-ten-diagnosis-table .total-values .desease-name {
+      text-align: right; }
+
+.RMNCH-box {
+  padding-top: 30px;
+  font-weight: bold;
+  border-bottom: 3px solid #CCC; }
+  .RMNCH-box .RMNCH-table {
+    font-size: 20px; }
+    .RMNCH-box .RMNCH-table table {
+      width: 100%;
+      text-align: center;
+      vertical-align: top;
+      border-collapse: collapse; }
+    .RMNCH-box .RMNCH-table .diagnosis-header {
+      color: #135897;
+      border-bottom: 2px solid #CCC; }
+    .RMNCH-box .RMNCH-table .previous-period-header {
+      color: #6D7280; }
+    .RMNCH-box .RMNCH-table .current-period-header {
+      background-color: #F4F2EC;
+      color: #9C8568; }
+    .RMNCH-box .RMNCH-table .previous-period-sub-header {
+      color: #6D7280;
+      font-size: 14px;
+      border-bottom: 2px solid #CCC; }
+    .RMNCH-box .RMNCH-table .current-period-sub-header-partial {
+      color: #B4B5A8;
+      font-size: 14px;
+      background-color: #F4F2EC;
+      border-bottom: 2px solid #CCC; }
+    .RMNCH-box .RMNCH-table .current-period-sub-header {
+      color: #6D7280;
+      font-size: 14px;
+      background-color: #F4F2EC;
+      border-bottom: 2px solid #CCC; }
+    .RMNCH-box .RMNCH-table .desease-name {
+      text-align: left;
+      color: #2C4856; }
+    .RMNCH-box .RMNCH-table .prevoius-value {
+      color: #2C4856; }
+    .RMNCH-box .RMNCH-table .current-value-partial {
+      color: #B4B5A8;
+      background-color: #F4F2EC; }
+    .RMNCH-box .RMNCH-table .current-value {
+      color: #2C4856;
+      background-color: #F4F2EC; }
+    .RMNCH-box .RMNCH-table .total-values td {
+      border-top: 2px solid #CCC; }
+    .RMNCH-box .RMNCH-table .total-values .desease-name {
+      text-align: right; }
+
+.deaths-box {
+  padding-top: 30px;
+  font-weight: bold;
+  border-bottom: 3px solid #CCC; }
+  .deaths-box .total-pop {
+    color: #2C4856;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 20px; }
+    .deaths-box .total-pop span {
+      font-size: 30px; }
+  .deaths-box .value-item {
+    display: inline-block;
+    padding: 6px;
+    border-right: 1px solid #CCC;
+    display: inline-block;
+    padding: 0px 20px; }
+    .deaths-box .value-item div:first-child {
+      font-size: 14px;
+      color: #B4B5A8; }
+    .deaths-box .value-item div:last-child {
+      font-size: 20px;
+      color: #6D7280; }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
 import D3PieChart from '../../../../../components/d3PieChart'
-import TopTenDeseases from '../../facilityReport/components/topTenDeseasesTable'
+import TopTenDeseases from '../components/topTenDeseasesTable'
 
 export default class WardLayout extends React.Component {
 
