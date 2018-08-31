@@ -82,11 +82,11 @@ export const getFacilityDiagnoses = (id) => {
           }
 
         })
-        ranges.total = ranges.lessThan5 + ranges.between5and60 + ranges.greaterThan60
+        const total = ranges.lessThan5 + ranges.between5and60 + ranges.greaterThan60
 
-        debugger;
         const diagnostic = (d.diagnostic.translation[lan] != "") ? d.diagnostic.translation[lan] : d.diagnostic.translation.original
-        parsedData.push({ diagnostic, ranges })
+        const totalPrevPeriod = d.totalPrevPeriod
+        parsedData.push({ diagnostic, total, totalPrevPeriod, ranges })
 
       })
 
