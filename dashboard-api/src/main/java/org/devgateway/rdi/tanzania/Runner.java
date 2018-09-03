@@ -23,6 +23,8 @@ import java.nio.file.Paths;
 public class Runner implements ApplicationRunner {
 
     private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
+    private final String CSV_FILE = "/data/translations.csv";
+
 
     private static final Logger logger = LogManager.getLogger(ApplicationRunner.class);
 
@@ -54,13 +56,12 @@ public class Runner implements ApplicationRunner {
                 Process p = Runtime.getRuntime().exec(pdwPath + BOUNDARIES_SH_FILE);
 
                 InputStream is = p.getInputStream();
-                BufferedReader br = new BufferedReader (new InputStreamReader (is));
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String aux = br.readLine();
 
-                while (aux!=null)
-                {
+                while (aux != null) {
                     // Se escribe la linea en pantalla
-                    System.out.println (aux);
+                    System.out.println(aux);
 
                     // y se lee la siguiente.
                     aux = br.readLine();
@@ -81,9 +82,9 @@ public class Runner implements ApplicationRunner {
     TranslationRepository translationRepository;
 
     private void loadTranslations() {
+        String pdwPath = System.getenv().get("PWD");
 
-        final String CSV_FILE = "/home/sdimunzio/projects/tz-health-dashboard/data/translations.csv";
-        try (Reader reader = Files.newBufferedReader(Paths.get(CSV_FILE));
+        try (Reader reader = Files.newBufferedReader(Paths.get(pdwPath + CSV_FILE));
              CSVReader csvReader = new CSVReader(reader);) {
             // Reading Records One by One in a String array
             String[] nextRecord;

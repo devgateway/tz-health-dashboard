@@ -53,7 +53,6 @@ export const getFacilityDiagnoses = (id) => {
           lessThan5: 0,
           between5and60: 0,
           greaterThan60: 0,
-          total: 0
         }
 
 
@@ -62,12 +61,10 @@ export const getFacilityDiagnoses = (id) => {
           if (v.age.dhis2Id == "xLotqtMo0pI") {
             ranges.lessThan5 += v.value
           }
-
           // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1"
           if (v.age.dhis2Id == "i3RHRoyrkuO") {
             ranges.lessThan5 += v.value
           }
-
           // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
           if (v.age.dhis2Id == "Cw0V80VVLNX") {
             ranges.lessThan5 += v.value

@@ -13,7 +13,7 @@ class Selector extends Component {
 
     return (<div>
         <button onClick={() => changeLanguage("de")}>de</button>
-      <button onClick={() => changeLanguage("en")}>en</button>
+        <button onClick={() => changeLanguage("en")}>en</button>
     </div>);
   }
 }
