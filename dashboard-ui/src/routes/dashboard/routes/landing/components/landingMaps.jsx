@@ -18,16 +18,15 @@ class MapView extends React.Component {
   }
 
   onWardSelected(feature) {
-    //this.context.router.history.push(`/wardReport/${feature.properties.ID}/y`)
     this.props.onWardSelected(feature)
   }
 
   onWardClicked(feature) {
-    this.context.router.history.push(`/wardReport/${feature.properties.ID}/y`)
+    this.context.router.history.push(`/report/ward/${feature.properties.ID}/y`)
   }
 
   onFacilityClicked(feature) {
-    this.context.router.history.push(`/facilityReport/${feature.properties.ID}/y`)
+    this.context.router.history.push(`/report/facility/${feature.properties.ID}/y`)
   }
 
   render() {
