@@ -6,7 +6,6 @@ import {push} from 'react-router-redux'
 import {translate, Trans} from "react-i18next";
 
 const component = (props) => {
-debugger
   return (
     <div className="dashboard">
       <h2>

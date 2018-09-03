@@ -138,7 +138,7 @@ const ACTION_HANDLERS = {
     const {error} = action;
     return state.setIn(['reportData', 'map', 'error'], error).setIn(['reportData', 'map', 'loading'], false)
   },
-  
+
 };
 
 // ------------------------------------ Helpers ------------------------------------
@@ -155,14 +155,13 @@ const getAggregatedPopulation = (data) => {
   const totalFemale = sumValues(data.filter(i => i.gender.name === 'KE'))
   const totalUnder5 = sumValues(data.filter(i => i.age.name === '< 1' || i.age.name === '1-4'))
   const total5to60 = sumValues(data.filter(i => i.age.name !== '< 1' && i.age.name !== '1-4' && i.age.name !== '60+'))
-  const totalAbove60 = sumValues(data.filter(i => i.age.name === '60+'))   
+  const totalAbove60 = sumValues(data.filter(i => i.age.name === '60+'))
   return {total, totalMale, totalFemale, totalUnder5, total5to60, totalAbove60}
 }
 
 const getAggregatedDiagnosis = (data) => {
   const parsedData = []
-  const lan = "english"
-  debugger
+
   data.forEach(d => {
     const {values, diagnostic, totalPrevPeriod} = d
     // "xLoqtMo0pI";"Umri chini ya mwezi 1" // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1" // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
@@ -170,11 +169,12 @@ const getAggregatedDiagnosis = (data) => {
     // "GF4Nq9E8x6l";"Umri miaka 5 hadi umri chini ya miaka 60"
     const total5to60 = sumValues(values.filter(i => i.age.dhis2Id === "GF4Nq9E8x6l"))
     // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
-    const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))   
+    const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))
     const total = sumValues(values)
-    const diagnosticLabel = (diagnostic.translation[lan] !== "") ? diagnostic.translation[lan] : diagnostic.translation.original
+    const diagnosticLabel = diagnostic.translation
     parsedData.push({ diagnostic: diagnosticLabel, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
   })
+
   return parsedData
 }
 

@@ -1,9 +1,11 @@
 import React from 'react'
+import {translate, Trans,i18n} from "react-i18next";
 
-export default class TopTenDeseases extends React.Component {
+ class TopTenDeseases extends React.Component {
 
   render() {
 
+    console.log(i18n)
     const period = 2017
 
     const deseases = this.props.diagnoses.get('data') || [];
@@ -18,18 +20,18 @@ export default class TopTenDeseases extends React.Component {
       <table className="">
         <tbody>
           <tr>
-            <th className="diagnosis-header" rowSpan="2">Top Ten Diagnoses</th>
+            <th className="diagnosis-header" rowSpan="2"><Trans>Top Ten Diagnoses</Trans></th>
             <th className="previous-period-header">{period - 1}</th>
             <th className="current-period-header" colSpan="4">{period}</th>
-            <th className="previous-period-header">% Change</th>
+            <th className="previous-period-header"><Trans>% Change</Trans></th>
           </tr>
           <tr>
-            <td className="previous-period-sub-header">Total Count</td>
-            <td className="current-period-sub-header-partial">{'Age <5'}</td>
-            <td className="current-period-sub-header-partial">{'Age 5-60'}</td>
-            <td className="current-period-sub-header-partial">{'Age >60'}</td>
-            <td className="current-period-sub-header">Total Count</td>
-            <td className="previous-period-sub-header">in Total Cases since Last Year</td>
+            <td className="previous-period-sub-header"><Trans>Total Count</Trans></td>
+            <td className="current-period-sub-header-partial"><Trans>Age</Trans> &lt; 5</td>
+            <td className="current-period-sub-header-partial"><Trans>Age</Trans>{'5-60'}</td>
+            <td className="current-period-sub-header-partial"><Trans>Age</Trans>{'>60'}</td>
+            <td className="current-period-sub-header"><Trans>Total Count</Trans></td>
+            <td className="previous-period-sub-header"><Trans>in Total Cases since Last Year</Trans></td>
           </tr>
           {
             deseases.map((it) => {
@@ -70,3 +72,7 @@ export default class TopTenDeseases extends React.Component {
     </div>)
   }
 }
+
+
+
+export default translate("translations")(TopTenDeseases)
