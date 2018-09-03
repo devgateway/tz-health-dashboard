@@ -6,6 +6,7 @@ import Selector from '../components/lanSelector'
 
 export default (props) =>(
   <div className="app">
-        <div><Selector></Selector></div>
+      <p><Selector></Selector></p>
+
         {props.children}
   </div>)
