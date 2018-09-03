@@ -4,11 +4,11 @@ import {translate, Trans} from "react-i18next";
 
 class Selector extends Component {
   render() {
-    debugger;
+
     const { t, i18n } = this.props;
 
     const changeLanguage = lng => {
-    debugger;
+
       i18n.changeLanguage(lng);
     };
 

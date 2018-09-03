@@ -51,35 +51,7 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
     }
 
 
-    public Long getYearlyTotalByDiagnostic(Facility f, Integer year, DataElement diagnostic) {
-        //QUERY
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Long> query = cb.createQuery(Long.class);
-        Root<OPDDiagnostic> from = query.from(OPDDiagnostic.class);
-
-
-        query.multiselect(cb.sum(from.get(OPDDiagnostic_.value)));
-
-        query.groupBy(
-                from.get(OPDDiagnostic_.diagnostic),
-                from.get(OPDDiagnostic_.year));
-
-
-        List<Predicate> queryFilter = new ArrayList();
-        queryFilter.add(cb.equal(from.get(OPDDiagnostic_.facility), f));
-        queryFilter.add(cb.equal(from.get(OPDDiagnostic_.year), year));
-        queryFilter.add(cb.equal(from.get(OPDDiagnostic_.diagnostic), diagnostic));
-
-        query.where(cb.and(queryFilter.toArray(new Predicate[queryFilter.size()])));
-        if (em.createQuery(query).getResultList().size() > 0) {
-            return em.createQuery(query).getSingleResult();
-        } else {
-            return null;
-        }
-
-    }
-
-    public List<OPDResponse> getYearly(Facility f, Integer year, List<Long> ids) {
+    public List<OPDResponse> getYearlyTotalByDiagnostic(Facility f, Integer year, List<Long> ids) {
         //QUERY
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<OPDResponse> query = cb.createQuery(OPDResponse.class);
@@ -89,13 +61,11 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
 
         query.multiselect(
                 from.get(OPDDiagnostic_.diagnostic),
-                //from.get(OPDDiagnostic_.age),
                 from.get(OPDDiagnostic_.year),
                 cb.sum(from.get(OPDDiagnostic_.value)));
 
         query.groupBy(
                 from.get(OPDDiagnostic_.diagnostic),
-                //from.get(OPDDiagnostic_.age),
                 from.get(OPDDiagnostic_.year));
 
 
@@ -105,7 +75,45 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
         queryFilter.add(queryJoin.get(DataElement_.id).in(ids));
 
         query.where(cb.and(queryFilter.toArray(new Predicate[queryFilter.size()])));
-        return em.createQuery(query).getResultList();
+        if (em.createQuery(query).getResultList().size() > 0) {
+            return em.createQuery(query).getResultList();
+        } else {
+            return null;
+        }
+
+    }
+
+    public List<OPDResponse> getYearly(Facility f, Integer year, List<Long> ids) {
+
+        if (ids.size() > 0) {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<OPDResponse> query = cb.createQuery(OPDResponse.class);
+            Root<OPDDiagnostic> from = query.from(OPDDiagnostic.class);
+            Join<OPDDiagnostic, DataElement> queryJoin = from.join(OPDDiagnostic_.diagnostic);
+
+
+            query.multiselect(
+                    from.get(OPDDiagnostic_.diagnostic),
+                    //from.get(OPDDiagnostic_.age),
+                    from.get(OPDDiagnostic_.year),
+                    cb.sum(from.get(OPDDiagnostic_.value)));
+
+            query.groupBy(
+                    from.get(OPDDiagnostic_.diagnostic),
+                    //from.get(OPDDiagnostic_.age),
+                    from.get(OPDDiagnostic_.year));
+
+
+            List<Predicate> queryFilter = new ArrayList();
+            queryFilter.add(cb.equal(from.get(OPDDiagnostic_.facility), f));
+            queryFilter.add(cb.equal(from.get(OPDDiagnostic_.year), year));
+            queryFilter.add(queryJoin.get(DataElement_.id).in(ids));
+
+            query.where(cb.and(queryFilter.toArray(new Predicate[queryFilter.size()])));
+            return em.createQuery(query).getResultList();
+        } else {
+            return null;
+        }
 
     }
 

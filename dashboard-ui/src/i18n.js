@@ -7,13 +7,28 @@ i18n.use(LanguageDetector).init({
     en: {
       translations: {
         "Dashboard":"Dashboard",
-        "Map":"Map"
+        "Map":"Map",
+        "Top Ten Diagnoses":"Top Ten Diagnoses",
+        "Total":"Total",
+        "Total Count":"Total Count",
+        "Age":"Age",
+        "Total Count":"Total Count",
+        "in Total Cases since Last Year":"in Total Cases since Last Year",
+        "Out-Patient Diseases (OPD) at":"Out-Patient Diseases (OPD) at",
+        "Change":"Change"
       }
     },
     sw: {
       translations: {
         "Dashboard":"Dashibodi",
-        "Map":"Ramani"
+        "Map":"Ramani",
+        "Top Ten Diagnoses":"Vipimo vya Juu kumi",
+        "Out-Patient Diseases (OPD) at":"Magonjwa ya Kati-mgonjwa (OPD)",
+        "Total":"Jumla",
+        "Total Count":"Jumla ya Hesabu",
+        "Age":"Umri",
+        "in Total Cases since Last Year":"katika kesi zote tangu mwaka jana",
+        "Change":"Badilisha"
       }
     }
   },
