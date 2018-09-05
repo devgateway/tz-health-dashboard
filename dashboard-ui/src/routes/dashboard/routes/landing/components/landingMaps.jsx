@@ -8,7 +8,7 @@ import D3Map from '../../../../../components/d3Map.jsx'
 import PropTypes from 'prop-types'
 
 class MapView extends React.Component {
-  
+
   static contextTypes = {
     router: PropTypes.object
   }
@@ -30,6 +30,8 @@ class MapView extends React.Component {
   }
 
   render() {
+    debugger;
+    
     const {ward, district, wards, districts, facilities} = this.props
     const wardFeature = {'type': 'FeatureCollection', 'features': [ward]}
     const facilitiesFeatures = []
@@ -42,14 +44,14 @@ class MapView extends React.Component {
         <h2>Tanzania</h2>
         <D3Map width="500" height="500" colors={["#FFF275", '#6C8EAD']} onFeatureClick={f => this.props.onDistricSelected(f)} shapeFeatures={districts} zoomeable={true}></D3Map>
       </div>
-      
-      {district ? 
+
+      {district ?
         <div className="infoBlock district">
           <h2>{district.properties['NAME']}</h2>
           <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardSelected(f)} shapeFeatures={wards} zoomeable={true}></D3Map>
         </div>
       : null}
-      {ward ? 
+      {ward ?
         <div className="infoBlock district">
           <h2>{ward.properties['NAME']}</h2>
           <D3Map width="500" height="500" colors={["#FF8C42", '#0C4700']} onFeatureClick={f => this.onWardClicked(f)} onPointClick={f => this.onFacilityClicked(f)} shapeFeatures={wardFeature} pointFeatures={pointFeatures} zoomeable={true}></D3Map>

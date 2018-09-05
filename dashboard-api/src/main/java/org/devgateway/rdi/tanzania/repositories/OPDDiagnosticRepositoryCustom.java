@@ -19,6 +19,6 @@ public interface OPDDiagnosticRepositoryCustom {
 
     List<OPDResponse> getYearly(Facility f, Integer year, List<Long> ids);
 
-    Long getYearlyTotalByDiagnostic(Facility f, Integer year, DataElement diagnostic);
+    List<OPDResponse> getYearlyTotalByDiagnostic(Facility f, Integer year, List<Long> ids);
 
 }

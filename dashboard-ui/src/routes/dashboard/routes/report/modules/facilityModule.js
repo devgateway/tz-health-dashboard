@@ -161,7 +161,6 @@ const getAggregatedPopulation = (data) => {
 
 const getAggregatedDiagnosis = (data) => {
   const parsedData = []
-  const lan = "english"
   data.forEach(d => {
     const {values, diagnostic, totalPrevPeriod} = d
     // "xLoqtMo0pI";"Umri chini ya mwezi 1" // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1" // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
@@ -171,8 +170,7 @@ const getAggregatedDiagnosis = (data) => {
     // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
     const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))   
     const total = sumValues(values)
-    const diagnosticLabel = (diagnostic.translation[lan] !== "") ? diagnostic.translation[lan] : diagnostic.translation.original
-    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnosticLabel, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
+    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic.translation, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
   })
   return parsedData
 }

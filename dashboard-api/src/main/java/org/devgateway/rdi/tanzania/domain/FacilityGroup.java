@@ -19,6 +19,9 @@ public class FacilityGroup {
     private String dhis2Id;
     private String name;
 
+    public FacilityGroup() {
+    }
+
     @JsonIgnore
     @ManyToMany(targetEntity = Facility.class, fetch = FetchType.LAZY)
     private List<Facility> facilities;

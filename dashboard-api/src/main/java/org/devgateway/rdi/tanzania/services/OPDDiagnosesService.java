@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Sebastian Dimunzio
@@ -32,6 +33,8 @@ public class OPDDiagnosesService {
         List<OPDResponse> yearlyByAge = opdDiagnosticRepository.getYearlyByAge(f, year, ids);
 
 
+       List<OPDResponse> prevValues= opdDiagnosticRepository.getYearlyTotalByDiagnostic(f, year - 1, ids);
+
         List<OPDByAgeResponse> results = new ArrayList<>();
 
         if (yearlyByAge != null) {
@@ -46,9 +49,11 @@ public class OPDDiagnosesService {
                     opdByAgeResponse.setYear(opd.getYear());
                     results.add(opdByAgeResponse);
                 }
-                opdByAgeResponse.setTotalPrevPeriod(
-                        opdDiagnosticRepository.getYearlyTotalByDiagnostic(f, year - 1, opd.getDiagnostic())
-                );
+
+                //
+                Optional<OPDResponse> prevYear = prevValues.stream().filter(opdByAgeResponse1 -> opdByAgeResponse1.getDiagnostic().getId().equals(opd.getDiagnostic().getId())).findAny();
+
+                opdByAgeResponse.setTotalPrevPeriod(prevYear.isPresent() ? prevYear.get().getValue() : null);
                 opdByAgeResponse.addValue(opd.getAge(), opd.getValue());
 
 
