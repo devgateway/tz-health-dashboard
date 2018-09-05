@@ -71,7 +71,7 @@ export const findFacilities = (params) => {
 }
 
 export const getWardInfo = (id, period) => {
-  const url = `${API_WARD_REPORT_INFO}/${id}/${period}`
+  const url = `${API_WARD_REPORT_INFO}/${id}?${prepareQuery(Object.assign({ }, period))}`
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -90,8 +90,8 @@ export const getWardInfo = (id, period) => {
   })
 }
 
-export const getFacilityData = (id, type) => {
-  const url = `${API_FACILITY_REPORT_INFO}/${id}/${type || ''}`
+export const getFacilityData = (id, period, type) => {
+  const url = `${API_FACILITY_REPORT_INFO}/${id}/${type || ''}?${preparePeriodQuery(period)}`
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -116,3 +116,13 @@ const prepareQuery = (params) => {
     .join('&');
 }
 
+const preparePeriodQuery = (period) => {
+  const periodObject = {}
+  if (period) {
+    const periodSp = period.split('_')
+    periodSp.forEach(p => {
+      periodObject[p.split('-')[0]] = p.split('-')[1]
+    })
+  }
+  return prepareQuery(periodObject)
+}

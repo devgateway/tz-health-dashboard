@@ -19,10 +19,10 @@ const FACILITY_MAP_ERROR = 'FACILITY_MAP_ERROR'
 
 // ------------------------------------ Actions ------------------------------------
 
-export const getFacilityInfo = (id) => {
+export const getFacilityInfo = (id, period) => {
   return (dispatch, getState) => {
     dispatch({type: FACILITY_INFO_REQUEST})
-    api.getFacilityData(id).then(data => {
+    api.getFacilityData(id, period).then(data => {
       dispatch({'type': FACILITY_INFO_RESPONSE, data})
     }).catch(error => {
       dispatch({'type': FACILITY_INFO_ERROR, error})
@@ -30,10 +30,10 @@ export const getFacilityInfo = (id) => {
   }
 };
 
-export const getFacilityPopulation = (id) => {
+export const getFacilityPopulation = (id, period) => {
   return (dispatch, getState) => {
     dispatch({type: FACILITY_POPULATION_REQUEST})
-    api.getFacilityData(id, 'population').then(data => {
+    api.getFacilityData(id, period, 'population').then(data => {
       dispatch({'type': FACILITY_POPULATION_RESPONSE, data})
     }).catch(error => {
       dispatch({'type': FACILITY_POPULATION_ERROR, error})
@@ -41,10 +41,10 @@ export const getFacilityPopulation = (id) => {
   }
 };
 
-export const getFacilityDiagnoses = (id) => {
+export const getFacilityDiagnoses = (id, period) => {
   return (dispatch, getState) => {
     dispatch({ type: FACILITY_DIAGNOSES_REQUEST })
-    api.getFacilityData(id, 'diagnoses').then(data => {
+    api.getFacilityData(id, period, 'diagnoses').then(data => {
       dispatch({ 'type': FACILITY_DIAGNOSES_RESPONSE, data })
     }).catch(error => {
       dispatch({ 'type': FACILITY_DIAGNOSES_ERROR, error })
@@ -162,7 +162,6 @@ const getAggregatedPopulation = (data) => {
 const getAggregatedDiagnosis = (data) => {
   const parsedData = []
   const lan = "english"
-  debugger
   data.forEach(d => {
     const {values, diagnostic, totalPrevPeriod} = d
     // "xLoqtMo0pI";"Umri chini ya mwezi 1" // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1" // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
@@ -173,7 +172,7 @@ const getAggregatedDiagnosis = (data) => {
     const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))   
     const total = sumValues(values)
     const diagnosticLabel = (diagnostic.translation[lan] !== "") ? diagnostic.translation[lan] : diagnostic.translation.original
-    parsedData.push({ diagnostic: diagnosticLabel, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
+    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnosticLabel, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
   })
   return parsedData
 }

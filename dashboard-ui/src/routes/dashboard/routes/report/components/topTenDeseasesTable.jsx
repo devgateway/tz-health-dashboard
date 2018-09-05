@@ -44,15 +44,17 @@ export default class TopTenDeseases extends React.Component {
               colsTotals['totalPrevPeriod'] += totalPrevPeriod
               colsTotals['total'] += total
 
-              return (<tr>
-                <td className="desease-name">{it.get("diagnostic")}</td>
-                <td className="previous-value">{it.get("totalPrevPeriod")}</td>
-                <td className="current-value-partial">{totalUnder5}</td>
-                <td className="current-value-partial">{total5to60}</td>
-                <td className="current-value-partial">{totalAbove60}</td>
-                <td className="current-value">{total}</td>
-                <td className="previous-value">{((((totalPrevPeriod-total)/totalPrevPeriod)*100)*-1).toFixed(2)}%</td>
-              </tr>)
+              return (
+                <tr key={it.get("dhis2Id")}>
+                  <td className="desease-name">{it.get("diagnostic")}</td>
+                  <td className="previous-value">{it.get("totalPrevPeriod")}</td>
+                  <td className="current-value-partial">{totalUnder5}</td>
+                  <td className="current-value-partial">{total5to60}</td>
+                  <td className="current-value-partial">{totalAbove60}</td>
+                  <td className="current-value">{total}</td>
+                  <td className="previous-value">{((((totalPrevPeriod-total)/totalPrevPeriod)*100)*-1).toFixed(2)}%</td>
+                </tr>
+              )
             })
           }
           <tr className="total-values">
