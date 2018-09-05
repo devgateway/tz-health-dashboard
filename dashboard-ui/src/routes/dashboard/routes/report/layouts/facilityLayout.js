@@ -3,8 +3,13 @@ import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
 import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
+import PeriodSelector from '../components/periodSelector'
 
 export default class WardLayout extends React.Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   constructor(props) {
     super(props);
@@ -13,9 +18,9 @@ export default class WardLayout extends React.Component {
 
   componentDidMount() {
     const { onGetFacilityInfo, onGetFacilityPopulation, onGetFacilityDiagnoses, params: {id, period} } = this.props;
-    onGetFacilityInfo(id)
-    onGetFacilityPopulation(id)
-    onGetFacilityDiagnoses(id)
+    onGetFacilityInfo(id, period)
+    onGetFacilityPopulation(id, period)
+    onGetFacilityDiagnoses(id, period)
   }
 
   componentDidUpdate(prevProps) {
@@ -24,6 +29,11 @@ export default class WardLayout extends React.Component {
       onGetMapPoints(info)
       onGetMapShape(info)
     }
+  }
+
+  onChangePeriod(period){
+    const {params: {id}} = this.props
+    this.context.router.history.push(`/report/facility/${id}/${period}`)
   }
 
   render() {
@@ -43,11 +53,11 @@ export default class WardLayout extends React.Component {
     
     return (
       <div>
+        <div className="report-header">
+          <div className="facility-name">{facilityName}</div>
+          <PeriodSelector period={period} onChangePeriod={e => this.onChangePeriod(e)}/>
+        </div>
         <div className="facility-report-container">
-          <div className="report-header">
-            <div className="facility-name">{facilityName}</div>
-            <div className="report-period">{reportPeriod}</div>
-          </div>
           <div className="location-box">
             <div><div className="location-title">Facility Type</div><div className="location-value">{facilityType}</div></div>
             <div><div className="location-title">Ward</div><div className="location-value">{watdName}</div></div>

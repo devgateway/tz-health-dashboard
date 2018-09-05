@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-import Selector from '../components/lanSelector'
-
+import Header from '../components/header'
+import './layout.css'
 
 export default (props) =>(
   <div className="app">
-        <div><Selector></Selector></div>
-        {props.children}
-  </div>)
+    <Header/>
+    {props.children}
+  </div>
+)

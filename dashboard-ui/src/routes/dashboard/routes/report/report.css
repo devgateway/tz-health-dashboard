@@ -12,21 +12,43 @@
   font-weight: bold; }
 
 .report-header {
-  color: #9C8568;
+  color: #2C4856;
   font-size: 30px;
   font-weight: bold;
   border-top: 1px solid #CCC;
-  border-bottom: 2px solid #CCC;
-  padding: 5px; }
+  border-bottom: 4px solid #CCC;
+  padding-left: 26px;
+  height: 60px;
+  line-height: 60px;
+  margin-bottom: 20px;
+  background-color: #F4F2EC; }
   .report-header > div {
     display: inline-block; }
-  .report-header .report-period {
-    float: right; }
+  .report-header .period-selector-container {
+    float: right;
+    line-height: 45px; }
+    .report-header .period-selector-container > div > div {
+      display: inline-block;
+      line-height: 1px;
+      border-right: 1px solid #CCC;
+      margin-right: 50px; }
+      .report-header .period-selector-container > div > div select {
+        padding-left: 12px;
+        width: 200px;
+        height: 31px;
+        border-color: #CCC;
+        color: #2C4856;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-left: 20px;
+        margin-right: 20px; }
 
 .location-box > div {
   width: calc(25% - 2px);
   height: 50px;
-  background-color: #F4F2EC; }
+  background-color: #F4F2EC;
+  border-top: 2px solid #CCC;
+  border-bottom: 2px solid #CCC; }
 
 .location-box > div:not(:last-child) {
   border-right: 2px solid #CCC; }

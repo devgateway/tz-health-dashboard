@@ -5,10 +5,9 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 
 const component = (props) => (
-  <div className="dashboard">
-    <h2>RDI Tanzania</h2>
-      {props.children}
-</div>)
+	<div className="dashboard">
+    {props.children}
+	</div>)
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: () => push('/about-us')

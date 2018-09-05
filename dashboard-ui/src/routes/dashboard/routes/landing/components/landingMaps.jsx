@@ -13,7 +13,7 @@ class MapView extends React.Component {
     router: PropTypes.object
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.onFindDistricts({})
   }
 
@@ -22,11 +22,11 @@ class MapView extends React.Component {
   }
 
   onWardClicked(feature) {
-    this.context.router.history.push(`/report/ward/${feature.properties.ID}/y`)
+    this.context.router.history.push(`/report/ward/${feature.properties.ID}`)
   }
 
   onFacilityClicked(feature) {
-    this.context.router.history.push(`/report/facility/${feature.properties.ID}/y`)
+    this.context.router.history.push(`/report/facility/${feature.properties.ID}`)
   }
 
   render() {
