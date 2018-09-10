@@ -24,12 +24,14 @@ const createRoute = (props) => {
     }, 'dash-chunk'))
   })
 
-  return (
-    <div>
-      <Route path="/report/facility/:id/:period?" render={({ match }) => <FacilityReport store={store} params={match.params} />}/>
-      <Route path="/report/ward/:id/:period?" render={({ match }) => <WardReport store={store} params={match.params} />}/>
-    </div>
-  )
+  return (<div>
+    <Route path="/report/facility/" exact={false}  render={e => {
+        return <div>Reports</div>
+      }}></Route>
+
+    <Route path="/report/facility/:id/:period?" render={({match}) => <FacilityReport store={store} params={match.params}/>}/>
+    <Route path="/report/ward/:id/:period?" render={({match}) => <WardReport store={store} params={match.params}/>}/>
+  </div>)
 }
 
 export default createRoute

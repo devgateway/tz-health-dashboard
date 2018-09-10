@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Configuration
-@PropertySource("dhis.properties")
+@PropertySource("classpath:dhis.properties")
 public class Dhis {
 
     @Value("${dhis.instance.url}")
