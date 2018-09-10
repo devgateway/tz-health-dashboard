@@ -19,7 +19,8 @@ const createRoute = (props) => {
     <div>
       <i>DashboardComponent (/) </i>
       <Route path="/"  render={(e)=>{
-          return <DashboardComponent>
+          return
+          <DashboardComponent>
             <Routes {...props}/>
 
             </DashboardComponent>
