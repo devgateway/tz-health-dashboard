@@ -27,9 +27,12 @@ public class OPDDiagnostic {
 
     Integer year;
 
+    Integer quarter;
+
     Integer month;
 
     Integer value;
+
 
     public Long getId() {
         return id;
@@ -86,4 +89,13 @@ public class OPDDiagnostic {
     public void setAge(Item age) {
         this.age = age;
     }
+
+    public Integer getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(Integer quarter) {
+        this.quarter = quarter;
+    }
+
 }

@@ -48,12 +48,13 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     FacilityRepository facilityRepository;
 
     public void importPopuationData() {
+
         populationService.clean();
         populationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y2017());
 
         dhis2OPDDiagnosesService.clean();
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2016));
         dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2017));
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2016));
 
 
     }

@@ -17,8 +17,16 @@ const DashboardComponent = asyncComponent({
 const createRoute = (props) => {
   return (
     <div>
-      <Route path="/dashboard" component={DashboardComponent}/>
-      <Routes {...props}/>
+      <i>DashboardComponent (/) </i>
+      <Route path="/"  render={(e)=>{
+          return <DashboardComponent>
+            <Routes {...props}/>
+
+            </DashboardComponent>
+        }}>
+
+
+      </Route>
     </div>
   )
 }

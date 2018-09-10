@@ -52,9 +52,9 @@ public class FacilityController {
     @RequestMapping("/facilities/{id}/diagnoses")
     public List<OPDByAgeResponse> diangoses(@PathVariable Long id,
                                             @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                            @RequestParam(name = "q", required = false) Integer quarter,
                                             @RequestParam(name = "m", required = false) Integer month) {
 
-
-        return opdDiagnosesService.getByYear(id, year);
+        return opdDiagnosesService.getByYear(id, year, quarter, month);
     }
 }

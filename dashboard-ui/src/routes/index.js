@@ -8,8 +8,7 @@ const createRoute = (props) => {
   const {store} = props
   return (
   	<div>
-
-      <Route exact path="/" render={() => <Redirect to="/dashboard/landing" />} />
+      <i>Root /</i>
       <Route path="/" render={() => <DashboardRoute store={store}/>} />
     </div>
   )
