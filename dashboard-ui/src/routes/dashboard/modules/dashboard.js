@@ -80,7 +80,6 @@ const initialState = Immutable.fromJS({ 'dashboard': true, year: 2017, quarterly
 
 // reducer is returned as default
 export default function appReducer(state = initialState, action) {
-  debugger;
   const handler = ACTION_HANDLERS[action.type];
   return handler ? handler(state, action) : state
 }

@@ -6,8 +6,6 @@ import {asyncComponent} from 'react-async-component';
 import ReportRoute from './report'
 import LandingRoute from './landing'
 
-debugger;
-
 const createRoute = (props) => {
   const {store} = props
   return (

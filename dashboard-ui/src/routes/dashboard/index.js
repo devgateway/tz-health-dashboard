@@ -17,16 +17,13 @@ const DashboardComponent = asyncComponent({
 const createRoute = (props) => {
   return (
     <div>
-      <i>DashboardComponent (/) </i>
-      <Route path="/"  render={(e)=>{
-          return
+      <Route path="/" render={(e)=>{
+        return (
           <DashboardComponent>
             <Routes {...props}/>
 
             </DashboardComponent>
-        }}>
-
-
+        )}}>
       </Route>
     </div>
   )

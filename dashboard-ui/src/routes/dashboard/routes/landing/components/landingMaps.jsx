@@ -30,8 +30,6 @@ class MapView extends React.Component {
   }
 
   render() {
-    debugger;
-    
     const {ward, district, wards, districts, facilities} = this.props
     const wardFeature = {'type': 'FeatureCollection', 'features': [ward]}
     const facilitiesFeatures = []
