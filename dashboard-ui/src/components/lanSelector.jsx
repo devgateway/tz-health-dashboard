@@ -14,8 +14,8 @@ class Selector extends Component {
 
     return (
       <div>
-          <button onClick={() => changeLanguage("sw")}><trans>Swahili</trans></button>
-          <button onClick={() => changeLanguage("en")}><trans>English</trans></button>
+          <button onClick={() => changeLanguage("sw")}><Trans>Swahili</Trans></button>
+          <button onClick={() => changeLanguage("en")}><Trans>English</Trans></button>
       </div>);
   }
 }

@@ -12,8 +12,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 const mapStateToProps = state => {
-  debugger;
-
+  
   return {
     mapShape: state.getIn(['facility', 'reportData', 'map', 'shape']),
     mapPoints: state.getIn(['facility', 'reportData', 'map', 'points']),
