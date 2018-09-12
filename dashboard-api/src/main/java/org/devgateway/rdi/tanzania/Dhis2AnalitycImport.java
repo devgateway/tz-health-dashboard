@@ -18,6 +18,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
+import java.util.Arrays;
+
 /**
  * @author Sebastian Dimunzio
  */
@@ -47,14 +49,17 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     @Autowired
     FacilityRepository facilityRepository;
 
-    public void importPopuationData() {
-
+    public void importData() {
         populationService.clean();
         populationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y2017());
 
+        LOGGER.info("Starting OPD IMPORT");
         dhis2OPDDiagnosesService.clean();
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2017));
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2016));
+
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
+        dhis2OPDDiagnosesService.byRegion("Dar es salaam", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
+        dhis2OPDDiagnosesService.byRegion("Dar es salaam", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
 
 
     }
@@ -62,7 +67,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        this.importPopuationData();
+        this.importData();
         System.exit(3);
     }
 

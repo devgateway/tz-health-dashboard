@@ -37,25 +37,26 @@ export default class WardLayout extends React.Component {
   }
 
   render() {
-    const {params: {id, period}, mapShape, mapPoints, info, population} = this.props
+    const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
+
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
     }
-    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
 
+  
+    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
     const watdName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
-    const reportPeriod = 'Year 2017'
 
     return (
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
-          <PeriodSelector period={period} onChangePeriod={e => this.onChangePeriod(e)}/>
+          <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
           <div className="location-box">
@@ -90,7 +91,7 @@ export default class WardLayout extends React.Component {
           </div>
 
           <div className="top-ten-deseases">
-            <TopTenDeseases facilityName={facilityName} diagnoses={this.props.diagnoses}/>
+            <TopTenDeseases  period={period}  facilityName={facilityName} diagnoses={this.props.diagnoses}/>
           </div>
 
           <div className="RMNCH-box">

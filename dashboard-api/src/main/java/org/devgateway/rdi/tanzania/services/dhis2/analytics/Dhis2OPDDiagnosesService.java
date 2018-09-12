@@ -108,6 +108,11 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
                         opdDiagnostic.setDiagnostic(diagnostic);
                         opdDiagnostic.setYear(Integer.parseInt(dateStr.substring(0, 4)));
                         opdDiagnostic.setMonth(Integer.parseInt(dateStr.substring(4, 6)));
+
+                        Integer quarter = ((Double) Math.ceil(opdDiagnostic.getMonth() / 3d)).intValue();
+
+                        opdDiagnostic.setQuarter(quarter);
+
                         opdDiagnostic.setAge(itemRepository.findByDhis2Id(ageID));
                         opdDiagnostic.setValue(new Double(Double.parseDouble(valueStr)).intValue());
                         Facility f = facilities.stream().filter(facility -> facility.getDhis2Id().equalsIgnoreCase(facilityID)).findAny().get();

@@ -137,8 +137,7 @@ const ACTION_HANDLERS = {
   [FACILITY_MAP_ERROR]: (state, action) => {
     const {error} = action;
     return state.setIn(['reportData', 'map', 'error'], error).setIn(['reportData', 'map', 'loading'], false)
-  },
-  
+  }
 };
 
 // ------------------------------------ Helpers ------------------------------------
@@ -155,7 +154,7 @@ const getAggregatedPopulation = (data) => {
   const totalFemale = sumValues(data.filter(i => i.gender.name === 'KE'))
   const totalUnder5 = sumValues(data.filter(i => i.age.name === '< 1' || i.age.name === '1-4'))
   const total5to60 = sumValues(data.filter(i => i.age.name !== '< 1' && i.age.name !== '1-4' && i.age.name !== '60+'))
-  const totalAbove60 = sumValues(data.filter(i => i.age.name === '60+'))   
+  const totalAbove60 = sumValues(data.filter(i => i.age.name === '60+'))
   return {total, totalMale, totalFemale, totalUnder5, total5to60, totalAbove60}
 }
 
@@ -168,7 +167,7 @@ const getAggregatedDiagnosis = (data) => {
     // "GF4Nq9E8x6l";"Umri miaka 5 hadi umri chini ya miaka 60"
     const total5to60 = sumValues(values.filter(i => i.age.dhis2Id === "GF4Nq9E8x6l"))
     // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
-    const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))   
+    const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))
     const total = sumValues(values)
     parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic.translation, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
   })

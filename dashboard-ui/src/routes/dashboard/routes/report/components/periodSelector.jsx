@@ -6,32 +6,33 @@ export default class PeriodSelector extends React.Component {
     super(props)
     this.state = {
       years: [
-        {id: 'y-2016', label: '2016'}, 
+        {id: 'y-2016', label: '2016'},
         {id: 'y-2017', label: '2017'}
       ],
       quarters: [
-        {id: 'q-1', label: 'January-March'}, 
-        {id: 'q-2', label: 'April-June'}, 
-        {id: 'q-3', label: 'July-September'}, 
+        {id: 'q-1', label: 'January-March'},
+        {id: 'q-2', label: 'April-June'},
+        {id: 'q-3', label: 'July-September'},
         {id: 'q-4', label: 'October-December'}
       ],
       months: [
-        {id: 'm-1', label: 'January'}, 
-        {id: 'm-2', label: 'February'}, 
-        {id: 'm-3', label: 'March'}, 
-        {id: 'm-4', label: 'April'}, 
-        {id: 'm-5', label: 'May'}, 
-        {id: 'm-6', label: 'June'}, 
-        {id: 'm-7', label: 'July'}, 
-        {id: 'm-8', label: 'August'}, 
-        {id: 'm-9', label: 'September'}, 
-        {id: 'm-10', label: 'October'}, 
-        {id: 'm-11', label: 'November'}, 
+        {id: 'm-1', label: 'January'},
+        {id: 'm-2', label: 'February'},
+        {id: 'm-3', label: 'March'},
+        {id: 'm-4', label: 'April'},
+        {id: 'm-5', label: 'May'},
+        {id: 'm-6', label: 'June'},
+        {id: 'm-7', label: 'July'},
+        {id: 'm-8', label: 'August'},
+        {id: 'm-9', label: 'September'},
+        {id: 'm-10', label: 'October'},
+        {id: 'm-11', label: 'November'},
         {id: 'm-12', label: 'December'}
       ],
       periodType: 'yearly',
     }
   }
+
 
   componentDidMount() {
     const {period} = this.props
@@ -49,7 +50,7 @@ export default class PeriodSelector extends React.Component {
     } else {
       this.setState({periodType: 'yearly'})
     }
-    
+
   }
 
   onChangeType(e){
@@ -98,8 +99,8 @@ export default class PeriodSelector extends React.Component {
               })}
             </select>
           </div>
-        </div>   
-      </div>            
+        </div>
+      </div>
     )
   }
 }
