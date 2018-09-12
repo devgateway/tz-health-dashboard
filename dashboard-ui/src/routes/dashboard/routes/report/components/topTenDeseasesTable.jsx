@@ -12,12 +12,12 @@ const compute = (prev, val) => {
 
 const MonthLabel=(props)=>{
   const {month, year} = props
-  return <span><Trans>{month}</Trans> {year?year:null}</span>
+  return <span><Trans>{month}</Trans>{year?' '+year:null}</span>
 }
 
 const QuarterLabels=(props)=>{
   const {start,end, year}=props
-  return <span><MonthLabel month={start}></MonthLabel> <MonthLabel month={end}></MonthLabel> {year}</span>
+  return <span><MonthLabel month={start}></MonthLabel>{'-'}<MonthLabel month={end}></MonthLabel> {year}</span>
 }
 
 class TopTenDeseases extends React.Component {
@@ -62,7 +62,7 @@ class TopTenDeseases extends React.Component {
     if (language == 'sw')
       lan = 'swahili'
 
-    const deseases = this.props.diagnoses.get('data') || [];
+    const deseases = this.props.diagnoses.get('data')? this.props.diagnoses.get('data').sortBy((val)=>-val.get('total')) : [];
     let colsTotals = {
       totalUnder5: 0,
       total5to60: 0,
@@ -70,6 +70,8 @@ class TopTenDeseases extends React.Component {
       totalPrevPeriod: 0,
       total: 0
     }
+
+
     return (<div className="top-ten-diagnosis-table">
       <div className="sub-title">
         <Trans>Out-Patient Diseases (OPD) at</Trans>
