@@ -8,6 +8,7 @@ import java.util.List;
 
 public class FacilityRequest {
 
+    String keyWord;
     List<Long> districts;
     List<Long> wards;
 
@@ -25,5 +26,13 @@ public class FacilityRequest {
 
     public void setWards(List<Long> wards) {
         this.wards = wards;
+    }
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
     }
 }

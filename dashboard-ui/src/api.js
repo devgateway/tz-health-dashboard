@@ -4,11 +4,11 @@ const API_WARDS = API_ROOT_URL + '/geo/wards'
 const API_WARD_INFO = API_ROOT_URL + '/wards'
 const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wardReport`
 const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facilities`
-const API_FACILITIES= `${API_ROOT_URL}/facilities`
+const API_FACILITIES = `${API_ROOT_URL}/facilities`
 
 
 export const findDistricts = (params) => {
-  const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({ }, params))
+  const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({}, params))
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -28,7 +28,7 @@ export const findDistricts = (params) => {
 }
 
 export const findWards = (params) => {
-  const url = API_WARDS + '?' + prepareQuery(Object.assign({ }, params))
+  const url = API_WARDS + '?' + prepareQuery(Object.assign({}, params))
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -50,7 +50,7 @@ export const findWards = (params) => {
 }
 
 export const findFacilities = (params) => {
-  const url = API_FACILITIES + '?' + prepareQuery(Object.assign({ }, params))
+  const url = API_FACILITIES + '?' + prepareQuery(Object.assign({}, params))
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
@@ -125,4 +125,31 @@ const preparePeriodQuery = (period) => {
     })
   }
   return prepareQuery(periodObject)
+}
+
+export const getMonthName=(m,format)=> {
+
+  var date = new Date(2000,m-1)
+      let locale = "en-us",
+      month = date.toLocaleString(locale, { month: format?format:"long" });
+      return month
+}
+
+export const getQuarterLabel=(q)=> {
+  let end=q*3;
+  let start=end-2;
+
+  return {start:getMonthName(start,'short'), end:getMonthName(end,'short')}
+}
+export const parsePeriod = (period) => {
+
+  const periodObject = {}
+
+  if (period && period.startsWith('y-')) {
+    const periodSp = period.split('_')
+    periodSp.forEach(p => {
+      periodObject[p.split('-')[0]] = p.split('-')[1]
+    })
+  }
+  return periodObject
 }

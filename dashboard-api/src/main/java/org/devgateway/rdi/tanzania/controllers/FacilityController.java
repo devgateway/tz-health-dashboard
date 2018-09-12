@@ -55,6 +55,6 @@ public class FacilityController {
                                             @RequestParam(name = "q", required = false) Integer quarter,
                                             @RequestParam(name = "m", required = false) Integer month) {
 
-        return opdDiagnosesService.getByYear(id, year, quarter, month);
+        return opdDiagnosesService.getOPDByPeriod(id, year, quarter, month);
     }
 }
