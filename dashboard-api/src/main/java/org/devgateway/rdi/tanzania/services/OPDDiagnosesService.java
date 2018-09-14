@@ -24,63 +24,44 @@ public class OPDDiagnosesService {
     FacilityService facilityService;
 
 
-    public List<OPDByAgeResponse> getByYear(Long id, Integer year, Integer quarter, Integer month) {
+    public List<OPDByAgeResponse> getOPDByPeriod(Long id, Integer year, Integer quarter, Integer month) {
 
         Facility f = facilityService.getFacility(id);
+
         List<Long> ids = opdDiagnosticRepository.getTop(f, year, quarter, month);
-        List<OPDResponse> yearlyByAge = opdDiagnosticRepository.getDiagnosesByAge(f, year, quarter, month, ids);
-        List<OPDResponse> prevValues = opdDiagnosticRepository.getYearlyTotalByDiagnostic(f, year - 1, ids);
-        List<OPDByAgeResponse> results = new ArrayList<>();
 
-        if (yearlyByAge != null) {
-            Long current = null;
-            OPDByAgeResponse opdByAgeResponse = null;
+        List<OPDResponse> diagnosesByAge = opdDiagnosticRepository.getDiagnoses(f, year, quarter, month, ids);
 
-            for (OPDResponse opd : yearlyByAge) {
-                if (current != opd.getDiagnostic().getId()) {
-                    current = opd.getDiagnostic().getId();
-                    opdByAgeResponse = new OPDByAgeResponse();
-                    opdByAgeResponse.setDiagnostic(opd.getDiagnostic());
-                    opdByAgeResponse.setYear(opd.getYear());
-                    results.add(opdByAgeResponse);
-                }
-
-                if (prevValues != null) {
-
-                    Optional<OPDResponse> prevYear = prevValues.stream().
-                            filter(opdByAgeResponse1 -> opdByAgeResponse1.getDiagnostic().
-                                    getId()
-                                    .equals(opd.getDiagnostic().getId()))
-                            .findAny();
-                    opdByAgeResponse.setTotalPrevPeriod(prevYear.isPresent() ? prevYear.get().getValue() : null);
-                }
-                opdByAgeResponse.addValue(opd.getAge(), opd.getValue());
-
+        List<OPDResponse> prevValues = null;
+        if (month != null) {
+            Integer prevYear = year;
+            Integer prevMonth = month == 1 ? 12 : month - 1;
+            if (month == 1) {
+                prevYear = year - 1;
             }
+            prevValues = opdDiagnosticRepository.getMonthlyTotalValues(f, prevYear, prevMonth, ids);
+
+        } else if (quarter != null) {
+            Integer prevYear = year;
+            Integer prevQuarter = quarter == 1 ? 3 : quarter - 1;
+            if (quarter == 1) {
+                prevYear = year - 1;
+            }
+            prevValues = opdDiagnosticRepository.getQuarterlyTotalValues(f, prevYear, prevQuarter, ids);
+
+        } else {
+            Integer prevYear = year - 1;
+            prevValues = opdDiagnosticRepository.getYearlyTotalValues(f, prevYear, ids);
         }
 
-        return results;
-
-    }
-
-
-    public List<OPDByAgeResponse> getByMonth(Long id, Integer year, Integer quarter, Integer month) {
-
-        Facility f = facilityService.getFacility(id);
-
-        List<Long> ids = opdDiagnosticRepository.getTop(f, year, month, quarter);
-
-        List<OPDResponse> yearlyByAge = opdDiagnosticRepository.getDiagnosesByAge(f, year, quarter, month, ids);
-
-        List<OPDResponse> prevValues = opdDiagnosticRepository.getYearlyTotalByDiagnostic(f, year - 1, ids);
 
         List<OPDByAgeResponse> results = new ArrayList<>();
 
-        if (yearlyByAge != null) {
+        if (diagnosesByAge != null) {
             Long current = null;
             OPDByAgeResponse opdByAgeResponse = null;
 
-            for (OPDResponse opd : yearlyByAge) {
+            for (OPDResponse opd : diagnosesByAge) {
                 if (current != opd.getDiagnostic().getId()) {
                     current = opd.getDiagnostic().getId();
                     opdByAgeResponse = new OPDByAgeResponse();

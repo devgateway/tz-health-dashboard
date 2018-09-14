@@ -73,6 +73,16 @@ const ACTION_HANDLERS = {
     const { data, category } = action
     return state.setIn([category, 'list'], data)
   },
+  ['@@router/LOCATION_CHANGE']: (state, action) => {
+    const { payload: { pathname } } = action;
+    const pattern = pathname.substring(pathname.lastIndexOf('/') + 1);
+    if (pattern) {
+      const parsed=api.parsePeriod(pattern);
+
+      return state.setIn(['period'],Immutable.fromJS(parsed))
+    }
+    return state;
+  }
 };
 
 // ------------------------------------ Reducer ------------------------------------

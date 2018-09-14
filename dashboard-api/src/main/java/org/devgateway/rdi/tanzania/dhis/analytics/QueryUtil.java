@@ -147,6 +147,22 @@ public class QueryUtil {
     }
 
 
+    public static QueryDimension MONTHS_OFF(List<Integer> years) {
+        QueryDimension queryDimension = new QueryDimension("pe", "Period");
+
+        for (Integer year : years) {
+            for (int i = 1; i < 13; i++) {
+                String month = "" + i;
+                if (i < 10) {
+                    month = "0" + month;
+                }
+                queryDimension.adItem(year + month, "month " + i);
+            }
+        }
+        return queryDimension;
+    }
+
+
     public static QueryDimension ouDimension() {
         return new QueryDimension("ou", "Org Unit");
     }

@@ -7,6 +7,7 @@ import org.devgateway.rdi.tanzania.repositories.RegionRepository;
 import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2AnalyticImport;
 import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2OPDDiagnosesService;
 import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2PopulationService;
+import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2RMNNCHService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+
+import java.util.Arrays;
 
 /**
  * @author Sebastian Dimunzio
@@ -39,6 +42,9 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     Dhis2OPDDiagnosesService dhis2OPDDiagnosesService;
 
     @Autowired
+    Dhis2RMNNCHService dhis2RMNNCHService;
+
+    @Autowired
     RegionRepository regionRepository;
 
     @Autowired
@@ -47,14 +53,20 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     @Autowired
     FacilityRepository facilityRepository;
 
-    public void importPopuationData() {
+    public void importData() {
+        //populationService.clean();
+        //populationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y2017());
 
-        populationService.clean();
-        populationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y2017());
+        //LOGGER.info("Starting OPD IMPORT");
+        //dhis2OPDDiagnosesService.clean();
 
-        dhis2OPDDiagnosesService.clean();
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2017));
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(2016));
+        //dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
+        //dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
+        //dhis2OPDDiagnosesService.byRegion("Dar es salaam", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
+        //dhis2OPDDiagnosesService.byRegion("Dar es salaam", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
+
+        dhis2RMNNCHService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT,
+                QueryUtil.MONTHS_OFF(Arrays.asList(2017, 2016)));
 
 
     }
@@ -62,7 +74,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     @Override
     public void run(String... strings) {
-        this.importPopuationData();
+        this.importData();
         System.exit(3);
     }
 

@@ -25,7 +25,7 @@ public class FacilityService {
     FacilityGroupRepository facilityGroupRepository;
 
     public List<Facility> getFacilities(FacilityRequest facilityRequest) {
-        return facilityRepository.findAll(FacilitySpecifications.facilityByWard(facilityRequest));
+        return facilityRepository.findAll(FacilitySpecifications.facilityFilters(facilityRequest));
 
     }
 
