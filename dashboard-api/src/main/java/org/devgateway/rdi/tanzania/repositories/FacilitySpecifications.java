@@ -22,6 +22,11 @@ public class FacilitySpecifications {
 
                 List<Predicate> predicates = new ArrayList<>();
 
+                if (facilityRequest.getTypes() != null && facilityRequest.getTypes().size() > 0) {
+                    predicates.add(root.get(Facility_.type).in(facilityRequest.getTypes()));
+                }
+
+
                 if (facilityRequest.getWards() != null && facilityRequest.getWards().size() > 0) {
                     predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));
                 }
