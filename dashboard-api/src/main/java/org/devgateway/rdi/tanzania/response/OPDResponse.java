@@ -9,12 +9,15 @@ import org.devgateway.rdi.tanzania.domain.Item;
 
 public class OPDResponse {
 
-
     private DataElement diagnostic;
 
     private Item age;
 
     private Integer year;
+
+    private Integer quarter;
+
+    private Integer month;
 
     private Long value;
 
@@ -40,8 +43,28 @@ public class OPDResponse {
     }
 
 
+    public OPDResponse(DataElement diagnostic, Item age, Integer year, Integer quarter, Long value) {
+        this.diagnostic = diagnostic;
+        this.age = age;
+        this.year = year;
+        this.quarter = quarter;
+
+        this.value = value;
+    }
+
+    public OPDResponse(DataElement diagnostic, Item age, Integer year, Integer quarter, Integer month, Long value) {
+        this.diagnostic = diagnostic;
+        this.age = age;
+        this.year = year;
+        this.quarter = quarter;
+        this.month = month;
+        this.value = value;
+    }
+
+
     public DataElement getDiagnostic() {
-        return diagnostic;
+        return
+                diagnostic;
     }
 
     public void setDiagnostic(DataElement diagnostic) {
@@ -70,5 +93,21 @@ public class OPDResponse {
 
     public void setValue(Long value) {
         this.value = value;
+    }
+
+    public Integer getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(Integer quarter) {
+        this.quarter = quarter;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
     }
 }

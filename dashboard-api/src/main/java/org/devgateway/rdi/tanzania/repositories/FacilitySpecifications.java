@@ -1,14 +1,10 @@
 package org.devgateway.rdi.tanzania.repositories;
 
-import org.devgateway.rdi.tanzania.domain.Facility;
-import org.devgateway.rdi.tanzania.domain.Facility_;
+import org.devgateway.rdi.tanzania.domain.*;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,22 +15,32 @@ import java.util.List;
 public class FacilitySpecifications {
 
 
-    public static Specification<Facility> facilityByWard(FacilityRequest facilityRequest) {
+    public static Specification<Facility> facilityFilters(FacilityRequest facilityRequest) {
         return new Specification<Facility>() {
             @Override
             public Predicate toPredicate(Root<Facility> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
 
                 List<Predicate> predicates = new ArrayList<>();
 
-                if (facilityRequest.getDistricts() != null && facilityRequest.getDistricts().size() > 0) {
-
-                    //predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));
+                if (facilityRequest.getWards() != null && facilityRequest.getWards().size() > 0) {
+                    predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));
                 }
 
+                if (facilityRequest.getDistricts() != null && facilityRequest.getDistricts().size() > 0) {
+                    Join<Facility, Ward> wardJoin = root.join(Facility_.ward);
+                    Join<Ward, District> districtJoin = wardJoin.join(Ward_.district);
+                    predicates.add(districtJoin.get(District_.gid).in(facilityRequest.getDistricts()));
+                }
+                if (facilityRequest.getRegions() != null && facilityRequest.getRegions().size() > 0) {
+                    Join<Facility, Ward> wardJoin = root.join(Facility_.ward);
+                    Join<Ward, District> districtJoin = wardJoin.join(Ward_.district);
+                    Join<District, Region> regionJoin = districtJoin.join(District_.region);
+                    predicates.add(regionJoin.get(Region_.gid).in(facilityRequest.getRegions()));
+                }
 
-                if (facilityRequest.getWards() != null && facilityRequest.getWards().size() > 0) {
-
-                    predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));
+                if (facilityRequest.getKeyWord() != null && !facilityRequest.getKeyWord().isEmpty()) {
+                    predicates.add(criteriaBuilder.like(criteriaBuilder.upper(root.get(Facility_.name)),
+                            facilityRequest.getKeyWord().toUpperCase() + "%"));
                 }
 
                 if (predicates.size() > 0) {

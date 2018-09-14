@@ -16,6 +16,10 @@ public class OPDByAgeResponse {
     private DataElement diagnostic;
     private Integer year;
     private Long totalPrevPeriod;
+
+    private Integer quarter;
+    private Integer month;
+
     private List<AgeValue> values = new ArrayList<>();
 
     public List<AgeValue> getValues() {
@@ -79,5 +83,21 @@ public class OPDByAgeResponse {
         public void setValue(Long value) {
             this.value = value;
         }
+    }
+
+    public Integer getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(Integer quarter) {
+        this.quarter = quarter;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
     }
 }
