@@ -5,10 +5,12 @@ import org.devgateway.rdi.tanzania.domain.ServiceAreaPopulation;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
 import org.devgateway.rdi.tanzania.response.FacilityResponse;
 import org.devgateway.rdi.tanzania.response.OPDByAgeResponse;
+import org.devgateway.rdi.tanzania.response.RMNCHResponse;
 import org.devgateway.rdi.tanzania.response.ResponseUtils;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.devgateway.rdi.tanzania.services.OPDDiagnosesService;
 import org.devgateway.rdi.tanzania.services.PopulationService;
+import org.devgateway.rdi.tanzania.services.RMNCHService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("*")
 public class FacilityController {
 
     @Autowired
@@ -27,6 +29,10 @@ public class FacilityController {
 
     @Autowired
     OPDDiagnosesService opdDiagnosesService;
+
+    @Autowired
+    RMNCHService rmnchService;
+
 
     @RequestMapping("/facilities")
     public List<Facility> getFacility(FacilityRequest facilityRequest) {
@@ -57,4 +63,14 @@ public class FacilityController {
 
         return opdDiagnosesService.getOPDByPeriod(id, year, quarter, month);
     }
+
+    @RequestMapping("/facilities/{id}/rmnch")
+    public List<RMNCHResponse> rmnch(@PathVariable Long id,
+                                     @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                     @RequestParam(name = "q", required = false) Integer quarter,
+                                     @RequestParam(name = "m", required = false) Integer month) {
+
+        return rmnchService.getRMNCHbyPeriod(id, year, quarter, month);
+    }
+
 }

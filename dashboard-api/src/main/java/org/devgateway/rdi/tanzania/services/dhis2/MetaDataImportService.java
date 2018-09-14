@@ -147,13 +147,16 @@ public class MetaDataImportService {
 
         //Import data Element of needed groups
         List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
-                .filter(dataElementGroup -> dataElementGroup.getName()
+                .filter(dataElementGroup ->
+                        dataElementGroup.getName().equalsIgnoreCase("Population") ||
+                        dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses") ||
+                        dataElementGroup.getName().equalsIgnoreCase("ANC Visits and Vaccination") ||
+                        dataElementGroup.getName().equalsIgnoreCase("L&D: Kujifungua (Delivery)") ||
+                        dataElementGroup.getName().equalsIgnoreCase("Child Health: Vaccination Services") ||
+                        dataElementGroup.getName().equalsIgnoreCase("Child Health: Growth, Vit A & Deworming") ||
+                        dataElementGroup.getName().equalsIgnoreCase("ANC: Malaria and Other Services")
 
-                        .equalsIgnoreCase("Population") ||
-                        dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses"))
-
-
-                .collect(Collectors.toList());
+                ).collect(Collectors.toList());
 
         dataElements(dataElementGroups1);
 

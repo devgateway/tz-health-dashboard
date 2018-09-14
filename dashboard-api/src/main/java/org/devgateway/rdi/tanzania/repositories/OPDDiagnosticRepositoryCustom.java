@@ -15,7 +15,6 @@ public interface OPDDiagnosticRepositoryCustom {
 
     List<OPDResponse> getDiagnoses(Facility f, Integer year, Integer quarter, Integer month, List<Long> ids);
 
-
     List<OPDResponse> getYearlyTotalValues(Facility f, Integer year, List<Long> ids);
 
     List<OPDResponse> getQuarterlyTotalValues(Facility f, Integer year, Integer quarter, List<Long> ids);
