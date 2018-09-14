@@ -1,0 +1,91 @@
+.report-generator-container .generator-by-path {
+  width: 1200px;
+  max-width: 1200px;
+  height: 455px;
+  align-items: center;
+  margin: auto;
+  overflow-x: auto;
+  border-bottom: 2px solid #aaa;
+  border-top: 2px solid #aaa; }
+  .report-generator-container .generator-by-path > div {
+    display: inline-block;
+    height: 100%;
+    float: left; }
+  .report-generator-container .generator-by-path .report-type-facility {
+    text-transform: capitalize;
+    width: 250px;
+    color: #fbfbfb;
+    background: #ca1717;
+    line-height: 300px;
+    text-align: center;
+    font-size: 20px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiNGRkZGRkY7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTYzLjYsMzIuOHY2MS41aDI4LjdWMzIuOEg2My42eiBNNzUuMyw4NC4yaC01Ljh2LTUuOGg1LjhWODQuMnogTTc1LjMsNzIuN2gtNS44di01LjhoNS44VjcyLjd6IE03NS4zLDYxLjNoLTUuOHYtNS44aDUuOFY2MS4zeiBNNzUuMyw0OS44aC01LjhWNDRoNS44VjQ5Ljh6IE04Ni43LDg0LjJoLTUuOHYtNS44aDUuOFY4NC4yeiBNODYuNyw3Mi43aC01Ljh2LTUuOGg1LjhWNzIuN3ogTTg2LjcsNjEuM2gtNS44di01LjhoNS44VjYxLjN6IE04Ni43LDQ5LjhoLTUuOFY0NGg1LjhWNDkuOHogTTQ3LjIsMjEuOWgtNi42di01LjhoLTUuM1Y1LjVoLTQuN3YxMC42aC01LjN2NS44aC02LjZ2MjIuOUg3LjR2NDkuOWg1MS4zVjQ0LjhINDcuMlYyMS45eiBNMjQuNiwyNy4yaDUuOFYzM2gtNS44QzI0LjYsMzMsMjQuNiwyNy4yLDI0LjYsMjcuMnogTTI0LjYsMzguNmg1Ljh2NS44aC01LjhDMjQuNiw0NC40LDI0LjYsMzguNiwyNC42LDM4LjZ6IE0yNC42LDg0LjJoLTUuOHYtNS44aDUuOEMyNC42LDc4LjQsMjQuNiw4NC4yLDI0LjYsODQuMnogTTI0LjYsNzIuN2gtNS44di01LjhoNS44QzI0LjYsNjYuOSwyNC42LDcyLjcsMjQuNiw3Mi43eiBNMjQuNiw2MS4zaC01Ljh2LTUuOGg1LjhDMjQuNiw1NS41LDI0LjYsNjEuMywyNC42LDYxLjN6IE0zNiw4NC4yaC01Ljh2LTUuOEgzNlY4NC4yeiBNMzYsNzIuN2gtNS44di01LjhIMzZWNzIuN3ogTTM2LDYxLjNoLTUuOHYtNS44SDM2VjYxLjN6IE00MS4zLDQ0LjRoLTUuOHYtNS44aDUuOFY0NC40eiBNNDEuMywzM2gtNS44di01LjhoNS44VjMzeiBNNDcuMyw4NC4yaC01Ljh2LTUuOGg1LjhWODQuMnogTTQ3LjMsNzIuN2gtNS44di01LjhoNS44VjcyLjd6IE00Ny4zLDU1LjV2NS44aC01Ljh2LTUuOEg0Ny4zeiIvPjwvc3ZnPg==);
+    background-repeat: no-repeat;
+    background-size: 101px 87px;
+    background-position: center; }
+    .report-generator-container .generator-by-path .report-type-facility div {
+      vertical-align: middle; }
+  .report-generator-container .generator-by-path .report-type-ward {
+    text-transform: capitalize;
+    width: 250px;
+    color: #fbfbfb;
+    background: #0aa3ec;
+    line-height: 300px;
+    text-align: center;
+    font-size: 20px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiNGRkZGRkY7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTc5LjUsMzUuM2wtMC44LDcuMmMxLjMsMi44LDIuMyw2LDIuNiw5LjhjMCwwLjMsMCwwLjgsMCwxLjJjLTEuMy0wLjUtMy44LTAuOC02LjgtMC45TDc2LDMxLjVjNS44LTEuNCwxMC4yLTYuNiwxMC4yLTEyLjhjMC03LjMtNS45LTEzLjItMTMuMi0xMy4yYy03LjMsMC0xMy4yLDUuOS0xMy4yLDEzLjJjMCw2LjIsNC4zLDExLjQsMTAuMiwxMi44bDEuNSwyMS4xYy0yLjgsMC4xLTUuMSwwLjQtNi41LDAuOGMwLjgtNC40LDAtOS42LTYuNS0xMi40YzEuMy0yLjMsNS4yLTIuOSw1LjItMi45bC03LjEtMTEuNWMwLDAsMS41LDAuMiwzLjgsMC45Yy0xLjUtMi4zLTIuMi00LjYtMi41LTYuMmMtMi43LTAuNi01LjQtMC45LTguMi0wLjljLTIwLjUsMC0zNy4xLDE2LjYtMzcuMSwzNy4xczE2LjYsMzcuMSwzNy4xLDM3LjFTODYuOCw3OCw4Ni44LDU3LjVDODYuOCw0OS4xLDg0LjEsNDEuNSw3OS41LDM1LjN6IE01MSwzMy41YzAuNiwxLjMsMC4yLDMuOC0zLjMsNWwtNC42LTlDNDMsMjkuNSw0OS4zLDI3LjYsNTEsMzMuNXogTTQwLjcsODguMWMtMi41LDAuMi01LjYsMC44LTYuNS04LjhjLTEuMy0yLjEtMy42LTIuNy01LjktMy4xcy0yLjctNS4yLDAtOWMtMi4zLTIuNS0xMi4xLTExLjEtMTAtMTkuN2MyLjEtNi43LDUuNC0xNS4zLDE3LjItMjAuN2M0LjYsNC40LDcuNyw2LjksMS41LDEwLjNjLTIuNSwxLjUtMy4xLDUsMCw1LjRjMCwwLDAuNi0zLjEsMi41LTIuM3M2LjMsNS4yLDIuOSw1LjRjLTMuMywwLjItNC44LDEuNy02LjMsMy42Yy0xLjUsMS45LTQuMiw2LjctNi4xLDYuOXMtMS43LTIuOS0zLjMtMi45Yy0xLjcsMC0zLjMsMC0yLjUsNS4yYzEsMi45LDEwLDkuNiwzMC4xLDE1LjlDNTQuNSw3NS4zLDUyLDg3LDQwLjcsODguMXogTTY5LjEsMTguOGMtMi42LDAtNC43LTIuMS00LjctNC43czIuMS00LjcsNC43LTQuN3M0LjcsMi4xLDQuNyw0LjdDNzMuOCwxNi43LDcxLjcsMTguOCw2OS4xLDE4Ljh6IE03Ni43LDY0LjhjMCwwLTAuNCwwLjQtMS43LDFjLTEuMywwLjYtMTIuMyw0LTExLjktNS42YzAuMy0wLjgsMS4yLTIuOSwxLjgtNS40YzEuNSwwLjUsNC42LDAuOSw4LjIsMC45czYuNy0wLjQsOC4yLTAuOWMtMC4xLDQuNC0wLjYsMTEuNC0yLjMsMTUuNkM3Ny4xLDY2LjUsNzYuNyw2NC44LDc2LjcsNjQuOHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 101px 87px;
+    background-position: center; }
+    .report-generator-container .generator-by-path .report-type-ward div {
+      vertical-align: middle; }
+  .report-generator-container .generator-by-path .generator-dropdowns {
+    width: 350px; }
+    .report-generator-container .generator-by-path .generator-dropdowns > div {
+      padding: 12px 35px; }
+    .report-generator-container .generator-by-path .generator-dropdowns select {
+      padding-left: 3px;
+      width: 100%;
+      height: 31px;
+      border-color: #CCC;
+      color: #2C4856;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 5px; }
+    .report-generator-container .generator-by-path .generator-dropdowns .dropdown-title {
+      font-size: 13px;
+      padding: 7px;
+      color: #4e5e6d; }
+  .report-generator-container .generator-by-path .generator-map {
+    width: 600px;
+    overflow: hidden; }
+
+.report-generator-container .generate-button-disabled {
+  width: 150px;
+  float: right;
+  height: 18px;
+  background: #838684;
+  margin-right: 30px;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 4px;
+  color: #f4f6f7;
+  font-size: 15px; }
+
+.report-generator-container .generate-button {
+  cursor: pointer;
+  width: 150px;
+  float: right;
+  height: 18px;
+  background: #34bd39;
+  margin-right: 30px;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 4px;
+  color: #f4f6f7;
+  font-size: 15px; }
+
+.report-generator-container .generate-button:hover {
+  background: #227925; }
