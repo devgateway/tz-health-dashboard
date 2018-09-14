@@ -12,7 +12,7 @@ public class FacilityRequest {
     List<Long> districts;
     List<Long> wards;
     List<Long> regions;
-
+    List<Long> types;
 
     public List<Long> getDistricts() {
         return districts;
@@ -44,5 +44,13 @@ public class FacilityRequest {
 
     public void setRegions(List<Long> regions) {
         this.regions = regions;
+    }
+
+    public List<Long> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Long> types) {
+        this.types = types;
     }
 }
