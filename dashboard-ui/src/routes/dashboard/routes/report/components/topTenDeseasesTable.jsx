@@ -29,8 +29,6 @@ class TopTenDeseases extends React.Component {
     const month = parseInt(period.get('m'))
     let current, currentLabel, prev, prevLabel;
 
-
-
     if (month) {
       current = month
       prev = (month == 1)? 12: month - 1

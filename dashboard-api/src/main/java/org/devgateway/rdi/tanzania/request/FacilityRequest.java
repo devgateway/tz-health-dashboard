@@ -11,6 +11,8 @@ public class FacilityRequest {
     String keyWord;
     List<Long> districts;
     List<Long> wards;
+    List<Long> regions;
+
 
     public List<Long> getDistricts() {
         return districts;
@@ -34,5 +36,13 @@ public class FacilityRequest {
 
     public void setKeyWord(String keyWord) {
         this.keyWord = keyWord;
+    }
+
+    public List<Long> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<Long> regions) {
+        this.regions = regions;
     }
 }
