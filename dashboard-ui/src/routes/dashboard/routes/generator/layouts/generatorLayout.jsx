@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
 
-
-const REPORT_TYPE = 'ward'
-
 export default class WardLayout extends React.Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   constructor(props) {
     super(props)
@@ -18,15 +19,15 @@ export default class WardLayout extends React.Component {
   }
 
   onChangeRegion(e) {
-    const regionId = e.target.value
-    const { selectRegion, getGeoItemsList, reportType = REPORT_TYPE } = this.props
+    const regionId = e.target.value === '-1' ? null : e.target.value
+    const { selectRegion, getGeoItemsList, params: {reportType} } = this.props
     selectRegion(regionId)
     getGeoItemsList('district', {regions: [regionId]})
   }
 
   onChangeDistrict(e) {
-    const districtId = e.target.value
-    const { selectDistrict, getGeoItemsList, reportType = REPORT_TYPE } = this.props
+    const districtId = e.target.value === '-1' ? null : e.target.value
+    const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
     getGeoItemsList('ward', {districts: [districtId]})
     if (reportType === 'ward') {
@@ -35,29 +36,36 @@ export default class WardLayout extends React.Component {
   }
 
   onChangeWard(e) {
-    const wardId = e.target.value
-    const { selectWard, getGeoItemsList } = this.props
+    const wardId = e.target.value === '-1' ? null : e.target.value
+    const { selectWard, getGeoItemsList, params: {reportType} } = this.props
     selectWard(wardId)
-    getGeoItemsList('facility', {wards: [wardId]})
+    if (reportType === 'facility') {
+      getGeoItemsList('facility', {wards: [wardId]})
+    }
   }
 
   onChangeFacility(e) {
-    const facilityId = e.target.value
+    const facilityId = e.target.value === '-1' ? null : e.target.value
     const { selectFacility } = this.props
     selectFacility(facilityId)
   }
 
   onFeatureClick(feature) {
     const featureId = feature.properties.ID
-    const { region, district, ward, facility, selectWard, selectDistrict, selectRegion, getGeoItemsList } = this.props
+    const { region, district, ward, facility, selectWard, selectDistrict, selectRegion, getGeoItemsList, params: {reportType} } = this.props
     if (ward.get('selected')) {
       //do nothing
     } else if (district.get('selected')) {
       selectWard(featureId)
-      getGeoItemsList('facility', {wards: [featureId]})
+      if (reportType === 'facility') {
+        getGeoItemsList('facility', {wards: [featureId]})
+      }
     } else if (region.get('selected')){
       selectDistrict(featureId)
       getGeoItemsList('ward', {districts: [featureId]})
+      if (reportType === 'ward') {
+        getGeoItemsList('facility', {districts: [featureId]})
+      }
     } else {
       selectRegion(featureId)
       getGeoItemsList('district', {regions: [featureId]})
@@ -70,11 +78,16 @@ export default class WardLayout extends React.Component {
   }
 
   onGenerateReport() {
-
+    const { ward, facility, params: {reportType} } = this.props
+    if (reportType === 'ward') {
+      this.context.router.history.push(`/report/ward/${ward.get('selected')}`)
+    } else {
+      this.context.router.history.push(`/report/facility/${facility.get('selected')}`)
+    }
   }
 
   render() {
-    const { region, district, ward, facility, reportType = REPORT_TYPE } = this.props
+    const { region, district, ward, facility, params: {reportType} } = this.props
     let mapShapes = region.get('list').toJS()
     if (ward.get('selected')) {
       const wardFeature = ward.get('list').toJS().features.find(f => f.properties.ID == ward.get('selected'))
@@ -86,18 +99,27 @@ export default class WardLayout extends React.Component {
     }
 
     let mapPoints = null
-    if (ward.get('selected') || (reportType === 'ward' && district.get('selected'))) {
-      const facilitiesFeatures = []
-      facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == facility.get('selected') ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
-      mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+
+    if (reportType === 'ward') {
+      if (district.get('selected')) {
+        const facilitiesFeatures = []
+        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == ward.get('selected') ? '#2c772f' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+        mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+      }
+    } else {
+      if (ward.get('selected')) {
+        const facilitiesFeatures = []
+        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == facility.get('selected') ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+        mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+      }
     }
-    
+
   	return (
   	  <div className="report-generator-container">
   	    <div className=""> 
           <div className="generator-by-path">
-            <div className={`report-type-${REPORT_TYPE}`}>
-              {`${REPORT_TYPE} filter`}
+            <div className={`report-type-${reportType}`}>
+              {`${reportType} filter`}
             </div>
             <div className="generator-dropdowns">
               <div className="path-dropdown">

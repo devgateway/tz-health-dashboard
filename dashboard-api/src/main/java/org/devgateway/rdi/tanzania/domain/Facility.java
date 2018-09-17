@@ -29,7 +29,6 @@ public class Facility {
     @ManyToMany(targetEntity = FacilityGroup.class, cascade = CascadeType.ALL)
     List<FacilityGroup> facilityGroups;
 
-    @JsonIgnore
     @ManyToOne(targetEntity = Ward.class)
     private Ward ward;
 
