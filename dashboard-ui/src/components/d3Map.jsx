@@ -96,7 +96,7 @@ class D3Map extends React.Component {
           tooltip.html('<div>' + d.properties['NAME'] + '</div>').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
           tooltip.style("opacity", .9)
         }).on('mousemove', (d) => {
-          tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px")
+          tooltip.style("left", (d3.event.pageX + 10) + "px").style("top", (d3.event.pageY - 28) + "px")
         }).on('mouseout', (d) => {
           tooltip.style("opacity", 0);
         })
@@ -117,7 +117,7 @@ class D3Map extends React.Component {
           tooltip.html('<div>' + d.properties['NAME'] + '</div>').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
           tooltip.style("opacity", .9)})
         .on('mousemove', (d) => {
-          tooltip.style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px")})
+          tooltip.style("left", (d3.event.pageX + 10) + "px").style("top", (d3.event.pageY - 28) + "px")})
         .on('mouseout', (d) => {
           tooltip.style("opacity", 0);})    
     }

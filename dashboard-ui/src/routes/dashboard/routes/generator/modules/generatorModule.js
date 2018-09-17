@@ -89,7 +89,7 @@ const ACTION_HANDLERS = {
   [WARD_SELECTED]: (state, action) => {
     const {ward} = action;
     return state.setIn(['ward', 'selected'], ward)
-      .setIn(['facility', 'list'], [])
+      //.setIn(['facility', 'list'], [])
       .setIn(['facility', 'selected'], null)
   },
   [FACILITY_SELECTED]: (state, action) => {

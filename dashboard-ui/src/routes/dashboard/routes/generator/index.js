@@ -18,7 +18,7 @@ const createRoute = (props) => {
   
   return (
     <div>
-      <Route path="/generate/:type" render={({match}) => <ReportGenerator store={store} params={match.params}/>}/>
+      <Route path="/generate/:reportType" render={({match}) => <ReportGenerator store={store} params={match.params}/>}/>
     </div>
   )
 }

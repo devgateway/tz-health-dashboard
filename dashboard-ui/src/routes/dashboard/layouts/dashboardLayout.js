@@ -8,10 +8,9 @@ import {translate, Trans} from "react-i18next";
 const component = (props) => {
   return (
     <div className="dashboard">
-      <h2>
-        <Trans>Dashboard</Trans></h2>
-        {props.children}
-  </div>)
+	    {props.children}
+	</div>
+  )
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({

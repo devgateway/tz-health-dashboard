@@ -72,7 +72,7 @@ export const getMapShape = (facilityData) => {
 export const getMapPoints = (facilityData) => {
   let params = {wards: facilityData.getIn(['ward', 'id']), type: facilityData.getIn(['type', 'dhis2Id'])}
   if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load facilities from region
-    params = {regions: facilityData.getIn(['region', 'id']), type: facilityData.getIn(['type', 'dhis2Id'])}
+    params = {regions: facilityData.getIn(['region', 'id']), types: facilityData.getIn(['type', 'id'])}
   }
   return (dispatch, getState) => {
     dispatch({type: FACILITY_MAP_REQUEST})
