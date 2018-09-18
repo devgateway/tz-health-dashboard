@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getFacilityInfo, getFacilityPopulation, getFacilityDiagnoses, getMapShape, getMapPoints } from '../modules/facilityModule'
+import { getFacilityInfo, getFacilityPopulation, getFacilityDiagnoses, getMapShape, getMapPoints ,getFacilityRMNCH} from '../modules/facilityModule'
 import Layout from '../layouts/facilityLayout'
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   onGetFacilityInfo: getFacilityInfo,
   onGetFacilityPopulation: getFacilityPopulation,
   onGetFacilityDiagnoses: getFacilityDiagnoses,
+  onGetFacilityRMNCH:getFacilityRMNCH,
   onGetMapPoints: getMapPoints,
   onGetMapShape: getMapShape,
 }, dispatch)
@@ -18,6 +19,7 @@ const mapStateToProps = state => {
     info: state.getIn(['facility', 'reportData', 'info']),
     population: state.getIn(['facility', 'reportData', 'population']),
     diagnoses: state.getIn(['facility', 'reportData', 'diagnoses']),
+    RMNCH: state.getIn(['facility', 'reportData', 'RMNCH']),
     period: state.getIn(['dashboard', 'period'])
   }
 }

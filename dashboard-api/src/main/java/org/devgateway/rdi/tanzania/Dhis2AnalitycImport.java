@@ -54,17 +54,12 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     FacilityRepository facilityRepository;
 
     public void importData() {
-        //populationService.clean();
-        //populationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y2017());
+        dhis2OPDDiagnosesService.clean();
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
 
-        //LOGGER.info("Starting OPD IMPORT");
-        //dhis2OPDDiagnosesService.clean();
 
-        //dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
-        //dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
-        //dhis2OPDDiagnosesService.byRegion("Dar es salaam", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
-        //dhis2OPDDiagnosesService.byRegion("Dar es salaam", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
-
+        dhis2RMNNCHService.clean();
         dhis2RMNNCHService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT,
                 QueryUtil.MONTHS_OFF(Arrays.asList(2017, 2016)));
 

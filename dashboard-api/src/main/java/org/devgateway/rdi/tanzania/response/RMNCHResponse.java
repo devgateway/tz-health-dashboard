@@ -18,10 +18,19 @@ public class RMNCHResponse {
 
     private Long value;
 
+    private Long totalPrevPeriod;
 
     public RMNCHResponse(DataElement indicator, Integer year, Long value) {
         this.indicator = indicator;
         this.year = year;
+        this.value = value;
+    }
+
+
+    public RMNCHResponse(DataElement indicator, Integer year, Integer quarter, Long value) {
+        this.indicator = indicator;
+        this.year = year;
+        this.quarter = quarter;
         this.value = value;
     }
 
@@ -71,5 +80,13 @@ public class RMNCHResponse {
 
     public void setValue(Long value) {
         this.value = value;
+    }
+
+    public Long getTotalPrevPeriod() {
+        return totalPrevPeriod;
+    }
+
+    public void setTotalPrevPeriod(Long totalPrevPeriod) {
+        this.totalPrevPeriod = totalPrevPeriod;
     }
 }

@@ -17,10 +17,11 @@ export default class WardLayout extends React.Component {
   }
 
   componentDidMount() {
-    const { onGetFacilityInfo, onGetFacilityPopulation, onGetFacilityDiagnoses, params: {id, period} } = this.props;
+    const { onGetFacilityInfo, onGetFacilityPopulation, onGetFacilityDiagnoses,onGetFacilityRMNCH, params: {id, period} } = this.props;
     onGetFacilityInfo(id, period)
     onGetFacilityPopulation(id, period)
     onGetFacilityDiagnoses(id, period)
+    onGetFacilityRMNCH(id,period)
   }
 
   componentDidUpdate(prevProps) {
@@ -38,13 +39,13 @@ export default class WardLayout extends React.Component {
 
   render() {
     const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
-
+    
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
     }
 
-  
+
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
@@ -96,7 +97,7 @@ export default class WardLayout extends React.Component {
 
           <div className="RMNCH-box">
             <div className="sub-title">Reproductive Maternal, Newborn and Child Health at {facilityName} </div>
-            <RMNCHTable/>
+            <RMNCHTable  period={period}  facilityName={facilityName} RMNCH={this.props.RMNCH}/>
           </div>
 
         </div>
