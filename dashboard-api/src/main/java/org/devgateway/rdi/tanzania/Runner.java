@@ -22,7 +22,7 @@ import java.nio.file.Paths;
 @Component
 public class Runner implements ApplicationRunner {
 
-    private static String BOUNDARIES_SH_FILE = "c:\\Program Files\\Git\\git-bash.exe c:\\Work\\tz-health-dashboard\\data\\load_data.sh";
+    private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
     private final String CSV_FILE = "/data/translations.csv";
 
 
@@ -51,9 +51,9 @@ public class Runner implements ApplicationRunner {
 
 
             //
-            String pdwPath = "C:/Work/tz-health-dashboard";
-            /*try {
-                Process p = Runtime.getRuntime().exec(BOUNDARIES_SH_FILE);
+            String pdwPath = System.getenv().get("PWD");
+            try {
+                Process p = Runtime.getRuntime().exec(pdwPath + BOUNDARIES_SH_FILE);
 
                 InputStream is = p.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -70,7 +70,7 @@ public class Runner implements ApplicationRunner {
 
             } catch (Exception e) {
                 e.printStackTrace();
-            }*/
+            }
 
 
             loadTranslations();
@@ -82,7 +82,7 @@ public class Runner implements ApplicationRunner {
     TranslationRepository translationRepository;
 
     private void loadTranslations() {
-        String pdwPath = "C:/Work/tz-health-dashboard";
+        String pdwPath = System.getenv().get("PWD");
 
         try (Reader reader = Files.newBufferedReader(Paths.get(pdwPath + CSV_FILE));
              CSVReader csvReader = new CSVReader(reader);) {

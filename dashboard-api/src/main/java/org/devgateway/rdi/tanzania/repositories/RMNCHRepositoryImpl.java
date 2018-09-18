@@ -22,9 +22,12 @@ public class RMNCHRepositoryImpl implements RMNCHRepositoryCustom {
     @PersistenceContext
     private EntityManager em;
 
+    public List<RMNCHResponse> getRMNCH(Facility f, Integer year, Integer quarter, Integer month) {
+        return getRMNCH(f, year, quarter, month, null);
+    }
 
     @Override
-    public List<RMNCHResponse> getRMNCH(Facility f, Integer year, Integer quarter, Integer month) {
+    public List<RMNCHResponse> getRMNCH(Facility f, Integer year, Integer quarter, Integer month, DataElement dataElement) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<RMNCHResponse> query = cb.createQuery(RMNCHResponse.class);
 
@@ -40,10 +43,12 @@ public class RMNCHRepositoryImpl implements RMNCHRepositoryCustom {
 
 
         selection.add(from.get(RMNCH_.indicator));
+
         selection.add(from.get(RMNCH_.year));
 
         group.add(from.get(RMNCH_.indicator));
         group.add(from.get(RMNCH_.year));
+
 
         if (quarter != null) {
             selection.add(from.get(RMNCH_.quarter));
@@ -63,6 +68,10 @@ public class RMNCHRepositoryImpl implements RMNCHRepositoryCustom {
 
         query.multiselect(selection.toArray(new Expression[selection.size()]));
         query.groupBy(group.toArray(new Expression[group.size()]));
+
+        if (dataElement != null) {
+            queryFilter.add(cb.equal(from.get(RMNCH_.indicator), dataElement));
+        }
 
 
         query.where(cb.and(queryFilter.toArray(new Predicate[queryFilter.size()])));
