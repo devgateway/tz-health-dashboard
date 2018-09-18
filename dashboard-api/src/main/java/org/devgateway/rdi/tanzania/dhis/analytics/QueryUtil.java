@@ -101,6 +101,18 @@ public class QueryUtil {
         return new QueryDimension("pe", "Period").adItem("2017", "2017");
     }
 
+    public static QueryDimension Y(Integer... years) {
+        QueryDimension queryDimension = new QueryDimension("pe", "Period");
+
+        for (Integer y : years) {
+            queryDimension.adItem(y.toString(), "year");
+
+        }
+
+        return queryDimension;
+
+    }
+
     public static QueryDimension LAST_12_MONTHS() {
         return new QueryDimension("pe", "Period").adItem("LAST_12_MONTHS", "LAST_12_MONTHS");
     }
@@ -147,7 +159,7 @@ public class QueryUtil {
     }
 
 
-    public static QueryDimension MONTHS_OFF(List<Integer> years) {
+    public static QueryDimension MONTHS_OFF(Integer... years) {
         QueryDimension queryDimension = new QueryDimension("pe", "Period");
 
         for (Integer year : years) {

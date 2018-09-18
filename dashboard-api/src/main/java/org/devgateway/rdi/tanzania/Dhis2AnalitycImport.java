@@ -19,8 +19,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
-import java.util.Arrays;
-
 /**
  * @author Sebastian Dimunzio
  */
@@ -36,7 +34,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2AnalitycImport.class);
 
     @Autowired
-    Dhis2PopulationService populationService;
+    Dhis2PopulationService dhis2PopulationService;
 
     @Autowired
     Dhis2OPDDiagnosesService dhis2OPDDiagnosesService;
@@ -54,15 +52,19 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     FacilityRepository facilityRepository;
 
     public void importData() {
-        dhis2OPDDiagnosesService.clean();
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2016)));
-        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(Arrays.asList(2017)));
+        LOGGER.info("........................STARTING ........................");
+        dhis2PopulationService.clean();
+        dhis2PopulationService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.Y(2016, 2017));
 
+        dhis2OPDDiagnosesService.clean();
+        dhis2OPDDiagnosesService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2017, 2016, 2015));
 
         dhis2RMNNCHService.clean();
         dhis2RMNNCHService.byRegion("Dodoma", Dhis2AnalyticImport.Grouping.DISTRICT,
-                QueryUtil.MONTHS_OFF(Arrays.asList(2017, 2016)));
+                QueryUtil.MONTHS_OFF(2017, 2016, 2015));
 
+        LOGGER.info("........................ALL DONE ........................");
 
     }
 

@@ -53,7 +53,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
     FacilityRepository facilityRepository;
 
     @Autowired
-    ServiceAreaPopulationRepository serviceAreaPopulation;
+    ServiceAreaPopulationRepository serviceAreaPopulationRepository;
 
 
     @Autowired
@@ -61,7 +61,8 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
 
 
     public void clean() {
-        serviceAreaPopulation.deleteAll();
+        serviceAreaPopulationRepository.deleteAllInBatch();
+        serviceAreaPopulationRepository.deleteAll();
     }
 
 
@@ -131,7 +132,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
         }
 
 
-        serviceAreaPopulation.save(populations);
+        serviceAreaPopulationRepository.save(populations);
         return populations;
     }
 }
