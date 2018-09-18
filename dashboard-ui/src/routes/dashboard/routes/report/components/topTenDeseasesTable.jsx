@@ -1,7 +1,7 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
 import {getMonthName,getQuarterLabel, diffPercentage} from '../../../../../api'
-import  {MonthLabel,QuarterLabel} from './DateLabels'
+import  {MonthLabel,QuarterLabel} from './labels'
 
 
 class TopTenDeseases extends React.Component {

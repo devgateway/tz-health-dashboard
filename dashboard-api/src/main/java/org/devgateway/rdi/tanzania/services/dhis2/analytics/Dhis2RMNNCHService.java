@@ -58,7 +58,7 @@ public class Dhis2RMNNCHService extends Dhis2AnalyticImport<RMNCH> {
 
     @Override
     public void clean() {
-        rmnchRepository.deleteAll();
+        rmnchRepository.deleteAllInBatch();
     }
 
     @Override

@@ -118,7 +118,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.devgateway.geocoder.GeoCoderApplication</mainClass>
+                            <mainClass>org.devgateway.rdi.tanzania.Application</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
 import {getMonthName, getQuarterLabel,diffPercentage} from '../../../../../api'
-import {MonthLabel, QuarterLabel} from './DateLabels'
+import {MonthLabel, QuarterLabel} from './labels'
 
 class RMNCHTable extends React.Component {
 
@@ -77,7 +77,7 @@ class RMNCHTable extends React.Component {
                   <tr>
                     <td className="previous-period-sub-header">Count</td>
                     <td className="current-period-sub-header">Count</td>
-                    <td className="previous-period-sub-header">since September</td>
+                    <td className="previous-period-sub-header">since {prevLabel}</td>
                   </tr>
                   {
                     data.map(it => {
