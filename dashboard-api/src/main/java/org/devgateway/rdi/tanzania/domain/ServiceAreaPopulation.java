@@ -1,17 +1,35 @@
 package org.devgateway.rdi.tanzania.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NamedNativeQueries;
+import org.hibernate.annotations.NamedNativeQuery;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * @author Sebastian Dimunzio
  */
 
 @Entity
+
+
+@SqlResultSetMapping(name = "deleteResult", columns = {@ColumnResult(name = "count")})
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "deleteByRegionId",
+                query = "DELETE FROM service_area_population s " +
+                        " USING " +
+                        " facility f ,boundary as ward , boundary as district, boundary as region " +
+                        " where s.facility_id=f.id" +
+                        " and f.ward_gid=ward.gid " +
+                        " and ward.district_gid=district.gid " +
+                        " and district.region_gid=region.gid " +
+                        " and region.gid =?"
+                , resultSetMapping = "deleteResult"
+        )
+})
+
 public class ServiceAreaPopulation {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

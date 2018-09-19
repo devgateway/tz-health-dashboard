@@ -5,10 +5,7 @@ import org.devgateway.rdi.tanzania.dhis.analytics.QueryBuilder;
 import org.devgateway.rdi.tanzania.dhis.analytics.QueryDimension;
 import org.devgateway.rdi.tanzania.dhis.analytics.QueryUtil;
 import org.devgateway.rdi.tanzania.dhis.analytics.results.AnalyticsResultsTable;
-import org.devgateway.rdi.tanzania.domain.DataElement;
-import org.devgateway.rdi.tanzania.domain.Dimension;
-import org.devgateway.rdi.tanzania.domain.Facility;
-import org.devgateway.rdi.tanzania.domain.ServiceAreaPopulation;
+import org.devgateway.rdi.tanzania.domain.*;
 import org.devgateway.rdi.tanzania.repositories.*;
 import org.hisp.dhis.Dhis2;
 import org.hisp.dhis.Dhis2Config;
@@ -60,9 +57,9 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
     ItemRepository itemRepository;
 
 
-    public void clean() {
-        serviceAreaPopulationRepository.deleteAllInBatch();
-        serviceAreaPopulationRepository.deleteAll();
+    public void clean(Region region) {
+        serviceAreaPopulationRepository.deleteUsingRegion(region.getGid());
+
     }
 
 
