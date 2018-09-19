@@ -16,4 +16,5 @@ public interface RMNCHRepositoryCustom {
 
     List<RMNCHResponse> getRMNCH(Facility f, Integer year, Integer quarter, Integer month, DataElement dataElement);
 
+    void deleteUsingRegion(Long id);
 }

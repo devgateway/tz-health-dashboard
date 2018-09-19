@@ -8,6 +8,7 @@ import org.devgateway.rdi.tanzania.response.RMNCHResponse;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,4 +79,19 @@ public class RMNCHRepositoryImpl implements RMNCHRepositoryCustom {
         return em.createQuery(query).getResultList();
 
     }
+
+
+    public void deleteUsingRegion(Long id) {
+        Query q = em.createNativeQuery("DELETE FROM rmnch s " +
+                " USING " +
+                " facility f ,boundary as ward , boundary as district, boundary as region " +
+                " where s.facility_id=f.id" +
+                " and f.ward_gid=ward.gid " +
+                " and ward.district_gid=district.gid " +
+                " and district.region_gid=region.gid " +
+                " and region.gid =?");
+        q.setParameter(1, id);
+        q.executeUpdate();
+    }
+
 }

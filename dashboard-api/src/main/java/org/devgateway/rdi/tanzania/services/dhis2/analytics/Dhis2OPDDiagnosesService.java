@@ -129,8 +129,8 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
         return save(opdDiagnostics);
     }
 
-    @Override
-    public void clean() {
-        opdDiagnosticRepository.deleteAllInBatch();
+
+    public void clean(Region r) {
+        opdDiagnosticRepository.deleteUsingRegion(r.getGid());
     }
 }

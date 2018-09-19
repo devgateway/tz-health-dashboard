@@ -21,4 +21,5 @@ public interface OPDDiagnosticRepositoryCustom {
 
     List<OPDResponse> getMonthlyTotalValues(Facility f, Integer year, Integer month, List<Long> ids);
 
+    void deleteUsingRegion(Long id);
 }

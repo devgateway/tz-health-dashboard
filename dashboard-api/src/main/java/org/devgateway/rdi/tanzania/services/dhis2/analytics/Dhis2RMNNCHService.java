@@ -7,6 +7,7 @@ import org.devgateway.rdi.tanzania.dhis.analytics.results.AnalyticsResultsTable;
 import org.devgateway.rdi.tanzania.domain.DataElement;
 import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.RMNCH;
+import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.repositories.*;
 import org.hisp.dhis.Dhis2;
 import org.hisp.dhis.Dhis2Config;
@@ -56,9 +57,9 @@ public class Dhis2RMNNCHService extends Dhis2AnalyticImport<RMNCH> {
         return items;
     }
 
-    @Override
-    public void clean() {
-        rmnchRepository.deleteAllInBatch();
+
+    public void clean(Region r) {
+        rmnchRepository.deleteUsingRegion(r.getGid());
     }
 
     @Override
