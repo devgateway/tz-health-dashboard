@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
+import TextSearch from '../containers/textSearchContainer'
 
 export default class WardLayout extends React.Component {
 
@@ -116,7 +117,14 @@ export default class WardLayout extends React.Component {
 
   	return (
   	  <div className="report-generator-container">
-  	    <div className=""> 
+  	    <div className="">
+          <div className="report-generator-paragraph">
+            <span className={`highlighted-${reportType}`}>{`${reportType} report generator: `}</span>
+            <span className="">Donec a ultrices mi, quis viverra est. Duis nec nisl justo. Cras maximus nibh at volutpat pretium. Proin rutrum egestas diam vitae sodales. Vestibulum rhoncus a lectus in tempus.</span>
+          </div>
+          <div className="dashed-separator"></div>
+          <div className=""><TextSearch searchType={reportType}/></div>
+          <div className="dashed-separator"></div>
           <div className="generator-by-path">
             <div className={`report-type-${reportType}`}>
               {`${reportType} filter`}
@@ -125,7 +133,7 @@ export default class WardLayout extends React.Component {
               <div className="path-dropdown">
                 <div className="dropdown-title">Region</div> 
                 <div className="">
-                  <select value={region.get('selected')} className="" onChange={e => this.onChangeRegion(e)} >
+                  <select value={region.get('selected') || -1} className="" onChange={e => this.onChangeRegion(e)} >
                     <option value={-1}>Select a region</option>
                     {region.getIn(['list', 'features']).map(option => {
                       return <option key={`region-${option.getIn(['properties', 'ID'])}`} value={option.getIn(['properties', 'ID'])}>{option.getIn(['properties', 'NAME'])}</option>

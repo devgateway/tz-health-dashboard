@@ -21,3 +21,7 @@
     float: right;
     margin-right: 100px;
     line-height: 80px; }
+    .app .header .lang-selector select {
+      width: 80px;
+      border: none;
+      color: #2196F3; }
