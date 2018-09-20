@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-public class FacilityController {
+public class    FacilityController {
 
     @Autowired
     FacilityService facilityService;

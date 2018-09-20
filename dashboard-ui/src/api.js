@@ -112,6 +112,7 @@ export const getWardInfo = (id, period) => {
 }
 
 export const getFacilityData = (id, period, type) => {
+
   const url = `${API_FACILITY_REPORT_INFO}/${id}/${type || ''}?${preparePeriodQuery(period)}`
   return new Promise((resolve, reject) => {
     fetch(url)
@@ -173,4 +174,14 @@ export const parsePeriod = (period) => {
     })
   }
   return periodObject
+}
+
+
+
+export const  diffPercentage = (prev, val) => {
+  debugger;
+  if (prev == null || prev == 0) {
+    return 'N/A'
+  }
+  return ((((prev - val) / prev) * 100) * -1).toFixed(2) + "%"
 }

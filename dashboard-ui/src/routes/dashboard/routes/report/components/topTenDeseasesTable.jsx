@@ -1,29 +1,14 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
-import {getMonthName,getQuarterLabel} from '../../../../../api'
-const compute = (prev, val) => {
+import {getMonthName,getQuarterLabel, diffPercentage} from '../../../../../api'
+import  {MonthLabel,QuarterLabel} from './labels'
 
-  if (prev == null || prev == 0) {
-    return 'N/A'
-  }
-  return ((((prev - val) / prev) * 100) * -1).toFixed(2) + "%"
-}
-
-
-const MonthLabel=(props)=>{
-  const {month, year} = props
-  return <span><Trans>{month}</Trans>{year?' '+year:null}</span>
-}
-
-const QuarterLabels=(props)=>{
-  const {start,end, year}=props
-  return <span><MonthLabel month={start}></MonthLabel>{'-'}<MonthLabel month={end}></MonthLabel> {year}</span>
-}
 
 class TopTenDeseases extends React.Component {
 
   render() {
     const {period} = this.props
+    const {facilityName, i18n: {language}} = this.props
     const year = parseInt(period.get('y'))
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
@@ -41,8 +26,8 @@ class TopTenDeseases extends React.Component {
         current = quarter
         prev = (quarter == 1)? 4: quarter - 1
         const prevYear=(current==1)?year-1:year
-        currentLabel=(<QuarterLabels start={getQuarterLabel(current).start } end={getQuarterLabel(current).end} year={year}/>)
-        prevLabel=(<QuarterLabels start={getQuarterLabel(prev).start } end={getQuarterLabel(prev).end} year={prevYear}/>)
+        currentLabel=(<QuarterLabel start={getQuarterLabel(current).start } end={getQuarterLabel(current).end} year={year}/>)
+        prevLabel=(<QuarterLabel start={getQuarterLabel(prev).start } end={getQuarterLabel(prev).end} year={prevYear}/>)
     } else {
       current = year
       prev = year - 1
@@ -50,9 +35,7 @@ class TopTenDeseases extends React.Component {
       prevLabel=prev;
     }
 
-      const {facilityName, i18n: {
-        language
-      }} = this.props
+
     let lan = 'en'
     if (language == 'en')
       lan = 'english'
@@ -127,7 +110,7 @@ class TopTenDeseases extends React.Component {
                 <td className="current-value-partial">{total5to60}</td>
                 <td className="current-value-partial">{totalAbove60}</td>
                 <td className="current-value">{total}</td>
-                <td className="previous-value">{(totalPrevPeriod)?((((totalPrevPeriod - total) / totalPrevPeriod) * 100) * -1).toFixed(2)+'%':null}</td>
+                <td className="previous-value">{diffPercentage(it.get("totalPrevPeriod"),total)}</td>
               </tr>)
             })
           }
@@ -143,7 +126,7 @@ class TopTenDeseases extends React.Component {
             <td className="current-value-partial">{colsTotals['total5to60']}</td>
             <td className="current-value-partial">{colsTotals['totalAbove60']}</td>
             <td className="current-value">{colsTotals['total']}</td>
-            <td className="previous-value">{ colsTotals['totalPrevPeriod']? ((((colsTotals['totalPrevPeriod'] - colsTotals['total']) / colsTotals['totalPrevPeriod']) * 100) * -1).toFixed(2)+'%':null}</td>
+            <td className="previous-value"> {diffPercentage(colsTotals['totalPrevPeriod'],colsTotals['total'])}</td>
           </tr>
         </tbody>
       </table>

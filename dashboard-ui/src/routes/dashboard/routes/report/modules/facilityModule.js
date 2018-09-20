@@ -8,6 +8,7 @@ const FACILITY_INFO_ERROR = 'FACILITY_INFO_ERROR'
 const FACILITY_POPULATION_REQUEST = 'FACILITY_POPULATION_REQUEST'
 const FACILITY_POPULATION_RESPONSE = 'FACILITY_POPULATION_RESPONSE'
 const FACILITY_POPULATION_ERROR = 'FACILITY_POPULATION_ERROR'
+
 const FACILITY_DIAGNOSES_REQUEST = 'FACILITY_DIAGNOSES_REQUEST'
 const FACILITY_DIAGNOSES_RESPONSE = 'FACILITY_DIAGNOSES_RESPONSE'
 const FACILITY_DIAGNOSES_ERROR = 'FACILITY_DIAGNOSES_ERROR'
@@ -16,6 +17,11 @@ const FACILITY_MAP_REQUEST = 'FACILITY_MAP_SHAPE_REQUEST'
 const FACILITY_MAP_SHAPE_RESPONSE = 'FACILITY_MAP_SHAPE_RESPONSE'
 const FACILITY_MAP_POINTS_RESPONSE = 'FACILITY_MAP_POINTS_RESPONSE'
 const FACILITY_MAP_ERROR = 'FACILITY_MAP_ERROR'
+
+
+const FACILITY_RMNCH_REQUEST = 'FACILITY_RMNCH_REQUEST'
+const FACILITY_RMNCH_RESPONSE = 'FACILITY_RMNCH_RESPONSE'
+const FACILITY_RMNCH_ERROR = 'FACILITY_RMNCH_ERROR'
 
 // ------------------------------------ Actions ------------------------------------
 
@@ -51,6 +57,19 @@ export const getFacilityDiagnoses = (id, period) => {
     })
   }
 };
+
+
+export const getFacilityRMNCH = (id, period) => {
+  return (dispatch, getState) => {
+    dispatch({ type: FACILITY_RMNCH_REQUEST })
+    api.getFacilityData(id, period, 'rmnch').then(data => {
+      dispatch({ 'type': FACILITY_RMNCH_RESPONSE, data })
+    }).catch(error => {
+      dispatch({ 'type': FACILITY_RMNCH_ERROR, error })
+    })
+  }
+};
+
 
 export const getMapShape = (facilityData) => {
   let getShapeMethod = api.findWards
@@ -121,6 +140,19 @@ const ACTION_HANDLERS = {
   [FACILITY_DIAGNOSES_ERROR]: (state, action) => {
     const {error} = action;
     return state.setIn(['reportData', 'diagnoses', 'error'], error).setIn(['reportData', 'diagnoses', 'loading'], false)
+  },
+
+  [FACILITY_RMNCH_REQUEST]: (state, action) => {
+    return state.setIn(['reportData', 'RMNCH', 'loading'], true)
+  },
+  [FACILITY_RMNCH_RESPONSE]: (state, action) => {
+    const {data} = action;
+    return state.setIn(['reportData', 'RMNCH', 'data'], Immutable.fromJS(data)).setIn(['reportData', 'RMNCH', 'loading'], false)
+  },
+  [FACILITY_RMNCH_ERROR]: (state, action) => {
+    const {error} = action;
+
+    return state.setIn(['reportData', 'RMNCH', 'error'], error).setIn(['reportData', 'RMNCH', 'loading'], false)
   },
 
   [FACILITY_MAP_REQUEST]: (state, action) => {

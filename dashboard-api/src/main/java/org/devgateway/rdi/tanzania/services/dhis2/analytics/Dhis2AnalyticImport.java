@@ -5,7 +5,9 @@ import org.devgateway.rdi.tanzania.domain.District;
 import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.domain.Ward;
+import org.devgateway.rdi.tanzania.repositories.DistrictRepository;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
+import org.devgateway.rdi.tanzania.repositories.WardRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,14 @@ public abstract class Dhis2AnalyticImport<T> {
     @Autowired
     RegionRepository regionRepository;
 
+    @Autowired
+    DistrictRepository districtRepository;
+
+
+    @Autowired
+    WardRepository wardRepository;
+
+
 
     public enum Grouping {
         REGION,
@@ -54,11 +64,11 @@ public abstract class Dhis2AnalyticImport<T> {
 
     }
 
-
     public List<T> byRegion(Region region, Grouping grouping, QueryDimension period) {
         List<T> data = new ArrayList<>();
-        LOGGER.info("Processing region " + region.getName());
+        LOGGER.info("> Processing region " + region.getName());
         if (grouping.equals(Grouping.DISTRICT) || grouping.equals(Grouping.WARD)) {
+
             region.getDistricts().forEach(district -> {
                 data.addAll(byDistrict(district, grouping, period));
             });
@@ -73,14 +83,15 @@ public abstract class Dhis2AnalyticImport<T> {
 
     public List<T> byDistrict(District district, Grouping grouping, QueryDimension period) {
         List<T> data = new ArrayList<>();
-        LOGGER.info("Processing district " + district.getName());
+        LOGGER.info(">> Processing district " + district.getName());
 
+        List<Ward> wards=wardRepository.findByDistrict(district);
 
         if (grouping.equals(Grouping.WARD)) {
-            district.getWards().forEach(ward -> data.addAll(byWard(ward, period)));
+            wards.forEach(ward -> data.addAll(byWard(ward, period)));
         } else {
             List<Facility> facilities = new ArrayList<>();
-            district.getWards().forEach(ward -> facilities.addAll(ward.getFacilities()));
+            wards.forEach(ward -> facilities.addAll(ward.getFacilities()));
             data.addAll(byFacilities(facilities, period));
 
         }
@@ -89,7 +100,7 @@ public abstract class Dhis2AnalyticImport<T> {
 
     public List<T> byWard(Ward ward, QueryDimension period) {
         List<T> data = new ArrayList<>();
-        LOGGER.info("Processing ward " + ward.getName());
+        LOGGER.info(">>> Processing ward " + ward.getName());
         byFacilities(ward.getFacilities(), period);
         return data;
     }
@@ -97,5 +108,5 @@ public abstract class Dhis2AnalyticImport<T> {
 
     public abstract List<T> byFacilities(List<Facility> facilities, QueryDimension period);
 
-    public abstract void clean();
+
 }
