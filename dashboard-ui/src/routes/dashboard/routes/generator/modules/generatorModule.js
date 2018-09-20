@@ -5,6 +5,10 @@ import * as api from '../../../../../api'
 const GET_ITEMS_REQUEST = 'GET_ITEMS_REQUEST'
 const GET_ITEMS_RESPONSE = 'GET_ITEMS_RESPONSE'
 const GET_ITEMS_ERROR = 'GET_ITEMS_ERROR'
+const GET_SEARCH_REQUEST = 'GET_SEARCH_REQUEST'
+const GET_SEARCH_RESPONSE = 'GET_SEARCH_RESPONSE'
+const GET_SEARCH_ERROR = 'GET_SEARCH_ERROR'
+const CLEAN_SEARCH_RESULTS = 'CLEAN_SEARCH_RESULTS'
 const REGION_SELECTED = 'REGION_SELECTED'
 const DISTRICT_SELECTED = 'DISTRICT_SELECTED'
 const WARD_SELECTED = 'WARD_SELECTED'
@@ -20,12 +24,29 @@ const apiMethods = {
 
 export const getGeoItemsList = (itemType, params) => {
   return (dispatch, getState) => {
-  	dispatch({type: GET_ITEMS_REQUEST})
+    dispatch({type: GET_ITEMS_REQUEST})
     apiMethods[itemType](params).then(data => {
       dispatch({itemType, 'type': GET_ITEMS_RESPONSE, data })
     }).catch(error => {
       dispatch({itemType, 'type': GET_ITEMS_ERROR, error})
     })
+  }
+}
+
+export const getSearchResults = (searchType, params) => {
+  return (dispatch, getState) => {
+    dispatch({type: GET_SEARCH_REQUEST})
+    apiMethods[searchType](params).then(data => {
+      dispatch({searchType, 'type': GET_SEARCH_RESPONSE, data })
+    }).catch(error => {
+      dispatch({searchType, 'type': GET_SEARCH_ERROR, error})
+    })
+  }
+}
+
+export const cleanSearchResults = (searchType) => {
+  return (dispatch, getState) => {
+    dispatch({type: CLEAN_SEARCH_RESULTS, searchType})
   }
 }
 
@@ -55,6 +76,23 @@ export const selectFacility = (facility) => {
 
 // ------------------------------------ Action Handlers ------------------------------------
 const ACTION_HANDLERS = {
+  [GET_SEARCH_REQUEST]: (state, action) => {
+    return state.setIn(['searchResults', action.searchType, 'loading'], true)
+  },
+  [GET_SEARCH_RESPONSE]: (state, action) => {
+    const {data, searchType} = action;
+    return state.setIn(['searchResults', searchType, 'list'], Immutable.fromJS(data))
+      .setIn(['searchResults', searchType, 'loading'], false)
+  },
+  [GET_SEARCH_ERROR]: (state, action) => {
+    const {error, searchType} = action;
+    return state.setIn(['searchResults', searchType, 'error'], Immutable.fromJS(error))
+      .setIn(['searchResults', searchType, 'loading'], false)
+  },
+  [CLEAN_SEARCH_RESULTS]: (state, action) => {
+    return state.setIn(['searchResults', action.searchType, 'list'],  Immutable.fromJS([]))
+  },
+
   [GET_ITEMS_REQUEST]: (state, action) => {
     return state.setIn([action.itemType, 'loading'], true)
   },
@@ -126,7 +164,16 @@ const initialState = Immutable.fromJS({
     'list': [], 
     'selected': null
   },
-  'searchResults': []
+  'searchResults': {
+    'facility': {
+      'loading': false,
+      'list': []
+    },
+    'ward': {
+      'loading': false,
+      'list': []
+    }
+  }
 });
 
 // reducer is returned as default
