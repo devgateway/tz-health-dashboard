@@ -36,13 +36,6 @@ class TopTenDeseases extends React.Component {
     }
 
 
-    let lan = 'en'
-    if (language == 'en')
-      lan = 'english'
-
-    if (language == 'sw')
-      lan = 'swahili'
-
     const deseases = this.props.diagnoses.get('data')? this.props.diagnoses.get('data').sortBy((val)=>-val.get('total')) : [];
     let colsTotals = {
       totalUnder5: 0,
@@ -55,8 +48,7 @@ class TopTenDeseases extends React.Component {
 
     return (<div className="top-ten-diagnosis-table">
       <div className="sub-title">
-        <Trans>Out-Patient Diseases (OPD) at</Trans>
-        {facilityName}</div>
+        <Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName}</div>
       <table className="">
         <tbody>
           <tr>
@@ -89,9 +81,15 @@ class TopTenDeseases extends React.Component {
           </tr>
           {
             deseases.map((it) => {
-              const label = it.get("diagnostic").get(lan) != ""
-                ? it.get("diagnostic").get(lan)
-                : it.get("diagnostic").get('original')
+
+              debugger
+
+              const label = it.getIn(['diagnostic','name'])
+              const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
+
+
+
+
               const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
               const total5to60 = it.getIn(['ranges', 'total5to60'])
               const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
@@ -104,7 +102,7 @@ class TopTenDeseases extends React.Component {
               colsTotals['total'] += total
 
               return (<tr key={it.get("dhis2Id")}>
-                <td className="desease-name">{label}</td>
+                <td className="desease-name">{(translation&&translation.get('value'))?translation.get('value') :label}</td>
                 <td className="previous-value">{it.get("totalPrevPeriod")}</td>
                 <td className="current-value-partial">{totalUnder5}</td>
                 <td className="current-value-partial">{total5to60}</td>
