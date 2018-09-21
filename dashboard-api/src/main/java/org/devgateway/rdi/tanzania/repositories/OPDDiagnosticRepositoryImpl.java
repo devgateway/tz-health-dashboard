@@ -121,7 +121,7 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
 
             query.multiselect(selection.toArray(new Expression[selection.size()]));
             query.groupBy(group.toArray(new Expression[group.size()]));
-
+            query.orderBy(cb.asc(from.get(OPDDiagnostic_.diagnostic)));
 
             query.where(cb.and(queryFilter.toArray(new Predicate[queryFilter.size()])));
             return em.createQuery(query).getResultList();
