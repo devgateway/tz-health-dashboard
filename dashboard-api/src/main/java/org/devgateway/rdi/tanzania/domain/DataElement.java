@@ -1,6 +1,8 @@
 package org.devgateway.rdi.tanzania.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Sebastian Dimunzio
@@ -13,8 +15,8 @@ public class DataElement {
     String dhis2Id;
     String name;
 
-    @ManyToOne
-    Translation translation;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    List<Translation> translations;
 
 
     public DataElement() {
@@ -60,11 +62,21 @@ public class DataElement {
         this.name = name;
     }
 
-    public Translation getTranslation() {
-        return translation;
+    public List<Translation> getTranslations() {
+        return translations;
     }
 
-    public void setTranslation(Translation translation) {
-        this.translation = translation;
+    public void setTranslations(List<Translation> translations) {
+        this.translations = translations;
     }
+
+
+    public List<Translation> addTranslations(Translation t) {
+        if (translations == null) {
+            translations = new ArrayList<>();
+        }
+        translations.add(t);
+        return translations;
+    }
+
 }

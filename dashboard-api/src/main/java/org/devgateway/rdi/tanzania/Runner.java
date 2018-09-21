@@ -90,12 +90,26 @@ public class Runner implements ApplicationRunner {
             String[] nextRecord;
             csvReader.readNext();//skip headers;
             while ((nextRecord = csvReader.readNext()) != null) {
+
                 String id = nextRecord[0];
-                String original = nextRecord[2];
                 String english = nextRecord[3];
                 String swahili = nextRecord[4];
 
-                translationRepository.save(new Translation(id, original, english, swahili));
+
+                Translation t = new Translation();
+                t.setLocale("en");
+                t.setKey(id);
+                t.setValue(english);
+                t.setProvided(true);
+                translationRepository.save(t);
+
+                Translation t2 = new Translation();
+                t2.setLocale("sw");
+                t2.setValue(swahili);
+                t2.setKey(id);
+                t2.setValue(swahili);
+                t2.setProvided(true);
+                translationRepository.save(t2);
 
             }
         } catch (IOException e) {

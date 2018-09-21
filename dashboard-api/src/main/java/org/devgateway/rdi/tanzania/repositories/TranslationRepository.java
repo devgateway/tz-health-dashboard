@@ -5,6 +5,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Sebastian Dimunzio
  */
@@ -13,5 +15,5 @@ import org.springframework.stereotype.Repository;
 
 public interface TranslationRepository extends JpaRepository<Translation, Long> {
     @Cacheable(cacheNames = "Translation")
-    Translation findByKey(String key);
+    List<Translation> findByKey(String key);
 }

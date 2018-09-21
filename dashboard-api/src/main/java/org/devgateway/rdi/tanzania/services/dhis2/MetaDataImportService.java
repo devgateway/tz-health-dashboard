@@ -1,6 +1,9 @@
 package org.devgateway.rdi.tanzania.services.dhis2;
 
 import org.devgateway.rdi.tanzania.domain.*;
+import org.devgateway.rdi.tanzania.repositories.OPDDiagnosticRepository;
+import org.devgateway.rdi.tanzania.repositories.RMNCHRepository;
+import org.devgateway.rdi.tanzania.repositories.ServiceAreaPopulationRepository;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.devgateway.rdi.tanzania.services.WardService;
 import org.devgateway.rdi.tanzania.services.dhis2.metadata.DataElementService;
@@ -46,8 +49,22 @@ public class MetaDataImportService {
     DataElementService dhis2DataElementGroupService;
 
 
+    @Autowired
+    ServiceAreaPopulationRepository serviceAreaPopulationRepository;
+
+    @Autowired
+    OPDDiagnosticRepository opdDiagnosticRepository;
+
+    @Autowired
+    RMNCHRepository rmnchRepository;
+
+
     //deleta all data and import it again
     public void clean() {
+        serviceAreaPopulationRepository.deleteAllInBatch();
+        opdDiagnosticRepository.deleteAllInBatch();
+        rmnchRepository.deleteAllInBatch();
+
         dhis2DataElementGroupService.cleanDataElements();
         facilityService.cleanGroups();
         facilityService.cleanFacilities();
@@ -149,12 +166,12 @@ public class MetaDataImportService {
         List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
                 .filter(dataElementGroup ->
                         dataElementGroup.getName().equalsIgnoreCase("Population") ||
-                        dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses") ||
-                        dataElementGroup.getName().equalsIgnoreCase("ANC Visits and Vaccination") ||
-                        dataElementGroup.getName().equalsIgnoreCase("L&D: Kujifungua (Delivery)") ||
-                        dataElementGroup.getName().equalsIgnoreCase("Child Health: Vaccination Services") ||
-                        dataElementGroup.getName().equalsIgnoreCase("Child Health: Growth, Vit A & Deworming") ||
-                        dataElementGroup.getName().equalsIgnoreCase("ANC: Malaria and Other Services")
+                                dataElementGroup.getName().equalsIgnoreCase("OPD Diagnoses") ||
+                                dataElementGroup.getName().equalsIgnoreCase("ANC Visits and Vaccination") ||
+                                dataElementGroup.getName().equalsIgnoreCase("L&D: Kujifungua (Delivery)") ||
+                                dataElementGroup.getName().equalsIgnoreCase("Child Health: Vaccination Services") ||
+                                dataElementGroup.getName().equalsIgnoreCase("Child Health: Growth, Vit A & Deworming") ||
+                                dataElementGroup.getName().equalsIgnoreCase("ANC: Malaria and Other Services")
 
                 ).collect(Collectors.toList());
 

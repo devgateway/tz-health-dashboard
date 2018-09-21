@@ -201,7 +201,7 @@ const getAggregatedDiagnosis = (data) => {
     // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
     const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))
     const total = sumValues(values)
-    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic.translation, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
+    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
   })
   return parsedData
 }
