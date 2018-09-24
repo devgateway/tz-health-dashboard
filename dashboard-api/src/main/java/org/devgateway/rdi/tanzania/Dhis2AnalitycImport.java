@@ -21,6 +21,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
+import javax.transaction.Transactional;
+
 /**
  * @author Sebastian Dimunzio
  */
@@ -31,6 +33,7 @@ import org.springframework.context.annotation.FilterType;
 @ComponentScan(excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {Dhis2MetadataImport.class, Application.class})})
 
+@Transactional
 public class Dhis2AnalitycImport implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2AnalitycImport.class);
@@ -63,24 +66,49 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     }
 
+
+    public void population(Region region) {
+        dhis2PopulationService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.Y(2016));
+
+        dhis2PopulationService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.Y(2017));
+    }
+
+    public void OPDDiagnoses(Region region) {
+        dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2017));
+        dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2016));
+        dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2015));
+
+    }
+
+
+    public void RMNNCH(Region region) {
+        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2017));
+
+        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2016));
+
+        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+                QueryUtil.MONTHS_OFF(2015));
+    }
+
+
     public void importData(String regionName, boolean incremental) {
 
         Region region = regionRepository.findOneByName(regionName);
 
         if (!incremental) {
-           this.clean(region);
+            this.clean(region);
         }
 
-       dhis2PopulationService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
-                QueryUtil.Y(2016, 2017));
-
-        dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
-                QueryUtil.MONTHS_OFF(2017, 2016, 2015));
-
-        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
-                QueryUtil.MONTHS_OFF(2017, 2016, 2015));
-
-
+        population(region);
+        OPDDiagnoses(region);
+        RMNNCH(region);
         LOGGER.info("........................ALL DONE ........................");
 
     }
@@ -105,7 +133,11 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
                 this.importData(cmd.getOptionValue('r'), incremental);
 
             } else {
-                System.out.print("Please provide region name");
+                System.out.println(".................................");
+                System.out.println(".");
+                System.out.println(" Please provide a region name. ");
+                System.out.println(".");
+                System.out.println(".................................");
             }
 
 
