@@ -54,6 +54,7 @@ public class Dhis2RMNNCHService extends Dhis2AnalyticImport<RMNCH> {
 
     public List<RMNCH> save(List<RMNCH> items) {
         rmnchRepository.save(items);
+        rmnchRepository.flush();
         return items;
     }
 

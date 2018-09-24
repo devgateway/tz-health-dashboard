@@ -50,6 +50,7 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
 
     public List<OPDDiagnostic> save(List<OPDDiagnostic> diagnostics) {
         opdDiagnosticRepository.save(diagnostics);
+        opdDiagnosticRepository.flush();
         return diagnostics;
 
     }

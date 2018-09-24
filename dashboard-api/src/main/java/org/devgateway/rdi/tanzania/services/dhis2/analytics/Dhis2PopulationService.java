@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional
+@Transactional(Transactional.TxType.REQUIRES_NEW)
 public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopulation> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2PopulationService.class);
@@ -130,6 +130,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
 
 
         serviceAreaPopulationRepository.save(populations);
+        serviceAreaPopulationRepository.flush();
         return populations;
     }
 }

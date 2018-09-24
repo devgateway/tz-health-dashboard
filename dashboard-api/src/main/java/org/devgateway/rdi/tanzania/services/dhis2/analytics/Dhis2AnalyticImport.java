@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional
+
 public abstract class Dhis2AnalyticImport<T> {
 
     @PersistenceContext
