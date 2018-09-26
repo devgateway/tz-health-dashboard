@@ -81,15 +81,9 @@ class TopTenDeseases extends React.Component {
           </tr>
           {
             deseases.map((it) => {
-
               debugger
-
               const label = it.getIn(['diagnostic','name'])
               const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
-
-
-
-
               const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
               const total5to60 = it.getIn(['ranges', 'total5to60'])
               const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
@@ -112,7 +106,6 @@ class TopTenDeseases extends React.Component {
               </tr>)
             })
           }
-
           <tr className="total-values">
             <td className="desease-name">
               <Trans>Total</Trans>
@@ -128,6 +121,7 @@ class TopTenDeseases extends React.Component {
           </tr>
         </tbody>
       </table>
+
     </div>)
   }
 }

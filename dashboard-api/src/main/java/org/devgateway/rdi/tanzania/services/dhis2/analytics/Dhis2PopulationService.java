@@ -23,7 +23,6 @@ import java.util.List;
  */
 
 @Service
-@Transactional(Transactional.TxType.REQUIRES_NEW)
 public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopulation> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2PopulationService.class);
@@ -57,8 +56,8 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
     ItemRepository itemRepository;
 
 
-    public void clean(Region region) {
-        serviceAreaPopulationRepository.deleteUsingRegion(region.getGid());
+    public void clean(Region region,Integer year) {
+        serviceAreaPopulationRepository.deleteUsingRegion(region.getGid(),year);
 
     }
 
@@ -88,7 +87,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
 
             QueryDimension ouDimension = QueryUtil.ouDimension(items);
 
-            LOGGER.info("Getting data of "
+            LOGGER.info("Getting Population of "
                     + ouDimension.getItems().size()
                     + " Facilities");
 
