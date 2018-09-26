@@ -25,7 +25,7 @@ import javax.persistence.*;
                         " and f.ward_gid=ward.gid " +
                         " and ward.district_gid=district.gid " +
                         " and district.region_gid=region.gid " +
-                        " and region.gid =?"
+                        " and region.gid =? and s.year=?"
                 , resultSetMapping = "deleteResult"
         )
 })

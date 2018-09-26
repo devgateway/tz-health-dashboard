@@ -7,5 +7,5 @@ package org.devgateway.rdi.tanzania.repositories;
 
 public interface ServiceAreaPopulationRepositoryCustom {
 
-    void deleteUsingRegion(Long id);
+    void deleteUsingRegion(Long id, Integer year);
 }

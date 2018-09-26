@@ -221,7 +221,7 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
         }
     }
 
-    public void deleteUsingRegion(Long id) {
+    public void deleteUsingRegion(Long id, Integer year) {
         Query q = em.createNativeQuery("DELETE FROM opddiagnostic s " +
                 " USING " +
                 " facility f ,boundary as ward , boundary as district, boundary as region " +
@@ -229,8 +229,10 @@ public class OPDDiagnosticRepositoryImpl implements OPDDiagnosticRepositoryCusto
                 " and f.ward_gid=ward.gid " +
                 " and ward.district_gid=district.gid " +
                 " and district.region_gid=region.gid " +
-                " and region.gid =?");
+                " and region.gid =? and s.year=?");
         q.setParameter(1, id);
+        q.setParameter(2, year);
+
         q.executeUpdate();
     }
 

@@ -60,7 +60,7 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
 
         List<OPDDiagnostic> opdDiagnostics = new ArrayList<>();
 
-        LOGGER.info("->:" + facilities.size() + " facilities will be processed");
+        LOGGER.info("->: Getting Diagnoses of " + facilities.size() + " facilities");
         if (facilities.size() > 0) {
 
             Dhis2 dhis2 = new Dhis2(dhis2Config);
@@ -131,7 +131,7 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
     }
 
 
-    public void clean(Region r) {
-        opdDiagnosticRepository.deleteUsingRegion(r.getGid());
+    public void clean(Region r, Integer year) {
+        opdDiagnosticRepository.deleteUsingRegion(r.getGid(),year);
     }
 }
