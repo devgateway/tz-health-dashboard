@@ -9,7 +9,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - [Sending Feedback](#sending-feedback)
 - [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
-  - [npm start](#npm-start)
+  - [npm startDate](#npm-startDate)
   - [npm test](#npm-test)
   - [npm run build](#npm-run-build)
   - [npm run eject](#npm-run-eject)
@@ -77,7 +77,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
   - [Surge](#surge)
 - [Advanced Configuration](#advanced-configuration)
 - [Troubleshooting](#troubleshooting)
-  - [`npm start` doesn’t detect changes](#npm-start-doesnt-detect-changes)
+  - [`npm startDate` doesn’t detect changes](#npm-startDate-doesnt-detect-changes)
   - [`npm test` hangs on macOS Sierra](#npm-test-hangs-on-macos-sierra)
   - [`npm run build` silently fails](#npm-run-build-silently-fails)
   - [`npm run build` fails on Heroku](#npm-run-build-fails-on-heroku)
@@ -145,7 +145,7 @@ They will not be included in the production build so you can use them for things
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm startDate`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -279,7 +279,7 @@ Then add the block below to your `launch.json` file and put it inside the `.vsco
 }
 ```
 
-Start your app by running `npm start`, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
+Start your app by running `npm startDate`, and startDate debugging in VS Code by pressing `F5` or by clicking the green debug icon. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
 
 ## Changing the Page `<title>`
 
@@ -431,7 +431,7 @@ Then in `package.json`, add the following lines to `scripts`:
    "scripts": {
 +    "build-css": "node-sass src/ -o src/",
 +    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
-     "start": "react-scripts start",
+     "startDate": "react-scripts startDate",
      "build": "react-scripts build",
      "test": "react-scripts test --env=jsdom",
 ```
@@ -444,29 +444,29 @@ To share variables between Sass files, you can use Sass imports. For example, `s
 
 At this point you might want to remove all CSS files from the source control, and add `src/**/*.css` to your `.gitignore` file. It is generally a good practice to keep the build products outside of the source control.
 
-As a final step, you may find it convenient to run `watch-css` automatically with `npm start`, and run `build-css` as a part of `npm run build`. You can use the `&&` operator to execute two scripts sequentially. However, there is no cross-platform way to run two scripts in parallel, so we will install a package for this:
+As a final step, you may find it convenient to run `watch-css` automatically with `npm startDate`, and run `build-css` as a part of `npm run build`. You can use the `&&` operator to execute two scripts sequentially. However, there is no cross-platform way to run two scripts in parallel, so we will install a package for this:
 
 ```
 npm install --save-dev npm-run-all
 ```
 
-Then we can change `start` and `build` scripts to include the CSS preprocessor commands:
+Then we can change `startDate` and `build` scripts to include the CSS preprocessor commands:
 
 ```diff
    "scripts": {
      "build-css": "node-sass src/ -o src/",
      "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
--    "start": "react-scripts start",
+-    "startDate": "react-scripts startDate",
 -    "build": "react-scripts build",
-+    "start-js": "react-scripts start",
-+    "start": "npm-run-all -p watch-css start-js",
++    "startDate-js": "react-scripts startDate",
++    "startDate": "npm-run-all -p watch-css startDate-js",
 +    "build": "npm run build-css && react-scripts build",
      "test": "react-scripts test --env=jsdom",
      "eject": "react-scripts eject"
    }
 ```
 
-Now running `npm start` and `npm run build` also builds Sass files. Note that `node-sass` seems to have an [issue recognizing newly created files on some systems](https://github.com/sass/node-sass/issues/1891) so you might need to restart the watcher when you create a file until it’s resolved.
+Now running `npm startDate` and `npm run build` also builds Sass files. Note that `node-sass` seems to have an [issue recognizing newly created files on some systems](https://github.com/sass/node-sass/issues/1891) so you might need to restart the watcher when you create a file until it’s resolved.
 
 ## Adding Images and Fonts
 
@@ -500,7 +500,7 @@ This works in CSS too:
 }
 ```
 
-Webpack finds all relative module references in CSS (they start with `./`) and replaces them with the final paths from the compiled bundle. If you make a typo or accidentally delete an important file, you will see a compilation error, just like when you import a non-existent JavaScript module. The final filenames in the compiled bundle are generated by Webpack from content hashes. If the file content changes in the future, Webpack will give it a different name in production so you don’t need to worry about long-term caching of assets.
+Webpack finds all relative module references in CSS (they startDate with `./`) and replaces them with the final paths from the compiled bundle. If you make a typo or accidentally delete an important file, you will see a compilation error, just like when you import a non-existent JavaScript module. The final filenames in the compiled bundle are generated by Webpack from content hashes. If the file content changes in the future, Webpack will give it a different name in production so you don’t need to worry about long-term caching of assets.
 
 Please be advised that this is also a custom feature of Webpack.
 
@@ -658,7 +658,7 @@ default you will have `NODE_ENV` defined for you, and any other environment vari
 These environment variables will be defined for you on `process.env`. For example, having an environment
 variable named `REACT_APP_SECRET_CODE` will be exposed in your JS as `process.env.REACT_APP_SECRET_CODE`.
 
-There is also a special built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`. When you run `npm start`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
+There is also a special built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`. When you run `npm startDate`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
 
 These environment variables can be useful for displaying information conditionally based on where the project is
 deployed or consuming sensitive data that lives outside of version control.
@@ -681,7 +681,7 @@ render() {
 
 During the build, `process.env.REACT_APP_SECRET_CODE` will be replaced with the current value of the `REACT_APP_SECRET_CODE` environment variable. Remember that the `NODE_ENV` variable will be set for you automatically.
 
-When you load the app in the browser and inspect the `<input>`, you will see its value set to `abcdef`, and the bold text will show the environment provided when using `npm start`:
+When you load the app in the browser and inspect the `<input>`, you will see its value set to `abcdef`, and the bold text will show the environment provided when using `npm startDate`:
 
 ```html
 <div>
@@ -718,7 +718,7 @@ You can also access the environment variables starting with `REACT_APP_` in the 
 
 Note that the caveats from the above section apply:
 
-* Apart from a few built-in variables (`NODE_ENV` and `PUBLIC_URL`), variable names must start with `REACT_APP_` to work.
+* Apart from a few built-in variables (`NODE_ENV` and `PUBLIC_URL`), variable names must startDate with `REACT_APP_` to work.
 * The environment variables are injected at build time. If you need to inject them at runtime, [follow this approach instead](#generating-dynamic-meta-tags-on-the-server).
 
 ### Adding Temporary Environment Variables In Your Shell
@@ -729,7 +729,7 @@ life of the shell session.
 #### Windows (cmd.exe)
 
 ```cmd
-set REACT_APP_SECRET_CODE=abcdef&&npm start
+set REACT_APP_SECRET_CODE=abcdef&&npm startDate
 ```
 
 (Note: the lack of whitespace is intentional.)
@@ -737,7 +737,7 @@ set REACT_APP_SECRET_CODE=abcdef&&npm start
 #### Linux, macOS (Bash)
 
 ```bash
-REACT_APP_SECRET_CODE=abcdef npm start
+REACT_APP_SECRET_CODE=abcdef npm startDate
 ```
 
 ### Adding Development Environment Variables In `.env`
@@ -791,7 +791,7 @@ You can find the companion GitHub repository [here](https://github.com/fullstack
 
 >Note: this feature is available with `react-scripts@0.2.3` and higher.
 
-People often serve the front-end React app from the same host and port as their backend implementation.<br>
+People often serve the front-endDate React app from the same host and port as their backend implementation.<br>
 For example, a production setup might look like this after the app is deployed:
 
 ```
@@ -816,7 +816,7 @@ Conveniently, this avoids [CORS issues](http://stackoverflow.com/questions/21854
 Fetch API cannot load http://localhost:4000/api/todos. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
-Keep in mind that `proxy` only has effect in development (with `npm start`), and it is up to you to ensure that URLs like `/api/todos` point to the right thing in production. You don’t have to use the `/api` prefix. Any unrecognized request without a `text/html` accept header will be redirected to the specified `proxy`.
+Keep in mind that `proxy` only has effect in development (with `npm startDate`), and it is up to you to ensure that URLs like `/api/todos` point to the right thing in production. You don’t have to use the `/api` prefix. Any unrecognized request without a `text/html` accept header will be redirected to the specified `proxy`.
 
 The `proxy` option supports HTTP, HTTPS and WebSocket connections.<br>
 If the `proxy` option is **not** flexible enough for you, alternatively you can:
@@ -830,12 +830,12 @@ If the `proxy` option is **not** flexible enough for you, alternatively you can:
 
 You may require the dev server to serve pages over HTTPS. One particular case where this could be useful is when using [the "proxy" feature](#proxying-api-requests-in-development) to proxy requests to an API server when that API server is itself serving HTTPS.
 
-To do this, set the `HTTPS` environment variable to `true`, then start the dev server as usual with `npm start`:
+To do this, set the `HTTPS` environment variable to `true`, then startDate the dev server as usual with `npm startDate`:
 
 #### Windows (cmd.exe)
 
 ```cmd
-set HTTPS=true&&npm start
+set HTTPS=true&&npm startDate
 ```
 
 (Note: the lack of whitespace is intentional.)
@@ -843,7 +843,7 @@ set HTTPS=true&&npm start
 #### Linux, macOS (Bash)
 
 ```bash
-HTTPS=true npm start
+HTTPS=true npm startDate
 ```
 
 Note that the server will use a self-signed certificate, so your web browser will almost definitely display a warning upon accessing the page.
@@ -900,7 +900,7 @@ Jest is a Node-based runner. This means that the tests always run in a Node envi
 
 While Jest provides browser globals such as `window` thanks to [jsdom](https://github.com/tmpvar/jsdom), they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.
 
-We recommend that you use a separate tool for browser end-to-end tests if you need them. They are beyond the scope of Create React App.
+We recommend that you use a separate tool for browser endDate-to-endDate tests if you need them. They are beyond the scope of Create React App.
 
 ### Filename Conventions
 
@@ -916,7 +916,7 @@ We recommend to put the test files (or `__tests__` folders) next to the code the
 
 ### Command Line Interface
 
-When you run `npm test`, Jest will launch in the watch mode. Every time you save a file, it will re-run the tests, just like `npm start` recompiles the code.
+When you run `npm test`, Jest will launch in the watch mode. Every time you save a file, it will re-run the tests, just like `npm startDate` recompiles the code.
 
 The watcher includes an interactive command-line interface with the ability to run all tests, or focus on a search pattern. It is designed this way so that you can keep it open and enjoy fast re-runs. You can learn the commands from the “Watch Usage” note that the watcher prints after every run:
 
@@ -952,7 +952,7 @@ You can also use [`jest.fn()` and `expect(fn).toBeCalled()`](http://facebook.git
 
 There is a broad spectrum of component testing techniques. They range from a “smoke test” verifying that a component renders without throwing, to shallow rendering and testing some of the output, to full rendering and testing component lifecycle and state changes.
 
-Different projects choose different testing tradeoffs based on how often components change, and how much logic they contain. If you haven’t decided on a testing strategy yet, we recommend that you start with creating simple smoke tests for your components:
+Different projects choose different testing tradeoffs based on how often components change, and how much logic they contain. If you haven’t decided on a testing strategy yet, we recommend that you startDate with creating simple smoke tests for your components:
 
 ```js
 import React from 'react';
@@ -1223,7 +1223,7 @@ serve -s build
 
 The last command shown above will serve your static site on the port **5000**. Like many of [serve](https://github.com/zeit/serve)’s internal settings, the port can be adjusted using the `-p` or `--port` flags.
 
-Run this command to get a full list of the options available:
+Run this command to get a full list of the data available:
 
 ```sh
 serve -h
@@ -1518,7 +1518,7 @@ When you build the project, Create React App will place the `public` folder cont
 3. Add this line to `scripts` in `package.json`:
     
     ```
-    "now-start": "serve build/",
+    "now-startDate": "serve build/",
     ```
     
 4. Run `now` from your project directory. You will see a **now.sh** URL in your output like this:
@@ -1571,9 +1571,9 @@ CI | :large_orange_diamond: | :white_check_mark: | When set to `true`, Create Re
 
 ## Troubleshooting
 
-### `npm start` doesn’t detect changes
+### `npm startDate` doesn’t detect changes
 
-When you save a file while `npm start` is running, the browser should refresh with the updated code.<br>
+When you save a file while `npm startDate` is running, the browser should refresh with the updated code.<br>
 If this doesn’t happen, try one of the following workarounds:
 
 * If your project is in a Dropbox folder, try moving it out.
@@ -1581,7 +1581,7 @@ If this doesn’t happen, try one of the following workarounds:
 * Some editors like Vim and IntelliJ have a “safe write” feature that currently breaks the watcher. You will need to disable it. Follow the instructions in [“Working with editors supporting safe write”](https://webpack.github.io/docs/webpack-dev-server.html#working-with-editors-ides-supporting-safe-write).
 * If your project path contains parentheses, try moving the project to a path without them. This is caused by a [Webpack watcher bug](https://github.com/webpack/watchpack/issues/42).
 * On Linux and macOS, you might need to [tweak system settings](https://webpack.github.io/docs/troubleshooting.html#not-enough-watchers) to allow more watchers.
-* If the project runs inside a virtual machine such as (a Vagrant provisioned) VirtualBox, create an `.env` file in your project directory if it doesn’t exist, and add `CHOKIDAR_USEPOLLING=true` to it. This ensures that the next time you run `npm start`, the watcher uses the polling mode, as necessary inside a VM.
+* If the project runs inside a virtual machine such as (a Vagrant provisioned) VirtualBox, create an `.env` file in your project directory if it doesn’t exist, and add `CHOKIDAR_USEPOLLING=true` to it. This ensures that the next time you run `npm startDate`, the watcher uses the polling mode, as necessary inside a VM.
 
 If none of these solutions help please leave a comment [in this thread](https://github.com/facebookincubator/create-react-app/issues/659).
 
