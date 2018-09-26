@@ -2,8 +2,10 @@ package org.devgateway.rdi.tanzania;
 
 import org.apache.commons.cli.*;
 import org.devgateway.rdi.tanzania.dhis.analytics.QueryUtil;
+import org.devgateway.rdi.tanzania.domain.ImportLog;
 import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.repositories.FacilityRepository;
+import org.devgateway.rdi.tanzania.repositories.ImportLogRepository;
 import org.devgateway.rdi.tanzania.repositories.OPDDiagnosticRepository;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
 import org.devgateway.rdi.tanzania.services.dhis2.analytics.Dhis2AnalyticImport;
@@ -21,7 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
-import javax.transaction.Transactional;
+import java.util.Date;
 
 /**
  * @author Sebastian Dimunzio
@@ -57,6 +59,9 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     @Autowired
     FacilityRepository facilityRepository;
 
+
+    @Autowired
+    ImportLogRepository importLogRepository;
 
     public void population(Region region, Integer year, boolean incremental) {
 
@@ -117,7 +122,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
         CommandLine cmd = null;
         Boolean incremental = true;
-
+        ImportLog importLog = new ImportLog();
         try {
 
             cmd = parser.parse(options, strings);
@@ -128,28 +133,43 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
                 Integer year = Integer.parseInt(cmd.getOptionValue("y"));
 
-                String data = cmd.getOptionValue("d");
-
-                if (cmd.hasOption("c")) {
-                    incremental = false;
-                }
-
-                if (!cmd.hasOption("d")) {
-                    this.importData(region, year, incremental);
-
+                if (region == null) {
+                    //error wrong region
                 } else {
-                    if (data.toUpperCase().indexOf("PO") > -1) {
-                        this.population(region, year, incremental);
-                    }
-                    if (data.toUpperCase().indexOf("OP") > -1) {
-                        this.OPDDiagnoses(region, year, incremental);
-                    }
-                    if (data.toUpperCase().indexOf("RM") > -1) {
-                        this.RMNNCH(region, year, incremental);
-                    }
-                }
 
+                    String data = cmd.getOptionValue("d");
+                    if (cmd.hasOption("c")) {
+                        incremental = false;
+                    }
+
+
+                    importLog.setRegion(region);
+                    importLog.setStartDate(new Date());
+                    importLog.setYear(year);
+                    importLog.setIncremental(incremental);
+                    importLog.setData(cmd.getOptionValue("d"));
+
+                    if (!cmd.hasOption("d")) {
+                        this.importData(region, year, incremental);
+
+                    } else {
+                        if (data.toUpperCase().indexOf("PO") > -1) {
+                            this.population(region, year, incremental);
+                        }
+                        if (data.toUpperCase().indexOf("OP") > -1) {
+                            this.OPDDiagnoses(region, year, incremental);
+                        }
+                        if (data.toUpperCase().indexOf("RM") > -1) {
+                            this.RMNNCH(region, year, incremental);
+                        }
+                    }
+
+                    importLog.setStatus("OK");
+                    importLogRepository.save(importLog);
+
+                }
             } else {
+
                 System.out.println("......................................");
                 System.out.println(".                                     .");
                 System.out.println(".                                     .");
@@ -161,6 +181,8 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
 
         } catch (ParseException e) {
+            importLog.setStatus("ERROR");
+            importLogRepository.save(importLog);
 
             LOGGER.error(e.getMessage(), e);
         }
