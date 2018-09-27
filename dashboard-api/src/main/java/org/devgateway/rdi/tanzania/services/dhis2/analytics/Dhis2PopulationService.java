@@ -63,7 +63,7 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
 
 
     @Override
-    public List<ServiceAreaPopulation> byFacilities(List<Facility> list, QueryDimension period) {
+    public List<ServiceAreaPopulation> _byFacilities(List<Facility> list, QueryDimension period) {
         List<ServiceAreaPopulation> populations = new ArrayList<>();
         Dhis2 dhis2 = new Dhis2(dhis2Config);
 
@@ -129,7 +129,6 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
 
 
         serviceAreaPopulationRepository.save(populations);
-        serviceAreaPopulationRepository.flush();
         return populations;
     }
 }
