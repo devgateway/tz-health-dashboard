@@ -69,7 +69,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
             dhis2PopulationService.clean(region, year);
         }
 
-        dhis2PopulationService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+        dhis2PopulationService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT,
                 QueryUtil.Y(year));
     }
 
@@ -79,7 +79,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
             dhis2OPDDiagnosesService.clean(region, year);
         }
 
-        dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+        dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT,
                 QueryUtil.MONTHS_OFF(year));
 
 
@@ -92,7 +92,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
             dhis2RMNNCHService.clean(region, year);
         }
 
-        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.WARD,
+        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT,
                 QueryUtil.MONTHS_OFF(year));
 
     }
@@ -134,7 +134,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
                 Integer year = Integer.parseInt(cmd.getOptionValue("y"));
 
                 if (region == null) {
-                    //error wrong region
+                    System.out.println(". Please provide a region or pass -all parameter");
                 } else {
 
                     String data = cmd.getOptionValue("d");

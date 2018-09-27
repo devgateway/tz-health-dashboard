@@ -64,11 +64,11 @@ public class Dhis2RMNCHService extends Dhis2AnalyticImport<RMNCH> {
     }
 
     @Override
-    public List<RMNCH> byFacilities(List<Facility> facilities, QueryDimension period) {
+    public List<RMNCH> _byFacilities(List<Facility> facilities, QueryDimension period) {
 
         List<RMNCH> results = new ArrayList<>();
 
-        LOGGER.info("->: Getting RMNCH" + facilities.size() + " facilities will be processed");
+        LOGGER.info("->: Getting RMNCH of " + facilities.size() + " facilities will be processed");
         if (facilities.size() > 0) {
 
             Dhis2 dhis2 = new Dhis2(dhis2Config);

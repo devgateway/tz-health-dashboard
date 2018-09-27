@@ -55,8 +55,9 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
 
     }
 
+
     @Override
-    public List<OPDDiagnostic> byFacilities(List<Facility> facilities, QueryDimension period) {
+    public List<OPDDiagnostic> _byFacilities(List<Facility> facilities, QueryDimension period) {
 
         List<OPDDiagnostic> opdDiagnostics = new ArrayList<>();
 
@@ -127,11 +128,12 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
 
 
         }
-        return save(opdDiagnostics);
+        save(opdDiagnostics);
+        return opdDiagnostics;
     }
 
 
     public void clean(Region r, Integer year) {
-        opdDiagnosticRepository.deleteUsingRegion(r.getGid(),year);
+        opdDiagnosticRepository.deleteUsingRegion(r.getGid(), year);
     }
 }
