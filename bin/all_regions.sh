@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 
-./data.sh -r "Arusha" -y2017 -c
-./data.sh -r "Arusha" -y2016 -c
-./data.sh -r "Arusha" -y2015 -c
+# ./data.sh -r "Arusha" -y2017 -c
+# ./data.sh -r "Arusha" -y2016 -c
+# ./data.sh -r "Arusha" -y2015 -c
 
 ./data.sh -r "Dar es salaam"  -y2017 -c
 ./data.sh -r "Dar es salaam" -y2016 -c
 ./data.sh -r "Dar es salaam"  -y2015 -c
 
-./data.sh -r "Dodoma" -y2017 -c
-./data.sh -r "Dodoma" -y2016 -c
-./data.sh -r "Dodoma" -y2015 -c
+# ./data.sh -r "Dodoma" -y2017 -c
+# ./data.sh -r "Dodoma" -y2016 -c
+# ./data.sh -r "Dodoma" -y2015 -c
 
 
 ./data.sh -r "Geita" -y2017 -c
