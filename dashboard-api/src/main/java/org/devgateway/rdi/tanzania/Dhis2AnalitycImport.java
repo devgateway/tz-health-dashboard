@@ -134,14 +134,19 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
                 Integer year = Integer.parseInt(cmd.getOptionValue("y"));
 
                 if (region == null) {
-                    System.out.println(". Please provide a region or pass -all parameter");
+                    System.out.println("......................................");
+                    System.out.println(".                                     .");
+                    System.out.println(".                                     .");
+                    System.out.println(". Please provide a valid region name  .");
+                    System.out.println(".                                     .");
+                    System.out.println(".                                     .");
+                    System.out.println(".......................................");
                 } else {
 
                     String data = cmd.getOptionValue("d");
                     if (cmd.hasOption("c")) {
                         incremental = false;
                     }
-
 
                     importLog.setRegion(region);
                     importLog.setStartDate(new Date());
