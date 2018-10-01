@@ -135,6 +135,7 @@ public class Dhis2RMNCHService extends Dhis2AnalyticImport<RMNCH> {
                         rmnch.setValue(new Double(Double.parseDouble(valueStr)).intValue());
                         Facility f = facilities.stream().filter(facility -> facility.getDhis2Id().equalsIgnoreCase(facilityID)).findAny().get();
                         rmnch.setFacility(f);
+                        rmnch.setWard(f.getWard());
                         results.add(rmnch);
                     }
 
