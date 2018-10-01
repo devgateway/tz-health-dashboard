@@ -19,6 +19,9 @@ public class OPDDiagnostic {
     @ManyToOne(targetEntity = Facility.class)
     private Facility facility;
 
+    @ManyToOne(targetEntity = Ward.class)
+    private Ward ward;
+
     @ManyToOne(targetEntity = DataElement.class)
     private DataElement diagnostic;
 
@@ -98,4 +101,12 @@ public class OPDDiagnostic {
         this.quarter = quarter;
     }
 
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public void setWard(Ward ward) {
+        this.ward = ward;
+    }
 }
