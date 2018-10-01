@@ -2,6 +2,7 @@ package org.devgateway.rdi.tanzania.services;
 
 import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.FacilityGroup;
+import org.devgateway.rdi.tanzania.domain.Ward;
 import org.devgateway.rdi.tanzania.repositories.FacilityGroupRepository;
 import org.devgateway.rdi.tanzania.repositories.FacilityRepository;
 import org.devgateway.rdi.tanzania.repositories.FacilitySpecifications;
@@ -46,6 +47,14 @@ public class FacilityService {
         return facilityGroupRepository.save(groups);
     }
 
+
+    public List<Facility> getFacilityByWard(Ward ward) {
+        if (ward == null) {
+            return null;
+        }
+
+        return facilityRepository.findByWard(ward);
+    }
 
     public void cleanFacilities() {
         facilityRepository.deleteAll();

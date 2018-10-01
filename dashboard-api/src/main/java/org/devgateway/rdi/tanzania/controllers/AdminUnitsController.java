@@ -9,10 +9,7 @@ import org.devgateway.rdi.tanzania.repositories.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,6 +41,16 @@ public class AdminUnitsController {
 
     }
 
+    @RequestMapping("/regions/{id}")
+    public ResponseEntity<Region> getRegion(@PathVariable Long id) {
+        Region region = regionRepository.findOne(id);
+        if (region != null) {
+            return new ResponseEntity(region, HttpStatus.OK);
+
+        } else return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+    }
+
 
     @RequestMapping("/districts")
     public ResponseEntity<List<District>> getDistricts(@RequestParam(name = "region", required = false) Long id) {
@@ -64,6 +71,17 @@ public class AdminUnitsController {
             return new ResponseEntity<List<District>>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @RequestMapping("/districts/{id}")
+    public ResponseEntity<District> getDistrict(@PathVariable Long id) {
+        District district= districtRepository.findOne(id);
+        if (district != null) {
+            return new ResponseEntity(district, HttpStatus.OK);
+
+        } else return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+    }
+
 
 
     @RequestMapping("/wards")
@@ -89,5 +107,14 @@ public class AdminUnitsController {
         }
     }
 
+    @RequestMapping("/wards/{id}")
+    public ResponseEntity<Ward> getWardById(@PathVariable Long id) {
+        Ward Ward= wardRepository.findOne(id);
+        if (Ward != null) {
+            return new ResponseEntity(Ward, HttpStatus.OK);
+
+        } else return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+    }
 
 }
