@@ -1,110 +1,121 @@
 import React from 'react'
 import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
-import D3PieChart from '../../../../../components/d3PieChart'
 import TopTenDeseases from '../components/topTenDeseasesTable'
+import RMNCHTable from '../components/RMNCHTable'
+import PeriodSelector from '../components/periodSelector'
 
 export default class WardLayout extends React.Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }
 
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  componentWillMount() {
-    const { onGetWardInfo, params: {id, period} } = this.props;
+  componentDidMount() {
+    const { onGetWardInfo, onGetWardPopulation, onGetWardDiagnoses,onGetWardRMNCH, params: {id, period} } = this.props;
     onGetWardInfo(id, period)
+    //onGetWardPopulation(id, period)
+    //onGetWardDiagnoses(id, period)
+    //onGetWardRMNCH(id,period)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.info.getIn(['ward', 'id']) !== prevProps.info.getIn(['ward', 'id'])) {
+      const { onGetMapPoints, onGetMapShape, info } = this.props;
+      onGetMapPoints(info)
+      onGetMapShape(info)
+    }
+  }
+
+  onChangePeriod(period){
+    const {params: {id}} = this.props
+    this.context.router.history.push(`/report/ward/${id}/${period}`)
   }
 
   render() {
-    const {wardFeature} = this.props
-    const features = {'type': 'FeatureCollection', 'features': [wardFeature]}
-    const wardName = wardFeature.properties.NAME
-    const reportPeriod = 'August-October 2017'
-    const totalPopulation = '13,944'
-    const totalFacilities = '4'
-    const d3PieChartData = [{category: 'aaa', value: 2}, {category: 'bbb', value: 3}, {category: 'ccc', value: 4}, {category: 'ddd', value: 5}, ]
+    const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
+    
+    const facilitiesFeatures = []
+    /*if (mapPoints) {
+      mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+    }*/
+
+
+    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+    const wardName = info.getIn(['name'])
+    const wardType = info.getIn(['type', 'name'])
+    const wardTypeId = info.getIn(['type', 'dhis2Id'])
+    const watdName = info.getIn(['ward', 'name'])
+    const districtName = info.getIn(['district', 'name'])
+    const regionName = info.getIn(['region', 'name'])
+
     return (
       <div>
-	      <div className="ward-report-container">
-          <div className="report-header">
-            <div className="ward-name">{wardName}</div>
-            <div className="report-period">{reportPeriod}</div>
+        <div className="report-header">
+          <div className="ward-name">{wardName}</div>
+          <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
+        </div>
+        <div className="ward-report-container">
+          <div className="location-box">
+            <div><div className="location-title">Ward</div><div className="location-value">{watdName}</div></div>
+            <div><div className="location-title">District</div><div className="location-value">{districtName}</div></div>
+            <div><div className="location-title">Region</div><div className="location-value">{regionName}</div></div>
           </div>
           <div className="population-box">
             <div className="info">
-              <div className="sub-title">Availability of Health Services in {wardName}</div>
-              <div className="total-pop"><span>{totalPopulation}</span> Total Population</div>
-              <div className="villages">
-                <div className="value-item"><div>Pahi</div><div>6,169</div></div>
-                <div className="value-item"><div>Potea</div><div>2,402</div></div>
-                <div className="value-item"><div>Salare</div><div>1,614</div></div>
-                <div className="value-item"><div>Kiteo</div><div>3,759</div></div>
-              </div>
-              <div className="gender">
-                <div className="value-item"><div>Male</div><div>6,670</div></div>
-                <div className="value-item"><div>Female</div><div>7,730</div></div>
-              </div>
+              <div className="sub-title">Availability of Health Services in {regionName} region</div>
+              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> Total Population</div>
+
               <div className="ages">
-                <div className="value-item"><div>{'Age <5'}</div><div>1,450</div></div>
-                <div className="value-item"><div>{'Age 5-60'}</div><div>11,730</div></div>
-                <div className="value-item"><div>{'Age >60'}</div><div>730</div></div>
+                <div className="value-label"><div>by Gender</div></div>
+                <div className="value-item"><div>Male</div><div>{population.getIn(['data', 'totalMale'])}</div></div>
+                <div className="value-item"><div>Female</div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
               </div>
 
-              <div className="total-pop"><span>{totalFacilities}</span> Total Health Facilities</div>
               <div className="ages">
-                <div className="value-item"><div>Public</div><div>2</div></div>
-                <div className="value-item"><div>Private</div><div>1</div></div>
-                <div className="value-item"><div>Faith-Based</div><div>1</div></div>
+                <div className="value-label"><div>by Age</div></div>
+                <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
+                <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
+                <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
               </div>
-
             </div>
             <div className="map">
-              <D3Map width="450" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={features} showBasemap={true}></D3Map>
+              {/*facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
+                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+              : null*/}
+              <div className="legend-box">
+                <div className="legend-title">Legend</div>
+                <div className="legend-item">
+                  <div className="current-icon"/>
+                  <div className="legend-name">{wardName}</div>
+                </div>
+                <div className="legend-item">
+                  <div className="other-icon"/>
+                  {wardTypeId === "FgLhM6ea9dS" || wardTypeId === "WK2vj3N9aA0" ? 
+                    <div className="legend-name">{`Other ${wardType} in same region`}</div>
+                  :
+                    <div className="legend-name">Other Ward in ward</div>
+                  }                  
+                </div>
+                <div className="legend-item">
+                  <div className="boundary-icon"/>
+                  {wardTypeId === "FgLhM6ea9dS" || wardTypeId === "WK2vj3N9aA0" ? 
+                    <div className="legend-name">District boundary</div>
+                  :
+                    <div className="legend-name">Ward boundary</div>
+                  }                  
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="human-resources-box">
-            <div className="sub-title">Human Resources for Health in {wardName}</div>
-            <div className="total-pop"><span>{'41'}</span> Total Staffing Level at {wardName} Facilities</div>
-            <div className="value-item"><div>Pahi</div><div>14</div></div>
-            <div className="value-item"><div>Potea</div><div>16</div></div>
-            <div className="value-item"><div>Kiteo</div><div>11</div></div>
-            <div className="total-pop"><span>{'7'}</span> Community Health Workers in {wardName}</div>            
-          </div>
-
-          <div className="top-ten-deseases">
-            <div className="sub-title">Out-Patient Diseases (OPD), All {wardName} Facilities</div>
-            <TopTenDeseases/>
-          </div>
-
-          <div className="deaths-box">
-            <div className="sub-title">Deaths in {wardName}</div>
-            <div>
-              <div className="total-pop"><span>{'365'}</span> Total Deaths</div>
-              <div className="value-item"><div>Male</div><div>205</div></div>
-              <div className="value-item"><div>Female</div><div>160</div></div>
-              <div className="value-item"><div>{'Age <5'}</div><div>65</div></div>
-              <div className="value-item"><div>{'Age 5-60'}</div><div>175</div></div>
-              <div className="value-item"><div>{'Age >60'}</div><div>125</div></div>
-            </div> 
-            <div>
-              <div className="total-pop"><span>{'260'}</span> Facility Deaths</div>
-              <div className="value-item"><div>Pahi</div><div>160</div></div>
-              <div className="value-item"><div>Potea</div><div>45</div></div>
-              <div className="value-item"><div>Kiteo</div><div>55</div></div>
-            </div> 
-            <div>
-              <div className="total-pop"><span>{'105'}</span> Community Deaths</div>
-              <div className="value-item"><div>Pahi</div><div>30</div></div>
-              <div className="value-item"><div>Potea</div><div>45</div></div>
-              <div className="value-item"><div>Salare</div><div>10</div></div>
-              <div className="value-item"><div>Kiteo</div><div>20</div></div>
-            </div> 
-          </div>
-          <D3PieChart title={"Test Pie Chart"} width={600} height={400} data={d3PieChartData} chartClassName={"pie-chart"} legend={true}/>
+          
         </div>
-	    </div>
+      </div>
     )
   }
 }

@@ -49,6 +49,7 @@ export default class WardLayout extends React.Component {
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
+    const facilityTypeId = info.getIn(['type', 'dhis2Id'])
     const watdName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
@@ -86,8 +87,31 @@ export default class WardLayout extends React.Component {
             </div>
             <div className="map">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
-                <D3Map width="570" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
+              <div className="legend-box">
+                <div className="legend-title">Legend</div>
+                <div className="legend-item">
+                  <div className="current-icon"/>
+                  <div className="legend-name">{facilityName}</div>
+                </div>
+                <div className="legend-item">
+                  <div className="other-icon"/>
+                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ? 
+                    <div className="legend-name">{`Other ${facilityType} in same region`}</div>
+                  :
+                    <div className="legend-name">Other Facility in ward</div>
+                  }                  
+                </div>
+                <div className="legend-item">
+                  <div className="boundary-icon"/>
+                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ? 
+                    <div className="legend-name">District boundary</div>
+                  :
+                    <div className="legend-name">Ward boundary</div>
+                  }                  
+                </div>
+              </div>
             </div>
           </div>
 

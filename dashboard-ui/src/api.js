@@ -3,7 +3,7 @@ const API_REGIONS = API_ROOT_URL + '/geo/regions'
 const API_DISTRICTS = API_ROOT_URL + '/geo/districts'
 const API_WARDS = API_ROOT_URL + '/geo/wards'
 const API_WARD_INFO = API_ROOT_URL + '/wards'
-const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wardReport`
+const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wards`
 const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facilities`
 const API_FACILITIES = `${API_ROOT_URL}/facilities`
 
@@ -111,8 +111,28 @@ export const getWardInfo = (id, period) => {
   })
 }
 
-export const getFacilityData = (id, period, type) => {
+export const getWardData = (id, period, type) => {
+  const url = `${API_WARD_REPORT_INFO}/${id}/${type || ''}?${preparePeriodQuery(period)}`
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            reject(response)
+          }
+          response.json().then(function(data) {
+            resolve(data);
+          });
+        }
+      )
+      .catch(function(err) {
+        reject('Fetch Error :-S', err);
+      });
+  })
+}
 
+
+export const getFacilityData = (id, period, type) => {
   const url = `${API_FACILITY_REPORT_INFO}/${id}/${type || ''}?${preparePeriodQuery(period)}`
   return new Promise((resolve, reject) => {
     fetch(url)
