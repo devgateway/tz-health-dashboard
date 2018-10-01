@@ -119,6 +119,7 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
                         opdDiagnostic.setValue(new Double(Double.parseDouble(valueStr)).intValue());
                         Facility f = facilities.stream().filter(facility -> facility.getDhis2Id().equalsIgnoreCase(facilityID)).findAny().get();
                         opdDiagnostic.setFacility(f);
+                        opdDiagnostic.setWard(f.getWard());
                         opdDiagnostics.add(opdDiagnostic);
                     }
 

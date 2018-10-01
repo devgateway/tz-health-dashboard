@@ -22,6 +22,10 @@ public class RMNCH {
     @ManyToOne(targetEntity = DataElement.class)
     private DataElement indicator;
 
+
+    @ManyToOne(targetEntity = Ward.class)
+    private Ward ward;
+
     Integer year;
 
     Integer quarter;
@@ -85,5 +89,13 @@ public class RMNCH {
 
     public void setValue(Integer value) {
         this.value = value;
+    }
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public void setWard(Ward ward) {
+        this.ward = ward;
     }
 }
