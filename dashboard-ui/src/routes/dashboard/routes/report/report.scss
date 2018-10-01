@@ -320,3 +320,63 @@
     }
   }
 }
+
+.map{
+  height: 450px;
+  width: 600px;
+  overflow: hidden;
+  .map-container {
+    float: none;
+  }
+  .legend-box:hover{
+    opacity: 1;
+  }
+  .legend-box{
+    height: 128px;
+    width: 265px;
+    background: #F1F1F1;
+    position: relative;
+    border: 1px solid #2c4856;
+    left: 300px;
+    bottom: 150px;
+    color: #2c4856;
+    opacity: 0.7;
+    >div{
+      
+    }
+    .legend-title{
+      height: 25px;
+      padding: 10px
+    }
+    .legend-item{
+      height: 20px;
+      padding: 2px 10px;
+      font-size: 13px;
+      >div{
+        display: inline-block;
+      }
+      .current-icon{
+        width: 10px;
+        height: 10px;
+        border: 1px solid #57595d;
+        border-radius: 10px;
+        background: #980707;
+        margin-right: 5px;
+      }
+      .other-icon{
+        width: 10px;
+        height: 10px;
+        border: 1px solid #57595d;
+        border-radius: 10px;
+        background: #6C8EAD;
+        margin-right: 5px;
+      }
+      .boundary-icon{
+        width: 10px;
+        border: 1px solid #9C8568;
+        margin-right: 5px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+}
