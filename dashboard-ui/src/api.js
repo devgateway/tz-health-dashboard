@@ -199,7 +199,7 @@ export const parsePeriod = (period) => {
 
 
 export const  diffPercentage = (prev, val) => {
-  debugger;
+
   if (prev == null || prev == 0) {
     return 'N/A'
   }

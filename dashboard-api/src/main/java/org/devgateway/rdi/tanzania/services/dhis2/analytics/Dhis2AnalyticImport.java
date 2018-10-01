@@ -32,6 +32,8 @@ public abstract class Dhis2AnalyticImport<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2AnalyticImport.class);
 
+    static Integer MAX_FACILITIES_TO_REQUEST = 100;
+
     @Autowired
     RegionRepository regionRepository;
 
@@ -41,7 +43,6 @@ public abstract class Dhis2AnalyticImport<T> {
 
     @Autowired
     WardRepository wardRepository;
-
 
 
     public enum Grouping {
@@ -85,7 +86,7 @@ public abstract class Dhis2AnalyticImport<T> {
         List<T> data = new ArrayList<>();
         LOGGER.info(">> Processing district " + district.getName());
 
-        List<Ward> wards=wardRepository.findByDistrict(district);
+        List<Ward> wards = wardRepository.findByDistrict(district);
 
         if (grouping.equals(Grouping.WARD)) {
             wards.forEach(ward -> data.addAll(byWard(ward, period)));
@@ -106,7 +107,40 @@ public abstract class Dhis2AnalyticImport<T> {
     }
 
 
-    public abstract List<T> byFacilities(List<Facility> facilities, QueryDimension period);
+    public List<T> byFacilities(List<Facility> facilities, QueryDimension period) {
+        LOGGER.info(facilities.size()+" facilities should be processed");
+        List<T> results = new ArrayList<>();
+
+        List<Facility> facilityToProcess = new ArrayList<>();
+        List<Facility> pending = new ArrayList<>();
+
+        if (facilities.size() > MAX_FACILITIES_TO_REQUEST) {
+            for (Integer i = 0; i < facilities.size(); i++) {
+                if (i < MAX_FACILITIES_TO_REQUEST) {
+                    facilityToProcess.add(facilities.get(i));
+                } else {
+                    pending.add(facilities.get(i));
+                }
+            }
+        }
+
+        if (facilityToProcess.size() == 0) {
+            facilityToProcess.addAll(facilities);
+        }
+
+        results.addAll(_byFacilities(facilityToProcess, period));
+
+        if (pending.size() > 0) {
+            results.addAll(byFacilities(pending, period));
+        }
+
+
+        return results;
+
+
+    }
+
+    public abstract List<T> _byFacilities(List<Facility> facilities, QueryDimension period);
 
 
 }

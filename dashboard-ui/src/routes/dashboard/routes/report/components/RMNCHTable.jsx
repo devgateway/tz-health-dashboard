@@ -55,16 +55,15 @@ class RMNCHTable extends React.Component {
               prevLabel = prev;
             }
 
-            let lan = 'en'
-            if (language == 'en')
-              lan = 'english'
-
-            if (language == 'sw')
-              lan = 'swahili'
-
             const cares = []
             let totalPrevious = 0
             let totalCurrent = 0
+
+
+
+
+
+
             return (<div className="RMNCH-table">
               <table className="">
                 <tbody>
@@ -81,11 +80,16 @@ class RMNCHTable extends React.Component {
                   </tr>
                   {
                     data.map(it => {
-                      debugger;
+
+                      const indicatorLabel = it.getIn(['indicator','name'])
+                      const translation=it.getIn(['indicator','translations']).find(e=>e.get('locale')==language);
+
                       totalPrevious += it.get('totalPrevPeriod')
                       totalCurrent += it.get('value')
+                      debugger;
                       return (<tr>
-                        <td className="desease-name">{it.getIn(['indicator','name'])}</td>
+                        <td className="desease-name">{(translation && translation.get('value'))?translation.get('value') :indicatorLabel}</td>
+
                         <td className="previous-value">{it.get('totalPrevPeriod')}</td>
                         <td className="current-value">{it.get('value')}</td>
                         <td className="previous-value">{diffPercentage(it.get('totalPrevPeriod'),it.get('value'))}</td>

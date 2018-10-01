@@ -15,18 +15,11 @@ public class Translation {
     @javax.persistence.Id
     private Long id;
     private String key;
-    private String original;
-    private String english;
-    private String swahili;
+    private String locale;
+    private boolean provided;
+    String value;
 
     public Translation() {
-    }
-
-    public Translation(String key, String original, String english, String swahili) {
-        this.key = key;
-        this.original = original;
-        this.english = english;
-        this.swahili = swahili;
     }
 
     public Long getId() {
@@ -45,27 +38,27 @@ public class Translation {
         this.key = key;
     }
 
-    public String getOriginal() {
-        return original;
+    public String getLocale() {
+        return locale;
     }
 
-    public void setOriginal(String original) {
-        this.original = original;
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
-    public String getEnglish() {
-        return english;
+    public String getValue() {
+        return value;
     }
 
-    public void setEnglish(String english) {
-        this.english = english;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getSwahili() {
-        return swahili;
+    public boolean isProvided() {
+        return provided;
     }
 
-    public void setSwahili(String swahili) {
-        this.swahili = swahili;
+    public void setProvided(boolean provided) {
+        this.provided = provided;
     }
 }
