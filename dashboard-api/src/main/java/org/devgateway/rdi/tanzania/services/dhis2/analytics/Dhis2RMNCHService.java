@@ -24,9 +24,9 @@ import java.util.List;
  */
 
 @Service
-public class Dhis2RMNNCHService extends Dhis2AnalyticImport<RMNCH> {
+public class Dhis2RMNCHService extends Dhis2AnalyticImport<RMNCH> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2RMNNCHService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Dhis2RMNCHService.class);
 
     @Autowired
     Dhis2Config dhis2Config;
@@ -54,20 +54,21 @@ public class Dhis2RMNNCHService extends Dhis2AnalyticImport<RMNCH> {
 
     public List<RMNCH> save(List<RMNCH> items) {
         rmnchRepository.save(items);
+        rmnchRepository.flush();
         return items;
     }
 
 
-    public void clean(Region r) {
-        rmnchRepository.deleteUsingRegion(r.getGid());
+    public void clean(Region r, Integer year) {
+        rmnchRepository.deleteUsingRegion(r.getGid(), year);
     }
 
     @Override
-    public List<RMNCH> byFacilities(List<Facility> facilities, QueryDimension period) {
+    public List<RMNCH> _byFacilities(List<Facility> facilities, QueryDimension period) {
 
         List<RMNCH> results = new ArrayList<>();
 
-        LOGGER.info("->:" + facilities.size() + " facilities will be processed");
+        LOGGER.info("->: Getting RMNCH of " + facilities.size() + " facilities will be processed");
         if (facilities.size() > 0) {
 
             Dhis2 dhis2 = new Dhis2(dhis2Config);

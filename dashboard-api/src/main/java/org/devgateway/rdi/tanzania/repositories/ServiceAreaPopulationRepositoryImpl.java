@@ -15,9 +15,10 @@ public class ServiceAreaPopulationRepositoryImpl implements ServiceAreaPopulatio
     EntityManager em;
 
     @Override
-    public void deleteUsingRegion(Long id) {
+    public void deleteUsingRegion(Long id, Integer year) {
         Query q = em.createNamedQuery("deleteByRegionId");
         q.setParameter(1, id);
+        q.setParameter(2, year);
         q.executeUpdate();
     }
 }

@@ -54,10 +54,29 @@ public class DataElementService extends Dhis2Service {
 
 
         return results.getDataElements().stream().map(dhis2Object -> {
-            Translation t = translationRepository.findByKey(dhis2Object.getId());
 
             DataElement dataElement = new DataElement(dhis2Object.getId(), dhis2Object.getDisplayName());
-            dataElement.setTranslation(t);
+            List<Translation> ts = translationRepository.findByKey(dhis2Object.getId());
+            if (ts != null && ts.size() > 0) {
+                //if translation are locally provided
+                dataElement.setTranslations(ts);
+            } else if (dhis2Object.getTranslations() != null && dhis2Object.getTranslations().size() > 0) {
+                dhis2Object.getTranslations().forEach(translation -> {
+                    //get dhis2 translations
+                    if (translation.getProperty().equalsIgnoreCase("NAME")) {
+                        Translation t = new Translation();
+                        t.setLocale(translation.getLocale());
+                        t.setKey(dataElement.getDhis2Id());
+                        t.setValue(translation.getValue());
+                        t.setProvided(false);
+                        dataElement.addTranslations(t);
+
+                    }
+                });
+
+            }
+
+
             return dataElement;
         }).collect(Collectors.toList());
 
