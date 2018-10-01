@@ -12,6 +12,8 @@ import org.devgateway.rdi.tanzania.services.OPDDiagnosesService;
 import org.devgateway.rdi.tanzania.services.PopulationService;
 import org.devgateway.rdi.tanzania.services.RMNCHService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-public class    FacilityController {
+public class FacilityController {
 
     @Autowired
     FacilityService facilityService;
@@ -56,21 +58,34 @@ public class    FacilityController {
 
 
     @RequestMapping("/facilities/{id}/diagnoses")
-    public List<OPDByAgeResponse> diangoses(@PathVariable Long id,
-                                            @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
-                                            @RequestParam(name = "q", required = false) Integer quarter,
-                                            @RequestParam(name = "m", required = false) Integer month) {
+    public ResponseEntity<List<OPDByAgeResponse>> diangoses(@PathVariable Long id,
+                                                            @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                                            @RequestParam(name = "q", required = false) Integer quarter,
+                                                            @RequestParam(name = "m", required = false) Integer month) {
 
-        return opdDiagnosesService.getOPDByPeriod(id, year, quarter, month);
+        Facility f = facilityService.getFacility(id);
+        if (f == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            List<OPDByAgeResponse> opdByAgeResponses = opdDiagnosesService.getOPDByFacilityAndPeriod(f, year, quarter, month);
+            return new ResponseEntity<List<OPDByAgeResponse>>(opdByAgeResponses, HttpStatus.OK);
+        }
     }
 
     @RequestMapping("/facilities/{id}/rmnch")
-    public List<RMNCHResponse> rmnch(@PathVariable Long id,
-                                     @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
-                                     @RequestParam(name = "q", required = false) Integer quarter,
-                                     @RequestParam(name = "m", required = false) Integer month) {
+    public ResponseEntity<List<RMNCHResponse>> rmnch(@PathVariable Long id,
+                                                     @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                                                     @RequestParam(name = "q", required = false) Integer quarter,
+                                                     @RequestParam(name = "m", required = false) Integer month) {
+        Facility f = facilityService.getFacility(id);
+        if (f == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyFacilityAndPeriod(f, year, quarter, month);
+            return new ResponseEntity<List<RMNCHResponse>>(rmnchByAgeResponses, HttpStatus.OK);
+        }
 
-        return rmnchService.getRMNCHbyPeriod(id, year, quarter, month);
+
     }
 
 }
