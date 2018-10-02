@@ -15,7 +15,7 @@ public class WardService {
     @Autowired
     WardRepository wardRepository;
 
-    public Ward getWardById(final Long id) {
+    public  Ward getWardById(final Long id) {
         Ward ward = null;
         if (id != null) {
             ward = wardRepository.findOne(id);
