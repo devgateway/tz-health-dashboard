@@ -1,6 +1,7 @@
 package org.devgateway.rdi.tanzania.response;
 
 import org.devgateway.rdi.tanzania.domain.Facility;
+import org.devgateway.rdi.tanzania.domain.Ward;
 
 /**
  * @author Sebastian Dimunzio
@@ -28,6 +29,19 @@ public class ResponseUtils {
             facilityResponse.setCoordinates(new Double[]{facility.getPoint().getCoordinate().x, facility.getPoint().getCoordinate().y});
 
             return facilityResponse;
+        } else {
+            return null;
+        }
+    }
+
+    public static WardResponse wardToResponse(Ward ward) {
+        if (ward != null) {
+            WardResponse wardResponse = new WardResponse();
+            wardResponse.setId(ward.getGid());
+            wardResponse.setName(ward.getName());
+            wardResponse.setDistrict(new BoundaryResponse(ward.getDistrict().getGid(), ward.getDistrict().getName()));
+            wardResponse.setRegion(new BoundaryResponse(ward.getDistrict().getRegion().getGid(), ward.getDistrict().getRegion().getName()));
+            return wardResponse;
         } else {
             return null;
         }

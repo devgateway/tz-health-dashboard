@@ -3,7 +3,7 @@ const API_REGIONS = API_ROOT_URL + '/geo/regions'
 const API_DISTRICTS = API_ROOT_URL + '/geo/districts'
 const API_WARDS = API_ROOT_URL + '/geo/wards'
 const API_WARD_INFO = API_ROOT_URL + '/wards'
-const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wards`
+const API_WARD_REPORT_INFO = `${API_ROOT_URL}/ward`
 const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facilities`
 const API_FACILITIES = `${API_ROOT_URL}/facilities`
 
