@@ -380,3 +380,16 @@
     }
   }
 }
+
+.ward-report-container{
+  width: 1150px;
+  max-width: 1150px;
+  align-items: center;
+  margin: auto;
+  overflow-x: auto;
+  .location-box{
+    div{
+      width: calc(33% + 2px) !important;
+    }
+  }
+}

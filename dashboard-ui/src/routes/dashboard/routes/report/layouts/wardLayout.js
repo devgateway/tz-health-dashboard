@@ -19,13 +19,13 @@ export default class WardLayout extends React.Component {
   componentDidMount() {
     const { onGetWardInfo, onGetWardPopulation, onGetWardDiagnoses,onGetWardRMNCH, params: {id, period} } = this.props;
     onGetWardInfo(id, period)
-    //onGetWardPopulation(id, period)
+    onGetWardPopulation(id, period)
     //onGetWardDiagnoses(id, period)
     //onGetWardRMNCH(id,period)
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.info.getIn(['ward', 'id']) !== prevProps.info.getIn(['ward', 'id'])) {
+    if (this.props.info.getIn(['id']) !== prevProps.info.getIn(['id'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
       onGetMapShape(info)
@@ -41,16 +41,25 @@ export default class WardLayout extends React.Component {
     const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
     
     const facilitiesFeatures = []
-    /*if (mapPoints) {
-      mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
-    }*/
+    const wardFacilities = []
+    if (mapPoints) {
+      mapPoints.forEach(f => {
+        facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()})
+        if (f.getIn(['ward', 'gid']) == id) {
+          wardFacilities.push(f.toJS())
+        }
+      })
+    }
 
+    //totals by ownership types
+    const totalPrivate = wardFacilities.filter(f => f.ownership.dhis2Id === 'UE4MHrqMzfd').length
+    const totalFaithBased = wardFacilities.filter(f => f.ownership.dhis2Id === 'rj0MuRMJYCj').length
+    const totalPublic = wardFacilities.filter(f => f.ownership.dhis2Id === 'm16TP0k7LVw').length
+    const totalParastatal = wardFacilities.filter(f => f.ownership.dhis2Id === 'G6Mg194YpDy').length
+    const totalDefence = wardFacilities.filter(f => f.ownership.dhis2Id === 'iTwLKcbi6BX').length
 
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const wardName = info.getIn(['name'])
-    const wardType = info.getIn(['type', 'name'])
-    const wardTypeId = info.getIn(['type', 'dhis2Id'])
-    const watdName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
 
@@ -62,53 +71,58 @@ export default class WardLayout extends React.Component {
         </div>
         <div className="ward-report-container">
           <div className="location-box">
-            <div><div className="location-title">Ward</div><div className="location-value">{watdName}</div></div>
+            <div><div className="location-title">Ward</div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title">District</div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title">Region</div><div className="location-value">{regionName}</div></div>
           </div>
           <div className="population-box">
-            <div className="info">
-              <div className="sub-title">Availability of Health Services in {regionName} region</div>
-              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> Total Population</div>
+            <div>
+              <div className="info">
+                <div className="sub-title">Availability of Health Services in {wardName} ward</div>
+                <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> Total Population</div>
 
-              <div className="ages">
-                <div className="value-label"><div>by Gender</div></div>
-                <div className="value-item"><div>Male</div><div>{population.getIn(['data', 'totalMale'])}</div></div>
-                <div className="value-item"><div>Female</div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
+                <div className="ages">
+                  <div className="value-label"><div>by Gender</div></div>
+                  <div className="value-item"><div>Male</div><div>{population.getIn(['data', 'totalMale'])}</div></div>
+                  <div className="value-item"><div>Female</div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
+                </div>
+
+                <div className="ages">
+                  <div className="value-label"><div>by Age</div></div>
+                  <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
+                  <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
+                  <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
+                </div>
               </div>
+              <div className="info">
+                <div className="total-pop"><span>{wardFacilities.length}</span> Total Health Facilities</div>
 
-              <div className="ages">
-                <div className="value-label"><div>by Age</div></div>
-                <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
-                <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
-                <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
+                <div className="ages">
+                  <div className="value-item"><div>{'Public'}</div><div>{totalPublic}</div></div>
+                  <div className="value-item"><div>{'Private'}</div><div>{totalPrivate}</div></div>
+                  <div className="value-item"><div>{'Faith Based'}</div><div>{totalFaithBased}</div></div>
+                  <div className="value-item"><div>{'Parastatal'}</div><div>{totalParastatal}</div></div>
+                  <div className="value-item"><div>{'Defence'}</div><div>{totalDefence}</div></div>
+                </div>
               </div>
             </div>
             <div className="map">
-              {/*facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
+              {mapShape.getIn(['features']) ?
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
-              : null*/}
+              : null}
               <div className="legend-box">
                 <div className="legend-title">Legend</div>
                 <div className="legend-item">
                   <div className="current-icon"/>
-                  <div className="legend-name">{wardName}</div>
+                  <div className="legend-name">Facility in {wardName} ward</div>
                 </div>
                 <div className="legend-item">
                   <div className="other-icon"/>
-                  {wardTypeId === "FgLhM6ea9dS" || wardTypeId === "WK2vj3N9aA0" ? 
-                    <div className="legend-name">{`Other ${wardType} in same region`}</div>
-                  :
-                    <div className="legend-name">Other Ward in ward</div>
-                  }                  
+                  <div className="legend-name">Facility in other ward</div>
                 </div>
                 <div className="legend-item">
                   <div className="boundary-icon"/>
-                  {wardTypeId === "FgLhM6ea9dS" || wardTypeId === "WK2vj3N9aA0" ? 
-                    <div className="legend-name">District boundary</div>
-                  :
-                    <div className="legend-name">Ward boundary</div>
-                  }                  
+                  <div className="legend-name">Ward boundary</div>
                 </div>
               </div>
             </div>

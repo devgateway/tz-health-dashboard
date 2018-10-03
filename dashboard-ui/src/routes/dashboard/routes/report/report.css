@@ -296,3 +296,12 @@
         border: 1px solid #9C8568;
         margin-right: 5px;
         margin-bottom: 4px; }
+
+.ward-report-container {
+  width: 1150px;
+  max-width: 1150px;
+  align-items: center;
+  margin: auto;
+  overflow-x: auto; }
+  .ward-report-container .location-box div {
+    width: calc(33% + 2px) !important; }

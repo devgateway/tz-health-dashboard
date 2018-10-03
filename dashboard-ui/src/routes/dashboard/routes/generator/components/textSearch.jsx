@@ -69,10 +69,6 @@ export default class App extends React.Component {
     }
   }
 
-  onKeyPress(e) {
-    debugger
-  }
-
   render() {
     const { value, selection } = this.state;
     const { searchType, searchResults } = this.props
@@ -81,7 +77,6 @@ export default class App extends React.Component {
       placeholder: "Search by name",
       value,
       onChange: this.onChange.bind(this),
-      onKeyPress: this.onKeyPress.bind(this),
     }
 
     return (
