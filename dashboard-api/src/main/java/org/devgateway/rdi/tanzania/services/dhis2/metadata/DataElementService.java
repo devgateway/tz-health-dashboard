@@ -69,6 +69,7 @@ public class DataElementService extends Dhis2Service {
                         t.setKey(dataElement.getDhis2Id());
                         t.setValue(translation.getValue());
                         t.setProvided(false);
+                        translationRepository.save(t);
                         dataElement.addTranslations(t);
 
                     }

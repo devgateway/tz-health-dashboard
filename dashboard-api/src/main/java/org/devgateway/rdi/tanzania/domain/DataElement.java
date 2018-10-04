@@ -15,7 +15,7 @@ public class DataElement {
     String dhis2Id;
     String name;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(targetEntity = Translation.class)
     List<Translation> translations;
 
 
