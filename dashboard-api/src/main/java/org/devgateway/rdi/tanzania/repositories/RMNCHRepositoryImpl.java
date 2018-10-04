@@ -26,7 +26,7 @@ public class RMNCHRepositoryImpl implements RMNCHRepositoryCustom {
 
     @Override
     public List<RMNCHResponse> getRMNCHByWard(Ward w, Integer year, Integer quarter, Integer month) {
-        return null;
+        return getRMNCHByWard(w, year, quarter, month, null);
     }
 
     @Override
