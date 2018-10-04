@@ -19,7 +19,6 @@ public class OPDDiagnosesServiceTest {
 
     @Test
     public void exampleTest() throws Exception {
-        opdDiagnosticRepository.findAll();
         Assert.assertTrue(true);
     }
 }

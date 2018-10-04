@@ -52,15 +52,8 @@ public class WardController {
         }
     }
 
-    @RequestMapping("/sa/{id}")
-    public WardResponse getWar2(@PathVariable Long id) {
-        Ward w = wardService.getWardById(id);
 
-        WardResponse wardResponse = ResponseUtils.wardToResponse(w);
-        return wardResponse;
-    }
-
-    @RequestMapping("/ward/{id}/population")
+    @RequestMapping("/wards/{id}/population")
     public ResponseEntity<List<Facility>> getWardFacilitiies(@PathVariable Long id) {
         Ward ward = wardService.getWardById(id);
         if (ward != null) {
@@ -72,7 +65,7 @@ public class WardController {
     }
 
 
-    @RequestMapping("/ward/{id}/diagnoses")
+    @RequestMapping("/wards/{id}/diagnoses")
     public ResponseEntity<List<OPDByAgeResponse>> diangoses(@PathVariable Long id,
                                                             @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                                                             @RequestParam(name = "q", required = false) Integer quarter,
@@ -87,7 +80,7 @@ public class WardController {
     }
 
 
-    @RequestMapping("/ward/{id}/rmnch")
+    @RequestMapping("/wards/{id}/rmnch")
     public ResponseEntity<List<RMNCHResponse>> rmnch(@PathVariable Long id,
                                                      @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                                                      @RequestParam(name = "q", required = false) Integer quarter,

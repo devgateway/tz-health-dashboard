@@ -31,6 +31,8 @@ public class AdminUnitsController {
     @Autowired
     WardRepository wardRepository;
 
+
+
     @RequestMapping("/regions")
     public ResponseEntity<List<Region>> getRegions() {
         List<Region> regions = regionRepository.findAll();

@@ -1,6 +1,7 @@
 package org.devgateway.rdi.tanzania.services.dhis2;
 
 import org.devgateway.rdi.tanzania.domain.*;
+import org.devgateway.rdi.tanzania.repositories.FacilityGroupRepository;
 import org.devgateway.rdi.tanzania.repositories.OPDDiagnosticRepository;
 import org.devgateway.rdi.tanzania.repositories.RMNCHRepository;
 import org.devgateway.rdi.tanzania.repositories.ServiceAreaPopulationRepository;
@@ -15,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +61,11 @@ public class MetaDataImportService {
     @Autowired
     RMNCHRepository rmnchRepository;
 
+    @Autowired
+    FacilityGroupRepository facilityGroupRepository;
+
+    @PersistenceContext
+    private EntityManager manager;
 
     //deleta all data and import it again
     public void clean() {
@@ -65,9 +73,12 @@ public class MetaDataImportService {
         opdDiagnosticRepository.deleteAllInBatch();
         rmnchRepository.deleteAllInBatch();
 
+
         dhis2DataElementGroupService.cleanDataElements();
+
         facilityService.cleanGroups();
         facilityService.cleanFacilities();
+
         dhis2DimensionService.cleanDimensions();
 
     }
@@ -75,15 +86,15 @@ public class MetaDataImportService {
     public List<Dimension> dimensions() {
         LOGGER.info("Getting dimensions");
         List<Dimension> dimensions = dhis2DimensionService.getAllDimensions(true);
-        dhis2DimensionService.save(dimensions);
-        return dimensions;
+        return dhis2DimensionService.save(dimensions);
+
     }
 
 
     public List<DataElementGroup> dataElementGroups() {
         List<DataElementGroup> dataElementGroups = dhis2DataElementGroupService.getDataElementGroups();
-        dhis2DataElementGroupService.saveGroups(dataElementGroups);
-        return dataElementGroups;
+        return dhis2DataElementGroupService.saveGroups(dataElementGroups);
+
     }
 
     public List<DataElementGroup> dataElements(List<DataElementGroup> groups) {
@@ -95,18 +106,14 @@ public class MetaDataImportService {
         });
 
 
-        dhis2DataElementGroupService.saveGroups(groups);
-        return groups;
+        return dhis2DataElementGroupService.saveGroups(groups);
+
     }
 
-    public void orgUnits() {
-        List<Facility> facilities = dhisOrgUnitService.getOrgUnitsList();
-        LOGGER.info("Got " + facilities.size() + " Facilities");
-
+    public List<Facility> addWard(List<Facility> facilities) {
         facilities.forEach(facility -> {
             //LOGGER.info("Getting ward by point for facility " + f.getName());
             Ward ward = wardService.wadByPoint(facility.getPoint());
-
             if (ward != null) {
                 facility.setWard(ward);
                 LOGGER.info("Ward found was" + ward.getName());
@@ -116,27 +123,41 @@ public class MetaDataImportService {
                         + "   coordinates are (" + facility.getPoint() + ")");
             }
         });
+        return facilities;
+    }
 
+    public List<Facility> orgUnits() {
+        List<Facility> facilities = dhisOrgUnitService.getOrgUnitsList();
+        LOGGER.info("Got " + facilities.size() + " Facilities");
+
+        addWard(facilities);
 
         facilities.stream().forEach(facility -> {
                     facility.getFacilityGroups().forEach(facilityGroup -> {
 
-                        if (facilityGroup.getItem() != null) {
-                            if (facilityGroup.getItem().getDimensions().stream()
-                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Type")).findFirst().isPresent()) {
-                                facility.setType(facilityGroup.getItem());
+                        FacilityGroup facilityGroup1 = facilityGroupRepository.findOne(facilityGroup.getId());
+
+
+                        if (facilityGroup1.getItem() != null) {
+                            if (facilityGroup1.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Type"))
+                                    .findFirst().isPresent()) {
+                                facility.setType(facilityGroup1.getItem());
                             }
-                            if (facilityGroup.getItem().getDimensions().stream()
-                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Detailed Type")).findFirst().isPresent()) {
-                                facility.setDetailedType(facilityGroup.getItem());
+                            if (facilityGroup1.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Detailed Type"))
+                                    .findFirst().isPresent()) {
+                                facility.setDetailedType(facilityGroup1.getItem());
                             }
-                            if (facilityGroup.getItem().getDimensions().stream()
-                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Ownership")).findFirst().isPresent()) {
-                                facility.setOwnership(facilityGroup.getItem());
+                            if (facilityGroup1.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().
+                                            equalsIgnoreCase("Ownership")).findFirst().isPresent()) {
+                                facility.setOwnership(facilityGroup1.getItem());
                             }
-                            if (facilityGroup.getItem().getDimensions().stream()
-                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Detailed Ownership")).findFirst().isPresent()) {
-                                facility.setDetailedOwnership(facilityGroup.getItem());
+                            if (facilityGroup1.getItem().getDimensions().stream()
+                                    .filter(dimension -> dimension.getName().equalsIgnoreCase("Detailed Ownership"))
+                                    .findFirst().isPresent()) {
+                                facility.setDetailedOwnership(facilityGroup1.getItem());
                             }
                         }
 
@@ -146,23 +167,25 @@ public class MetaDataImportService {
 
         );
 
-        facilityService.save(facilities);
+        return facilityService.save(facilities);
 
     }
 
 
-    public void orgUnitsGroups() {
+    public List<FacilityGroup> orgUnitsGroups() {
         List<FacilityGroup> facilityGroups = dhis2OrgGroupService.getOrgGroups();
-        facilityService.saveGroups(facilityGroups);
+        return facilityService.saveGroups(facilityGroups);
     }
 
     public void importMedata() {
-        clean();
         dimensions();
+
         orgUnitsGroups();
+
         List<DataElementGroup> dataElementGroups = dataElementGroups();
 
         //Import data Element of needed groups
+
         List<DataElementGroup> dataElementGroups1 = dataElementGroups.stream()
                 .filter(dataElementGroup ->
                         dataElementGroup.getName().equalsIgnoreCase("Population") ||

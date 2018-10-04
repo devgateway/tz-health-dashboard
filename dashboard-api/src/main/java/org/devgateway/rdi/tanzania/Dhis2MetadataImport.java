@@ -38,7 +38,9 @@ public class Dhis2MetadataImport implements CommandLineRunner {
 
 
     @Override
+
     public void run(String... strings) {
+         dhis2MetaDataImportService.clean();
         dhis2MetaDataImportService.importMedata();
         System.exit(3);
     }

@@ -1,11 +1,10 @@
 package org.devgateway.rdi.tanzania;
 
 import com.opencsv.CSVReader;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.devgateway.rdi.tanzania.domain.Translation;
 import org.devgateway.rdi.tanzania.repositories.TranslationRepository;
 import org.devgateway.rdi.tanzania.services.dhis2.MetaDataImportService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -26,7 +25,7 @@ public class Runner implements ApplicationRunner {
     private final String CSV_FILE = "/data/translations.csv";
 
 
-    private static final Logger logger = LogManager.getLogger(ApplicationRunner.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Application.class.getName());
 
     @Override
     public void run(ApplicationArguments applicationArguments) {
