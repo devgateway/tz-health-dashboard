@@ -7,6 +7,7 @@ import  {MonthLabel,QuarterLabel} from './labels'
 class TopTenDeseases extends React.Component {
 
   render() {
+
     const {period} = this.props
     const {facilityName, i18n: {language}} = this.props
     const year = parseInt(period.get('y'))

@@ -40,7 +40,8 @@ public class WardController {
     @Autowired
     RMNCHService rmnchService;
 
-    @RequestMapping("/ward/{id}")
+
+    @RequestMapping("/wards/{id}")
     public ResponseEntity<WardResponse> getWard(@PathVariable Long id) {
         Ward w = wardService.getWardById(id);
         if (w != null) {
@@ -89,7 +90,7 @@ public class WardController {
         if (w == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            List<RMNCHResponse> rmnch = rmnchService.getRMNCHbyFacilityAndPeriod(null, year, quarter, month);
+            List<RMNCHResponse> rmnch = rmnchService.getRMNCHbyWardAndPeriod(w, year, quarter, month);
             return new ResponseEntity<List<RMNCHResponse>>(rmnch, HttpStatus.OK);
         }
 

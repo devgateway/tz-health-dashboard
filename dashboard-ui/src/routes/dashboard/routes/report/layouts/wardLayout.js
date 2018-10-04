@@ -20,8 +20,8 @@ export default class WardLayout extends React.Component {
     const { onGetWardInfo, onGetWardPopulation, onGetWardDiagnoses,onGetWardRMNCH, params: {id, period} } = this.props;
     onGetWardInfo(id, period)
     onGetWardPopulation(id, period)
-    //onGetWardDiagnoses(id, period)
-    //onGetWardRMNCH(id,period)
+    onGetWardDiagnoses(id, period)
+    onGetWardRMNCH(id,period)
   }
 
   componentDidUpdate(prevProps) {
@@ -38,8 +38,11 @@ export default class WardLayout extends React.Component {
   }
 
   render() {
+
     const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
-    
+
+
+
     const facilitiesFeatures = []
     const wardFacilities = []
     if (mapPoints) {
@@ -127,9 +130,17 @@ export default class WardLayout extends React.Component {
               </div>
             </div>
           </div>
-          
+          <div className="top-ten-deseases">
+            <TopTenDeseases  period={period}  facilityName={"facilwaityName"} diagnoses={this.props.diagnoses}/>
+          </div>
+          <div className="RMNCH-box">
+            <div className="sub-title">Reproductive Maternal, Newborn and Child Health at {wardName} </div>
+            <RMNCHTable  period={period}  facilityName={"facilityName"} RMNCH={this.props.RMNCH}/>
+          </div>
+
         </div>
-      </div>
+
+            </div>
     )
   }
 }
