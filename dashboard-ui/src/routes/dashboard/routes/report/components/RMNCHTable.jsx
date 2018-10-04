@@ -86,7 +86,7 @@ class RMNCHTable extends React.Component {
 
                       totalPrevious += it.get('totalPrevPeriod')
                       totalCurrent += it.get('value')
-                      debugger;
+                      
                       return (<tr>
                         <td className="desease-name">{(translation && translation.get('value'))?translation.get('value') :indicatorLabel}</td>
 

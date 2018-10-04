@@ -109,14 +109,5 @@ public class AdminUnitsController {
         }
     }
 
-    @RequestMapping("/wards/{id}")
-    public ResponseEntity<Ward> getWardById(@PathVariable Long id) {
-        Ward Ward= wardRepository.findOne(id);
-        if (Ward != null) {
-            return new ResponseEntity(Ward, HttpStatus.OK);
-
-        } else return new ResponseEntity(HttpStatus.NOT_FOUND);
-
-    }
 
 }

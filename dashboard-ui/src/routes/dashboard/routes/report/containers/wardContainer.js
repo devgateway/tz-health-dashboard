@@ -13,6 +13,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 const mapStateToProps = state => {
+
   return {
     mapShape: state.getIn(['ward', 'reportData', 'map', 'shape']),
     mapPoints: state.getIn(['ward', 'reportData', 'map', 'points']),

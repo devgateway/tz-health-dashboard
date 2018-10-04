@@ -123,7 +123,7 @@ const ACTION_HANDLERS = {
   },
   [FACILITY_POPULATION_RESPONSE]: (state, action) => {
     const {data} = action;
-    return state.setIn(['reportData', 'population', 'data'], Immutable.fromJS(getAggregatedPopulation(data))).setIn(['reportData', 'population', 'loading'], false)
+    return state.setIn(['reportData', 'population', 'data'], Immutable.fromJS(api.getAggregatedPopulation(data))).setIn(['reportData', 'population', 'loading'], false)
   },
   [FACILITY_POPULATION_ERROR]: (state, action) => {
     const {error} = action;
@@ -135,7 +135,7 @@ const ACTION_HANDLERS = {
   },
   [FACILITY_DIAGNOSES_RESPONSE]: (state, action) => {
     const {data} = action;
-    return state.setIn(['reportData', 'diagnoses', 'data'], Immutable.fromJS(getAggregatedDiagnosis(data))).setIn(['reportData', 'diagnoses', 'loading'], false)
+    return state.setIn(['reportData', 'diagnoses', 'data'], Immutable.fromJS(api.getAggregatedDiagnosis(data))).setIn(['reportData', 'diagnoses', 'loading'], false)
   },
   [FACILITY_DIAGNOSES_ERROR]: (state, action) => {
     const {error} = action;
@@ -180,31 +180,7 @@ const sumValues = (dataset) => {
   return total
 }
 
-const getAggregatedPopulation = (data) => {
-  const total = sumValues(data)
-  const totalMale = sumValues(data.filter(i => i.gender.name === 'ME'))
-  const totalFemale = sumValues(data.filter(i => i.gender.name === 'KE'))
-  const totalUnder5 = sumValues(data.filter(i => i.age.name === '< 1' || i.age.name === '1-4'))
-  const total5to60 = sumValues(data.filter(i => i.age.name !== '< 1' && i.age.name !== '1-4' && i.age.name !== '60+'))
-  const totalAbove60 = sumValues(data.filter(i => i.age.name === '60+'))
-  return {total, totalMale, totalFemale, totalUnder5, total5to60, totalAbove60}
-}
 
-const getAggregatedDiagnosis = (data) => {
-  const parsedData = []
-  data.forEach(d => {
-    const {values, diagnostic, totalPrevPeriod} = d
-    // "xLoqtMo0pI";"Umri chini ya mwezi 1" // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1" // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
-    const totalUnder5 = sumValues(values.filter(i => i.age.dhis2Id === "xLotqtMo0pI" || i.age.dhis2Id === "i3RHRoyrkuO" || i.age.dhis2Id === "Cw0V80VVLNX"))
-    // "GF4Nq9E8x6l";"Umri miaka 5 hadi umri chini ya miaka 60"
-    const total5to60 = sumValues(values.filter(i => i.age.dhis2Id === "GF4Nq9E8x6l"))
-    // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
-    const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))
-    const total = sumValues(values)
-    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
-  })
-  return parsedData
-}
 
 // ------------------------------------ Reducer ------------------------------------
 const initialState = Immutable.fromJS({
