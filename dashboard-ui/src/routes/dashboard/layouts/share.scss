@@ -1,8 +1,10 @@
 .share-buttons{
-  position: absolute;
-  top: 200px;
+  position: fixed;
+  top: 180px;
   left: 2px;
-  padding: 3px;
+  opacity: .9;
+  padding-top:3px;
+  padding-left: 3px;
   background-color: #F4F2EC;
   border:1px solid #2C4856;
 
