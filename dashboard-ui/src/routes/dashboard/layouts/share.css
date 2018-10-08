@@ -1,0 +1,41 @@
+.share-buttons {
+  position: absolute;
+  top: 200px;
+  left: 2px;
+  padding: 3px;
+  background-color: #F4F2EC;
+  border: 1px solid #2C4856; }
+
+.shareLink {
+  width: 50px;
+  height: 50px;
+  display: block;
+  background-image: url("../../../../public/share_icons_small.png");
+  background-repeat: no-repeat; }
+
+.facebook {
+  background-position: -12px -9px; }
+
+.twitter {
+  background-position: -78px -9px; }
+
+.instagram {
+  background-position: 144px -9px; }
+
+.gplus {
+  background-position: -12px -72px; }
+
+.in {
+  background-position: -78px -72px; }
+
+.pinterest {
+  background-position: -144px -72px; }
+
+.vk {
+  background-position: -12px -135px; }
+
+.twitter {
+  background-position: -78px -135px; }
+
+.be {
+  background-position: -144px -135px; }
