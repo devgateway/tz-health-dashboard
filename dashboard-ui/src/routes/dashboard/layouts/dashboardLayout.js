@@ -1,16 +1,16 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { bindActionCreators } from 'redux'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import {translate, Trans} from "react-i18next";
-
+import Share from './share.jsx'
 const component = (props) => {
   return (
     <div className="dashboard">
-	    {props.children}
-	</div>
-  )
+      <div><Share></Share></div>
+      {props.children}
+    </div>)
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 }, dispatch)
 
 const mapStateToProps = state => {
-    return {}
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(translate("translations")(component))
