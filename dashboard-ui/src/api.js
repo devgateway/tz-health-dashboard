@@ -122,14 +122,14 @@ export const getWardData = (id, period, type) => {
           }
           try {
             response.json().then(function(data) {
-                if (data){
-                  resolve(data);
-               } else{
-                 debugger;
-               }
-             });
+              if (data) {
+                resolve(data);
+              } else {
+
+              }
+            });
           } catch (e) {
-            debugger;
+
           }
 
         }
@@ -192,17 +192,35 @@ export const getQuarterLabel = (q) => {
 
   return { start: getMonthName(start, 'short'), end: getMonthName(end, 'short') }
 }
+
+
 export const parsePeriod = (period) => {
-
-  const periodObject = {}
-
   if (period && period.startsWith('y-')) {
+    const periodObject = {}
+
     const periodSp = period.split('_')
     periodSp.forEach(p => {
       periodObject[p.split('-')[0]] = p.split('-')[1]
     })
+
+    return periodObject
+
+  } else {
+    return null;
   }
-  return periodObject
+}
+
+export const composePeriod = (periodObject) => {
+
+  const { y, m, q } = periodObject
+  if (y && !m && !q) {
+    return 'y-' + y
+  }
+  if (y && q) {
+    return 'y-' + y + '_q-' + q
+  } else if (y && m) {
+    return 'y-' + y + '_m-' + m
+  }
 }
 
 
@@ -229,14 +247,14 @@ export const getAggregatedPopulation = (data) => {
   const totalUnder5 = sumValues(data.filter(i => i.age.name === '< 1' || i.age.name === '1-4'))
   const total5to60 = sumValues(data.filter(i => i.age.name !== '< 1' && i.age.name !== '1-4' && i.age.name !== '60+'))
   const totalAbove60 = sumValues(data.filter(i => i.age.name === '60+'))
-  return {total, totalMale, totalFemale, totalUnder5, total5to60, totalAbove60}
+  return { total, totalMale, totalFemale, totalUnder5, total5to60, totalAbove60 }
 }
 
 
 export const getAggregatedDiagnosis = (data) => {
   const parsedData = []
   data.forEach(d => {
-    const {values, diagnostic, totalPrevPeriod} = d
+    const { values, diagnostic, totalPrevPeriod } = d
     // "xLoqtMo0pI";"Umri chini ya mwezi 1" // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1" // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
     const totalUnder5 = sumValues(values.filter(i => i.age.dhis2Id === "xLotqtMo0pI" || i.age.dhis2Id === "i3RHRoyrkuO" || i.age.dhis2Id === "Cw0V80VVLNX"))
     // "GF4Nq9E8x6l";"Umri miaka 5 hadi umri chini ya miaka 60"
@@ -244,7 +262,7 @@ export const getAggregatedDiagnosis = (data) => {
     // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
     const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))
     const total = sumValues(values)
-    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, ranges: {totalUnder5, total5to60, totalAbove60, total}})
+    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, ranges: { totalUnder5, total5to60, totalAbove60, total } })
   })
   return parsedData
 }

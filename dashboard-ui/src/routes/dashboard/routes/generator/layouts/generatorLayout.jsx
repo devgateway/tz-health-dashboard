@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from "prop-types"
 import D3Map from '../../../../../components/d3Map'
 import TextSearch from '../containers/textSearchContainer'
-
+import {composePeriod} from '../../../../../api'
 export default class WardLayout extends React.Component {
 
   static contextTypes = {
@@ -79,16 +79,22 @@ export default class WardLayout extends React.Component {
   }
 
   onGenerateReport() {
-    const { ward, facility, params: {reportType} } = this.props
+
+    const { ward, facility, period, params: {reportType} } = this.props
+    debugger;
+    const strPeriod=composePeriod(period.toJS())
     if (reportType === 'ward') {
-      this.context.router.history.push(`/report/ward/${ward.get('selected')}`)
+      this.context.router.history.push(`/report/ward/${ward.get('selected')}/${strPeriod}}`)
     } else {
-      this.context.router.history.push(`/report/facility/${facility.get('selected')}`)
+      this.context.router.history.push(`/report/facility/${facility.get('selected')}/${strPeriod}`)
     }
   }
 
   render() {
-    const { region, district, ward, facility, params: {reportType} } = this.props
+    const { region, district, ward,period, facility, params: {reportType} } = this.props
+
+
+
     let mapShapes = region.get('list').toJS()
     if (ward.get('selected')) {
       const wardFeature = ward.get('list').toJS().features.find(f => f.properties.ID == ward.get('selected'))
@@ -131,7 +137,7 @@ export default class WardLayout extends React.Component {
             </div>
             <div className="generator-dropdowns">
               <div className="path-dropdown">
-                <div className="dropdown-title">Region</div> 
+                <div className="dropdown-title">Region</div>
                 <div className="">
                   <select value={region.get('selected') || -1} className="" onChange={e => this.onChangeRegion(e)} >
                     <option value={-1}>Select a region</option>
@@ -184,12 +190,12 @@ export default class WardLayout extends React.Component {
             </div>
             <div className="generator-map">
               {mapShapes.features.length > 0 ?
-                <D3Map width="600" height="480" colors={["#FF8C42", '#0C4700']} 
-                  shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" 
+                <D3Map width="600" height="480" colors={["#FF8C42", '#0C4700']}
+                  shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568"
                   onFeatureClick={f => this.onFeatureClick(f)} onPointClick={f => this.onFacilityClicked(f)}
                   shapeFeatures={mapShapes} pointFeatures={mapPoints} showBasemap={true}  zoomeable={true}></D3Map>
               : null}
-            </div>            
+            </div>
           </div>
         </div>
   	  </div>
