@@ -77,16 +77,20 @@ const ACTION_HANDLERS = {
     const { payload: { pathname } } = action;
     const pattern = pathname.substring(pathname.lastIndexOf('/') + 1);
     if (pattern) {
-      const parsed=api.parsePeriod(pattern);
 
-      return state.setIn(['period'],Immutable.fromJS(parsed))
+      const parsed = api.parsePeriod(pattern);
+      if (parsed != null) {
+        return state.setIn(['period'], Immutable.fromJS(parsed))
+      } else {
+        return state;
+      }
     }
     return state;
   }
 };
 
 // ------------------------------------ Reducer ------------------------------------
-const initialState = Immutable.fromJS({ 'dashboard': true, year: 2017, quarterly: null, month: null });
+const initialState = Immutable.fromJS({ 'dashboard': true, 'period': api.parsePeriod('y-2017') });
 
 // reducer is returned as default
 export default function appReducer(state = initialState, action) {
