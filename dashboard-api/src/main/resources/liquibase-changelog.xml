@@ -74,4 +74,29 @@
             (indicator_id);
         </sql>
     </changeSet>
+
+
+
+    <changeSet id="add_spatial_index_to_facility" author="sdimunzio">
+        <sql>
+            CREATE INDEX sidx_facility_point
+            ON public.facility
+            USING gist
+            (point);
+
+        </sql>
+    </changeSet>
+
+    <changeSet id="populate_geometry_columns" author="sdimunzio">
+        <sql>
+
+            WITH
+            t AS (SELECT table_schema, table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'public' AND table_type = 'BASE TABLE')
+            SELECT Populate_Geometry_Columns((table_schema::text || '.' || table_name::text)::regclass)FROM t;
+        </sql>
+    </changeSet>
+
+
 </databaseChangeLog>
