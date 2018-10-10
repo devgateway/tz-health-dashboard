@@ -86,16 +86,7 @@
                 </includes>
             </resource>
 
-            <resource>
-                <filtering>true</filtering>
-                <directory>src/test/resources</directory>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.sql</include>
-                    <include>**/*.xml</include>
-                    <include>**/*.xsd</include>
-                </includes>
-            </resource>
+
         </resources>
         <plugins>
             <plugin>
