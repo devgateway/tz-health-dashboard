@@ -84,7 +84,7 @@ export default class WardLayout extends React.Component {
     debugger;
     const strPeriod=composePeriod(period.toJS())
     if (reportType === 'ward') {
-      this.context.router.history.push(`/report/ward/${ward.get('selected')}/${strPeriod}}`)
+      this.context.router.history.push(`/report/ward/${ward.get('selected')}/${strPeriod}`)
     } else {
       this.context.router.history.push(`/report/facility/${facility.get('selected')}/${strPeriod}`)
     }
