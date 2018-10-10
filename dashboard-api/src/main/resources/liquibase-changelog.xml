@@ -37,6 +37,7 @@
         </sql>
     </changeSet>
 
+
     <changeSet id="add_index_opddiagnostic_facility_id" author="sdimunzio">
         <sql>
             CREATE INDEX opddiagnostic_facility_id_idx
@@ -46,4 +47,31 @@
         </sql>
     </changeSet>
 
+    <changeSet id="add_index_rmnch_ward_gid_idx" author="sdimunzio">
+        <sql>
+            CREATE INDEX rmnch_ward_gid_idx
+            ON public.rmnch
+            USING btree
+            (ward_gid);
+        </sql>
+    </changeSet>
+
+    <changeSet id="add_index_rmnch_facility_id_idx" author="sdimunzio">
+        <sql>
+
+            CREATE INDEX rmnch_facility_id_idx
+            ON public.rmnch
+            USING btree
+            (facility_id);
+        </sql>
+    </changeSet>
+
+    <changeSet id="add_index_rmnch_indicator_id_idx" author="sdimunzio">
+        <sql>
+            CREATE INDEX rmnch_indicator_id_idx
+            ON public.rmnch
+            USING btree
+            (indicator_id);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
