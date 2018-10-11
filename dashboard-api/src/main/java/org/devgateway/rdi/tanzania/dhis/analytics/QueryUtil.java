@@ -158,6 +158,11 @@ public class QueryUtil {
         return queryDimension;
     }
 
+    public static QueryDimension MONTH(Integer year, Integer month) {
+        QueryDimension queryDimension = new QueryDimension("pe", "Period");
+        queryDimension.adItem(year.toString().concat(month.toString()), "month "+month );
+        return queryDimension;
+    }
 
     public static QueryDimension MONTHS_OFF(Integer... years) {
         QueryDimension queryDimension = new QueryDimension("pe", "Period");
