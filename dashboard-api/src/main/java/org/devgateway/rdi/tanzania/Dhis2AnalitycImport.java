@@ -65,7 +65,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     public void population(Region region, Integer year, boolean incremental) {
 
-        if (incremental) {
+        if (!incremental) {
             dhis2PopulationService.clean(region, year);
         }
 
@@ -75,7 +75,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     public void OPDDiagnoses(Region region, Integer year, boolean incremental) {
 
-        if (incremental) {
+        if (!incremental) {
             dhis2OPDDiagnosesService.clean(region, year);
         }
 
