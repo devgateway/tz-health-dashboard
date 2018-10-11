@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Sebastian Dimunzio
@@ -16,6 +17,8 @@ public interface WardRepository extends JpaRepository<Ward, Long>, WardRepositor
 
 
     @EntityGraph(value = "facilityJoin", type = EntityGraph.EntityGraphType.FETCH)
-    List<Ward> findByDistrict(District district);
+    Set<Ward> findByDistrict(District district);
+
+
 }
 

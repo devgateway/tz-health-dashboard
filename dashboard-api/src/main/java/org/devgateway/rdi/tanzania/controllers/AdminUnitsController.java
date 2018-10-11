@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Sebastian Dimunzio
@@ -87,9 +88,9 @@ public class AdminUnitsController {
 
 
     @RequestMapping("/wards")
-    public ResponseEntity<List<Ward>> getWard(@RequestParam(name = "district", required = false) Long id) {
+    public ResponseEntity<Set<Ward>> getWard(@RequestParam(name = "district", required = false) Long id) {
 
-        List<Ward> data = null;
+        Set<Ward> data = null;
 
         if (id != null) {
             District district = districtRepository.findOne(id);
@@ -97,15 +98,16 @@ public class AdminUnitsController {
                 data = wardRepository.findByDistrict(district);
             }
         } else {
-            data = wardRepository.findAll();
+           List all= wardRepository.findAll();
+           data.addAll(all);
         }
 
 
         if (data != null) {
-            return new ResponseEntity<List<Ward>>(data, HttpStatus.OK);
+            return new ResponseEntity<Set<Ward>>(data, HttpStatus.OK);
 
         } else {
-            return new ResponseEntity<List<Ward>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Set<Ward>>(HttpStatus.NOT_FOUND);
         }
     }
 
