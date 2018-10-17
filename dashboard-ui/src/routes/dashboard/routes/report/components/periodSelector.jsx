@@ -92,10 +92,10 @@ export default class PeriodSelector extends React.Component {
             </select>
           </div>
           <div className="period-selector">
-            <select  className="" onChange={e => this.onChangePeriod(e)} >
+            <select  className="" onChange={e => this.onChangePeriod(e)} value={period}>
               <option value={-1}>Select a period</option>
               {options.map(option => {
-                return <option key={`${option.id}`} selected={option.id==period} value={option.id}>{option.label}</option>
+                return <option key={`${option.id}`} value={option.id}>{option.label}</option>
               })}
             </select>
           </div>
