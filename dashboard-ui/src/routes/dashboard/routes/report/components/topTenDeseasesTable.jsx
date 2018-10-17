@@ -1,19 +1,20 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
-import {getMonthName, getQuarterLabel, diffPercentage} from '../../../../../api'
-import {MonthLabel, QuarterLabel} from './labels'
+import {getMonthName,getQuarterLabel, diffPercentage,parsePeriod,getCSVURI} from '../../../../../api'
+import  {MonthLabel,QuarterLabel} from './labels'
 
 
 class TopTenDeseases extends React.Component {
 
   render() {
 
-    const {period} = this.props
-    const {facilityName, i18n: {language}} = this.props
+    const {id,type,period,facilityName, i18n: {language}} = this.props
     const year = parseInt(period.get('y'))
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
     let current, currentLabel, prev, prevLabel;
+
+
 
     if (month) {
       current = month
@@ -82,6 +83,7 @@ class TopTenDeseases extends React.Component {
           </tr>
           {
             deseases.map((it) => {
+              debugger
               const label = it.getIn(['diagnostic','name'])
               const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
               const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
@@ -122,6 +124,10 @@ class TopTenDeseases extends React.Component {
         </tbody>
       </table>
 
+      <div className="download csv">
+        <a href={getCSVURI(type,'diagnoses','csv',id,period.toJS())}>CSV</a>
+        <a href={getCSVURI(type,'diagnoses','json',id,period.toJS())}>JSON</a>
+      </div>
     </div>)
   }
 }

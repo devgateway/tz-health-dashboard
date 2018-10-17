@@ -131,11 +131,11 @@ export default class WardLayout extends React.Component {
             </div>
           </div>
           <div className="top-ten-deseases">
-            <TopTenDeseases  period={period}  facilityName={wardName} diagnoses={this.props.diagnoses}/>
+            <TopTenDeseases  type="wards"  id={id} period={period}  facilityName={wardName} diagnoses={this.props.diagnoses}/>
           </div>
           <div className="RMNCH-box">
             <div className="sub-title">Reproductive Maternal, Newborn and Child Health at {wardName} </div>
-            <RMNCHTable  period={period}  facilityName={wardName} RMNCH={this.props.RMNCH}/>
+            <RMNCHTable type="wards" id={id}  period={period}  facilityName={wardName} RMNCH={this.props.RMNCH}/>
           </div>
 
         </div>

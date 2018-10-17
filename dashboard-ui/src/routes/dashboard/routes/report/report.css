@@ -11,6 +11,20 @@
   font-size: 20px;
   font-weight: bold; }
 
+.download {
+  display: block;
+  text-align: right; }
+  .download a {
+    target: _blank;
+    color: #668DAA;
+    font-size: 11px;
+    text-decoration: none; }
+  .download a:after {
+    content: "|";
+    margin: 3px; }
+  .download a:nth-last-child(1):after {
+    content: ""; }
+
 .report-header {
   color: #2C4856;
   font-size: 30px;
@@ -24,6 +38,8 @@
   background-color: #F4F2EC; }
   .report-header > div {
     display: inline-block; }
+  .report-header .download {
+    border: 1px solid red; }
   .report-header .period-selector-container {
     float: right;
     line-height: 45px; }
@@ -241,7 +257,7 @@
     padding: 6px;
     border-right: 1px solid #CCC;
     display: inline-block;
-    padding: 0px 20px; }
+    padding: 0 20px; }
     .deaths-box .value-item div:first-child {
       font-size: 14px;
       color: #B4B5A8; }
