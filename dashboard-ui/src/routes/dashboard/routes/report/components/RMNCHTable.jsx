@@ -8,7 +8,7 @@ class RMNCHTable extends React.Component {
   render() {
 
 
-    const {id,RMNCH, period,facilityName, i18n: {language}} = this.props
+    const {id,RMNCH,type, period,facilityName, i18n: {language}} = this.props
 
     let data=[]
 
@@ -102,7 +102,9 @@ class RMNCHTable extends React.Component {
                   </tr>
                 </tbody>
               </table>
-                <div className="download ">  <a href={getCSVURI('rmnch','csv',id,period.toJS())}>CSV</a><a href={getCSVURI('rmnch','json',id,period.toJS())}>JSON</a></div>
+                <div className="download ">
+                  <a href={getCSVURI(type,'rmnch','csv',id,period.toJS())}>CSV</a>
+                  <a href={getCSVURI(type,'rmnch','json',id,period.toJS())}>JSON</a></div>
             </div>)
           }else{
             return null;

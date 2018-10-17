@@ -2,9 +2,7 @@ package org.devgateway.rdi.tanzania.controllers;
 
 import org.devgateway.rdi.tanzania.domain.Facility;
 import org.devgateway.rdi.tanzania.domain.Ward;
-import org.devgateway.rdi.tanzania.response.OPDByAgeResponse;
-import org.devgateway.rdi.tanzania.response.WardResponse;
-import org.devgateway.rdi.tanzania.response.RMNCHResponse;
+import org.devgateway.rdi.tanzania.response.*;
 import org.devgateway.rdi.tanzania.services.FacilityService;
 import org.devgateway.rdi.tanzania.services.OPDDiagnosesService;
 import org.devgateway.rdi.tanzania.services.RMNCHService;
@@ -13,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.devgateway.rdi.tanzania.response.ResponseUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -80,6 +76,22 @@ public class WardController {
         }
     }
 
+    @RequestMapping(value = "/wards/{id}/diagnoses.csv", produces = "text/csv")
+    public void diangosesAsCsv(HttpServletResponse response, @PathVariable Long id,
+                               @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                               @RequestParam(name = "q", required = false) Integer quarter,
+                               @RequestParam(name = "m", required = false) Integer month) throws IOException {
+        Ward w = wardService.getWardById(id);
+        String csvFileName = w.getName() + "_diagnoses.csv";
+        response.setContentType("text/csv");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+        response.setHeader(headerKey, headerValue);
+        List<OPDByAgeResponse> opdByAgeResponses = opdDiagnosesService.getOPDByWardAndPeriod(w, year, quarter, month);
+        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses);
+
+    }
+
 
     @RequestMapping("/wards/{id}/rmnch")
     public ResponseEntity<List<RMNCHResponse>> rmnch(@PathVariable Long id,
@@ -93,6 +105,26 @@ public class WardController {
             List<RMNCHResponse> rmnch = rmnchService.getRMNCHbyWardAndPeriod(w, year, quarter, month);
             return new ResponseEntity<List<RMNCHResponse>>(rmnch, HttpStatus.OK);
         }
+
+
+    }
+
+
+    @RequestMapping("/wards/{id}/rmnch.csv")
+    public void rmnchAsCSV(HttpServletResponse response, @PathVariable Long id,
+                           @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
+                           @RequestParam(name = "q", required = false) Integer quarter,
+                           @RequestParam(name = "m", required = false) Integer month) throws IOException {
+        Ward w = wardService.getWardById(id);
+
+        String csvFileName = w.getName() + "_rmnch.csv";
+        response.setContentType("text/csv");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+        response.setHeader(headerKey, headerValue);
+        List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyWardAndPeriod(w, year, quarter, month);
+
+        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses);
 
 
     }

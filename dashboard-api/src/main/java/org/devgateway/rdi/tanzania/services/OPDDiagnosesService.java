@@ -131,6 +131,8 @@ public class OPDDiagnosesService {
                     opdByAgeResponse = new OPDByAgeResponse();
                     opdByAgeResponse.setDiagnostic(opd.getDiagnostic());
                     opdByAgeResponse.setYear(opd.getYear());
+                    opdByAgeResponse.setMonth(opd.getMonth());
+                    opdByAgeResponse.setQuarter(opd.getQuarter());
                     results.add(opdByAgeResponse);
                 }
 
@@ -142,7 +144,7 @@ public class OPDDiagnosesService {
                 opdByAgeResponse.setTotalPrevPeriod(prevYear.isPresent() ? prevYear.get().getValue() : null);
 
                 opdByAgeResponse.addValue(opd.getAge(), opd.getValue());
-
+                ;
 
             }
         }

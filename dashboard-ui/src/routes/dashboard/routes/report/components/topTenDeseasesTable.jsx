@@ -8,8 +8,7 @@ class TopTenDeseases extends React.Component {
 
   render() {
 
-    const {period} = this.props
-    const {id,facilityName, i18n: {language}} = this.props
+    const {id,type,period,facilityName, i18n: {language}} = this.props
     const year = parseInt(period.get('y'))
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
@@ -126,8 +125,8 @@ class TopTenDeseases extends React.Component {
       </table>
 
       <div className="download csv">
-        <a href={getCSVURI('diagnoses','csv',id,period.toJS())}>CSV</a>
-        <a href={getCSVURI('diagnoses','json',id,period.toJS())}>JSON</a>
+        <a href={getCSVURI(type,'diagnoses','csv',id,period.toJS())}>CSV</a>
+        <a href={getCSVURI(type,'diagnoses','json',id,period.toJS())}>JSON</a>
       </div>
     </div>)
   }
