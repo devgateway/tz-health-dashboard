@@ -64,7 +64,7 @@ const generateFacilityPDF = (state, image) => {
   } else {
     current = year
     prev = year - 1
-    currentLabel = current;
+    currentLabel = current.toString();
     prevLabel = prev;
   }
 
