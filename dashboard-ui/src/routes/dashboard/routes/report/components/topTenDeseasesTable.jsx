@@ -1,6 +1,6 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
-import {getMonthName,getQuarterLabel, diffPercentage} from '../../../../../api'
+import {getMonthName,getQuarterLabel, diffPercentage,parsePeriod,getCSVURI} from '../../../../../api'
 import  {MonthLabel,QuarterLabel} from './labels'
 
 
@@ -9,11 +9,13 @@ class TopTenDeseases extends React.Component {
   render() {
 
     const {period} = this.props
-    const {facilityName, i18n: {language}} = this.props
+    const {id,facilityName, i18n: {language}} = this.props
     const year = parseInt(period.get('y'))
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
     let current, currentLabel, prev, prevLabel;
+
+
 
     if (month) {
       current = month
@@ -123,6 +125,10 @@ class TopTenDeseases extends React.Component {
         </tbody>
       </table>
 
+      <div className="download csv">
+        <a href={getCSVURI('diagnoses','csv',id,period.toJS())}>CSV</a>
+        <a href={getCSVURI('diagnoses','json',id,period.toJS())}>JSON</a>
+      </div>
     </div>)
   }
 }
