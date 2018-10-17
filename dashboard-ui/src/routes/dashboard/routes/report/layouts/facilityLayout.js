@@ -4,6 +4,7 @@ import D3Map from '../../../../../components/d3Map'
 import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 import PeriodSelector from '../components/periodSelector'
+import {print} from '../utils/printUtil'
 
 export default class WardLayout extends React.Component {
 
@@ -37,6 +38,10 @@ export default class WardLayout extends React.Component {
     this.context.router.history.push(`/report/facility/${id}/${period}`)
   }
 
+  printReport(){
+    print('facility', this.props)
+  }
+
   render() {
     const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
     
@@ -50,7 +55,7 @@ export default class WardLayout extends React.Component {
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
     const facilityTypeId = info.getIn(['type', 'dhis2Id'])
-    const watdName = info.getIn(['ward', 'name'])
+    const wardName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
 
@@ -58,12 +63,13 @@ export default class WardLayout extends React.Component {
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
+          <div className="print-icon" onClick={e => this.printReport()}></div>
           <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
           <div className="location-box">
             <div><div className="location-title">Facility Type</div><div className="location-value">{facilityType}</div></div>
-            <div><div className="location-title">Ward</div><div className="location-value">{watdName}</div></div>
+            <div><div className="location-title">Ward</div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title">District</div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title">Region</div><div className="location-value">{regionName}</div></div>
           </div>
@@ -85,7 +91,7 @@ export default class WardLayout extends React.Component {
                 <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
               </div>
             </div>
-            <div className="map">
+            <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}

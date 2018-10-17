@@ -1,6 +1,6 @@
-
 import React from 'react'
 import {translate, Trans} from "react-i18next";
+
 const MonthLabel=(props)=>{
   const {month, year} = props
   return <span><Trans>{month}</Trans>{year?' '+year:null}</span>
@@ -12,4 +12,4 @@ const QuarterLabel=(props)=>{
 }
 
 
-export {MonthLabel,QuarterLabel}
+export {MonthLabel, QuarterLabel}
