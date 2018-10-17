@@ -193,9 +193,9 @@ export const getQuarterLabel = (q) => {
   return { start: getMonthName(start, 'short'), end: getMonthName(end, 'short') }
 }
 
-export const getCSVURI = (data,format,id, period) => {
-  debugger;
-  return API_FACILITY_REPORT_INFO+"/" + id + "/"+data+"."+format+"?" + preparePeriodQuery(composePeriod(period));
+export const getCSVURI = (type,data,format,id, period) => {
+
+  return API_ROOT_URL+"/"+type+"/" + id + "/"+data+"."+format+"?" + preparePeriodQuery(composePeriod(period));
 }
 
 export const parsePeriod = (period) => {
