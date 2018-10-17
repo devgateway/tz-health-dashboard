@@ -193,6 +193,10 @@ export const getQuarterLabel = (q) => {
   return { start: getMonthName(start, 'short'), end: getMonthName(end, 'short') }
 }
 
+export const getCSVURI = (type,data,format,id, period) => {
+
+  return API_ROOT_URL+"/"+type+"/" + id + "/"+data+"."+format+"?" + preparePeriodQuery(composePeriod(period));
+}
 
 export const parsePeriod = (period) => {
   if (period && period.startsWith('y-')) {

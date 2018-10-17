@@ -1,6 +1,6 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
-import {getMonthName, getQuarterLabel,diffPercentage} from '../../../../../api'
+import {getMonthName, getQuarterLabel,diffPercentage,getCSVURI} from '../../../../../api'
 import {MonthLabel, QuarterLabel} from './labels'
 
 class RMNCHTable extends React.Component {
@@ -8,10 +8,8 @@ class RMNCHTable extends React.Component {
   render() {
 
 
-    const {facilityName, i18n: {
-        language
-      }} = this.props
-    const {RMNCH, period} = this.props
+    const {id,RMNCH,type, period,facilityName, i18n: {language}} = this.props
+
     let data=[]
 
     if (RMNCH && RMNCH.get('loading') == true) {
@@ -86,7 +84,7 @@ class RMNCHTable extends React.Component {
 
                       totalPrevious += it.get('totalPrevPeriod')
                       totalCurrent += it.get('value')
-                      
+
                       return (<tr>
                         <td className="desease-name">{(translation && translation.get('value'))?translation.get('value') :indicatorLabel}</td>
 
@@ -104,6 +102,9 @@ class RMNCHTable extends React.Component {
                   </tr>
                 </tbody>
               </table>
+                <div className="download ">
+                  <a href={getCSVURI(type,'rmnch','csv',id,period.toJS())}>CSV</a>
+                  <a href={getCSVURI(type,'rmnch','json',id,period.toJS())}>JSON</a></div>
             </div>)
           }else{
             return null;

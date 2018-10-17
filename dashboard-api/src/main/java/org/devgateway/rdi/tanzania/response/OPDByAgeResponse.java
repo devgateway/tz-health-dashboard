@@ -1,8 +1,11 @@
 package org.devgateway.rdi.tanzania.response;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import org.devgateway.rdi.tanzania.domain.DataElement;
 import org.devgateway.rdi.tanzania.domain.Item;
 
+import javax.tools.Diagnostic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +15,9 @@ import java.util.List;
 
 public class OPDByAgeResponse {
 
+      private DataElement diagnostic;
 
-    private DataElement diagnostic;
+
     private Integer year;
     private Long totalPrevPeriod;
 
