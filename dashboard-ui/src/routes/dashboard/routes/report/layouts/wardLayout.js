@@ -4,6 +4,7 @@ import D3Map from '../../../../../components/d3Map'
 import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 import PeriodSelector from '../components/periodSelector'
+import {print} from '../utils/printUtil'
 
 export default class WardLayout extends React.Component {
 
@@ -37,12 +38,12 @@ export default class WardLayout extends React.Component {
     this.context.router.history.push(`/report/ward/${id}/${period}`)
   }
 
+  printReport(){
+    print('ward', this.props)
+  }
+
   render() {
-
     const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
-
-
-
     const facilitiesFeatures = []
     const wardFacilities = []
     if (mapPoints) {
@@ -70,6 +71,7 @@ export default class WardLayout extends React.Component {
       <div>
         <div className="report-header">
           <div className="ward-name">{wardName}</div>
+          <div className="print-icon" onClick={e => this.printReport()}></div>
           <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
@@ -105,11 +107,11 @@ export default class WardLayout extends React.Component {
                   <div className="value-item"><div>{'Private'}</div><div>{totalPrivate}</div></div>
                   <div className="value-item"><div>{'Faith Based'}</div><div>{totalFaithBased}</div></div>
                   <div className="value-item"><div>{'Parastatal'}</div><div>{totalParastatal}</div></div>
-                  <div className="value-item"><div>{'Defence'}</div><div>{totalDefence}</div></div>
+                  <div className="value-item"><div>{'Defense'}</div><div>{totalDefence}</div></div>
                 </div>
               </div>
             </div>
-            <div className="map">
+            <div className="map" id="map1">
               {mapShape.getIn(['features']) ?
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
