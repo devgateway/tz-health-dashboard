@@ -1,31 +1,19 @@
 package org.devgateway.rdi.tanzania.response;
 
-public class WardResponse {
+public class WardResponse extends BoundaryResponse{
 
-    private Long id;
-
-    private String name;
 
     private BoundaryResponse district;
 
     private BoundaryResponse region;
 
-    public Long getId() {
-        return id;
+    public WardResponse(Long id, String name) {
+        super(id, name);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public WardResponse() {
+        super();
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
     public BoundaryResponse getDistrict() {
         return district;
