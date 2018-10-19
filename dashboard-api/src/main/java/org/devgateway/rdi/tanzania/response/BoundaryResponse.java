@@ -25,6 +25,9 @@ public class BoundaryResponse {
         this.name = name;
     }
 
+    public BoundaryResponse() {
+    }
+
     public BoundaryResponse(Long id, String name) {
         this.id = id;
         this.name = name;
