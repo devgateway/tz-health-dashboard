@@ -126,7 +126,11 @@ export default class WardLayout extends React.Component {
   	    <div className="">
           <div className="report-generator-paragraph">
             <span className={`highlighted-${reportType}`}>{`${reportType} report generator: `}</span>
-            <span className="">Donec a ultrices mi, quis viverra est. Duis nec nisl justo. Cras maximus nibh at volutpat pretium. Proin rutrum egestas diam vitae sodales. Vestibulum rhoncus a lectus in tempus.</span>
+            {reportType === 'ward' ? 
+              <span className="">Create a custom data report for a ward by <b>1. Selecting a Ward</b> by typing its name in the <i>Ward Search</i> or filtering by location using the <i>Ward Filter</i> and map, and then <b>2. Selecting a Time Period</b> in the <i>Date Filter section</i></span>  
+            :
+              <span className="">Create a custom data report for a health facility by <b>1. Selecting a Facility</b> by typing its name in the <i>Facility Search</i> or filtering by location using the <i>Facility Filter</i> and map, and then <b>2. Selecting a Time Period</b> in the <i>Date Filter section</i></span>  
+            }
           </div>
           <div className="dashed-separator"></div>
           <div className=""><TextSearch searchType={reportType}/></div>
