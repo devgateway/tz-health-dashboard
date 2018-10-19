@@ -34,11 +34,9 @@ public class RMNCHService {
             @Override
             public RMNCHResponse apply(RMNCHResponse rmnchResponse) {
 
-                RMNCHResponse totalPrevPeriod = rmnchRepository.
-                        getRMNCH(f, prevPeriod[0], prevPeriod[1], prevPeriod[2], rmnchResponse.getIndicator()).get(0);
-
-
-                rmnchResponse.setTotalPrevPeriod(totalPrevPeriod.getValue());
+                List<RMNCHResponse> prevValues = rmnchRepository.getRMNCH(f, prevPeriod[0], prevPeriod[1], prevPeriod[2], rmnchResponse.getIndicator());
+                Long totalPrevPeriod = prevValues.size() > 0 ? prevValues.iterator().next().getValue() : null;
+                rmnchResponse.setTotalPrevPeriod(totalPrevPeriod);
                 return rmnchResponse;
             }
         }).collect(Collectors.toList());
