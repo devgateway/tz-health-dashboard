@@ -5,8 +5,9 @@ import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 import PeriodSelector from '../components/periodSelector'
 import {print} from '../utils/printUtil'
+import {translate, Trans} from "react-i18next"
 
-export default class WardLayout extends React.Component {
+class WardLayout extends React.Component {
 
   static contextTypes = {
     router: PropTypes.object
@@ -68,24 +69,24 @@ export default class WardLayout extends React.Component {
         </div>
         <div className="facility-report-container">
           <div className="location-box">
-            <div><div className="location-title">Facility Type</div><div className="location-value">{facilityType}</div></div>
-            <div><div className="location-title">Ward</div><div className="location-value">{wardName}</div></div>
-            <div><div className="location-title">District</div><div className="location-value">{districtName}</div></div>
-            <div><div className="location-title">Region</div><div className="location-value">{regionName}</div></div>
+            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value">{facilityType}</div></div>
+            <div><div className="location-title"><Trans>Ward</Trans></div><div className="location-value">{wardName}</div></div>
+            <div><div className="location-title"><Trans>District</Trans></div><div className="location-value">{districtName}</div></div>
+            <div><div className="location-title"><Trans>Region</Trans></div><div className="location-value">{regionName}</div></div>
           </div>
           <div className="population-box">
             <div className="info">
-              <div className="sub-title">Availability of Health Services in {regionName} region</div>
-              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> Total Population</div>
+              <div className="sub-title"><Trans>Availability of Health Services in</Trans> {regionName} <Trans>Region</Trans></div>
+              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> <Trans>Total Population</Trans></div>
 
               <div className="ages">
-                <div className="value-label"><div>by Gender</div></div>
-                <div className="value-item"><div>Male</div><div>{population.getIn(['data', 'totalMale'])}</div></div>
-                <div className="value-item"><div>Female</div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
+                <div className="value-label"><div><Trans>by Gender</Trans></div></div>
+                <div className="value-item"><div><Trans>Male</Trans></div><div>{population.getIn(['data', 'totalMale'])}</div></div>
+                <div className="value-item"><div><Trans>Female</Trans></div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
               </div>
 
               <div className="ages">
-                <div className="value-label"><div>by Age</div></div>
+                <div className="value-label"><div><Trans>by Age</Trans></div></div>
                 <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
                 <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
                 <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
@@ -96,7 +97,7 @@ export default class WardLayout extends React.Component {
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
               <div className="legend-box">
-                <div className="legend-title">Legend</div>
+                <div className="legend-title"><Trans>Legend</Trans></div>
                 <div className="legend-item">
                   <div className="current-icon"/>
                   <div className="legend-name">{facilityName}</div>
@@ -104,17 +105,17 @@ export default class WardLayout extends React.Component {
                 <div className="legend-item">
                   <div className="other-icon"/>
                   {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                    <div className="legend-name">{`Other ${facilityType} in same region`}</div>
+                    <div className="legend-name"><Trans>Other</Trans> {facilityType} <Trans>in same region</Trans></div>
                   :
-                    <div className="legend-name">Other Facility in ward</div>
+                    <div className="legend-name"><Trans>Other Facility in ward</Trans></div>
                   }
                 </div>
                 <div className="legend-item">
                   <div className="boundary-icon"/>
                   {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                    <div className="legend-name">District boundary</div>
+                    <div className="legend-name"><Trans>District boundary</Trans></div>
                   :
-                    <div className="legend-name">Ward boundary</div>
+                    <div className="legend-name"><Trans>Ward boundary</Trans></div>
                   }
                 </div>
               </div>
@@ -126,7 +127,7 @@ export default class WardLayout extends React.Component {
           </div>
 
           <div className="RMNCH-box">
-            <div className="sub-title">Reproductive Maternal, Newborn and Child Health at {facilityName} </div>
+            <div className="sub-title"><Trans>Reproductive Maternal, Newborn and Child Health at</Trans> {facilityName} </div>
             <RMNCHTable type="facilities"   period={period} id={id} facilityName={facilityName} RMNCH={this.props.RMNCH}/>
           </div>
 
@@ -135,3 +136,5 @@ export default class WardLayout extends React.Component {
     )
   }
 }
+
+export default translate("translations")(WardLayout)

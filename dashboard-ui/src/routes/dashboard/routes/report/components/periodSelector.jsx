@@ -1,6 +1,7 @@
 import React from 'react'
+import {translate, Trans} from "react-i18next"
 
-export default class PeriodSelector extends React.Component {
+class PeriodSelector extends React.Component {
 
   constructor(props) {
     super(props)
@@ -86,14 +87,14 @@ export default class PeriodSelector extends React.Component {
         <div className="">
           <div className="period-type-selector">
             <select value={periodType} className="" onChange={e => this.onChangeType(e)} >
-              <option value="monthly">Monthly</option>
-              <option value="quarterly">Quarterly</option>
-              <option value="yearly">Yearly</option>
+              <option value="monthly"><Trans>Monthly</Trans></option>
+              <option value="quarterly"><Trans>Quarterly</Trans></option>
+              <option value="yearly"><Trans>Yearly</Trans></option>
             </select>
           </div>
           <div className="period-selector">
             <select  className="" onChange={e => this.onChangePeriod(e)} value={period}>
-              <option value={-1}>Select a period</option>
+              <option value={-1}><Trans>Select a period</Trans></option>
               {options.map(option => {
                 return <option key={`${option.id}`} value={option.id}>{option.label}</option>
               })}
@@ -104,3 +105,5 @@ export default class PeriodSelector extends React.Component {
     )
   }
 }
+
+export default translate("translations")(PeriodSelector)
