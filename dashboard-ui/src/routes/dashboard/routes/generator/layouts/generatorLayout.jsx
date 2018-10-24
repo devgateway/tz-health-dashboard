@@ -18,21 +18,21 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { getGeoItemsList } = this.props
-    getGeoItemsList('region', {})
+    getGeoItemsList('region', {simplifyFactor:0})
   }
 
   onChangeRegion(e) {
     const regionId = e.target.value === '-1' ? null : e.target.value
     const { selectRegion, getGeoItemsList, params: {reportType} } = this.props
     selectRegion(regionId)
-    getGeoItemsList('district', {regions: [regionId]})
+    getGeoItemsList('district', {regions: [regionId], simplifyFactor:0})
   }
 
   onChangeDistrict(e) {
     const districtId = e.target.value === '-1' ? null : e.target.value
     const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
-    getGeoItemsList('ward', {districts: [districtId]})
+    getGeoItemsList('ward', {districts: [districtId], simplifyFactor:0})
     if (reportType === 'ward') {
       getGeoItemsList('facility', {districts: [districtId]})
     }
@@ -71,7 +71,7 @@ class WardLayout extends React.Component {
       }
     } else {
       selectRegion(featureId)
-      getGeoItemsList('district', {regions: [featureId]})
+      getGeoItemsList('district', {regions: [featureId], simplifyFactor:0})
     }
   }
 
