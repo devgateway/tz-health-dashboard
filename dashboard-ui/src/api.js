@@ -9,6 +9,7 @@ const API_FACILITIES = `${API_ROOT_URL}/facilities`
 
 
 export const findRegions = (params) => {
+
   const url = API_REGIONS + '?' + prepareQuery(Object.assign({}, params))
   return new Promise((resolve, reject) => {
     fetch(url)
@@ -29,6 +30,7 @@ export const findRegions = (params) => {
 }
 
 export const findDistricts = (params) => {
+
   const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({}, params))
   return new Promise((resolve, reject) => {
     fetch(url)
@@ -49,6 +51,7 @@ export const findDistricts = (params) => {
 }
 
 export const findWards = (params) => {
+
   const url = API_WARDS + '?' + prepareQuery(Object.assign({}, params))
   return new Promise((resolve, reject) => {
     fetch(url)
@@ -193,9 +196,9 @@ export const getQuarterLabel = (q) => {
   return { start: getMonthName(start, 'short'), end: getMonthName(end, 'short') }
 }
 
-export const getCSVURI = (type,data,format,id, period) => {
+export const getCSVURI = (type, data, format, id, period) => {
 
-  return API_ROOT_URL+"/"+type+"/" + id + "/"+data+"."+format+"?" + preparePeriodQuery(composePeriod(period));
+  return API_ROOT_URL + "/" + type + "/" + id + "/" + data + "." + format + "?" + preparePeriodQuery(composePeriod(period));
 }
 
 export const parsePeriod = (period) => {
@@ -269,4 +272,35 @@ export const getAggregatedDiagnosis = (data) => {
     parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, ranges: { totalUnder5, total5to60, totalAbove60, total } })
   })
   return parsedData
+}
+
+export const toDataURL = (url, callback) => {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
+
+
+export const imagesToBase64 = (images, callback) => {
+  var total = images.length
+  var loaded = 0;
+  for (var i = 0; i < images.length; i++) {
+    const img = images[i];
+    const url = img.href.baseVal;
+    toDataURL(url, function(value) {
+      img.setAttribute("href",value)
+      loaded++;
+      if (loaded == total) {
+        return callback(images);
+      }
+    })
+  }
 }
