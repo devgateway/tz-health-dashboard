@@ -1,6 +1,7 @@
 import jsPDF from 'jspdf'
 import {hexToRgb, colorCodeByName} from './colorsUtil'
 import {getMonthName, getQuarterLabel, diffPercentage} from '../../../../../api'
+import i18n from '../../../../../i18n'
 
 export const generateWardPDF = (state, image) => {
   const {params: {id}, mapPoints, info, population, period, diagnoses, RMNCH} = state
@@ -60,9 +61,9 @@ export const generateWardPDF = (state, image) => {
   //page header
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
-  doc.text(10, cursorY, "Tanzania Health Data Report")
-  const freq = period.get('q') ? 'Quarterly' : (period.get('m') ? 'Monthly' : 'Yearly')
-  doc.text(150, cursorY, `${freq} Ward Report`)
+  doc.text(10, cursorY, i18n.t('Tanzania Health Data Report'))
+  const freq = period.get('q') ? i18n.t('Quarterly') : (period.get('m') ? i18n.t('Monthly') : i18n.t('Yearly'))
+  doc.text(150, cursorY, `${freq} ${i18n.t('Ward Report')}`)
   doc.setLineWidth(0.5)
   doc.setDrawColor(200, 200, 200)
   doc.line(10, cursorY+1, 200, cursorY+1)
@@ -84,15 +85,15 @@ export const generateWardPDF = (state, image) => {
   doc.setTextColor(44, 72, 86)
   doc.setFontSize(9)
   doc.setFontType("normal")
-  doc.text(12, cursorY+8, "Ward: ")
+  doc.text(12, cursorY+8, `${i18n.t('Ward')}: `)
   doc.setFontType("bold")
   doc.text(22, cursorY+8, wardName)
   doc.setFontType("normal")
-  doc.text(75, cursorY+8, "District: ")
+  doc.text(75, cursorY+8, `${i18n.t('District')}: `)
   doc.setFontType("bold")
   doc.text(87, cursorY+8, districtName)
   doc.setFontType("normal")
-  doc.text(138, cursorY+8, "Region: ")
+  doc.text(138, cursorY+8, `${i18n.t('Region')}: `)
   doc.setFontType("bold")
   doc.text(150, cursorY+8, regionName)
   cursorY += 20
@@ -102,9 +103,9 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(14)
   doc.setTextColor(44, 164, 196)
   doc.setFontType("bold");
-  doc.text(10, cursorY, `Availability of Health Services`)
+  doc.text(10, cursorY, i18n.t('Availability of Health Services'))
   cursorY += 6
-  doc.text(10, cursorY, `in ${wardName} ward`)
+  doc.text(10, cursorY, `${i18n.t('in')} ${wardName} ${i18n.t('Ward')}`)
   cursorY += 10
   doc.setFontSize(20)
   doc.setTextColor(44, 72, 86)
@@ -112,13 +113,13 @@ export const generateWardPDF = (state, image) => {
   const totalPop = population.getIn(['data', 'total']) ? population.getIn(['data', 'total']).toString() : ''
   doc.text(10, cursorY, `${totalPop}`)
   doc.setFontSize(14)
-  doc.text(15 + (totalPop.length*3), cursorY, ' Total Population')
+  doc.text(15 + (totalPop.length*3), cursorY, ` ${i18n.t('Total Population')}: `)
   cursorY += 8
 
   doc.setFontSize(9)
   doc.setTextColor(44, 44, 44)
   doc.setFontType("bold");
-  doc.text(10, cursorY, `by Gender`)
+  doc.text(10, cursorY, i18n.t('by Gender'))
   cursorY += 7
   doc.setDrawColor(200, 200, 200)
   doc.line(29, cursorY-2, 29, cursorY+12)
@@ -126,8 +127,8 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(8)
   doc.setTextColor(180, 181, 168)
   doc.setFontType("bold");
-  doc.text(16, cursorY, `Male`)
-  doc.text(33, cursorY, `Female`)
+  doc.text(16, cursorY, i18n.t('Male'))
+  doc.text(33, cursorY, i18n.t('Female'))
   cursorY += 8
   doc.setFontSize(14)
   doc.setTextColor(109, 114, 128)
@@ -138,7 +139,7 @@ export const generateWardPDF = (state, image) => {
   cursorY += 8
   doc.setFontSize(9)
   doc.setTextColor(44, 44, 44)
-  doc.text(10, cursorY, `by Age`)
+  doc.text(10, cursorY, i18n.t('by Age'))
   cursorY += 7
   doc.setDrawColor(200, 200, 200)
   doc.line(29, cursorY-2, 29, cursorY+12)
@@ -165,7 +166,7 @@ export const generateWardPDF = (state, image) => {
   doc.setFontType("bold");
   doc.text(10, cursorY, `${wardFacilities.length}`)
   doc.setFontSize(14)
-  doc.text(18, cursorY, ' Total Health Facilities')
+  doc.text(18, cursorY, ` ${i18n.t('Total Health Facilities')}: `)
   cursorY += 7
   doc.setDrawColor(200, 200, 200)
   doc.line(22, cursorY-2, 22, cursorY+12)
@@ -175,12 +176,12 @@ export const generateWardPDF = (state, image) => {
   doc.line(82, cursorY-2, 82, cursorY+12)
   doc.setFontSize(8)
   doc.setTextColor(180, 181, 168)
-  doc.text(10, cursorY, `Public`)
-  doc.text(25, cursorY, `Private`)
-  doc.text(41, cursorY, `Faith`)
-  doc.text(40, cursorY+2, `Based`)
-  doc.text(53, cursorY, `Parastatal`)
-  doc.text(69, cursorY, `Defense`)
+  doc.text(10, cursorY, i18n.t('Public'))
+  doc.text(25, cursorY, i18n.t('Private'))
+  doc.text(41, cursorY, i18n.t('Faith'))
+  doc.text(40, cursorY+2, i18n.t('Based'))
+  doc.text(53, cursorY, i18n.t('Parastatal'))
+  doc.text(69, cursorY, i18n.t('Defense'))
   cursorY += 8
   doc.setFontSize(14)
   doc.setTextColor(109, 114, 128)
@@ -198,7 +199,7 @@ export const generateWardPDF = (state, image) => {
   //OPD diagnoses//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   doc.setFontSize(14)
   doc.setTextColor(44, 164, 196)
-  doc.text(10, cursorY, `Out-Patient Diseases (OPD) at ${wardName}`)
+  doc.text(10, cursorY, `${i18n.t('Out-Patient Diseases (OPD) at')} ${wardName}`)
   cursorY += 15
   const deseases = diagnoses.get('data')? diagnoses.get('data').sortBy((val)=>-val.get('total')) : [];
   let colsTotals = {
@@ -213,26 +214,26 @@ export const generateWardPDF = (state, image) => {
   doc.rect(98, cursorY-7, 63, 20 + (diagnoses.get('data').size * 5), 'F')
   
   doc.setTextColor(19, 88, 151)
-  doc.text(20, cursorY, `Top Ten Diagnoses`)
+  doc.text(20, cursorY, i18n.t('Top Ten Diagnoses'))
   cursorY -= 2
   doc.setFontSize(12)
   doc.setTextColor(109, 114, 128)
   doc.text(85 - prevLabel.toString().length, cursorY, `${prevLabel}`)
-  doc.text(170, cursorY, `% Change`)
+  doc.text(170, cursorY, `% ${i18n.t('Change')}`)
   doc.setTextColor(156, 133, 104)
   doc.text(130 - currentLabel.toString().length, cursorY, `${currentLabel}`)
   cursorY += 4
   doc.setFontSize(9)
   doc.setFontType('normal')
   doc.setTextColor(109, 114, 128)
-  doc.text(78, cursorY, `Total Count`)
+  doc.text(78, cursorY, i18n.t('Total Count'))
   doc.setTextColor(180, 181, 168)
-  doc.text(100, cursorY, `Age< 5`)
-  doc.text(115, cursorY, `Age5-60`)
-  doc.text(130, cursorY, `Age>60`)
+  doc.text(100, cursorY, `${i18n.t('Age')}< 5`)
+  doc.text(115, cursorY, `${i18n.t('Age')}5-60`)
+  doc.text(130, cursorY, `${i18n.t('Age')}>60`)
   doc.setTextColor(109, 114, 128)
-  doc.text(143, cursorY, `Total Count`)
-  doc.text(162, cursorY, `Total Cases since Last Year`)
+  doc.text(143, cursorY, i18n.t('Total Count'))
+  doc.text(162, cursorY, `${i18n.t('since')} ${prevLabel}`)
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)
@@ -270,7 +271,7 @@ export const generateWardPDF = (state, image) => {
   doc.line(10, cursorY, 200, cursorY)
   cursorY += 5
   doc.setTextColor(44, 72, 86)
-  doc.text(50, cursorY, `Total`)
+  doc.text(50, cursorY, i18n.t('Total'))
   let totalPrevValueLabel = colsTotals['totalPrevPeriod'] || 'N/A'
   doc.text(85 - totalPrevValueLabel.toString().length, cursorY, `${totalPrevValueLabel}`)
   doc.setTextColor(180, 181, 168)
@@ -290,8 +291,8 @@ export const generateWardPDF = (state, image) => {
   //page header
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
-  doc.text(10, cursorY, "Tanzania Health Data Report")
-  doc.text(150, cursorY, `${freq} Ward Report`)
+  doc.text(10, cursorY, i18n.t('Tanzania Health Data Report'))
+  doc.text(150, cursorY, `${freq} ${i18n.t('Ward Report')}`)
   doc.setLineWidth(0.5)
   doc.setDrawColor(200, 200, 200)
   doc.line(10, cursorY+1, 200, cursorY+1)
@@ -310,27 +311,27 @@ export const generateWardPDF = (state, image) => {
   //RMNCH//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   doc.setFontSize(14)
   doc.setTextColor(44, 164, 196)
-  doc.text(10, cursorY, `Reproductive Maternal, Newborn and Child Health at ${wardName}`)
+  doc.text(10, cursorY, `${i18n.t('Reproductive Maternal, Newborn and Child Health at')} ${wardName}`)
   cursorY += 15
 
   doc.setFillColor(244, 242, 236)
   doc.rect(138, cursorY-7, 30, 20 + (RMNCH.get('data').size * 5), 'F')
   doc.setTextColor(19, 88, 151)
-  doc.text(40, cursorY, `RMNCH Services`)
+  doc.text(40, cursorY, i18n.t('RMNCH Services'))
   cursorY -= 2
   doc.setFontSize(12)
   doc.setTextColor(109, 114, 128)
   doc.text(122 - prevLabel.toString().length, cursorY, `${prevLabel}`)
-  doc.text(172, cursorY, `% Change`)
+  doc.text(172, cursorY, `% ${i18n.t('Change')}`)
   doc.setTextColor(156, 133, 104)
   doc.text(152 - currentLabel.toString().length, cursorY, `${currentLabel}`)
   cursorY += 4
   doc.setFontSize(9)
   doc.setFontType('normal')
   doc.setTextColor(109, 114, 128)
-  doc.text(118, cursorY, `Count`)
-  doc.text(148, cursorY, `Count`)
-  doc.text(173, cursorY, `since ${prevLabel}`)
+  doc.text(118, cursorY, i18n.t('Count'))
+  doc.text(148, cursorY, i18n.t('Count'))
+  doc.text(173, cursorY, `${i18n.t('since')} ${prevLabel}`)
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)
@@ -357,7 +358,7 @@ export const generateWardPDF = (state, image) => {
   doc.line(10, cursorY, 200, cursorY)
   cursorY += 5
   doc.setTextColor(44, 72, 86)
-  doc.text(100, cursorY, `Total`)
+  doc.text(100, cursorY, i18n.t('Total'))
   totalPrevValueLabel = totalPrevious || 'N/A'
   doc.text(122 - totalPrevValueLabel.toString().length, cursorY, `${totalPrevValueLabel}`)
   const totalValueLabel = totalCurrent || 'N/A'
@@ -367,8 +368,6 @@ export const generateWardPDF = (state, image) => {
   cursorY += 2
   doc.setLineWidth(0.5)
   doc.line(10, cursorY, 200, cursorY)
-
-
 
   doc.save(`${wardName}.pdf`)
 }
