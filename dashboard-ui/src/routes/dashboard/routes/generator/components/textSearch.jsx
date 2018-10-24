@@ -4,8 +4,9 @@ import Autosuggest from 'react-autosuggest'
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
 import './textSearch.css'
+import {translate, Trans} from "react-i18next"
 
-export default class App extends React.Component {
+class TextSearch extends React.Component {
   
   static contextTypes = {
     router: PropTypes.object
@@ -92,11 +93,13 @@ export default class App extends React.Component {
           renderSuggestion={this.renderSuggestion.bind(this)}
           inputProps={inputProps} />
         {selection.id ?
-          <div className="generate-button" onClick={e => this.onGenerateReport()}>Generate Report</div>
+          <div className="generate-button" onClick={e => this.onGenerateReport()}><Trans>Generate Report</Trans></div>
         :
-          <div className="generate-button-disabled">Generate Report</div>
+          <div className="generate-button-disabled"><Trans>Generate Report</Trans></div>
         }  
       </div>
     )
   }
 }
+
+export default translate("translations")(TextSearch)

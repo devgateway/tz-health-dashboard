@@ -1,7 +1,7 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
 import {getMonthName,getQuarterLabel, diffPercentage,parsePeriod,getCSVURI} from '../../../../../api'
-import  {MonthLabel,QuarterLabel} from './labels'
+import {MonthLabel,QuarterLabel} from './labels'
 
 
 class TopTenDeseases extends React.Component {
@@ -13,30 +13,24 @@ class TopTenDeseases extends React.Component {
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
     let current, currentLabel, prev, prevLabel;
-
-
-
     if (month) {
       current = month
       prev = (month == 1)? 12: month - 1
-      currentLabel =(<MonthLabel month={getMonthName(month)} year={year}/>)
-
-      const prevYear=(current==1)?year-1:year
-      prevLabel =(<MonthLabel month={getMonthName(prev)} year={prevYear}/>)
-
+      currentLabel = (<MonthLabel month={getMonthName(month)} year={year}/>)
+      const prevYear = (current==1) ? year-1 : year
+      prevLabel = (<MonthLabel month={getMonthName(prev)} year={prevYear}/>)
     } else if (quarter) {
         current = quarter
-        prev = (quarter == 1)? 4: quarter - 1
-        const prevYear=(current==1)?year-1:year
-        currentLabel=(<QuarterLabel start={getQuarterLabel(current).start } end={getQuarterLabel(current).end} year={year}/>)
-        prevLabel=(<QuarterLabel start={getQuarterLabel(prev).start } end={getQuarterLabel(prev).end} year={prevYear}/>)
+        prev = (quarter == 1) ? 4: quarter - 1
+        const prevYear = (current==1) ? year-1 : year
+        currentLabel = (<QuarterLabel start={getQuarterLabel(current).start } end={getQuarterLabel(current).end} year={year}/>)
+        prevLabel = (<QuarterLabel start={getQuarterLabel(prev).start } end={getQuarterLabel(prev).end} year={prevYear}/>)
     } else {
       current = year
       prev = year - 1
-      currentLabel=current;
-      prevLabel=prev;
+      currentLabel = current;
+      prevLabel = prev;
     }
-
 
     const deseases = this.props.diagnoses.get('data')? this.props.diagnoses.get('data').sortBy((val)=>-val.get('total')) : [];
     let colsTotals = {
@@ -47,45 +41,28 @@ class TopTenDeseases extends React.Component {
       total: 0
     }
 
-
     return (<div className="top-ten-diagnosis-table">
-      <div className="sub-title">
-        <Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName}</div>
+      <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName}</div>
       <table className="">
         <tbody>
           <tr>
-            <th className="diagnosis-header" rowSpan="2">
-              <Trans>Top Ten Diagnoses</Trans>
-            </th>
+            <th className="diagnosis-header" rowSpan="2"><Trans>Top Ten Diagnoses</Trans></th>
             <th className="previous-period-header">{prevLabel}</th>
             <th className="current-period-header" colSpan="4">{currentLabel}</th>
-            <th className="previous-period-header">%
-              <Trans>Change</Trans>
-            </th>
+            <th className="previous-period-header">%<Trans>Change</Trans></th>
           </tr>
           <tr>
-            <td className="previous-period-sub-header">
-              <Trans>Total Count</Trans>
-            </td>
-            <td className="current-period-sub-header-partial">
-              <Trans>Age</Trans>
-              &lt; 5</td>
-            <td className="current-period-sub-header-partial">
-              <Trans>Age</Trans>{'5-60'}</td>
-            <td className="current-period-sub-header-partial">
-              <Trans>Age</Trans>{'>60'}</td>
-            <td className="current-period-sub-header">
-              <Trans>Total Count</Trans>
-            </td>
-            <td className="previous-period-sub-header">
-              <Trans>in Total Cases since Last Year</Trans>
-            </td>
+            <td className="previous-period-sub-header"><Trans>Total Count</Trans></td>
+            <td className="current-period-sub-header-partial"><Trans>Age</Trans>&lt; 5</td>
+            <td className="current-period-sub-header-partial"><Trans>Age</Trans>{'5-60'}</td>
+            <td className="current-period-sub-header-partial"><Trans>Age</Trans>{'>60'}</td>
+            <td className="current-period-sub-header"><Trans>Total Count</Trans></td>
+            <td className="previous-period-sub-header"><Trans>in Total Cases since Last Year</Trans></td>
           </tr>
           {
             deseases.map((it) => {
-              debugger
-              const label = it.getIn(['diagnostic','name'])
-              const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
+              const label = it.getIn(['diagnostic', 'name'])
+              const translation=it.getIn(['diagnostic', 'translations']).find(e=>e.get('locale') == language);
               const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
               const total5to60 = it.getIn(['ranges', 'total5to60'])
               const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
@@ -109,13 +86,9 @@ class TopTenDeseases extends React.Component {
             })
           }
           <tr className="total-values">
-            <td className="desease-name">
-              <Trans>Total</Trans>
-            </td>
-            <td className="previous-value">
-              {colsTotals['totalPrevPeriod']}</td>
-            <td className="current-value-partial">
-              {colsTotals['totalUnder5']}</td>
+            <td className="desease-name"><Trans>Total</Trans></td>
+            <td className="previous-value">{colsTotals['totalPrevPeriod']}</td>
+            <td className="current-value-partial">{colsTotals['totalUnder5']}</td>
             <td className="current-value-partial">{colsTotals['total5to60']}</td>
             <td className="current-value-partial">{colsTotals['totalAbove60']}</td>
             <td className="current-value">{colsTotals['total']}</td>
