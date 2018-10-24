@@ -27,7 +27,7 @@ public class BoundaryRequest {
         return simplifyFactor;
     }
 
-    public void setSimplifyFactor(Double simplifyFactor) {
+    public void setSimplifyFactor(Double simplifyFactors) {
         this.simplifyFactor = simplifyFactor;
     }
 

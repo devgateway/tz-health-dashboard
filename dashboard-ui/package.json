@@ -6,7 +6,7 @@
     "autosuggest-highlight": "^3.1.1",
     "css-loader": "^0.28.11",
     "d3": "^5.3.0",
-    "d3-tile": "0.0.4",
+    "d3-tile": "0.0.1",
     "dom-to-image": "^2.6.0",
     "dom-to-image-chrome-fix": "^2.6.0",
     "history": "^4.7.2",

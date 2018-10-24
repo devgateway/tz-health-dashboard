@@ -8,7 +8,7 @@ import './share.css'
 
 
 function copyToClipboard(text) {
-  debugger;
+
     if (window.clipboardData && window.clipboardData.setData) {
         // IE specific code path to prevent textarea being shown while dialog is visible.
         return window.clipboardData.setData("Text", text);
@@ -63,7 +63,7 @@ class CopyLinkButton extends React.Component {
     const classs=(showLink)?"copied":(hover)?"hover":"normal";
 
     return (<div className={"copy-link-button "+classs} onClick={this.onClick} onMouseOver={this.onMouseOver} onMouseOut={this.onMouseOut}>
-      <div class="container">
+      <div className="container">
         <span className="normal">COPY</span>
         <span className="hover">CLICK</span>
         <span className="copied">DONE</span>
@@ -94,7 +94,7 @@ class ShareLink extends React.Component {
     const target = document.location.href
     const url = href + encodeURIComponent(target)
 
-    return (<a class={"shareLink " + className} onClick={this.open} href={url} title={title} target="_blank"></a>)
+    return (<a className={"shareLink " + className} onClick={this.open} href={url} title={title} target="_blank"></a>)
   }
 }
 

@@ -23,14 +23,16 @@ export default class WardLayout extends React.Component {
     const regionId = e.target.value === '-1' ? null : e.target.value
     const { selectRegion, getGeoItemsList, params: {reportType} } = this.props
     selectRegion(regionId)
-    getGeoItemsList('district', {regions: [regionId]})
+    debugger;
+    getGeoItemsList('district', {regions: [regionId], simplifyFactor:0})
   }
 
   onChangeDistrict(e) {
     const districtId = e.target.value === '-1' ? null : e.target.value
     const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
-    getGeoItemsList('ward', {districts: [districtId]})
+    debugger;
+    getGeoItemsList('ward', {districts: [districtId], simplifyFactor:0})
     if (reportType === 'ward') {
       getGeoItemsList('facility', {districts: [districtId]})
     }
@@ -41,7 +43,7 @@ export default class WardLayout extends React.Component {
     const { selectWard, getGeoItemsList, params: {reportType} } = this.props
     selectWard(wardId)
     if (reportType === 'facility') {
-      getGeoItemsList('facility', {wards: [wardId]})
+      getGeoItemsList('facility', {wards: [wardId], simplifyFactor:0})
     }
   }
 
@@ -59,17 +61,17 @@ export default class WardLayout extends React.Component {
     } else if (district.get('selected')) {
       selectWard(featureId)
       if (reportType === 'facility') {
-        getGeoItemsList('facility', {wards: [featureId]})
+        getGeoItemsList('facility', {wards: [featureId], simplifyFactor:0})
       }
     } else if (region.get('selected')){
       selectDistrict(featureId)
       getGeoItemsList('ward', {districts: [featureId]})
       if (reportType === 'ward') {
-        getGeoItemsList('facility', {districts: [featureId]})
+        getGeoItemsList('facility', {districts: [featureId], simplifyFactor:0})
       }
     } else {
       selectRegion(featureId)
-      getGeoItemsList('district', {regions: [featureId]})
+      getGeoItemsList('district', {regions: [featureId], simplifyFactor:0})
     }
   }
 
@@ -81,7 +83,7 @@ export default class WardLayout extends React.Component {
   onGenerateReport() {
 
     const { ward, facility, period, params: {reportType} } = this.props
-    debugger;
+
     const strPeriod=composePeriod(period.toJS())
     if (reportType === 'ward') {
       this.context.router.history.push(`/report/ward/${ward.get('selected')}/${strPeriod}`)
@@ -126,10 +128,10 @@ export default class WardLayout extends React.Component {
   	    <div className="">
           <div className="report-generator-paragraph">
             <span className={`highlighted-${reportType}`}>{`${reportType} report generator: `}</span>
-            {reportType === 'ward' ? 
-              <span className="">Create a custom data report for a ward by <b>1. Selecting a Ward</b> by typing its name in the <i>Ward Search</i> or filtering by location using the <i>Ward Filter</i> and map, and then <b>2. Selecting a Time Period</b> in the <i>Date Filter section</i></span>  
+            {reportType === 'ward' ?
+              <span className="">Create a custom data report for a ward by <b>1. Selecting a Ward</b> by typing its name in the <i>Ward Search</i> or filtering by location using the <i>Ward Filter</i> and map, and then <b>2. Selecting a Time Period</b> in the <i>Date Filter section</i></span>
             :
-              <span className="">Create a custom data report for a health facility by <b>1. Selecting a Facility</b> by typing its name in the <i>Facility Search</i> or filtering by location using the <i>Facility Filter</i> and map, and then <b>2. Selecting a Time Period</b> in the <i>Date Filter section</i></span>  
+              <span className="">Create a custom data report for a health facility by <b>1. Selecting a Facility</b> by typing its name in the <i>Facility Search</i> or filtering by location using the <i>Facility Filter</i> and map, and then <b>2. Selecting a Time Period</b> in the <i>Date Filter section</i></span>
             }
           </div>
           <div className="dashed-separator"></div>
@@ -194,7 +196,7 @@ export default class WardLayout extends React.Component {
             </div>
             <div className="generator-map">
               {mapShapes.features.length > 0 ?
-                <D3Map width="600" height="480" colors={["#FF8C42", '#0C4700']}
+                <D3Map width={600} height={480} colors={["#FF8C42", '#0C4700']}
                   shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568"
                   onFeatureClick={f => this.onFeatureClick(f)} onPointClick={f => this.onFacilityClicked(f)}
                   shapeFeatures={mapShapes} pointFeatures={mapPoints} showBasemap={true}  zoomeable={true}></D3Map>
