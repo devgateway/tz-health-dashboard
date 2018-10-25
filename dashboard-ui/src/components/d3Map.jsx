@@ -2,7 +2,6 @@ import React from 'react'
 import './map.css'
 
 import * as d3 from 'd3'
-import * as topojson from 'topojson'
 import * as d3T from 'd3-tile'
 import {imagesToBase64, toDataURL} from '../api'
 const defWidth = 400,
