@@ -7,10 +7,13 @@ import org.devgateway.rdi.tanzania.repositories.FacilityGroupRepository;
 import org.devgateway.rdi.tanzania.repositories.FacilityRepository;
 import org.devgateway.rdi.tanzania.repositories.FacilitySpecifications;
 import org.devgateway.rdi.tanzania.request.FacilityRequest;
+import org.devgateway.rdi.tanzania.response.FacilityResponse;
+import org.devgateway.rdi.tanzania.response.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sebastian Dimunzio
@@ -25,8 +28,9 @@ public class FacilityService {
     @Autowired
     FacilityGroupRepository facilityGroupRepository;
 
-    public List<Facility> getFacilities(FacilityRequest facilityRequest) {
-        return facilityRepository.findAll(FacilitySpecifications.facilityFilters(facilityRequest));
+    public List<FacilityResponse> getFacilities(FacilityRequest facilityRequest) {
+        List<Facility> facilities = facilityRepository.findAll(FacilitySpecifications.facilityFilters(facilityRequest));
+        return facilities.stream().map(f -> ResponseUtils.facilityToResponse(f)).collect(Collectors.toList());
 
     }
 
