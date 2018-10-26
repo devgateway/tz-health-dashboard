@@ -50,6 +50,27 @@ export const findDistricts = (params) => {
   })
 }
 
+export const searchWards = (keyword) => {
+  const url = `${API_WARD_INFO}/find?key=${keyword}`
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            reject(response)
+          }
+          // Examine the text in the response
+          response.json().then(function(data) {
+            resolve(data);
+          });
+        }
+      )
+      .catch(function(err) {
+        reject('Fetch Error :-S', err);
+      });
+  })
+}
+
 export const findWards = (params) => {
 
   const url = API_WARDS + '?' + prepareQuery(Object.assign({}, params))

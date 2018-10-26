@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getSearchResults, cleanSearchResults } from '../modules/generatorModule'
+import { getFacilitySearchResults, getWardSearchResults, cleanSearchResults } from '../modules/generatorModule'
 import TextSearch from '../components/textSearch'
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-	getSearchResults, cleanSearchResults
+	getFacilitySearchResults, getWardSearchResults, cleanSearchResults
 }, dispatch)
 
 const mapStateToProps = state => {
