@@ -18,21 +18,21 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { getGeoItemsList } = this.props
-    getGeoItemsList('region', {simplifyFactor:0})
+    getGeoItemsList('region', {})
   }
 
   onChangeRegion(e) {
     const regionId = e.target.value === '-1' ? null : e.target.value
     const { selectRegion, getGeoItemsList, params: {reportType} } = this.props
     selectRegion(regionId)
-    getGeoItemsList('district', {regions: [regionId], simplifyFactor:0})
+    getGeoItemsList('district', {regions: [regionId]})
   }
 
   onChangeDistrict(e) {
     const districtId = e.target.value === '-1' ? null : e.target.value
     const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
-    getGeoItemsList('ward', {districts: [districtId], simplifyFactor:0})
+    getGeoItemsList('ward', {districts: [districtId]})
     if (reportType === 'ward') {
       getGeoItemsList('facility', {districts: [districtId]})
     }
@@ -71,7 +71,7 @@ class WardLayout extends React.Component {
       }
     } else {
       selectRegion(featureId)
-      getGeoItemsList('district', {regions: [featureId], simplifyFactor:0})
+      getGeoItemsList('district', {regions: [featureId]})
     }
   }
 
@@ -124,32 +124,32 @@ class WardLayout extends React.Component {
   	    <div className="">
           <div className="report-generator-paragraph">
             <span className={`highlighted-${reportType}`}><Trans>{`${reportType} report generator`}</Trans>: </span>
-            {reportType === 'ward' ?
+            {reportType === 'ward' ? 
               <span className="">
-                <Trans>Create a custom data report for a ward by </Trans>
-                <b><Trans>1. Selecting a Ward </Trans></b>
+                <Trans>Create a custom data report for a ward by </Trans> 
+                1.<b><Trans>Selecting a Ward </Trans></b> 
                 <Trans>by typing its name in the </Trans>
-                <i><Trans>Ward Search </Trans></i>
+                <i><Trans>Ward Search </Trans></i> 
                 <Trans>or filtering by location using the </Trans>
-                <i><Trans>Ward Filter </Trans></i>
+                <i><Trans>Ward Filter </Trans></i> 
                 <Trans>and map, and then </Trans>
-                <b><Trans>2. Selecting a Time Period </Trans></b>
+                2.<b><Trans>Selecting a Time Period </Trans></b> 
                 <Trans>in the </Trans>
                 <i><Trans>Date Filter section </Trans></i>
-              </span>
+              </span>  
             :
               <span className="">
-                <Trans>Create a custom data report for a health facility by </Trans>
-                <b><Trans>1. Selecting a Facility </Trans></b>
+                <Trans>Create a custom data report for a health facility by </Trans> 
+                1.<b><Trans>Selecting a Facility </Trans></b> 
                 <Trans>by typing its name in the </Trans>
-                <i><Trans>Facility Search </Trans></i>
+                <i><Trans>Facility Search </Trans></i> 
                 <Trans>or filtering by location using the </Trans>
-                <i><Trans>Facility Filter </Trans></i>
+                <i><Trans>Facility Filter </Trans></i> 
                 <Trans>and map, and then </Trans>
-                <b><Trans>2. Selecting a Time Period </Trans></b>
+                2.<b><Trans>Selecting a Time Period </Trans></b> 
                 <Trans>in the </Trans>
                 <i><Trans>Date Filter section </Trans></i>
-              </span>
+              </span>  
             }
           </div>
           <div className="dashed-separator"></div>
@@ -157,7 +157,7 @@ class WardLayout extends React.Component {
           <div className="dashed-separator"></div>
           <div className="generator-by-path">
             <div className={`report-type-${reportType}`}>
-              {`${reportType} filter`}
+              <Trans>{`${reportType} filter`}</Trans>
             </div>
             <div className="generator-dropdowns">
               <div className="path-dropdown">
