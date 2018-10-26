@@ -31,6 +31,8 @@ public class FacilityResponse {
 
     private BoundaryResponse region;
 
+    private Point point;
+
     public Long getId() {
         return id;
     }
@@ -117,5 +119,13 @@ public class FacilityResponse {
 
     public void setCoordinates(Double[] coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public Point getPoint() {
+        return point;
+    }
+
+    public void setPoint(Point point) {
+        this.point = point;
     }
 }
