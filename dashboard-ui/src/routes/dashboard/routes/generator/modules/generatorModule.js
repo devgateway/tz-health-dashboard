@@ -110,7 +110,11 @@ const ACTION_HANDLERS = {
   },
   [GET_ITEMS_RESPONSE]: (state, action) => {
     const {data} = action;
-    data.features.sort((i1, i2) => {return i1.properties.NAME.localeCompare(i2.properties.NAME)})
+    if (action.itemType === 'facility') {
+      data.sort((i1, i2) => {return i1.name.localeCompare(i2.name)})
+    } else {
+      data.features.sort((i1, i2) => {return i1.properties.NAME.localeCompare(i2.properties.NAME)})
+    }
     return state.setIn([action.itemType, 'list'], Immutable.fromJS(data))
       .setIn([action.itemType, 'loading'], false)
   },
