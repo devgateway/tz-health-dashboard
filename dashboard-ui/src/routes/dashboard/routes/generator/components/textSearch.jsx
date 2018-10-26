@@ -26,8 +26,13 @@ class TextSearch extends React.Component {
   }
   
   onSuggestionsFetchRequested({ value }) {
+    const {getFacilitySearchResults, getWardSearchResults, searchType} = this.props
   	if (value.length > 3) {
-	  	this.props.getSearchResults(this.props.searchType, {'keyWord': value})
+      if (searchType === 'ward') {
+        getWardSearchResults(value)
+      } else {
+        getFacilitySearchResults(value)
+      }
 	  }
   };
 
@@ -83,7 +88,7 @@ class TextSearch extends React.Component {
     return (
       <div className="text-search-container">
         <div className={`search-type-${searchType}`}>
-          {`${searchType} search`}
+          <Trans>{`${searchType} search`}</Trans>
         </div>
         <Autosuggest 
           suggestions={suggestions}

@@ -33,13 +33,25 @@ export const getGeoItemsList = (itemType, params) => {
   }
 }
 
-export const getSearchResults = (searchType, params) => {
+export const getFacilitySearchResults = (keyword) => {
   return (dispatch, getState) => {
     dispatch({type: GET_SEARCH_REQUEST})
-    apiMethods[searchType](params).then(data => {
-      dispatch({searchType, 'type': GET_SEARCH_RESPONSE, data })
+    const params = {'keyWord': keyword}
+    api.findFacilities(params).then(data => {
+      dispatch({searchType: 'facility', 'type': GET_SEARCH_RESPONSE, data })
     }).catch(error => {
-      dispatch({searchType, 'type': GET_SEARCH_ERROR, error})
+      dispatch({searchType: 'facility', 'type': GET_SEARCH_ERROR, error})
+    })
+  }
+}
+
+export const getWardSearchResults = (keyword) => {
+  return (dispatch, getState) => {
+    dispatch({type: GET_SEARCH_REQUEST})
+    api.searchWards(keyword).then(data => {
+      dispatch({searchType: 'ward', 'type': GET_SEARCH_RESPONSE, data })
+    }).catch(error => {
+      dispatch({searchType: 'ward', 'type': GET_SEARCH_ERROR, error})
     })
   }
 }
@@ -98,6 +110,7 @@ const ACTION_HANDLERS = {
   },
   [GET_ITEMS_RESPONSE]: (state, action) => {
     const {data} = action;
+    data.features.sort((i1, i2) => {return i1.properties.NAME.localeCompare(i2.properties.NAME)})
     return state.setIn([action.itemType, 'list'], Immutable.fromJS(data))
       .setIn([action.itemType, 'loading'], false)
   },
