@@ -1,3 +1,35 @@
+update district set district=trim(regexp_replace(district , '\s+', ' ', 'g'));
+
+
+update ward set district_n='Bukoba' where  district_n='Bukoba Rural';
+update ward set district_n='Butiam'  where district_n='Butiama';
+update ward set district_n='Handeni Mji' where district_n='Handeni Township Authority';
+
+update ward set district_n='Iringa'  where district_n ='Iringa Rural';
+update ward set district_n='Kigoma Urban'  where district_n ='Kigoma Municipal-Ujiji';
+update ward set district_n='Kigoma'  where district_n = 'Kigoma Rural';
+
+update ward set district_n='Lindi'  where district_n = 'Lindi Rural';
+update ward set district_n='Masasi Township Authority'  where district_n ='Masasi Township Authority';
+update ward set district_n='Mbeya'  where district_n ='Mbeya Rural';
+update ward set district_n='Moshi Urban'  where district_n ='Moshi Municipal';
+
+update ward set district_n='Mpanda'  where district_n ='Mpanda Rural';
+update ward set district_n='Mtwara'  where district_n ='Mtwara Rural';
+
+update ward set district_n='Musoma Urban'  where district_n ='Musoma Municipal';
+update ward set district_n='Njombe'  where district_n ='Njombe Rural';
+update ward set district_n='Nyang''hwale'  where district_n ='Nyang''wale';
+update ward set district_n='Shinyanga'  where district_n ='Shinyanga Rural';
+update ward set district_n='Songea'  where district_n ='Songea Rural';
+update ward set district_n='Sumbawanga'  where district_n ='Sumbawanga Rural';
+update ward set district_n='Tanga Urban'  where district_n ='Tanga';
+
+
+
+
+
+
 insert into boundary (dtype,geom,gid,name,population,population_male,population_female)
 select
 'REGION' as dtype,
