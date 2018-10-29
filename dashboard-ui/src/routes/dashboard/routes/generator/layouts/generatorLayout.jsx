@@ -22,23 +22,26 @@ class WardLayout extends React.Component {
   }
 
   onChangeRegion(e) {
+debugger;
     const regionId = e.target.value === '-1' ? null : e.target.value
     const { selectRegion, getGeoItemsList, params: {reportType} } = this.props
     selectRegion(regionId)
-    getGeoItemsList('district', {regions: [regionId]})
+    getGeoItemsList('district', {regions: [regionId],simplifyFactor:0})
   }
 
   onChangeDistrict(e) {
+    debugger;
     const districtId = e.target.value === '-1' ? null : e.target.value
     const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
-    getGeoItemsList('ward', {districts: [districtId]})
+    getGeoItemsList('ward', {districts: [districtId],simplifyFactor:0})
     if (reportType === 'ward') {
       getGeoItemsList('facility', {districts: [districtId]})
     }
   }
 
   onChangeWard(e) {
+    debugger;
     const wardId = e.target.value === '-1' ? null : e.target.value
     const { selectWard, getGeoItemsList, params: {reportType} } = this.props
     selectWard(wardId)
@@ -65,13 +68,13 @@ class WardLayout extends React.Component {
       }
     } else if (region.get('selected')){
       selectDistrict(featureId)
-      getGeoItemsList('ward', {districts: [featureId]})
+      getGeoItemsList('ward', {districts: [featureId],simplifyFactor:0})
       if (reportType === 'ward') {
         getGeoItemsList('facility', {districts: [featureId]})
       }
     } else {
       selectRegion(featureId)
-      getGeoItemsList('district', {regions: [featureId]})
+      getGeoItemsList('district', {regions: [featureId],simplifyFactor:0})
     }
   }
 
@@ -124,32 +127,32 @@ class WardLayout extends React.Component {
   	    <div className="">
           <div className="report-generator-paragraph">
             <span className={`highlighted-${reportType}`}><Trans>{`${reportType} report generator`}</Trans>: </span>
-            {reportType === 'ward' ? 
+            {reportType === 'ward' ?
               <span className="">
-                <Trans>Create a custom data report for a ward by </Trans> 
-                1.<b><Trans>Selecting a Ward </Trans></b> 
+                <Trans>Create a custom data report for a ward by </Trans>
+                1.<b><Trans>Selecting a Ward </Trans></b>
                 <Trans>by typing its name in the </Trans>
-                <i><Trans>Ward Search </Trans></i> 
+                <i><Trans>Ward Search </Trans></i>
                 <Trans>or filtering by location using the </Trans>
-                <i><Trans>Ward Filter </Trans></i> 
+                <i><Trans>Ward Filter </Trans></i>
                 <Trans>and map, and then </Trans>
-                2.<b><Trans>Selecting a Time Period </Trans></b> 
+                2.<b><Trans>Selecting a Time Period </Trans></b>
                 <Trans>in the </Trans>
                 <i><Trans>Date Filter section </Trans></i>
-              </span>  
+              </span>
             :
               <span className="">
-                <Trans>Create a custom data report for a health facility by </Trans> 
-                1.<b><Trans>Selecting a Facility </Trans></b> 
+                <Trans>Create a custom data report for a health facility by </Trans>
+                1.<b><Trans>Selecting a Facility </Trans></b>
                 <Trans>by typing its name in the </Trans>
-                <i><Trans>Facility Search </Trans></i> 
+                <i><Trans>Facility Search </Trans></i>
                 <Trans>or filtering by location using the </Trans>
-                <i><Trans>Facility Filter </Trans></i> 
+                <i><Trans>Facility Filter </Trans></i>
                 <Trans>and map, and then </Trans>
-                2.<b><Trans>Selecting a Time Period </Trans></b> 
+                2.<b><Trans>Selecting a Time Period </Trans></b>
                 <Trans>in the </Trans>
                 <i><Trans>Date Filter section </Trans></i>
-              </span>  
+              </span>
             }
           </div>
           <div className="dashed-separator"></div>
