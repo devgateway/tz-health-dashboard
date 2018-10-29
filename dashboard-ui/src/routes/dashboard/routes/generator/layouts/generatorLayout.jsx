@@ -85,7 +85,6 @@ debugger;
 
   onGenerateReport() {
     const { ward, facility, period, params: {reportType} } = this.props
-    debugger;
     const strPeriod=composePeriod(period.toJS())
     if (reportType === 'ward') {
       this.context.router.history.push(`/report/ward/${ward.get('selected')}/${strPeriod}`)

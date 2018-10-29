@@ -46,6 +46,7 @@ class TextSearch extends React.Component {
   }
 
   renderSuggestion(suggestion, { query }) {
+    const { searchType } = this.props
     const suggestionText = `${suggestion.name}`;
     const matches = AutosuggestHighlightMatch(suggestionText, query);
     const parts = AutosuggestHighlightParse(suggestionText, matches);
@@ -59,7 +60,11 @@ class TextSearch extends React.Component {
           })}
         </span>
         <span className="name">
-          {` (Ward: ${suggestion.ward ? suggestion.ward.name : 'Unknown'})`}
+          {searchType === 'ward' ?
+            <i>{`(Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'} )`}</i>
+          :
+            <i>{`(Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'} - Ward: ${suggestion.ward ? suggestion.ward.name : 'Unknown'})`}</i>
+          } 
         </span>
       </span>
     );
