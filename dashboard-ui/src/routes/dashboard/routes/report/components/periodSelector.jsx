@@ -42,7 +42,7 @@ class PeriodSelector extends React.Component {
       if (periodSp.length === 1) {
         this.setState({periodType: 'yearly'})
       } else {
-        if (periodSp[1].startsWith('M')) {
+        if (periodSp[1].startsWith('m')) {
           this.setState({periodType: 'monthly'})
         } else {
           this.setState({periodType: 'quarterly'})
