@@ -4,6 +4,7 @@ import D3Map from '../../../../../components/d3Map'
 import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 import PeriodSelector from '../components/periodSelector'
+import Legends from '../components/legends'
 import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 
@@ -15,7 +16,7 @@ class WardLayout extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {legendVisible: true};
   }
 
   componentDidMount() {
@@ -39,12 +40,17 @@ class WardLayout extends React.Component {
     this.context.router.history.push(`/report/ward/${id}/${period}`)
   }
 
+  onToggleLegend(){
+    this.setState({legendVisible: !this.state.legendVisible})
+  }
+
   printReport(){
     print('ward', this.props)
   }
 
   render() {
     const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
+    const {legendVisible} = this.state
     const facilitiesFeatures = []
     const wardFacilities = []
     if (mapPoints) {
@@ -71,7 +77,7 @@ class WardLayout extends React.Component {
     return (
       <div>
         <div className="report-header">
-          <div className="ward-name">{wardName}</div>
+          <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
           <div className="print-icon" onClick={e => this.printReport()}></div>
           <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
@@ -116,21 +122,22 @@ class WardLayout extends React.Component {
               {mapShape.getIn(['features']) ?
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
-              <div className="legend-box">
-                <div className="legend-title"><Trans>Legend</Trans></div>
-                <div className="legend-item">
-                  <div className="current-icon"/>
-                  <div className="legend-name"><Trans>Facility in</Trans> {wardName} <Trans>Ward</Trans></div>
-                </div>
-                <div className="legend-item">
-                  <div className="other-icon"/>
-                  <div className="legend-name"><Trans>Facility in other ward</Trans></div>
-                </div>
-                <div className="legend-item">
-                  <div className="boundary-icon"/>
-                  <div className="legend-name"><Trans>Ward boundary</Trans></div>
-                </div>
-              </div>
+              <Legends>
+                <div>
+                  <div className="legend-item">
+                    <div className="current-icon"/>
+                    <div className="legend-name"><Trans>Facility in</Trans> {wardName} <Trans>Ward</Trans></div>
+                  </div>
+                  <div className="legend-item">
+                    <div className="other-icon"/>
+                    <div className="legend-name"><Trans>Facility in other ward</Trans></div>
+                  </div>
+                  <div className="legend-item">
+                    <div className="boundary-icon"/>
+                    <div className="legend-name"><Trans>Ward boundary</Trans></div>
+                  </div>
+                </div>              
+              </Legends>
             </div>
           </div>
           <div className="top-ten-deseases">

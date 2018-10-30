@@ -4,6 +4,7 @@ import D3Map from '../../../../../components/d3Map'
 import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 import PeriodSelector from '../components/periodSelector'
+import Legends from '../components/legends'
 import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 
@@ -96,29 +97,30 @@ class WardLayout extends React.Component {
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
-              <div className="legend-box">
-                <div className="legend-title"><Trans>Legend</Trans></div>
-                <div className="legend-item">
-                  <div className="current-icon"/>
-                  <div className="legend-name">{facilityName}</div>
+              <Legends>
+                <div>
+                  <div className="legend-item">
+                    <div className="current-icon"/>
+                    <div className="legend-name">{facilityName}</div>
+                  </div>
+                  <div className="legend-item">
+                    <div className="other-icon"/>
+                    {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
+                      <div className="legend-name"><Trans>Other</Trans> {facilityType} <Trans>in same region</Trans></div>
+                    :
+                      <div className="legend-name"><Trans>Other Facility in ward</Trans></div>
+                    }
+                  </div>
+                  <div className="legend-item">
+                    <div className="boundary-icon"/>
+                    {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
+                      <div className="legend-name"><Trans>District boundary</Trans></div>
+                    :
+                      <div className="legend-name"><Trans>Ward boundary</Trans></div>
+                    }
+                  </div>
                 </div>
-                <div className="legend-item">
-                  <div className="other-icon"/>
-                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                    <div className="legend-name"><Trans>Other</Trans> {facilityType} <Trans>in same region</Trans></div>
-                  :
-                    <div className="legend-name"><Trans>Other Facility in ward</Trans></div>
-                  }
-                </div>
-                <div className="legend-item">
-                  <div className="boundary-icon"/>
-                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                    <div className="legend-name"><Trans>District boundary</Trans></div>
-                  :
-                    <div className="legend-name"><Trans>Ward boundary</Trans></div>
-                  }
-                </div>
-              </div>
+              </Legends>
             </div>
           </div>
 
