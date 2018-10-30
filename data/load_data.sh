@@ -24,7 +24,7 @@ psql -Upostgres -dtanzania < data_to_boundary.sql
 
 
 
-psql -Upostgres -d tanzania -c 'drop table if exists region'
-psql -Upostgres -d tanzania -c 'drop table if exists district'
-psql -Upostgres -d tanzania -c 'drop table if exists ward'
+#psql -Upostgres -d tanzania -c 'drop table if exists region'
+#psql -Upostgres -d tanzania -c 'drop table if exists district'
+#psql -Upostgres -d tanzania -c 'drop table if exists ward'
 
