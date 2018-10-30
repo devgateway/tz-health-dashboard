@@ -20,8 +20,8 @@
     </changeSet>
 
     <changeSet id="add_index_opddiagnostic_diagnostic_id" author="sdimunzio">
-        <preConditions>
-            <tableExists tableName="public.opddiagnostic"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="opddiagnostic" schemaName="public."></tableExists>
         </preConditions>
         <sql>
             CREATE INDEX opddiagnostic_diagnostic_id_idx
@@ -32,8 +32,8 @@
     </changeSet>
 
     <changeSet id="add_index_opddiagnostic_ward_gid" author="sdimunzio">
-        <preConditions>
-            <tableExists tableName="public.opddiagnostic"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="opddiagnostic" schemaName="public."></tableExists>
         </preConditions>
         <sql>
             CREATE INDEX opddiagnostic_ward_gid_idx
@@ -45,8 +45,8 @@
 
 
     <changeSet id="add_index_opddiagnostic_facility_id" author="sdimunzio">
-        <preConditions>
-            <tableExists tableName="public.opddiagnostic"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="opddiagnostic" schemaName="public."></tableExists>
         </preConditions>
         <sql>
             CREATE INDEX opddiagnostic_facility_id_idx
@@ -57,8 +57,8 @@
     </changeSet>
 
     <changeSet id="add_index_rmnch_ward_gid_idx" author="sdimunzio">
-        <preConditions>
-            <tableExists tableName="public.rmnch"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="rmnch" schemaName="public"></tableExists>
         </preConditions>
         <sql>
             CREATE INDEX rmnch_ward_gid_idx
@@ -69,8 +69,8 @@
     </changeSet>
 
     <changeSet id="add_index_rmnch_facility_id_idx" author="sdimunzio">
-        <preConditions>
-            <tableExists tableName="public.rmnch"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="rmnch" schemaName="public"></tableExists>
         </preConditions>
         <sql>
 
@@ -83,8 +83,8 @@
 
     <changeSet id="add_index_rmnch_indicator_id_idx" author="sdimunzio">
 
-        <preConditions>
-            <tableExists tableName="public.rmnch"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="rmnch" schemaName="public"></tableExists>
         </preConditions>
         <sql>
             CREATE INDEX rmnch_indicator_id_idx
@@ -97,8 +97,8 @@
 
     <changeSet id="add_spatial_index_to_facility" author="sdimunzio">
 
-        <preConditions>
-            <tableExists tableName="public.facility"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="facility" schemaName="public"></tableExists>
         </preConditions>
         <sql>
             CREATE INDEX sidx_facility_point
@@ -110,9 +110,8 @@
     </changeSet>
 
     <changeSet id="populate_geometry_columns" author="sdimunzio">
-
-        <preConditions>
-            <tableExists tableName="information_schema.tables"></tableExists>
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="facility" schemaName="public"></tableExists>
         </preConditions>
         <sql>
 
