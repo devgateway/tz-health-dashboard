@@ -1,4 +1,4 @@
-ID,ID,ORGINAL LABEL,en,sw
+ID,ID,ORGINAL LABEL,EN,SW
 Kpa6sheYah0,Kpa6sheYah0,Road Traffic Accidents,Road Traffic Accidents,Ajali Barabani
 Wyorktq1rUA,Wyorktq1rUA,Eye Infection,Eye Infection,Ambukizo la jicho
 f6Q9p6uSWtS,f6Q9p6uSWtS,Chronic Ear Infection,Chronic Ear Infection,Ambukizo sugu la skio
@@ -9,7 +9,7 @@ nWRerupXUoy,nWRerupXUoy,Other Emergencies,Other Emergencies,Dharura nyingine
 eTOV59Rcv4F,eTOV59Rcv4F,Neuroses,Neuroses,Fadhaa
 ccIfQsrfWeL,ccIfQsrfWeL,Relapsing Fever (Louse Borne Typhus),Relapsing Fever (Louse Borne Typhus),Homa ya kurudia
 O9HZJ5frgiJ,O9HZJ5frgiJ,Yellow Fever,Yellow Fever,Homa ya manjano
-mcVhgPQtLLX,mcVhgPQtLLX,Typhoid,Typhoid,Homa ya matumbo 
+mcVhgPQtLLX,mcVhgPQtLLX,Typhoid,Typhoid,Homa ya matumbo
 NlXYR3IJWCl,NlXYR3IJWCl,Rheumatic Fever,Rheumatic Fever,Homa ya rumatizimu
 ykShMtNgDB1,ykShMtNgDB1,Idadi ya Watu,Population,Idadi ya Watu
 iP9wSaCAZl5,iP9wSaCAZl5,Caries,Caries,Karisi
@@ -60,7 +60,7 @@ DWWNT5pcrWf,DWWNT5pcrWf,Malaria BS +ve,Malaria BS +ve,Malaria BS +ve
 NSYWPEpZBuY,NSYWPEpZBuY,Malaria mRDT +ve,Malaria mRDT +ve,Malaria mRDT +ve
 MwnLlVZZJkU,MwnLlVZZJkU,Malaria In Pregnancy,Malaria In Pregnancy,Malaria wakati wa ujauzito
 kmpnqbSQLBl,kmpnqbSQLBl,Malaria Clinical,Malaria Clinical,"Malaria, kliniki"
-uyQpafHrxLT,uyQpafHrxLT,Mara ya Kwanza Kuhudhuria OPD Mwaka Huu ,First OPD visit this Year,Mara ya Kwanza Kuhudhuria OPD Mwaka Huu 
+uyQpafHrxLT,uyQpafHrxLT,Mara ya Kwanza Kuhudhuria OPD Mwaka Huu ,First OPD visit this Year,Mara ya Kwanza Kuhudhuria OPD Mwaka Huu
 a9Pxllofrpx,a9Pxllofrpx,"Mental conditions, Other","Mental conditions, Other",Maradhi mengine ya akili
 Ivd9opj8WCi,Ivd9opj8WCi,Other Dental Conditions,Other Dental Conditions,Maradhi mengine ya meno
 QvexV259cj2,QvexV259cj2,Other Surgical Condition,Other Surgical Condition,Maradhi mengine ya upasuaji
@@ -102,3 +102,12 @@ qoeOTJT0x6o,qoeOTJT0x6o,Peptic Ulcers,Peptic Ulcers,Vidonda vya tumbo
 gNQ5NYT8SCz,gNQ5NYT8SCz,Fungal Infection - Non-Skin,Fungal Infection - Non-Skin,"Vimelea maambukizi, yasiyo ya ngozi"
 wULlcm4Qj5S,wULlcm4Qj5S,Skin Infection - Fungal,Skin Infection - Fungal,Vimelea ngozi maambukizi
 xCl76XUXHb9,xCl76XUXHb9,Viral Haemorrhagic Fevers,Viral Haemorrhagic Fevers,Virusi vya homa ya hemorajiki
+ZbmHzUkeJbQ,ZbmHzUkeJbQ,ANC Waliopewa Iron/ Folic vidonge vya Kutosha,# of ANC attendees receiving adequate iron and folic acid tablets until next ANC visit,ANC Waliopewa Iron/ Folic vidonge vya Kutosha
+WAdaCligbNP,WAdaCligbNP,ANC Umri wa mimba chini ya wiki 12 (< 12weeks),# of pregnant women who made first visit before 12 weeks gestation ,ANC Umri wa mimba chini ya wiki 12 (< 12weeks)
+yqA1CfsfBHQ,yqA1CfsfBHQ,ANC Hudhurio la nne wajawazito wote,# of pregnant women with at least 4 ANC visits,ANC Hudhurio la nne wajawazito wote
+RyNkn76uTJo,RyNkn76uTJo,ANC Wajawazito waliopata Chanjo ya TT2+,# of pregnant women immunized with Tetanus Toxoid Injections,ANC Wajawazito waliopata Chanjo ya TT2+
+Zn1VXPl11BD,Zn1VXPl11BD,Nyongeza ya Vitamin A Watoto chini ya umri wa mwaka 1,# of children who received Vitamin A below 1 year of age,Nyongeza ya Vitamin A Watoto chini ya umri wa mwaka 1
+Zn1VXPl11BD,Zn1VXPl11BD,Watoto Waliochanjwa Polio,# of children immunized with Polio Vaccination,Watoto Waliochanjwa Polio
+V2ZzQl7dgVF,V2ZzQl7dgVF,Watoto Waliochanjwa Penta,# of children immunized with 3rd dose of PENTA,Watoto Waliochanjwa Penta
+DPLR0aQemYC,DPLR0aQemYC,Waliozalishwa na Watoa Huduma Wenye Ujuzi,Deliveries Assisted by Skilled Health Attendant,Waliozalishwa na Watoa Huduma Wenye Ujuzi
+Nd5BDnxVEP0,Nd5BDnxVEP0,Nyongeza ya Vitamin A Watoto umri zaidi ya mwaka 1 - 5,# of children who received Vitamin A between 1 year and 5 years of age ,Nyongeza ya Vitamin A Watoto umri zaidi ya mwaka 1 - 5

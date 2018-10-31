@@ -100,7 +100,7 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
     public void importData(Region region, Integer year, Boolean incremental) {
 
-        population(region, year, incremental);
+       // population(region, year, incremental);
         OPDDiagnoses(region, year, incremental);
         RMNNCH(region, year, incremental);
 
