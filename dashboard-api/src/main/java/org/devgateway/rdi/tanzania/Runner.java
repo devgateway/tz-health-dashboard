@@ -83,7 +83,7 @@ public class Runner implements ApplicationRunner {
     private void loadTranslations() {
         String pdwPath = System.getenv().get("PWD");
 
-        try (Reader reader = Files.newBufferedReader(Paths.get("C:/Work/tz-health-dashboard/data/translations.csv"));
+        try (Reader reader = Files.newBufferedReader(Paths.get(pdwPath + CSV_FILE));
              CSVReader csvReader = new CSVReader(reader);) {
             // Reading Records One by One in a String array
             String[] nextRecord;
