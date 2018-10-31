@@ -90,6 +90,9 @@ i18n.use(LanguageDetector).init({
         "facility filter": "facility filter ",
         "ward search": "ward search",
         "facility search": "facility search",
+        "Search and Filter Ward Data": "Search and Filter Ward Data",
+        "Search and Filter Facility Data": "Search and Filter Facility Data",
+
       } 
     },
     sw: {
@@ -103,7 +106,6 @@ i18n.use(LanguageDetector).init({
         "Age":"Umri",
         "in Total Cases since Last Year":"katika kesi zote tangu mwaka jana",
         "Change":"Badilisha",
-        //translate from here
         "Data Report Generator": "Jenerator ya taarifa ya data",
         "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.": 
           "Dashibodi hii inaonyesha habari muhimu kutoka kwa mfumo wa usimamizi wa habari za afya Tanzania, dhis2. Unaweza kuchunguza na kupakua data ya kimataifa juu ya watu wa huduma; magonjwa ya nje; uzazi, uzazi, mtoto mchanga, na afya ya mtoto; fedha za afya; utumishi; na vifo vya jamii. Tumia vifungo chini ili kupiga mbizi zaidi ndani ya data, kwa ama kituo cha kibinafsi au kata.",
@@ -178,6 +180,10 @@ i18n.use(LanguageDetector).init({
         "facility filter": "Chunga Kituo",
         "ward search": "Chagua Kata",
         "facility search": "Chagua Kituo",
+
+        //translate from here
+        "Search and Filter Ward Data": "Search and Filter Ward Data",
+        "Search and Filter Facility Data": "Search and Filter Facility Data",
         
       }
     }

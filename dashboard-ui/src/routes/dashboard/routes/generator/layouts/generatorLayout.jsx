@@ -223,6 +223,10 @@ debugger;
               : null}
             </div>
           </div>
+          <div className="info-box">
+            <div className="info-icon"></div>
+            <div className="info-paragraph"><Trans>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean mattis facilisis placerat. In convallis ante enim, nec pulvinar nibh cursus nec. Donec quis vulputate eros.</Trans></div>
+          </div>
         </div>
   	  </div>
   	)
