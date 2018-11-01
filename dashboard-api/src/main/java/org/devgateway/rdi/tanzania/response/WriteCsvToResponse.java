@@ -2,6 +2,7 @@ package org.devgateway.rdi.tanzania.response;
 
 import com.opencsv.CSVWriter;
 import org.devgateway.rdi.tanzania.Constants;
+import org.devgateway.rdi.tanzania.domain.Translation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,7 @@ public class WriteCsvToResponse {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WriteCsvToResponse.class);
 
-    public static void writeOPDResponse(PrintWriter print, List<OPDByAgeResponse> diagnoses) {
+    public static void writeOPDResponse(PrintWriter print, List<OPDByAgeResponse> diagnoses, String locale) {
 
         CSVWriter writer = new CSVWriter(print);
 
@@ -29,6 +30,14 @@ public class WriteCsvToResponse {
             String id = opdByAgeResponse.getDiagnostic().getDhis2Id();
 
             String name = opdByAgeResponse.getDiagnostic().getName();
+
+            if (locale != null) {
+
+                List<Translation> translations = opdByAgeResponse.getDiagnostic().getTranslations().stream().filter(translation -> translation.getLocale().equalsIgnoreCase(locale)).collect(Collectors.toList());
+                if (translations.size() > 0) {
+                    name = translations.iterator().next().getValue();
+                }
+            }
 
             String year = opdByAgeResponse.getYear() != null ? opdByAgeResponse.getYear().toString() : null;
 
@@ -67,7 +76,7 @@ public class WriteCsvToResponse {
     }
 
 
-    public static void writeRMNCHResponse(PrintWriter print, List<RMNCHResponse> rmnchResponses) {
+    public static void writeRMNCHResponse(PrintWriter print, List<RMNCHResponse> rmnchResponses, String locale) {
 
         CSVWriter writer = new CSVWriter(print);
 
@@ -79,6 +88,14 @@ public class WriteCsvToResponse {
             String id = rmnchResponse.getIndicator().getDhis2Id();
 
             String name = rmnchResponse.getIndicator().getName();
+
+            if (locale != null) {
+
+                List<Translation> translations = rmnchResponse.getIndicator().getTranslations().stream().filter(translation -> translation.getLocale().equalsIgnoreCase(locale)).collect(Collectors.toList());
+                if (translations.size() > 0) {
+                    name = translations.iterator().next().getValue();
+                }
+            }
 
             String year = rmnchResponse.getYear() != null ? rmnchResponse.getYear().toString() : null;
 
