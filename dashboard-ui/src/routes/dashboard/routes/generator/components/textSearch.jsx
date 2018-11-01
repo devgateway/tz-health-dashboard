@@ -41,8 +41,13 @@ class TextSearch extends React.Component {
   }
 
   getSuggestionValue(suggestion) {
+    const { searchType } = this.props
     this.setState({selection: suggestion})
-    return `${suggestion.name} (Ward: ${suggestion.ward ? suggestion.ward.name : 'Unknown'})`;
+    if (searchType === 'ward') {
+      return `${suggestion.name} (Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'})`
+    } else {
+      return `${suggestion.name} (Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'} - Ward: ${suggestion.ward ? suggestion.ward.name : 'Unknown'})`
+    }
   }
 
   renderSuggestion(suggestion, { query }) {

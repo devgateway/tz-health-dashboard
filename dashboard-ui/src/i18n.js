@@ -90,8 +90,8 @@ i18n.use(LanguageDetector).init({
         "facility filter": "facility filter ",
         "ward search": "ward search",
         "facility search": "facility search",
-        "Search and Filter Ward Data": "Search and Filter Ward Data",
-        "Search and Filter Facility Data": "Search and Filter Facility Data",
+        "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.",
+        "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.",
 
       } 
     },
@@ -182,8 +182,8 @@ i18n.use(LanguageDetector).init({
         "facility search": "Chagua Kituo",
 
         //translate from here
-        "Search and Filter Ward Data": "Search and Filter Ward Data",
-        "Search and Filter Facility Data": "Search and Filter Facility Data",
+        "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.",
+        "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.",
         
       }
     }
