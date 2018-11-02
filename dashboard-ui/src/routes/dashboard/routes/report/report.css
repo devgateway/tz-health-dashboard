@@ -9,7 +9,8 @@
   padding: 10px;
   color: #2CA4C4;
   font-size: 20px;
-  font-weight: bold; }
+  font-weight: bold;
+  display: inline-block; }
 
 .download {
   display: block;
@@ -190,6 +191,17 @@
       border-top: 2px solid #CCC; }
     .top-ten-deseases .top-ten-diagnosis-table .total-values .desease-name {
       text-align: right; }
+
+.value-legend {
+  display: inline-block;
+  float: right;
+  font-size: 15px;
+  font-weight: normal;
+  background: #f4f2ec;
+  color: #2c4856;
+  padding: 10px;
+  word-spacing: 5px;
+  margin-right: 15px; }
 
 .RMNCH-box {
   padding-top: 30px;
