@@ -217,9 +217,9 @@ export const getQuarterLabel = (q) => {
   return { start: getMonthName(start, 'short'), end: getMonthName(end, 'short') }
 }
 
-export const getCSVURI = (type, data, format, id, period) => {
+export const getCSVURI = (type, data, format, id, period, language) => {
 
-  return API_ROOT_URL + "/" + type + "/" + id + "/" + data + "." + format + "?" + preparePeriodQuery(composePeriod(period));
+  return API_ROOT_URL + "/" + type + "/" + id + "/" + data + "." + format + "?" + preparePeriodQuery(composePeriod(period)) + "&lan=" + language;
 }
 
 export const parsePeriod = (period) => {
@@ -317,7 +317,7 @@ export const imagesToBase64 = (images, callback) => {
     const img = images[i];
     const url = img.href.baseVal;
     toDataURL(url, function(value) {
-      img.setAttribute("href",value)
+      img.setAttribute("href", value)
       loaded++;
       if (loaded == total) {
         return callback(images);

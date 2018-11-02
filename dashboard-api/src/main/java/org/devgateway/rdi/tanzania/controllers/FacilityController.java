@@ -77,7 +77,8 @@ public class FacilityController {
     public void diangosesAsCsv(HttpServletResponse response, @PathVariable Long id,
                                @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                                @RequestParam(name = "q", required = false) Integer quarter,
-                               @RequestParam(name = "m", required = false) Integer month) throws IOException {
+                               @RequestParam(name = "m", required = false) Integer month,
+                               @RequestParam(name = "lan", required = false) String lan) throws IOException {
         Facility f = facilityService.getFacility(id);
         String csvFileName = f.getName() + "_diagnoses.csv";
         response.setContentType("text/csv");
@@ -85,7 +86,7 @@ public class FacilityController {
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
         List<OPDByAgeResponse> opdByAgeResponses = opdDiagnosesService.getOPDByFacilityAndPeriod(f, year, quarter, month);
-        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses);
+        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses,lan);
 
     }
 
@@ -111,7 +112,8 @@ public class FacilityController {
     public void rmnchAsCSV(HttpServletResponse response, @PathVariable Long id,
                            @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                            @RequestParam(name = "q", required = false) Integer quarter,
-                           @RequestParam(name = "m", required = false) Integer month) throws IOException {
+                           @RequestParam(name = "m", required = false) Integer month,
+                           @RequestParam(name = "lan", required = false) String lan) throws IOException {
         Facility f = facilityService.getFacility(id);
         String csvFileName = f.getName() + "_rmnch.csv";
         response.setContentType("text/csv");
@@ -120,7 +122,7 @@ public class FacilityController {
         response.setHeader(headerKey, headerValue);
         List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyFacilityAndPeriod(f, year, quarter, month);
 
-        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses);
+        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses,lan);
 
 
     }

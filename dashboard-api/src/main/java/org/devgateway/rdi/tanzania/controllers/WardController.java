@@ -94,7 +94,8 @@ public class WardController {
     public void diangosesAsCsv(HttpServletResponse response, @PathVariable Long id,
                                @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                                @RequestParam(name = "q", required = false) Integer quarter,
-                               @RequestParam(name = "m", required = false) Integer month) throws IOException {
+                               @RequestParam(name = "m", required = false) Integer month,
+                               @RequestParam(name = "lan", required = false) String lan) throws IOException {
         Ward w = wardService.getWardById(id);
         String csvFileName = w.getName() + "_diagnoses.csv";
         response.setContentType("text/csv");
@@ -102,7 +103,7 @@ public class WardController {
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
         List<OPDByAgeResponse> opdByAgeResponses = opdDiagnosesService.getOPDByWardAndPeriod(w, year, quarter, month);
-        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses);
+        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses, lan);
 
     }
 
@@ -128,7 +129,8 @@ public class WardController {
     public void rmnchAsCSV(HttpServletResponse response, @PathVariable Long id,
                            @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                            @RequestParam(name = "q", required = false) Integer quarter,
-                           @RequestParam(name = "m", required = false) Integer month) throws IOException {
+                           @RequestParam(name = "m", required = false) Integer month,
+                           @RequestParam(name = "lan", required = false) String lan) throws IOException {
         Ward w = wardService.getWardById(id);
 
         String csvFileName = w.getName() + "_rmnch.csv";
@@ -138,7 +140,7 @@ public class WardController {
         response.setHeader(headerKey, headerValue);
         List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyWardAndPeriod(w, year, quarter, month);
 
-        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses);
+        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses,lan);
 
 
     }
