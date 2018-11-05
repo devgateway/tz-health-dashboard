@@ -129,7 +129,6 @@ class WardLayout extends React.Component {
           </div>
 
           <div className="RMNCH-box">
-            <div className="sub-title"><Trans>Reproductive Maternal, Newborn and Child Health at</Trans> {facilityName} </div>
             <RMNCHTable type="facilities"   period={period} id={id} facilityName={facilityName} RMNCH={this.props.RMNCH}/>
           </div>
 

@@ -42,6 +42,8 @@ class RMNCHTable extends React.Component {
 
       return (
         <div className="RMNCH-table">
+          <div className="sub-title"><Trans>Reproductive Maternal, Newborn and Child Health at</Trans> {facilityName} </div>
+          <div className="value-legend"><b><Trans>Legend</Trans></b> +<Trans>Increasing</Trans> -<Trans>Decreasing</Trans></div>
           <table className="">
             <tbody>
               <tr>
