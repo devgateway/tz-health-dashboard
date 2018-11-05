@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import D3Map from '../../../../../components/d3Map'
+import D3Map from '../../../../../components/d3Map.jsx'
 import TopTenDeseases from '../components/topTenDeseasesTable'
 import RMNCHTable from '../components/RMNCHTable'
 import PeriodSelector from '../components/periodSelector'
@@ -28,7 +28,8 @@ class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.info.getIn(['ward', 'id']) !== prevProps.info.getIn(['ward', 'id'])) {
+    debugger;
+    if (this.props.info.getIn(['ward', 'gid']) !== prevProps.info.getIn(['ward', 'gid'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
       onGetMapShape(info)
@@ -46,13 +47,12 @@ class WardLayout extends React.Component {
 
   render() {
     const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
-
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
     }
 
-
+    debugger;
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
@@ -95,7 +95,8 @@ class WardLayout extends React.Component {
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
-                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568"
+                   shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
               <Legends>
                 <div>

@@ -7,7 +7,7 @@ import './textSearch.css'
 import {translate, Trans} from "react-i18next"
 
 class TextSearch extends React.Component {
-  
+
   static contextTypes = {
     router: PropTypes.object
   }
@@ -18,13 +18,13 @@ class TextSearch extends React.Component {
     this.state = {
       value: '',
       selection: {}
-    };    
+    };
   }
 
   onChange(event, { newValue, method }) {
     this.setState({value: newValue})
   }
-  
+
   onSuggestionsFetchRequested({ value }) {
     const {getFacilitySearchResults, getWardSearchResults, searchType} = this.props
   	if (value.length > 3) {
@@ -69,7 +69,7 @@ class TextSearch extends React.Component {
             <i>{`(Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'} )`}</i>
           :
             <i>{`(Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'} - Ward: ${suggestion.ward ? suggestion.ward.name : 'Unknown'})`}</i>
-          } 
+          }
         </span>
       </span>
     );
@@ -81,7 +81,7 @@ class TextSearch extends React.Component {
     if (searchType === 'ward') {
       this.context.router.history.push(`/report/ward/${selection.gid}`)
     } else {
-      this.context.router.history.push(`/report/facility/${selection.gid}`)
+      this.context.router.history.push(`/report/facility/${selection.id}`)
     }
   }
 
@@ -100,18 +100,18 @@ class TextSearch extends React.Component {
         <div className={`search-type-${searchType}`}>
           <Trans>{`${searchType} search`}</Trans>
         </div>
-        <Autosuggest 
+        <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
           getSuggestionValue={this.getSuggestionValue.bind(this)}
           renderSuggestion={this.renderSuggestion.bind(this)}
           inputProps={inputProps} />
-        {selection.gid ?
+        {selection.id ?
           <div className="generate-button" onClick={e => this.onGenerateReport()}><Trans>Generate Report</Trans></div>
         :
           <div className="generate-button-disabled"><Trans>Generate Report</Trans></div>
-        }  
+        }
       </div>
     )
   }
