@@ -43,6 +43,7 @@ class TopTenDeseases extends React.Component {
 
     return (<div className="top-ten-diagnosis-table">
       <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName}</div>
+      <div className="value-legend"><b><Trans>Legend</Trans></b> +<Trans>Increasing</Trans> -<Trans>Decreasing</Trans></div>
       <table className="">
         <tbody>
           <tr>
