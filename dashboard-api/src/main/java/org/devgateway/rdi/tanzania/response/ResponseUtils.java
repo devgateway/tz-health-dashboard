@@ -37,7 +37,7 @@ public class ResponseUtils {
     public static WardResponse wardToResponse(Ward ward) {
         if (ward != null) {
             WardResponse wardResponse = new WardResponse();
-            wardResponse.setId(ward.getGid());
+            wardResponse.setGid(ward.getGid());
             wardResponse.setName(ward.getName());
             wardResponse.setDistrict(new BoundaryResponse(ward.getDistrict().getGid(), ward.getDistrict().getName()));
             wardResponse.setRegion(new BoundaryResponse(ward.getDistrict().getRegion().getGid(), ward.getDistrict().getRegion().getName()));

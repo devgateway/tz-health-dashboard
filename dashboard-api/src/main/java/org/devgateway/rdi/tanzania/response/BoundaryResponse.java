@@ -6,15 +6,15 @@ package org.devgateway.rdi.tanzania.response;
 
 public class BoundaryResponse {
 
-    Long id;
+    Long gid;
     String name;
 
-    public Long getId() {
-        return id;
+    public Long getGid() {
+        return gid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setGid(Long gid) {
+        this.gid = gid;
     }
 
     public String getName() {
@@ -28,8 +28,8 @@ public class BoundaryResponse {
     public BoundaryResponse() {
     }
 
-    public BoundaryResponse(Long id, String name) {
-        this.id = id;
+    public BoundaryResponse(Long gid, String name) {
+        this.gid = gid;
         this.name = name;
     }
 }

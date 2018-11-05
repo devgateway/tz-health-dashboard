@@ -39,7 +39,7 @@ public class WardService {
 
         return wards.stream().map(ward -> {
             WardResponse w = new WardResponse();
-            w.setId(ward.getGid());
+            w.setGid(ward.getGid());
             w.setName(ward.getName());
             if (ward.getDistrict() != null) {
                 w.setDistrict(new BoundaryResponse(ward.getDistrict().getGid(), ward.getDistrict().getName()));

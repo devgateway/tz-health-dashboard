@@ -110,13 +110,13 @@ debugger;
     if (reportType === 'ward') {
       if (district.get('selected')) {
         const facilitiesFeatures = []
-        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == ward.get('selected') ? '#2c772f' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('gid'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == ward.get('selected') ? '#2c772f' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
         mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
       }
     } else {
       if (ward.get('selected')) {
         const facilitiesFeatures = []
-        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == facility.get('selected') ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('gid'), NAME: f.get('name'), fillColor: f.get('gid') == facility.get('selected') ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
         mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
       }
     }
@@ -202,7 +202,7 @@ debugger;
                     <select value={facility.get('selected') || -1} className="" onChange={e => this.onChangeFacility(e)} >
                       <option value={-1}><Trans>Select a facility</Trans></option>
                       {facility.getIn(['list']).map(option => {
-                        return <option key={`facility-${option.getIn(['id'])}`} value={option.getIn(['id'])}>{option.getIn(['name'])}</option>
+                        return <option key={`facility-${option.getIn(['gid'])}`} value={option.getIn(['gid'])}>{option.getIn(['name'])}</option>
                       })}
                     </select>
                   </div>

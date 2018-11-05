@@ -7,28 +7,28 @@ class PeriodSelector extends React.Component {
     super(props)
     this.state = {
       years: [
-        {id: 'y-2016', label: '2016'},
-        {id: 'y-2017', label: '2017'}
+        {gid: 'y-2016', label: '2016'},
+        {gid: 'y-2017', label: '2017'}
       ],
       quarters: [
-        {id: 'q-1', label: 'January-March'},
-        {id: 'q-2', label: 'April-June'},
-        {id: 'q-3', label: 'July-September'},
-        {id: 'q-4', label: 'October-December'}
+        {gid: 'q-1', label: 'January-March'},
+        {gid: 'q-2', label: 'April-June'},
+        {gid: 'q-3', label: 'July-September'},
+        {gid: 'q-4', label: 'October-December'}
       ],
       months: [
-        {id: 'm-1', label: 'January'},
-        {id: 'm-2', label: 'February'},
-        {id: 'm-3', label: 'March'},
-        {id: 'm-4', label: 'April'},
-        {id: 'm-5', label: 'May'},
-        {id: 'm-6', label: 'June'},
-        {id: 'm-7', label: 'July'},
-        {id: 'm-8', label: 'August'},
-        {id: 'm-9', label: 'September'},
-        {id: 'm-10', label: 'October'},
-        {id: 'm-11', label: 'November'},
-        {id: 'm-12', label: 'December'}
+        {gid: 'm-1', label: 'January'},
+        {gid: 'm-2', label: 'February'},
+        {gid: 'm-3', label: 'March'},
+        {gid: 'm-4', label: 'April'},
+        {gid: 'm-5', label: 'May'},
+        {gid: 'm-6', label: 'June'},
+        {gid: 'm-7', label: 'July'},
+        {gid: 'm-8', label: 'August'},
+        {gid: 'm-9', label: 'September'},
+        {gid: 'm-10', label: 'October'},
+        {gid: 'm-11', label: 'November'},
+        {gid: 'm-12', label: 'December'}
       ],
       periodType: 'yearly',
     }
@@ -70,14 +70,14 @@ class PeriodSelector extends React.Component {
       options = []
       years.forEach(y => {
         quarters.forEach(q => {
-          options.push({id: `${y.id}_${q.id}`, label: `${q.label} ${y.label}`})
+          options.push({gid: `${y.gid}_${q.gid}`, label: `${q.label} ${y.label}`})
         })
       })
     } else if (periodType === 'monthly') {
       options = []
       years.forEach(y => {
         months.forEach(m => {
-          options.push({id: `${y.id}_${m.id}`, label: `${m.label} ${y.label}`})
+          options.push({gid: `${y.gid}_${m.gid}`, label: `${m.label} ${y.label}`})
         })
       })
     }
@@ -96,7 +96,7 @@ class PeriodSelector extends React.Component {
             <select  className="" onChange={e => this.onChangePeriod(e)} value={period}>
               <option value={-1}><Trans>Select a period</Trans></option>
               {options.map(option => {
-                return <option key={`${option.id}`} value={option.id}>{option.label}</option>
+                return <option key={`${option.gid}`} value={option.gid}>{option.label}</option>
               })}
             </select>
           </div>

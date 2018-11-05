@@ -79,9 +79,9 @@ class TextSearch extends React.Component {
     const { searchType } = this.props
     const { selection } = this.state;
     if (searchType === 'ward') {
-      this.context.router.history.push(`/report/ward/${selection.id}`)
+      this.context.router.history.push(`/report/ward/${selection.gid}`)
     } else {
-      this.context.router.history.push(`/report/facility/${selection.id}`)
+      this.context.router.history.push(`/report/facility/${selection.gid}`)
     }
   }
 
@@ -107,7 +107,7 @@ class TextSearch extends React.Component {
           getSuggestionValue={this.getSuggestionValue.bind(this)}
           renderSuggestion={this.renderSuggestion.bind(this)}
           inputProps={inputProps} />
-        {selection.id ?
+        {selection.gid ?
           <div className="generate-button" onClick={e => this.onGenerateReport()}><Trans>Generate Report</Trans></div>
         :
           <div className="generate-button-disabled"><Trans>Generate Report</Trans></div>
