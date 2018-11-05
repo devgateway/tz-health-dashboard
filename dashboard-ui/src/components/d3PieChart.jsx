@@ -144,7 +144,7 @@ export default class PieChart extends React.Component {
         const x = d3.event.clientX; // event.target.getBoundingClientRect().left
         const y = d3.event.clientY; // event.target.getBoundingClientRect().left
         d3.select('#tooltip').remove();
-        d3.select("body").append('div').attr('id', 'tooltip')
+        d3.select("body").append('div').attr('gid', 'tooltip')
           .style("left", e => x + 'px')
           .style("top", e => y + 'px')
           .style("opacity", 1)

@@ -6,7 +6,7 @@ import {MonthLabel, QuarterLabel} from './labels'
 class RMNCHTable extends React.Component {
 
   render() {
-    const {id,RMNCH,type, period,facilityName, i18n: {language}} = this.props
+    const {gid,RMNCH,type, period,facilityName, i18n: {language}} = this.props
     let data=[]
     if (RMNCH && RMNCH.get('loading') == true) {
       return <div>Loading</div>
@@ -78,8 +78,8 @@ class RMNCHTable extends React.Component {
             </tbody>
           </table>
           <div className="download ">
-            <a href={getCSVURI(type,'rmnch','csv',id,period.toJS(),language)}>CSV</a>
-            <a href={getCSVURI(type,'rmnch','json',id,period.toJS(),language)}>JSON</a>
+            <a href={getCSVURI(type,'rmnch','csv',gid,period.toJS(),language)}>CSV</a>
+            <a href={getCSVURI(type,'rmnch','json',gid,period.toJS(),language)}>JSON</a>
           </div>
         </div>
       )

@@ -3,19 +3,19 @@
   <title></title>
   <layer-tree-group expanded="1" checked="Qt::PartiallyChecked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="1" checked="Qt::Checked" id="facility20180730104722071" name="facility">
+    <layer-tree-layer expanded="1" checked="Qt::Checked" gid="facility20180730104722071" name="facility">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" checked="Qt::Checked" id="boundary_copy_copy20180730104321642" name="Mirongo">
+    <layer-tree-layer expanded="1" checked="Qt::Checked" gid="boundary_copy_copy20180730104321642" name="Mirongo">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" checked="Qt::Checked" id="boundary20180730103634693" name="Nyamagana">
+    <layer-tree-layer expanded="1" checked="Qt::Checked" gid="boundary20180730103634693" name="Nyamagana">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" checked="Qt::Unchecked" id="Nyamagana_copy20180730104950706" name="Nyamagana copy">
+    <layer-tree-layer expanded="1" checked="Qt::Unchecked" gid="Nyamagana_copy20180730104950706" name="Nyamagana copy">
       <customproperties/>
     </layer-tree-layer>
-    <layer-tree-layer expanded="1" checked="Qt::Checked" id="boundary_copy20180730103738527" name="Pamba">
+    <layer-tree-layer expanded="1" checked="Qt::Checked" gid="boundary_copy20180730103738527" name="Pamba">
       <customproperties>
         <property key="overview" value="1"/>
       </customproperties>
@@ -85,7 +85,7 @@
   </legend>
   <projectlayers>
     <maplayer minimumScale="0" maximumScale="1e+08" simplifyDrawingHints="1" minLabelScale="0" maxLabelScale="1e+08" simplifyDrawingTol="1" geometry="Polygon" simplifyMaxScale="1" type="vector" hasScaleBasedVisibilityFlag="0" simplifyLocal="1" scaleBasedLabelVisibilityFlag="0">
-      <id>Nyamagana_copy20180730104950706</id>
+      <gid>Nyamagana_copy20180730104950706</gid>
       <datasource>dbname='tanzania' host=localhost port=5432 sslmode=disable key='gid' srid=0 type=MultiPolygon table="public"."boundary" (geom) sql="name" ILIKE 'Nyamagana' and "dtype" ='WARD'</datasource>
       <keywordList>
         <value></value>
@@ -260,7 +260,7 @@
         <xmax>32.90262717299999906</xmax>
         <ymax>-2.50718498199996009</ymax>
       </extent>
-      <id>boundary20180730103634693</id>
+      <gid>boundary20180730103634693</gid>
       <datasource>dbname='tanzania' host=localhost port=5432 sslmode=disable key='gid' srid=0 type=MultiPolygon table="public"."boundary" (geom) sql="name" ILIKE 'Nyamagana' and "dtype" ='WARD'</datasource>
       <keywordList>
         <value></value>
@@ -435,7 +435,7 @@
         <xmax>32.92304665199999647</xmax>
         <ymax>-2.51621508899996016</ymax>
       </extent>
-      <id>boundary_copy20180730103738527</id>
+      <gid>boundary_copy20180730103738527</gid>
       <datasource>dbname='tanzania' host=localhost port=5432 sslmode=disable key='gid' srid=0 type=MultiPolygon table="public"."boundary" (geom) sql="name" ilike  'Pamba'
 </datasource>
       <keywordList>
@@ -648,7 +648,7 @@
         <xmax>32.90759391800000344</xmax>
         <ymax>-2.51096070199997978</ymax>
       </extent>
-      <id>boundary_copy_copy20180730104321642</id>
+      <gid>boundary_copy_copy20180730104321642</gid>
       <datasource>dbname='tanzania' host=localhost port=5432 sslmode=disable key='gid' srid=0 type=MultiPolygon table="public"."boundary" (geom) sql="name" ilike '%Mirongo%'</datasource>
       <keywordList>
         <value></value>
@@ -1021,7 +1021,7 @@ def my_form_open(dialog, layer, feature):
         <xmax>32.90191000000000088</xmax>
         <ymax>-2.51684999999999981</ymax>
       </extent>
-      <id>facility20180730104722071</id>
+      <gid>facility20180730104722071</gid>
       <datasource>file:///home/sdimunzio/projects/tz-health-dashboard/data/facilities/facility.csv?type=csv&amp;xField=Longitude&amp;yField=Latitude&amp;spatialIndex=yes&amp;subsetIndex=no&amp;watchFile=no&amp;=&amp;subset=%22Facility%20Name%22%20ilike%20'%25Amani%20Chogo%25'</datasource>
       <keywordList>
         <value></value>

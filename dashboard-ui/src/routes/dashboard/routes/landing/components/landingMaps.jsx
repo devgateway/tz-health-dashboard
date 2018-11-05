@@ -36,7 +36,7 @@ class MapView extends React.Component {
     const wardFeature = {'type': 'FeatureCollection', 'features': [ward]}
     const facilitiesFeatures = []
     if (facilities) {
-      facilities.forEach(f => facilitiesFeatures.push({properties: {ID: f.id, NAME: f.name}, geometry: f.point}))
+      facilities.forEach(f => facilitiesFeatures.push({properties: {ID: f.gid, NAME: f.name}, geometry: f.point}))
     }
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     return (<div className="maps-container">

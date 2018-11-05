@@ -63,6 +63,7 @@ class WardLayout extends React.Component {
     }
 
     //totals by ownership types
+    debugger;
     const totalPrivate = wardFacilities.filter(f => f.ownership.dhis2Id === 'UE4MHrqMzfd').length
     const totalFaithBased = wardFacilities.filter(f => f.ownership.dhis2Id === 'rj0MuRMJYCj').length
     const totalPublic = wardFacilities.filter(f => f.ownership.dhis2Id === 'm16TP0k7LVw').length
@@ -136,7 +137,7 @@ class WardLayout extends React.Component {
                     <div className="boundary-icon"/>
                     <div className="legend-name"><Trans>Ward boundary</Trans></div>
                   </div>
-                </div>              
+                </div>
               </Legends>
             </div>
           </div>
