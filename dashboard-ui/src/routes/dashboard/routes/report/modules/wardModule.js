@@ -75,7 +75,7 @@ export const getWardRMNCH = (id, period) => {
 
 export const getMapShape = (wardData) => {
   let getShapeMethod = api.findWards
-  let params = {wards: wardData.getIn(['id'])}
+  let params = {wards: wardData.getIn(['gid'])}
   return (dispatch, getState) => {
     dispatch({type: WARD_MAP_REQUEST})
     getShapeMethod(params).then(data => {
@@ -87,7 +87,7 @@ export const getMapShape = (wardData) => {
 };
 
 export const getMapPoints = (wardData) => {
-  let params = {districts: wardData.getIn(['district', 'id'])}
+  let params = {districts: wardData.getIn(['district', 'gid'])}
   return (dispatch, getState) => {
     dispatch({type: WARD_MAP_REQUEST})
     api.findFacilities(params).then(data => {
@@ -106,6 +106,7 @@ const ACTION_HANDLERS = {
   },
   [WARD_INFO_RESPONSE]: (state, action) => {
     const {data} = action;
+    debugger;
     return state.setIn(['reportData', 'info'], Immutable.fromJS(data)).setIn(['reportData', 'info', 'loading'], false)
   },
   [WARD_INFO_ERROR]: (state, action) => {

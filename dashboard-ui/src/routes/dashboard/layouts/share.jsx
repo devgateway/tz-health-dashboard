@@ -103,7 +103,7 @@ export default class Share extends React.Component {
   /* ================================================== */
 
   render() {
-    return <div className="share-buttons" gid="share-buttons">
+    return <div className="share-buttons" id="share-buttons">
 
       <ShareLink className="facebook" href="http://www.facebook.com/sharer.php?u=" title="Facebook"></ShareLink>
       <ShareLink className="gplus" href="https://plus.google.com/share?url=" title="Google +"></ShareLink>

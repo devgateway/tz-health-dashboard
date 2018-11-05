@@ -21,6 +21,7 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { onGetWardInfo, onGetWardPopulation, onGetWardDiagnoses,onGetWardRMNCH, params: {id, period} } = this.props;
+    debugger;
     onGetWardInfo(id, period)
     onGetWardPopulation(id, period)
     onGetWardDiagnoses(id, period)
@@ -28,7 +29,7 @@ class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.info.getIn(['id']) !== prevProps.info.getIn(['id'])) {
+    if (this.props.info.getIn(['gid']) !== prevProps.info.getIn(['gid'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
       onGetMapShape(info)

@@ -72,11 +72,12 @@ export const getFacilityRMNCH = (id, period) => {
 
 
 export const getMapShape = (facilityData) => {
+  debugger;
   let getShapeMethod = api.findWards
-  let params = {wards: facilityData.getIn(['ward', 'id'])}
+  let params = {wards: facilityData.getIn(['ward', 'gid'])}
   if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load all districts from region
     getShapeMethod = api.findDistricts
-    params = {regions: facilityData.getIn(['region', 'id'])}
+    params = {regions: facilityData.getIn(['region', 'gid'])}
   }
   return (dispatch, getState) => {
     dispatch({type: FACILITY_MAP_REQUEST})
@@ -89,9 +90,9 @@ export const getMapShape = (facilityData) => {
 };
 
 export const getMapPoints = (facilityData) => {
-  let params = {wards: facilityData.getIn(['ward', 'id']), type: facilityData.getIn(['type', 'dhis2Id'])}
+  let params = {wards: facilityData.getIn(['ward', 'gid']), type: facilityData.getIn(['type', 'dhis2Id'])}
   if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load facilities from region
-    params = {regions: facilityData.getIn(['region', 'id']), types: facilityData.getIn(['type', 'id'])}
+    params = {regions: facilityData.getIn(['region', 'gid']), types: facilityData.getIn(['type', 'id'])}
   }
   return (dispatch, getState) => {
     dispatch({type: FACILITY_MAP_REQUEST})
