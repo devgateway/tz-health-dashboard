@@ -22,31 +22,34 @@ class WardLayout extends React.Component {
   }
 
   onChangeRegion(e) {
-debugger;
     const regionId = e.target.value === '-1' ? null : e.target.value
     const { selectRegion, getGeoItemsList, params: {reportType} } = this.props
     selectRegion(regionId)
-    getGeoItemsList('district', {regions: [regionId],simplifyFactor:0})
+    if (regionId) {
+      getGeoItemsList('district', {regions: [regionId],simplifyFactor:0})
+    }
   }
 
   onChangeDistrict(e) {
-    debugger;
     const districtId = e.target.value === '-1' ? null : e.target.value
     const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
-    getGeoItemsList('ward', {districts: [districtId],simplifyFactor:0})
-    if (reportType === 'ward') {
-      getGeoItemsList('facility', {districts: [districtId]})
+    if (districtId) {
+      getGeoItemsList('ward', {districts: [districtId],simplifyFactor:0})
+      if (reportType === 'ward') {
+        getGeoItemsList('facility', {districts: [districtId]})
+      }
     }
   }
 
   onChangeWard(e) {
-    debugger;
     const wardId = e.target.value === '-1' ? null : e.target.value
     const { selectWard, getGeoItemsList, params: {reportType} } = this.props
     selectWard(wardId)
-    if (reportType === 'facility') {
-      getGeoItemsList('facility', {wards: [wardId]})
+    if (wardId) {
+      if (reportType === 'facility') {
+        getGeoItemsList('facility', {wards: [wardId]})
+      }
     }
   }
 
