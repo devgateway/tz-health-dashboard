@@ -46,7 +46,7 @@ public class GeoJsonService {
                         boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region)));
+        regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,false)));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -54,7 +54,7 @@ public class GeoJsonService {
     public FeatureCollection getRegionById(final Long id) {
         Region region = regionRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        geoJsonBuilder.add(BoundaryTrasnfomer.transform(region));
+        geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,true));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -65,7 +65,7 @@ public class GeoJsonService {
                 boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        districts.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region)));
+        districts.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,false)));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -74,7 +74,7 @@ public class GeoJsonService {
     public FeatureCollection getDistrictById(final Long id) {
         District district = districtRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        geoJsonBuilder.add(BoundaryTrasnfomer.transform(district));
+        geoJsonBuilder.add(BoundaryTrasnfomer.transform(district,true));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -85,7 +85,7 @@ public class GeoJsonService {
                 boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        wards.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region)));
+        wards.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,false)));
         return geoJsonBuilder.getFeatures();
     }
 
