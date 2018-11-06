@@ -1,7 +1,6 @@
 package org.devgateway.rdi.tanzania.services;
 
 import org.devgateway.geo.GeoJsonBuilder;
-import org.devgateway.rdi.tanzania.domain.Boundary;
 import org.devgateway.rdi.tanzania.domain.District;
 import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.domain.Ward;
@@ -44,7 +43,7 @@ public class GeoJsonService {
 
         List<Region> regions = regionRepository.
                 findAll(BoundarySpecifications.getRegionSpecifications(boundaryRequest),
-                boundaryRequest.getSimplifyFactor());
+                        boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
         regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region)));
@@ -95,7 +94,7 @@ public class GeoJsonService {
     public FeatureCollection getWardById(final Long id) {
         Ward ward = wardRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        geoJsonBuilder.add(BoundaryTrasnfomer.transform(ward));
+        geoJsonBuilder.add(BoundaryTrasnfomer.transform(ward, true));
         return geoJsonBuilder.getFeatures();
     }
 
