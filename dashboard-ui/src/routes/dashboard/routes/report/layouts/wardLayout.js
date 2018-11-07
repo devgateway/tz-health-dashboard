@@ -75,7 +75,17 @@ class WardLayout extends React.Component {
     const wardName = info.getIn(['name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
-
+    const shapeFeatures = mapShape.toJS()
+    
+    let totalPopulation = 0
+    let totalPopMale = 0
+    let totalPopFemale = 0
+    if (shapeFeatures.features) {
+      totalPopulation = shapeFeatures.features[0].properties.POPULATION || 0
+      totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || 0
+      totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
+    }
+  
     return (
       <div>
         <div className="report-header">
@@ -93,20 +103,23 @@ class WardLayout extends React.Component {
             <div>
               <div className="info">
                 <div className="sub-title"><Trans>Availability of Health Services in</Trans> {wardName} <Trans>Ward</Trans></div>
-                <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> <Trans>Total Population</Trans></div>
+                <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans></div>
 
                 <div className="ages">
                   <div className="value-label"><div><Trans>by Gender</Trans></div></div>
-                  <div className="value-item"><div><Trans>Male</Trans></div><div>{population.getIn(['data', 'totalMale'])}</div></div>
-                  <div className="value-item"><div><Trans>Female</Trans></div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
+                  <div className="value-item"><div><Trans>Male</Trans></div><div>{totalPopMale}</div></div>
+                  <div className="value-item"><div><Trans>Female</Trans></div><div>{totalPopFemale}</div></div>
                 </div>
-
+                <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
+              
+                {/*}
                 <div className="ages">
                   <div className="value-label"><div><Trans>by Age</Trans></div></div>
                   <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
                   <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
                   <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
                 </div>
+                */}
               </div>
               <div className="info">
                 <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans></div>
@@ -146,7 +159,6 @@ class WardLayout extends React.Component {
             <TopTenDeseases  type="wards"  id={id} period={period}  facilityName={wardName} diagnoses={this.props.diagnoses}/>
           </div>
           <div className="RMNCH-box">
-            <div className="sub-title"><Trans>Reproductive Maternal, Newborn and Child Health at</Trans> {wardName} </div>
             <RMNCHTable type="wards" id={id}  period={period}  facilityName={wardName} RMNCH={this.props.RMNCH}/>
           </div>
 

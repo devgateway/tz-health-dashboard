@@ -36,7 +36,9 @@ public class DistrictRepositoryImpl implements DistrictRepositoryCustom {
         multiSelect.add(root.get(District_.gid));
         multiSelect.add(function);
         multiSelect.add(root.get(District_.name));
-
+        multiSelect.add(root.get(District_.population));
+        multiSelect.add(root.get(District_.populationMale));
+        multiSelect.add(root.get(District_.populationFemale));
 
         Predicate predicate=specification.toPredicate(root, criteriaQuery, criteriaBuilder);
         if (predicate != null) {

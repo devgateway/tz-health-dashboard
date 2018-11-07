@@ -37,7 +37,9 @@ public class WardRepositoryImpl implements WardRepositoryCustom {
         multiSelect.add(root.get(Ward_.gid));
         multiSelect.add(function);
         multiSelect.add(root.get(Ward_.name));
-
+        multiSelect.add(root.get(Ward_.population));
+        multiSelect.add(root.get(Ward_.populationMale));
+        multiSelect.add(root.get(Ward_.populationFemale));
 
         Predicate predicate = specification.toPredicate(root, criteriaQuery, criteriaBuilder);
         if (predicate != null) {
