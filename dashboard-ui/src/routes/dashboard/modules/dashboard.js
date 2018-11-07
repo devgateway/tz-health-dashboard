@@ -75,16 +75,17 @@ const ACTION_HANDLERS = {
   },
   ['@@router/LOCATION_CHANGE']: (state, action) => {
     const { payload: { pathname } } = action;
+    const lan = pathname.substring(1, 3);
+    state = state.setIn(['lan'], lan)
     const pattern = pathname.substring(pathname.lastIndexOf('/') + 1);
-    if (pattern) {
 
+    if (pattern) {
       const parsed = api.parsePeriod(pattern);
       if (parsed != null) {
         return state.setIn(['period'], Immutable.fromJS(parsed))
-      } else {
-        return state;
       }
     }
+    debugger;
     return state;
   }
 };

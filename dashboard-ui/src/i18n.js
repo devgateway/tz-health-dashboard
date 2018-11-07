@@ -6,27 +6,25 @@ i18n.use(LanguageDetector).init({
   resources: {
     en: {
       translations: {
-        "Dashboard":"Dashboard",
-        "Map":"Map",
-        "Top Ten Diagnoses":"Top Ten Diagnoses",
-        "Total":"Total",
-        "Total Count":"Total Count",
-        "Age":"Age",
-        "Total Count":"Total Count",
-        "in Total Cases since Last Year":"in Total Cases since Last Year",
-        "Out-Patient Diseases (OPD) at":"Out-Patient Diseases (OPD) at",
-        "Change":"Change",
+        "Dashboard": "Dashboard",
+        "Map": "Map",
+        "Top Ten Diagnoses": "Top Ten Diagnoses",
+        "Total": "Total",
+        "Total Count": "Total Count",
+        "Age": "Age",
+        "Total Count": "Total Count",
+        "in Total Cases since Last Year": "in Total Cases since Last Year",
+        "Out-Patient Diseases (OPD) at": "Out-Patient Diseases (OPD) at",
+        "Change": "Change",
         "Data Report Generator": "Data Report Generator",
-        "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.": 
-          "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.",
+        "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.": "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.",
         "Facility Report Generator": "Facility Report Generator",
         "Ward Report Generator": "Ward Report Generator",
-        "This portal is managed by the President’s Office - Regional Administration and Local Government (PORALG), in partnership with the Ministry of Health, Community Development, Gender, Elderly and Children (MoHCDGEC). Development Gateway developed the dashboard, with financial support from the Bill & Melinda Gates Foundation and technical support from DataVision International.":
-          "This portal is managed by the President’s Office - Regional Administration and Local Government (PORALG), in partnership with the Ministry of Health, Community Development, Gender, Elderly and Children (MoHCDGEC). Development Gateway developed the dashboard, with financial support from the Bill & Melinda Gates Foundation and technical support from DataVision International.",
+        "This portal is managed by the President’s Office - Regional Administration and Local Government (PORALG), in partnership with the Ministry of Health, Community Development, Gender, Elderly and Children (MoHCDGEC). Development Gateway developed the dashboard, with financial support from the Bill & Melinda Gates Foundation and technical support from DataVision International.": "This portal is managed by the President’s Office - Regional Administration and Local Government (PORALG), in partnership with the Ministry of Health, Community Development, Gender, Elderly and Children (MoHCDGEC). Development Gateway developed the dashboard, with financial support from the Bill & Melinda Gates Foundation and technical support from DataVision International.",
         "facility report generator": "facility report generator",
-        "ward report generator": "ward report generator", 
+        "ward report generator": "ward report generator",
         "Create a custom data report for a ward by ": "Create a custom data report for a ward by ",
-        "Selecting a Ward ": "Selecting a Ward ", 
+        "Selecting a Ward ": "Selecting a Ward ",
         "by typing its name in the ": "by typing its name in the ",
         "Ward Search ": "Ward Search ",
         "or filtering by location using the ": "or filtering by location using the ",
@@ -36,7 +34,7 @@ i18n.use(LanguageDetector).init({
         "in the ": "in the ",
         "Date Filter section ": "Date Filter section ",
         "Create a custom data report for a health facility by ": "Create a custom data report for a health facility by ",
-        "Selecting a Facility ": "Selecting a Facility ", 
+        "Selecting a Facility ": "Selecting a Facility ",
         "Facility Search ": "Facility Search ",
         "Facility Filter ": "Facility Filter ",
         "Regions": "Regions",
@@ -92,31 +90,30 @@ i18n.use(LanguageDetector).init({
         "facility search": "facility search",
         "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.",
         "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.",
-
-      } 
+        "English":"English",
+        "Swahili":"Swahili"
+      }
     },
     sw: {
       translations: {
-        "Dashboard":"Dashibodi",
-        "Map":"Ramani",
-        "Top Ten Diagnoses":"Vipimo vya Juu kumi",
-        "Out-Patient Diseases (OPD) at":"Magonjwa ya Kati-mgonjwa (OPD)",
-        "Total":"Jumla",
-        "Total Count":"Jumla ya Hesabu",
-        "Age":"Umri",
-        "in Total Cases since Last Year":"katika kesi zote tangu mwaka jana",
-        "Change":"Badilisha",
+        "Dashboard": "Dashibodi",
+        "Map": "Ramani",
+        "Top Ten Diagnoses": "Vipimo vya Juu kumi",
+        "Out-Patient Diseases (OPD) at": "Magonjwa ya Kati-mgonjwa (OPD)",
+        "Total": "Jumla",
+        "Total Count": "Jumla ya Hesabu",
+        "Age": "Umri",
+        "in Total Cases since Last Year": "katika kesi zote tangu mwaka jana",
+        "Change": "Badilisha",
         "Data Report Generator": "Jenerator ya taarifa ya data",
-        "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.": 
-          "Dashibodi hii inaonyesha habari muhimu kutoka kwa mfumo wa usimamizi wa habari za afya Tanzania, dhis2. Unaweza kuchunguza na kupakua data ya kimataifa juu ya watu wa huduma; magonjwa ya nje; uzazi, uzazi, mtoto mchanga, na afya ya mtoto; fedha za afya; utumishi; na vifo vya jamii. Tumia vifungo chini ili kupiga mbizi zaidi ndani ya data, kwa ama kituo cha kibinafsi au kata.",
+        "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.": "Dashibodi hii inaonyesha habari muhimu kutoka kwa mfumo wa usimamizi wa habari za afya Tanzania, dhis2. Unaweza kuchunguza na kupakua data ya kimataifa juu ya watu wa huduma; magonjwa ya nje; uzazi, uzazi, mtoto mchanga, na afya ya mtoto; fedha za afya; utumishi; na vifo vya jamii. Tumia vifungo chini ili kupiga mbizi zaidi ndani ya data, kwa ama kituo cha kibinafsi au kata.",
         "Facility Report Generator": "Jenerator ya taarifa ya Kituo",
         "Ward Report Generator": "Jenerator ya taarifa ya Kata",
-        "This portal is managed by the President’s Office - Regional Administration and Local Government (PORALG), in partnership with the Ministry of Health, Community Development, Gender, Elderly and Children (MoHCDGEC). Development Gateway developed the dashboard, with financial support from the Bill & Melinda Gates Foundation and technical support from DataVision International.":
-          "Hifadhi hii inasimamiwa na Ofisi ya Rais - Utawala wa Mikoa na Serikali za Mitaa (PORALG), kwa kushirikiana na Wizara ya Afya, Maendeleo ya Jamii, Jinsia, Wazee na Watoto (MoHCDGEC). Development Gateway ilianzisha dashibodi, na msaada wa kifedha kutoka Foundation ya Bill & Melinda Gates na msaada wa kiufundi kutoka DataVision International.",
+        "This portal is managed by the President’s Office - Regional Administration and Local Government (PORALG), in partnership with the Ministry of Health, Community Development, Gender, Elderly and Children (MoHCDGEC). Development Gateway developed the dashboard, with financial support from the Bill & Melinda Gates Foundation and technical support from DataVision International.": "Hifadhi hii inasimamiwa na Ofisi ya Rais - Utawala wa Mikoa na Serikali za Mitaa (PORALG), kwa kushirikiana na Wizara ya Afya, Maendeleo ya Jamii, Jinsia, Wazee na Watoto (MoHCDGEC). Development Gateway ilianzisha dashibodi, na msaada wa kifedha kutoka Foundation ya Bill & Melinda Gates na msaada wa kiufundi kutoka DataVision International.",
         "facility report generator": "Jenerator ya taarifa ya kituo",
-        "ward report generator": "Jenerator ya taarifa ya Kata", 
+        "ward report generator": "Jenerator ya taarifa ya Kata",
         "Create a custom data report for a ward by ": "Unda taarifa data maalum ya kata na ",
-        "Selecting a Ward ": "Kuchagua Kata ", 
+        "Selecting a Ward ": "Kuchagua Kata ",
         "by typing its name in the ": "Kwa kuandika jina lake katika ",
         "Ward Search ": "Chagua Kata ",
         "or filtering by location using the ": "au kuchuja na maeneo kwa kutumia ",
@@ -126,7 +123,7 @@ i18n.use(LanguageDetector).init({
         "in the ": "Ndani ya ",
         "Date Filter section ": "Chagua Tarehe ",
         "Create a custom data report for a health facility by ": "Unda taarifa data maalum ya kituo cha afya na ",
-        "Selecting a Facility ": "Kuchagua kituo ", 
+        "Selecting a Facility ": "Kuchagua kituo ",
         "Facility Search ": "Chagua Kituo ",
         "Facility Filter ": "Chunga Kituo ",
         "Regions": "Mikoa",
@@ -180,15 +177,16 @@ i18n.use(LanguageDetector).init({
         "facility filter": "Chunga Kituo",
         "ward search": "Chagua Kata",
         "facility search": "Chagua Kituo",
-
         //translate from here
         "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.",
         "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.": "Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.",
-        
+        "English":"English",
+        "Swahili":"Swahili"
+
       }
     }
   },
-  fallbackLng: "en",
+  fallbackLng: "sw",
   debug: true,
 
   // have a common namespace used around the full app

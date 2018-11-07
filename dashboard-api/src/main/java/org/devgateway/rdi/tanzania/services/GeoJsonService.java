@@ -46,7 +46,7 @@ public class GeoJsonService {
                         boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,false)));
+        regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,true)));
         return geoJsonBuilder.getFeatures();
     }
 

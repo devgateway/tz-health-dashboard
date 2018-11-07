@@ -15,10 +15,10 @@ const createRoute = (props) => {
     }, 'dash-chunk'))
   })
 
-  
+
   return (
     <div>
-      <Route path="/generate/:reportType" render={({match}) => <ReportGenerator store={store} params={match.params}/>}/>
+      <Route path="/:locale/generate/:reportType" render={({match}) => <ReportGenerator store={store} params={match.params}/>}/>
     </div>
   )
 }
