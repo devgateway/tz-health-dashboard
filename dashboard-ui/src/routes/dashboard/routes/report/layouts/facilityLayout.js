@@ -28,7 +28,7 @@ class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    debugger;
+    
     if (this.props.info.getIn(['ward', 'gid']) !== prevProps.info.getIn(['ward', 'gid'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
@@ -52,7 +52,7 @@ class WardLayout extends React.Component {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
     }
 
-    debugger;
+    
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])

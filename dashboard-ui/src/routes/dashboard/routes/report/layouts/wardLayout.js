@@ -21,7 +21,7 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { onGetWardInfo, onGetWardPopulation, onGetWardDiagnoses,onGetWardRMNCH, params: {id, period} } = this.props;
-    debugger;
+    
     onGetWardInfo(id, period)
     onGetWardPopulation(id, period)
     onGetWardDiagnoses(id, period)
@@ -64,7 +64,7 @@ class WardLayout extends React.Component {
     }
 
     //totals by ownership types
-    debugger;
+    
     const totalPrivate = wardFacilities.filter(f => f.ownership.dhis2Id === 'UE4MHrqMzfd').length
     const totalFaithBased = wardFacilities.filter(f => f.ownership.dhis2Id === 'rj0MuRMJYCj').length
     const totalPublic = wardFacilities.filter(f => f.ownership.dhis2Id === 'm16TP0k7LVw').length

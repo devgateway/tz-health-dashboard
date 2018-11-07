@@ -1,5 +1,5 @@
 import React from 'react'
-import {translate, Trans} from "react-i18next"
+import {translate, Trans, t} from "react-i18next"
 
 class PeriodSelector extends React.Component {
 
@@ -7,33 +7,71 @@ class PeriodSelector extends React.Component {
     super(props)
     this.state = {
       years: [
-        {gid: 'y-2016', label: '2016'},
-        {gid: 'y-2017', label: '2017'}
+        {
+          gid: 'y-2016',
+          label: '2016'
+        }, {
+          gid: 'y-2017',
+          label: '2017'
+        }
       ],
       quarters: [
-        {gid: 'q-1', label: 'January-March'},
-        {gid: 'q-2', label: 'April-June'},
-        {gid: 'q-3', label: 'July-September'},
-        {gid: 'q-4', label: 'October-December'}
+        {
+          gid: 'q-1',
+          label: 'January-March'
+        }, {
+          gid: 'q-2',
+          label: 'April-June'
+        }, {
+          gid: 'q-3',
+          label: 'July-September'
+        }, {
+          gid: 'q-4',
+          label: 'October-December'
+        }
       ],
       months: [
-        {gid: 'm-1', label: 'January'},
-        {gid: 'm-2', label: 'February'},
-        {gid: 'm-3', label: 'March'},
-        {gid: 'm-4', label: 'April'},
-        {gid: 'm-5', label: 'May'},
-        {gid: 'm-6', label: 'June'},
-        {gid: 'm-7', label: 'July'},
-        {gid: 'm-8', label: 'August'},
-        {gid: 'm-9', label: 'September'},
-        {gid: 'm-10', label: 'October'},
-        {gid: 'm-11', label: 'November'},
-        {gid: 'm-12', label: 'December'}
+        {
+          gid: 'm-1',
+          label: 'January'
+        }, {
+          gid: 'm-2',
+          label: 'February'
+        }, {
+          gid: 'm-3',
+          label: 'March'
+        }, {
+          gid: 'm-4',
+          label: 'April'
+        }, {
+          gid: 'm-5',
+          label: 'May'
+        }, {
+          gid: 'm-6',
+          label: 'June'
+        }, {
+          gid: 'm-7',
+          label: 'July'
+        }, {
+          gid: 'm-8',
+          label: 'August'
+        }, {
+          gid: 'm-9',
+          label: 'September'
+        }, {
+          gid: 'm-10',
+          label: 'October'
+        }, {
+          gid: 'm-11',
+          label: 'November'
+        }, {
+          gid: 'm-12',
+          label: 'December'
+        }
       ],
-      periodType: 'yearly',
+      periodType: 'yearly'
     }
   }
-
 
   componentDidMount() {
     const {period} = this.props
@@ -54,17 +92,22 @@ class PeriodSelector extends React.Component {
 
   }
 
-  onChangeType(e){
+  onChangeType(e) {
     this.setState({periodType: e.target.value})
   }
 
-  onChangePeriod(e){
+  onChangePeriod(e) {
     this.props.onChangePeriod(e.target.value)
   }
 
   render() {
-    const { years, months, quarters, periodType } = this.state
-    const { period = 'y-2017' } = this.props
+    const {years, months, quarters, periodType} = this.state
+    const {
+      period = 'y-2017',
+      t,
+      i18n
+    } = this.props
+
     let options = years
     if (periodType === 'quarterly') {
       options = []
@@ -82,27 +125,27 @@ class PeriodSelector extends React.Component {
       })
     }
 
-    return (
-      <div className="period-selector-container">
-        <div className="">
-          <div className="period-type-selector">
-            <select value={periodType} className="" onChange={e => this.onChangeType(e)} >
-              <option value="monthly"><Trans>Monthly</Trans></option>
-              <option value="quarterly"><Trans>Quarterly</Trans></option>
-              <option value="yearly"><Trans>Yearly</Trans></option>
-            </select>
-          </div>
-          <div className="period-selector">
-            <select  className="" onChange={e => this.onChangePeriod(e)} value={period}>
-              <option value={-1}><Trans>Select a period</Trans></option>
-              {options.map(option => {
+    return (<div className="period-selector-container">
+      <div className="">
+        <div className="period-type-selector">
+          <select value={periodType} className="" onChange={e => this.onChangeType(e)}>
+            <option value="monthly">{t("Monthly")}</option>
+            <option value="quarterly">{t("Quarterly")}</option>
+            <option value="yearly">{t("Yearly")}</option>
+          </select>
+        </div>
+        <div className="period-selector">
+          <select className="" onChange={e => this.onChangePeriod(e)} value={period}>
+            <option value={-1}>{t("Select a period")}</option>
+            {
+              options.map(option => {
                 return <option key={`${option.gid}`} value={option.gid}>{option.label}</option>
-              })}
-            </select>
-          </div>
+              })
+            }
+          </select>
         </div>
       </div>
-    )
+    </div>)
   }
 }
 

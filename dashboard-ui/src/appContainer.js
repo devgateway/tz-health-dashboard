@@ -7,6 +7,7 @@ import DefaultLayout from './layouts/defaultLayout'
 class AppContainer extends React.Component {
 
   render () {
+    
     const {history,store} = this.props
     return (
       <Provider store={store}>

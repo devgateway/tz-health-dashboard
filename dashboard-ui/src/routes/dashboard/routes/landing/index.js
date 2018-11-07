@@ -5,7 +5,8 @@ import './landing.css'
 
 const createRoute = () => {
   return (
-  	<Route path='/' exact={true} render={(e) => <LandingLayout></LandingLayout>}></Route>
+  
+  	<Route path='/:locale' exact={true} render={(e) => <LandingLayout></LandingLayout>}></Route>
   )
 }
 export default createRoute

@@ -25,8 +25,8 @@ const createRoute = (props) => {
   })
 
   return (<div>
-    <Route path="/report/facility/:id/:period?" render={({match}) => <FacilityReport store={store} params={match.params}/>}/>
-    <Route path="/report/ward/:id/:period?" render={({match}) => <WardReport store={store} params={match.params}/>}/>
+    <Route path="/:locale/report/facility/:id/:period?" render={({match}) => <FacilityReport store={store} params={match.params}/>}/>
+    <Route path="/:locale/report/ward/:id/:period?" render={({match}) => <WardReport store={store} params={match.params}/>}/>
   </div>)
 }
 
