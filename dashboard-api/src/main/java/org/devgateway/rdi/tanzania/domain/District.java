@@ -45,11 +45,13 @@ public class District extends Boundary {
         this.wards = wards;
     }
 
-    public District(Long gid, Geometry geom, String name) {
+    public District(Long gid, Geometry geom, String name, Long population, Long populationMale, Long populationFemale) {
         this.gid = gid;
         this.geom = geom;
         this.name = name;
+        this.population = population;
+        this.populationMale = populationMale;
+        this.populationFemale = populationFemale;
     }
-
 
 }

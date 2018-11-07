@@ -60,11 +60,29 @@ class WardLayout extends React.Component {
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const shapeFeatures = mapShape.toJS()
     let shapeStrokeColor = '#9C8568'
+    let regionFeature
     if ((facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") && mapRegion.getIn(['features']) && mapShape.getIn(['features'])) {
-      const regionFeature = mapRegion.getIn(['features']).toJS()[0] 
+      regionFeature = mapRegion.getIn(['features']).toJS()[0] 
       Object.assign(regionFeature.properties, {strokeColor: '#9C8568'})
       shapeStrokeColor = '#6C8EAD'
       shapeFeatures.features.push(regionFeature)
+    }
+
+    let totalPopulation = 0
+    let totalPopMale = 0
+    let totalPopFemale = 0
+    if (facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") {
+      if (regionFeature) {
+        totalPopulation = regionFeature.properties.POPULATION || 0
+        totalPopMale = regionFeature.properties.POPULATION_MALE || 0
+        totalPopFemale = regionFeature.properties.POPULATION_FEMALE || 0
+      }
+    } else {
+      if (shapeFeatures.features) {
+        totalPopulation = shapeFeatures.features[0].properties.POPULATION || 0
+        totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || 0
+        totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
+      }
     }
 
     return (
@@ -84,20 +102,23 @@ class WardLayout extends React.Component {
           <div className="population-box">
             <div className="info">
               <div className="sub-title"><Trans>Availability of Health Services in</Trans> {regionName} <Trans>Region</Trans></div>
-              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> <Trans>Total Population</Trans></div>
+              <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans></div>
 
               <div className="ages">
                 <div className="value-label"><div><Trans>by Gender</Trans></div></div>
-                <div className="value-item"><div><Trans>Male</Trans></div><div>{population.getIn(['data', 'totalMale'])}</div></div>
-                <div className="value-item"><div><Trans>Female</Trans></div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
+                <div className="value-item"><div><Trans>Male</Trans></div><div>{totalPopMale}</div></div>
+                <div className="value-item"><div><Trans>Female</Trans></div><div>{totalPopFemale}</div></div>
               </div>
+              <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
 
+              {/*}
               <div className="ages">
                 <div className="value-label"><div><Trans>by Age</Trans></div></div>
                 <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
                 <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
                 <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
               </div>
+              */}
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?

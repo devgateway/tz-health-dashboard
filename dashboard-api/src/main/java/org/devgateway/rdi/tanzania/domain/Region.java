@@ -18,10 +18,13 @@ public class Region extends Boundary {
     public Region() {
     }
 
-    public Region(Long gid, Geometry geom, String name) {
+    public Region(Long gid, Geometry geom, String name, Long population, Long populationMale, Long populationFemale) {
         this.gid = gid;
         this.geom = geom;
         this.name = name;
+        this.population = population;
+        this.populationMale = populationMale;
+        this.populationFemale = populationFemale;
     }
 
     @JsonIgnore
