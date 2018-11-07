@@ -15,6 +15,7 @@ const FACILITY_DIAGNOSES_ERROR = 'FACILITY_DIAGNOSES_ERROR'
 
 const FACILITY_MAP_REQUEST = 'FACILITY_MAP_SHAPE_REQUEST'
 const FACILITY_MAP_SHAPE_RESPONSE = 'FACILITY_MAP_SHAPE_RESPONSE'
+const FACILITY_MAP_REGION_RESPONSE = 'FACILITY_MAP_REGION_RESPONSE'
 const FACILITY_MAP_POINTS_RESPONSE = 'FACILITY_MAP_POINTS_RESPONSE'
 const FACILITY_MAP_ERROR = 'FACILITY_MAP_ERROR'
 
@@ -72,7 +73,6 @@ export const getFacilityRMNCH = (id, period) => {
 
 
 export const getMapShape = (facilityData) => {
-  debugger;
   let getShapeMethod = api.findWards
   let params = {wards: facilityData.getIn(['ward', 'gid'])}
   if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load all districts from region
@@ -83,6 +83,13 @@ export const getMapShape = (facilityData) => {
     dispatch({type: FACILITY_MAP_REQUEST})
     getShapeMethod(params).then(data => {
       dispatch({'type': FACILITY_MAP_SHAPE_RESPONSE, data })
+    }).catch(error => {
+      dispatch({'type': FACILITY_MAP_ERROR, error})
+    })
+    //get region shape 
+    dispatch({type: FACILITY_MAP_REQUEST})
+    api.findRegions(params).then(data => {
+      dispatch({'type': FACILITY_MAP_REGION_RESPONSE, data })
     }).catch(error => {
       dispatch({'type': FACILITY_MAP_ERROR, error})
     })
@@ -152,7 +159,6 @@ const ACTION_HANDLERS = {
   },
   [FACILITY_RMNCH_ERROR]: (state, action) => {
     const {error} = action;
-
     return state.setIn(['reportData', 'RMNCH', 'error'], error).setIn(['reportData', 'RMNCH', 'loading'], false)
   },
 
@@ -162,6 +168,10 @@ const ACTION_HANDLERS = {
   [FACILITY_MAP_SHAPE_RESPONSE]: (state, action) => {
     const {data} = action;
     return state.setIn(['reportData', 'map', 'shape'], Immutable.fromJS(data)).setIn(['reportData', 'map', 'loading'], false)
+  },
+  [FACILITY_MAP_REGION_RESPONSE]: (state, action) => {
+    const {data} = action;
+    return state.setIn(['reportData', 'map', 'region'], Immutable.fromJS(data)).setIn(['reportData', 'map', 'loading'], false)
   },
   [FACILITY_MAP_POINTS_RESPONSE]: (state, action) => {
     const {data} = action;
@@ -205,6 +215,7 @@ const initialState = Immutable.fromJS({
       'loading': false,
       'shape': {},
       'points': [],
+      'region': {},
     }
   }
 });
