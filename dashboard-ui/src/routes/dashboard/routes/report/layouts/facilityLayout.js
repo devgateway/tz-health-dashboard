@@ -28,7 +28,6 @@ class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    debugger;
     if (this.props.info.getIn(['ward', 'gid']) !== prevProps.info.getIn(['ward', 'gid'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
@@ -46,20 +45,27 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
-    const facilitiesFeatures = []
-    if (mapPoints) {
-      mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
-    }
-
-    debugger;
-    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+    const {params: {id}, mapShape, mapRegion, mapPoints, info, population, period} = this.props
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
     const facilityTypeId = info.getIn(['type', 'dhis2Id'])
     const wardName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
+    
+    const facilitiesFeatures = []
+    if (mapPoints) {
+      mapPoints.forEach(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+    }
+    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+    const shapeFeatures = mapShape.toJS()
+    let shapeStrokeColor = '#9C8568'
+    if ((facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") && mapRegion.getIn(['features']) && mapShape.getIn(['features'])) {
+      const regionFeature = mapRegion.getIn(['features']).toJS()[0] 
+      Object.assign(regionFeature.properties, {strokeColor: '#9C8568'})
+      shapeStrokeColor = '#6C8EAD'
+      shapeFeatures.features.push(regionFeature)
+    }
 
     return (
       <div>
@@ -95,8 +101,8 @@ class WardLayout extends React.Component {
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
-                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568"
-                   shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor={shapeStrokeColor}
+                   shapeFeatures={shapeFeatures} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
               <Legends>
                 <div>
@@ -115,11 +121,17 @@ class WardLayout extends React.Component {
                   <div className="legend-item">
                     <div className="boundary-icon"/>
                     {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                      <div className="legend-name"><Trans>District boundary</Trans></div>
+                      <div className="legend-name"><Trans>Region boundary</Trans></div>
                     :
                       <div className="legend-name"><Trans>Ward boundary</Trans></div>
                     }
                   </div>
+                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
+                    <div className="legend-item">
+                      <div className="district-boundary-icon"/>
+                      <div className="legend-name"><Trans>District boundary</Trans></div>
+                    </div>
+                  : null}
                 </div>
               </Legends>
             </div>
