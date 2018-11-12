@@ -1,5 +1,6 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next"
+import i18n from '../../../../../i18n'
 
 class PeriodSelector extends React.Component {
 
@@ -11,24 +12,24 @@ class PeriodSelector extends React.Component {
         {gid: 'y-2017', label: '2017'}
       ],
       quarters: [
-        {gid: 'q-1', label: 'January-March'},
-        {gid: 'q-2', label: 'April-June'},
-        {gid: 'q-3', label: 'July-September'},
-        {gid: 'q-4', label: 'October-December'}
+        {gid: 'q-1', label: `${i18n.t('January')}-${i18n.t('March')}`},
+        {gid: 'q-2', label: `${i18n.t('April')}-${i18n.t('June')}`},
+        {gid: 'q-3', label: `${i18n.t('July')}-${i18n.t('September')}`},
+        {gid: 'q-4', label: `${i18n.t('October')}-${i18n.t('December')}`}
       ],
       months: [
-        {gid: 'm-1', label: 'January'},
-        {gid: 'm-2', label: 'February'},
-        {gid: 'm-3', label: 'March'},
-        {gid: 'm-4', label: 'April'},
-        {gid: 'm-5', label: 'May'},
-        {gid: 'm-6', label: 'June'},
-        {gid: 'm-7', label: 'July'},
-        {gid: 'm-8', label: 'August'},
-        {gid: 'm-9', label: 'September'},
-        {gid: 'm-10', label: 'October'},
-        {gid: 'm-11', label: 'November'},
-        {gid: 'm-12', label: 'December'}
+        {gid: 'm-1', label: i18n.t('January')},
+        {gid: 'm-2', label: i18n.t('February')},
+        {gid: 'm-3', label: i18n.t('March')},
+        {gid: 'm-4', label: i18n.t('April')},
+        {gid: 'm-5', label: i18n.t('May')},
+        {gid: 'm-6', label: i18n.t('June')},
+        {gid: 'm-7', label: i18n.t('July')},
+        {gid: 'm-8', label: i18n.t('August')},
+        {gid: 'm-9', label: i18n.t('September')},
+        {gid: 'm-10', label: i18n.t('October')},
+        {gid: 'm-11', label: i18n.t('November')},
+        {gid: 'm-12', label: i18n.t('December')}
       ],
       periodType: 'yearly',
     }

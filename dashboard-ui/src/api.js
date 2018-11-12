@@ -1,3 +1,4 @@
+import i18n from './i18n'
 const API_ROOT_URL = (document.location.hostname === 'localhost') ? 'http://localhost:8083' : '';
 const API_REGIONS = API_ROOT_URL + '/geo/regions'
 const API_DISTRICTS = API_ROOT_URL + '/geo/districts'
@@ -207,7 +208,7 @@ export const getMonthName = (m, format) => {
   var date = new Date(2000, m - 1)
   let locale = "en-us",
     month = date.toLocaleString(locale, { month: format ? format : "long" });
-  return month
+  return i18n.t(month)
 }
 
 export const getQuarterLabel = (q) => {
@@ -258,7 +259,7 @@ export const diffPercentage = (prev, val) => {
   if (prev == null || prev == 0) {
     return 'N/A'
   }
-  return ((((prev - val) / prev) * 100) * -1).toFixed(2) + "%"
+  return Math.round(((((prev - val) / prev) * 100) * -1)) + "%"
 }
 
 

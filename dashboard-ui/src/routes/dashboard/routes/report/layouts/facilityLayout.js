@@ -94,7 +94,7 @@ class WardLayout extends React.Component {
         </div>
         <div className="facility-report-container">
           <div className="location-box">
-            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value">{facilityType}</div></div>
+            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityType}</Trans></div></div>
             <div><div className="location-title"><Trans>Ward</Trans></div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title"><Trans>District</Trans></div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title"><Trans>Region</Trans></div><div className="location-value">{regionName}</div></div>
@@ -134,7 +134,7 @@ class WardLayout extends React.Component {
                   <div className="legend-item">
                     <div className="other-icon"/>
                     {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                      <div className="legend-name"><Trans>Other</Trans> {facilityType} <Trans>in same region</Trans></div>
+                      <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same region</Trans></div>
                     :
                       <div className="legend-name"><Trans>Other Facility in ward</Trans></div>
                     }
