@@ -38,7 +38,7 @@ class WardLayout extends React.Component {
 
   onChangePeriod(period){
     const {params: {id}} = this.props
-    this.context.router.history.push(`/report/facility/${id}/${period}`)
+    this.context.router.history.push(`/${this.props.lng}/report/facility/${id}/${period}`)
   }
 
   printReport(){
@@ -47,7 +47,7 @@ class WardLayout extends React.Component {
 
   render() {
 
-    const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
+    const {params: {id}, mapShape, mapPoints,mapRegion, info, population,period} = this.props
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
@@ -59,17 +59,12 @@ class WardLayout extends React.Component {
     const wardName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
-    
-    const facilitiesFeatures = []
-    if (mapPoints) {
-      mapPoints.forEach(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
-    }
-    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+
     const shapeFeatures = mapShape.toJS()
     let shapeStrokeColor = '#9C8568'
     let regionFeature
     if ((facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") && mapRegion.getIn(['features']) && mapShape.getIn(['features'])) {
-      regionFeature = mapRegion.getIn(['features']).toJS()[0] 
+      regionFeature = mapRegion.getIn(['features']).toJS()[0]
       Object.assign(regionFeature.properties, {strokeColor: '#9C8568'})
       shapeStrokeColor = '#6C8EAD'
       shapeFeatures.features.push(regionFeature)
