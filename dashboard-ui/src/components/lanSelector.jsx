@@ -28,10 +28,12 @@ class Selector extends Component {
     const {t, i18n} = this.props;
     let selected;
     if (i18n.language != "sw" && i18n.language != "en") {
-      debugger;
+      selected = i18n.options.fallbackLng[0];
+    } else {
+      selected = i18n.language
     }
     return (<div>
-      <select className="" value={i18n.language} onChange={e => this.changeLanguage(e)}>
+      <select className="" value={selected} onChange={e => this.changeLanguage(e)}>
         <option value="en">{t("English")}</option>
         <option value="sw">{t("Swahili")}</option>
       </select>
