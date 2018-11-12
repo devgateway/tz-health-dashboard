@@ -38,8 +38,8 @@ class WardLayout extends React.Component {
 
   onChangePeriod(period){
     const {params: {id}} = this.props
-    debugger;
-    this.context.router.history.push(`/report/ward/${id}/${period}`)
+    let current = document.location.hash.substr(1)
+    this.context.router.history.push(`/${this.props.lng}/report/ward/${id}/${period}`)
   }
 
   onToggleLegend(){
