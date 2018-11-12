@@ -23,7 +23,7 @@ public class WriteCsvToResponse {
         CSVWriter writer = new CSVWriter(print);
 
         String[] en_header = new String[]{"ID", "Name", "Year", "Quarter", "Month", "Age< 5", "Age5-60", "Age>60", "Total"};
-        String[] sw_header = new String[]{"ID", "Name", "Year", "Quarter", "Month", "Umri< 5", "Umri-60", "Umri>60", "Umri"};
+        String[] sw_header = new String[]{"ID", "Jina", "Mwaka", "Robo Mwaka", "Mwezi", "Umri< 5", "Umri-60", "Umri>60", "Umri"};
 
         String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
         writer.writeNext(header);
@@ -85,7 +85,8 @@ public class WriteCsvToResponse {
         CSVWriter writer = new CSVWriter(print);
 
         String[] en_header = new String[]{"ID", "Service", "Year", "Quarter", "Month", "Count"};
-        String[] sw_header = new String[]{"ID", "Service", "Year", "Quarter", "Month", "Count"};
+        String[] sw_header = new String[]{"ID", "Service", "Mwaka", "Robo Mwaka", "Mwezi", "Count"};
+
 
         String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
         writer.writeNext(header);
