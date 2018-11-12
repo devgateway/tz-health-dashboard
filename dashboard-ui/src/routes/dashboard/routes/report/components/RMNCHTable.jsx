@@ -1,12 +1,12 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
-import {getMonthName, getQuarterLabel,diffPercentage,getCSVURI} from '../../../../../api'
+import {getMonthName, getQuarterLabel, diffPercentage, getCSVURI} from '../../../../../api'
 import {MonthLabel, QuarterLabel} from './labels'
 
 class RMNCHTable extends React.Component {
 
   render() {
-    const {gid,RMNCH,type, period,facilityName, i18n: {language}} = this.props
+    const {gid, RMNCH, type, period, facilityName, i18n: {language}} = this.props
     let data=[]
     if (RMNCH && RMNCH.get('loading') == true) {
       return <div>Loading</div>
