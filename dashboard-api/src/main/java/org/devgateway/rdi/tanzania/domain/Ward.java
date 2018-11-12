@@ -48,10 +48,13 @@ public class Ward extends Boundary {
     public Ward() {
     }
 
-    public Ward(Long gid, Geometry geom, String name) {
+    public Ward(Long gid, Geometry geom, String name, Long population, Long populationMale, Long populationFemale) {
         this.gid = gid;
         this.geom = geom;
         this.name = name;
+        this.population = population;
+        this.populationMale = populationMale;
+        this.populationFemale = populationFemale;
     }
 
     public District getDistrict() {

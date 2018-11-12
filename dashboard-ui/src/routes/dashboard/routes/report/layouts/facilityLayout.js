@@ -28,7 +28,7 @@ class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    
+
     if (this.props.info.getIn(['ward', 'gid']) !== prevProps.info.getIn(['ward', 'gid'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
@@ -46,13 +46,12 @@ class WardLayout extends React.Component {
   }
 
   render() {
+
     const {params: {id}, mapShape, mapPoints, info, population,period} = this.props
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
     }
-
-    
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
     const facilityType = info.getIn(['type', 'name'])
@@ -60,6 +59,38 @@ class WardLayout extends React.Component {
     const wardName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
+    
+    const facilitiesFeatures = []
+    if (mapPoints) {
+      mapPoints.forEach(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+    }
+    const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
+    const shapeFeatures = mapShape.toJS()
+    let shapeStrokeColor = '#9C8568'
+    let regionFeature
+    if ((facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") && mapRegion.getIn(['features']) && mapShape.getIn(['features'])) {
+      regionFeature = mapRegion.getIn(['features']).toJS()[0] 
+      Object.assign(regionFeature.properties, {strokeColor: '#9C8568'})
+      shapeStrokeColor = '#6C8EAD'
+      shapeFeatures.features.push(regionFeature)
+    }
+
+    let totalPopulation = 0
+    let totalPopMale = 0
+    let totalPopFemale = 0
+    if (facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") {
+      if (regionFeature) {
+        totalPopulation = regionFeature.properties.POPULATION || 0
+        totalPopMale = regionFeature.properties.POPULATION_MALE || 0
+        totalPopFemale = regionFeature.properties.POPULATION_FEMALE || 0
+      }
+    } else {
+      if (shapeFeatures.features) {
+        totalPopulation = shapeFeatures.features[0].properties.POPULATION || 0
+        totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || 0
+        totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
+      }
+    }
 
     return (
       <div>
@@ -70,7 +101,7 @@ class WardLayout extends React.Component {
         </div>
         <div className="facility-report-container">
           <div className="location-box">
-            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value">{facilityType}</div></div>
+            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityType}</Trans></div></div>
             <div><div className="location-title"><Trans>Ward</Trans></div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title"><Trans>District</Trans></div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title"><Trans>Region</Trans></div><div className="location-value">{regionName}</div></div>
@@ -78,25 +109,28 @@ class WardLayout extends React.Component {
           <div className="population-box">
             <div className="info">
               <div className="sub-title"><Trans>Availability of Health Services in</Trans> {regionName} <Trans>Region</Trans></div>
-              <div className="total-pop"><span>{population.getIn(['data', 'total'])}</span> <Trans>Total Population</Trans></div>
+              <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans></div>
 
               <div className="ages">
                 <div className="value-label"><div><Trans>by Gender</Trans></div></div>
-                <div className="value-item"><div><Trans>Male</Trans></div><div>{population.getIn(['data', 'totalMale'])}</div></div>
-                <div className="value-item"><div><Trans>Female</Trans></div><div>{population.getIn(['data', 'totalFemale'])}</div></div>
+                <div className="value-item"><div><Trans>Male</Trans></div><div>{totalPopMale}</div></div>
+                <div className="value-item"><div><Trans>Female</Trans></div><div>{totalPopFemale}</div></div>
               </div>
+              <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
 
+              {/*}
               <div className="ages">
                 <div className="value-label"><div><Trans>by Age</Trans></div></div>
                 <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
                 <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
                 <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
               </div>
+              */}
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
-                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568"
-                   shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor={shapeStrokeColor}
+                   shapeFeatures={shapeFeatures} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
               : null}
               <Legends>
                 <div>
@@ -107,7 +141,7 @@ class WardLayout extends React.Component {
                   <div className="legend-item">
                     <div className="other-icon"/>
                     {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                      <div className="legend-name"><Trans>Other</Trans> {facilityType} <Trans>in same region</Trans></div>
+                      <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same region</Trans></div>
                     :
                       <div className="legend-name"><Trans>Other Facility in ward</Trans></div>
                     }
@@ -115,11 +149,17 @@ class WardLayout extends React.Component {
                   <div className="legend-item">
                     <div className="boundary-icon"/>
                     {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                      <div className="legend-name"><Trans>District boundary</Trans></div>
+                      <div className="legend-name"><Trans>Region boundary</Trans></div>
                     :
                       <div className="legend-name"><Trans>Ward boundary</Trans></div>
                     }
                   </div>
+                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
+                    <div className="legend-item">
+                      <div className="district-boundary-icon"/>
+                      <div className="legend-name"><Trans>District boundary</Trans></div>
+                    </div>
+                  : null}
                 </div>
               </Legends>
             </div>

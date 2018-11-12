@@ -9,7 +9,7 @@ import org.geojson.Feature;
  * @author Sebastian Dimunzio
  */
 
-public class BoundaryTrasnfomer {
+public class BoundaryTransformer {
 
 
     public static Feature transform(Boundary boundary, boolean includePopulation) {
@@ -18,9 +18,9 @@ public class BoundaryTrasnfomer {
         f.setProperty("NAME", boundary.getName());
         f.setGeometry(GeoJsonUtils.jtsGeometryToGeoJson(boundary.getGeom()));
         if (includePopulation) {
-            f.setProperty("POPULAION", boundary.getPopulation());
-            f.setProperty("POPULAION_FEMALE", boundary.getPopulationFemale());
-            f.setProperty("POPULAION_MALE", boundary.getPopulationMale());
+            f.setProperty("POPULATION", boundary.getPopulation());
+            f.setProperty("POPULATION_FEMALE", boundary.getPopulationFemale());
+            f.setProperty("POPULATION_MALE", boundary.getPopulationMale());
   
         }
         return f;
@@ -32,12 +32,12 @@ public class BoundaryTrasnfomer {
         f.setProperty("ID", boundary.getGid());
         f.setProperty("NAME", boundary.getName());
         if (includePopulation) {
-            f.setProperty("POPULAION", boundary.getPopulation());
-            f.setProperty("POPULAION_FEMALE", boundary.getPopulationFemale());
-            f.setProperty("POPULAION_MALE", boundary.getPopulationMale());
-            f.setProperty("POPULAION_RURAL", boundary.getPopulationRural());
-            f.setProperty("POPULAION_RURAL_FEMALE", boundary.getPopulationRuralFemale());
-            f.setProperty("POPULAION_RURAL_MALE", boundary.getPopulationRuralFemale());
+            f.setProperty("POPULATION", boundary.getPopulation());
+            f.setProperty("POPULATION_FEMALE", boundary.getPopulationFemale());
+            f.setProperty("POPULATION_MALE", boundary.getPopulationMale());
+            f.setProperty("POPULATION_RURAL", boundary.getPopulationRural());
+            f.setProperty("POPULATION_RURAL_FEMALE", boundary.getPopulationRuralFemale());
+            f.setProperty("POPULATION_RURAL_MALE", boundary.getPopulationRuralFemale());
 
         }
         f.setGeometry(GeoJsonUtils.jtsGeometryToGeoJson(boundary.getGeom()));

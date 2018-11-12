@@ -5,6 +5,7 @@ import AutosuggestHighlightMatch from 'autosuggest-highlight/match'
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse'
 import './textSearch.css'
 import {translate, Trans} from "react-i18next"
+import i18n from '../../../../../i18n'
 
 class TextSearch extends React.Component {
 
@@ -91,7 +92,7 @@ class TextSearch extends React.Component {
     const { searchType, searchResults } = this.props
     const suggestions = searchResults.getIn([searchType, 'list']).toJS()
     const inputProps = {
-      placeholder: "Search by name",
+      placeholder: i18n.t('Search by name'),
       value,
       onChange: this.onChange.bind(this),
     }
