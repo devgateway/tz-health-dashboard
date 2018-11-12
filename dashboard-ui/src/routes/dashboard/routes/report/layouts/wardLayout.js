@@ -59,25 +59,29 @@ class WardLayout extends React.Component {
       mapPoints.forEach(f => {
         facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()})
         if (f.getIn(['ward', 'gid']) == id) {
+          if(f.get('ownership')==null){
+            console.log("facility without ownership"+f.get('dhis2Id'));
+          }
+
           wardFacilities.push(f.toJS())
         }
       })
     }
 
     //totals by ownership types
-
-    const totalPrivate = wardFacilities.filter(f => f.ownership.dhis2Id === 'UE4MHrqMzfd').length
-    const totalFaithBased = wardFacilities.filter(f => f.ownership.dhis2Id === 'rj0MuRMJYCj').length
-    const totalPublic = wardFacilities.filter(f => f.ownership.dhis2Id === 'm16TP0k7LVw').length
-    const totalParastatal = wardFacilities.filter(f => f.ownership.dhis2Id === 'G6Mg194YpDy').length
-    const totalDefence = wardFacilities.filter(f => f.ownership.dhis2Id === 'iTwLKcbi6BX').length
+    debugger;
+    const totalPrivate = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'UE4MHrqMzfd').length
+      const totalFaithBased = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'rj0MuRMJYCj').length
+    const totalPublic = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'm16TP0k7LVw').length
+    const totalParastatal = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'G6Mg194YpDy').length
+    const totalDefence = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'iTwLKcbi6BX').length
 
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const wardName = info.getIn(['name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
     const shapeFeatures = mapShape.toJS()
-    
+
     let totalPopulation = 0
     let totalPopMale = 0
     let totalPopFemale = 0
@@ -86,7 +90,7 @@ class WardLayout extends React.Component {
       totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || 0
       totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
     }
-  
+
     return (
       <div>
         <div className="report-header">
@@ -112,7 +116,7 @@ class WardLayout extends React.Component {
                   <div className="value-item"><div><Trans>Female</Trans></div><div>{totalPopFemale}</div></div>
                 </div>
                 <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
-              
+
                 {/*}
                 <div className="ages">
                   <div className="value-label"><div><Trans>by Age</Trans></div></div>
