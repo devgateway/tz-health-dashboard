@@ -38,7 +38,6 @@ export const findDistricts = (params) => {
   }
 }
 
-
 export const findWards = (params) => {
   return (dispatch, getState) => {
     api.findWards(params).then(data => {

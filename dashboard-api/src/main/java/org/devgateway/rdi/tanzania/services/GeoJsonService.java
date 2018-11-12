@@ -4,7 +4,7 @@ import org.devgateway.geo.GeoJsonBuilder;
 import org.devgateway.rdi.tanzania.domain.District;
 import org.devgateway.rdi.tanzania.domain.Region;
 import org.devgateway.rdi.tanzania.domain.Ward;
-import org.devgateway.rdi.tanzania.geojson.BoundaryTrasnfomer;
+import org.devgateway.rdi.tanzania.geojson.BoundaryTransformer;
 import org.devgateway.rdi.tanzania.repositories.BoundarySpecifications;
 import org.devgateway.rdi.tanzania.repositories.DistrictRepository;
 import org.devgateway.rdi.tanzania.repositories.RegionRepository;
@@ -54,7 +54,7 @@ public class GeoJsonService {
     public FeatureCollection getRegionById(final Long id) {
         Region region = regionRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,true));
+        geoJsonBuilder.add(BoundaryTransformer.transform(region,true));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -65,7 +65,7 @@ public class GeoJsonService {
                 boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        districts.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,false)));
+        districts.stream().forEach(region -> geoJsonBuilder.add(BoundaryTransformer.transform(region,true)));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -74,7 +74,7 @@ public class GeoJsonService {
     public FeatureCollection getDistrictById(final Long id) {
         District district = districtRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        geoJsonBuilder.add(BoundaryTrasnfomer.transform(district,true));
+        geoJsonBuilder.add(BoundaryTransformer.transform(district,true));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -85,7 +85,7 @@ public class GeoJsonService {
                 boundaryRequest.getSimplifyFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        wards.stream().forEach(region -> geoJsonBuilder.add(BoundaryTrasnfomer.transform(region,false)));
+        wards.stream().forEach(region -> geoJsonBuilder.add(BoundaryTransformer.transform(region,true)));
         return geoJsonBuilder.getFeatures();
     }
 
@@ -94,7 +94,7 @@ public class GeoJsonService {
     public FeatureCollection getWardById(final Long id) {
         Ward ward = wardRepository.findOne(id);
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
-        geoJsonBuilder.add(BoundaryTrasnfomer.transform(ward, true));
+        geoJsonBuilder.add(BoundaryTransformer.transform(ward, true));
         return geoJsonBuilder.getFeatures();
     }
 

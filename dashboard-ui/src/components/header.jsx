@@ -2,7 +2,6 @@ import React from 'react'
 
 import Selector from './lanSelector'
 
-
 export default (props) => {
 
   return (

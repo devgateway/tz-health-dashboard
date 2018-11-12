@@ -340,6 +340,11 @@
         border: 1px solid #9C8568;
         margin-right: 5px;
         margin-bottom: 4px; }
+      .map .legend-box .legend-item .district-boundary-icon {
+        width: 10px;
+        border: 1px solid #6C8EAD;
+        margin-right: 5px;
+        margin-bottom: 4px; }
 
 .ward-report-container {
   width: 1150px;
@@ -360,3 +365,7 @@
   width: 25px;
   padding: 15px;
   cursor: pointer; }
+
+.population-disclaimer {
+  font-size: 12px;
+  color: #2c4856; }

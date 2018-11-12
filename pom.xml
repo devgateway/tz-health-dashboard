@@ -220,7 +220,7 @@
     </build>
     <repositories>
         <repository>
-            <gid>jitpack.io</gid>
+            <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
