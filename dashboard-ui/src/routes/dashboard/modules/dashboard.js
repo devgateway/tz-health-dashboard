@@ -85,7 +85,7 @@ const ACTION_HANDLERS = {
         return state.setIn(['period'], Immutable.fromJS(parsed))
       }
     }
-    debugger;
+    
     return state;
   }
 };
