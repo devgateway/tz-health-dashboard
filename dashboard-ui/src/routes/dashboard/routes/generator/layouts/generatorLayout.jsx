@@ -87,12 +87,14 @@ class WardLayout extends React.Component {
   }
 
   onGenerateReport() {
+    const lan= this.props.i18n.language
+
     const { ward, facility, period, params: {reportType} } = this.props
     const strPeriod=composePeriod(period.toJS())
     if (reportType === 'ward') {
-      this.context.router.history.push(`/report/ward/${ward.get('selected')}/${strPeriod}`)
+      this.context.router.history.push(`/${lan}/report/ward/${ward.get('selected')}/${strPeriod}`)
     } else {
-      this.context.router.history.push(`/report/facility/${facility.get('selected')}/${strPeriod}`)
+      this.context.router.history.push(`/${lan}/report/facility/${facility.get('selected')}/${strPeriod}`)
     }
   }
 

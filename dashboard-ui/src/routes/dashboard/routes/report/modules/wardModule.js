@@ -106,7 +106,7 @@ const ACTION_HANDLERS = {
   },
   [WARD_INFO_RESPONSE]: (state, action) => {
     const {data} = action;
-    debugger;
+    
     return state.setIn(['reportData', 'info'], Immutable.fromJS(data)).setIn(['reportData', 'info', 'loading'], false)
   },
   [WARD_INFO_ERROR]: (state, action) => {
