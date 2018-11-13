@@ -60,7 +60,7 @@ class WardLayout extends React.Component {
         facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == id ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()})
         if (f.getIn(['ward', 'gid']) == id) {
           if(f.get('ownership')==null){
-            console.log("facility without ownership"+f.get('dhis2Id'));
+            console.log("facility without ownership"+f.get('code'));
           }
 
           wardFacilities.push(f.toJS())
