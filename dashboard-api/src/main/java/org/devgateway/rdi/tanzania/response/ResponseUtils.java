@@ -31,9 +31,10 @@ public class ResponseUtils {
                 facilityResponse.setRegion(new BoundaryResponse(facility.getWard().getDistrict().getRegion().getGid(), facility.getWard().getDistrict().getRegion().getName()));
 
             }
-
-            facilityResponse.setCoordinates(new Double[]{facility.getPoint().getCoordinate().x, facility.getPoint().getCoordinate().y});
-            facilityResponse.setPoint(facility.getPoint());
+            if (facility.getPoint() != null) {
+                facilityResponse.setCoordinates(new Double[]{facility.getPoint().getCoordinate().x, facility.getPoint().getCoordinate().y});
+                facilityResponse.setPoint(facility.getPoint());
+            }
             return facilityResponse;
         } else {
             return null;
