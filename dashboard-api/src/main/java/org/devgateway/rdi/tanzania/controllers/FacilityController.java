@@ -37,7 +37,7 @@ public class FacilityController {
 
     @RequestMapping("/facilities")
     public List<FacilityResponse> getFacility(FacilityRequest facilityRequest) {
-        return facilityService.getFacilities(facilityRequest);
+            return facilityService.getFacilities(facilityRequest);
     }
 
 
