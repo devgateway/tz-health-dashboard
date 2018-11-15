@@ -4,7 +4,7 @@ import {getMonthName, getQuarterLabel, diffPercentage} from '../../../../../api'
 import i18n from '../../../../../i18n'
 
 export const generateFacilityPDF = (state, image) => {
-  const {info, population, period, diagnoses, RMNCH, mapShape, mapPoints, mapRegion} = state
+  const {info, population, period, diagnoses, RMNCH, mapShape, mapPoints, mapRegion, i18n: {language} } = state
   const facilityName = info.getIn(['name'])
   const facilityType = info.getIn(['type', 'name'])
   const wardName = info.getIn(['ward', 'name'])
@@ -20,7 +20,7 @@ export const generateFacilityPDF = (state, image) => {
   const FONT_PAGE_HEADER = 13
   const FONT_HEADER_SPACE = 10
   let cursorY = 25
-  const language = 'en' //this should be set from selected language
+  //const language = 'en' //this should be set from selected language
   const year = parseInt(period.get('y'))
   const quarter = parseInt(period.get('q'))
   const month = parseInt(period.get('m'))
@@ -237,7 +237,8 @@ export const generateFacilityPDF = (state, image) => {
   deseases.forEach((it) => {
     cursorY += 5
     const indicatorLabel = it.getIn(['diagnostic','name'])
-    const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
+    const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language)
+    debugger
     const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
     const total5to60 = it.getIn(['ranges', 'total5to60'])
     const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
