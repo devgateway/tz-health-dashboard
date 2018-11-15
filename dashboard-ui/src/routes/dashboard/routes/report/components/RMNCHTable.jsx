@@ -6,8 +6,8 @@ import {MonthLabel, QuarterLabel} from './labels'
 class RMNCHTable extends React.Component {
 
   render() {
-    const {id,gid, RMNCH, type, period, facilityName, i18n: {language}} = this.props
-    debugger;
+    const {id, RMNCH, type, period, facilityName, i18n: {language}} = this.props
+
     let data=[]
     if (RMNCH && RMNCH.get('loading') == true) {
       return <div>Loading</div>
