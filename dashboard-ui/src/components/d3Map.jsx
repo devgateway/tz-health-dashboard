@@ -114,7 +114,12 @@ class D3Map extends React.Component {
 
       if (pointFeatures) {
         vector.selectAll("circle").remove()
-        vector.selectAll("circle").data(pointFeatures.features).enter().append("circle").attr("cx", d => projection(d.geometry.coordinates)[0]).attr("cy", d => projection(d.geometry.coordinates)[1]).attr('class', 'clickeable').attr("r", pointSize).attr("fill", (d) => d.properties.fillColor || pointFillColor).attr('stroke', (d) => d.properties.strokeColor || pointStrokeColor).attr('stroke-width', pointStrokeWidth).on('click', (d) => {
+        vector.selectAll("circle").data(pointFeatures.features).enter().append("circle").attr("cx", d => projection(d.geometry.coordinates)[0])
+        .attr("cy", d => projection(d.geometry.coordinates)[1]).attr('class', 'clickeable').attr("r", pointSize)
+        .attr("fill", (d) => d.properties.fillColor || pointFillColor).attr('stroke', (d) => d.properties.strokeColor || pointStrokeColor)
+        .attr('stroke-width', pointStrokeWidth)
+        .attr("class", (d) => d.properties.selected?"top":"regular")
+        .on('click', (d) => {
           parent.props.onPointClick(d)
         }).on('mouseover', (d) => {
           console.log('mouseover')
@@ -139,7 +144,7 @@ class D3Map extends React.Component {
   }
 
   render() {
-    
+
     const {shapeFeatures, pointFeatures, children} = this.props
     return (<div className="map-container" ref="mapElement">
       {

@@ -23,3 +23,10 @@ circle.clickeable {
 
 .map-container g {
   z-index: 1005; }
+
+.top {
+  z-index: 1500;
+  cursor: row-resize; }
+
+.regular {
+  cursor: pointer; }
