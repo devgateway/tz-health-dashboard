@@ -4,7 +4,7 @@ import {getMonthName, getQuarterLabel, diffPercentage} from '../../../../../api'
 import i18n from '../../../../../i18n'
 
 export const generateWardPDF = (state, image) => {
-  const {params: {id}, mapPoints, info, population, period, diagnoses, RMNCH, mapShape} = state
+  const {params: {id}, mapPoints, info, population, period, diagnoses, RMNCH, mapShape, i18n: {language} } = state
   const wardName = info.getIn(['name'])
   const districtName = info.getIn(['district', 'name'])
   const regionName = info.getIn(['region', 'name'])
@@ -17,7 +17,6 @@ export const generateWardPDF = (state, image) => {
   const FONT_PAGE_HEADER = 13
   const FONT_HEADER_SPACE = 10
   let cursorY = 25
-  const language = 'en' //this should be set from selected language
   const year = parseInt(period.get('y'))
   const quarter = parseInt(period.get('q'))
   const month = parseInt(period.get('m'))

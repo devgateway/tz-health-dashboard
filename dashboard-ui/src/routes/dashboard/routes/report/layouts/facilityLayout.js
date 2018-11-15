@@ -57,7 +57,7 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {params: {id}, mapShape, mapPoints,mapRegion, info, population,period} = this.props
+    const {params: {id}, mapShape, mapPoints, mapRegion, info, population, period} = this.props
 
     const facilitiesFeatures = []
     if (mapPoints) {
