@@ -69,8 +69,9 @@ class WardLayout extends React.Component {
     }
 
     //totals by ownership types
+
     const totalPrivate = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'UE4MHrqMzfd').length
-    const totalFaithBased = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'rj0MuRMJYCj').length
+      const totalFaithBased = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'rj0MuRMJYCj').length
     const totalPublic = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'm16TP0k7LVw').length
     const totalParastatal = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'G6Mg194YpDy').length
     const totalDefence = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'iTwLKcbi6BX').length
@@ -89,6 +90,8 @@ class WardLayout extends React.Component {
       totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || 0
       totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
     }
+
+  
 
     return (
       <div>
@@ -139,7 +142,9 @@ class WardLayout extends React.Component {
             </div>
             <div className="map" id="map1">
               {mapShape.getIn(['features']) ?
-                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}></D3Map>
+                <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2'
+                  shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}
+                  zoomeable={true}></D3Map>
               : null}
               <Legends>
                 <div>
