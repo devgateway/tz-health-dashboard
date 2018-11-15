@@ -129,8 +129,6 @@ class D3Map extends React.Component {
           tooltip.style("left", (d3.event.pageX + 10) + "px").style("top", (d3.event.pageY - 28) + "px")
         }).on('mouseout', (d) => {
           tooltip.style("opacity", 0);
-        }).on("click",(d)=>{
-          debugger;
         })
       }
 
