@@ -4,7 +4,7 @@ import {getMonthName, getQuarterLabel, diffPercentage} from '../../../../../api'
 import i18n from '../../../../../i18n'
 
 export const generateWardPDF = (state, image) => {
-  const {params: {id}, mapPoints, info, population, period, diagnoses, RMNCH} = state
+  const {params: {id}, mapPoints, info, population, period, diagnoses, RMNCH, mapShape} = state
   const wardName = info.getIn(['name'])
   const districtName = info.getIn(['district', 'name'])
   const regionName = info.getIn(['region', 'name'])
@@ -100,9 +100,18 @@ export const generateWardPDF = (state, image) => {
   //poulation box//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //map
     doc.addImage(image, 'PNG', 85, cursorY-5, 120, 120)
-  doc.setFontSize(14)
+  doc.setFontSize(13)
   doc.setTextColor(44, 164, 196)
   doc.setFontType("bold");
+  let totalPopulation = '0'
+  let totalPopMale = '0'
+  let totalPopFemale = '0'
+  const shapeFeatures = mapShape.toJS()
+  if (shapeFeatures.features) {
+    totalPopulation = shapeFeatures.features[0].properties.POPULATION || '0'
+    totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || '0'
+    totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || '0'
+  }
   doc.text(10, cursorY, i18n.t('Availability of Health Services'))
   cursorY += 6
   doc.text(10, cursorY, `${i18n.t('in')} ${wardName} ${i18n.t('Ward')}`)
@@ -110,10 +119,9 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(20)
   doc.setTextColor(44, 72, 86)
   doc.setFontType("bold");
-  const totalPop = population.getIn(['data', 'total']) ? population.getIn(['data', 'total']).toString() : ''
-  doc.text(10, cursorY, `${totalPop}`)
-  doc.setFontSize(14)
-  doc.text(15 + (totalPop.length*3), cursorY, ` ${i18n.t('Total Population')}: `)
+  doc.text(10, cursorY, `${totalPopulation}`)
+  doc.setFontSize(13)
+  doc.text(15 + (totalPopulation.toString().length*3), cursorY, ` ${i18n.t('Total Population')}: `)
   cursorY += 8
 
   doc.setFontSize(9)
@@ -122,21 +130,24 @@ export const generateWardPDF = (state, image) => {
   doc.text(10, cursorY, i18n.t('by Gender'))
   cursorY += 7
   doc.setDrawColor(200, 200, 200)
-  doc.line(29, cursorY-2, 29, cursorY+12)
-  doc.line(47, cursorY-2, 47, cursorY+12)
+  doc.line(33, cursorY-2, 33, cursorY+12)
+  doc.line(57, cursorY-2, 57, cursorY+12)
   doc.setFontSize(8)
   doc.setTextColor(180, 181, 168)
   doc.setFontType("bold");
-  doc.text(16, cursorY, i18n.t('Male'))
-  doc.text(33, cursorY, i18n.t('Female'))
+  doc.text(18, cursorY, i18n.t('Male'))
+  doc.text(39, cursorY, i18n.t('Female'))
   cursorY += 8
-  doc.setFontSize(14)
+  doc.setFontSize(13)
   doc.setTextColor(109, 114, 128)
-  const totalMale = population.getIn(['data', 'totalMale']) ? population.getIn(['data', 'totalMale']).toString() : ''
-  const totalFemale = population.getIn(['data', 'totalFemale']) ? population.getIn(['data', 'totalFemale']).toString() : ''
-  doc.text(18 - (totalMale.length), cursorY, `${totalMale}`)
-  doc.text(36 - (totalFemale.length), cursorY, `${totalFemale}`)
+  doc.text(18 - (totalPopMale.toString().length), cursorY, `${totalPopMale}`)
+  doc.text(42 - (totalPopFemale.toString().length), cursorY, `${totalPopFemale}`)
   cursorY += 8
+
+  doc.setFontSize(7)
+  doc.setTextColor(44, 44, 44)
+  doc.text(10, cursorY, i18n.t('Source: census 2012'))
+  /*
   doc.setFontSize(9)
   doc.setTextColor(44, 44, 44)
   doc.text(10, cursorY, i18n.t('by Age'))
@@ -159,13 +170,13 @@ export const generateWardPDF = (state, image) => {
   doc.text(18 - (totalUnder5.length), cursorY, `${totalUnder5}`)
   doc.text(36 - (total5to60.length), cursorY, `${total5to60}`)
   doc.text(54 - (totalAbove60.length), cursorY, `${totalAbove60}`)
-  
-  cursorY += 11
+  */
+  cursorY += 23
   doc.setFontSize(20)
   doc.setTextColor(44, 72, 86)
   doc.setFontType("bold");
   doc.text(10, cursorY, `${wardFacilities.length}`)
-  doc.setFontSize(14)
+  doc.setFontSize(13)
   doc.text(18, cursorY, ` ${i18n.t('Total Health Facilities')}: `)
   cursorY += 7
   doc.setDrawColor(200, 200, 200)
@@ -183,7 +194,7 @@ export const generateWardPDF = (state, image) => {
   doc.text(53, cursorY, i18n.t('Parastatal'))
   doc.text(69, cursorY, i18n.t('Defense'))
   cursorY += 8
-  doc.setFontSize(14)
+  doc.setFontSize(13)
   doc.setTextColor(109, 114, 128)
   doc.text(15 - (totalPublic.toString().length), cursorY, `${totalPublic}`)
   doc.text(29 - (totalPrivate.toString().length), cursorY, `${totalPrivate}`)
@@ -197,7 +208,7 @@ export const generateWardPDF = (state, image) => {
 
 
   //OPD diagnoses//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  doc.setFontSize(14)
+  doc.setFontSize(13)
   doc.setTextColor(44, 164, 196)
   doc.text(10, cursorY, `${i18n.t('Out-Patient Diseases (OPD) at')} ${wardName}`)
   cursorY += 15
@@ -210,6 +221,12 @@ export const generateWardPDF = (state, image) => {
     total: 0
   }
 
+  doc.setFillColor(244, 242, 236)
+  doc.rect(161, cursorY-13, 40, 6, 'F')
+  doc.setTextColor(109, 114, 128)
+  doc.setFontSize(7)
+  doc.text(165, cursorY-9, `+${i18n.t('Increasing')} -${i18n.t('Decreasing')}`)
+  
   doc.setFillColor(244, 242, 236)
   doc.rect(98, cursorY-7, 63, 20 + (diagnoses.get('data').size * 5), 'F')
   
@@ -240,7 +257,7 @@ export const generateWardPDF = (state, image) => {
   
   deseases.forEach((it) => {
     cursorY += 5
-    const label = it.getIn(['diagnostic','name'])
+    const indicatorLabel = it.getIn(['diagnostic','name'])
     const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
     const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
     const total5to60 = it.getIn(['ranges', 'total5to60'])
@@ -255,7 +272,11 @@ export const generateWardPDF = (state, image) => {
     doc.setFontSize(11)
     doc.setTextColor(44, 72, 86)
     doc.setFontType("bold");
-    doc.text(10, cursorY, `${(translation && translation.get('value')) ? translation.get('value') :label}`)
+    let label = (translation && translation.get('value')) ? translation.get('value') : indicatorLabel
+    if (label.length > 35){
+      label = `${label.slice(0, 32)}...`
+    }
+    doc.text(10, cursorY, `${label}`)
     const prevValueLabel = it.get("totalPrevPeriod") || 'N/A'
     doc.text(85 - prevValueLabel.toString().length, cursorY, `${prevValueLabel}`)
     doc.setTextColor(180, 181, 168)
@@ -309,11 +330,17 @@ export const generateWardPDF = (state, image) => {
   cursorY += 20
 
   //RMNCH//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  doc.setFontSize(14)
+  doc.setFontSize(13)
   doc.setTextColor(44, 164, 196)
   doc.text(10, cursorY, `${i18n.t('Reproductive Maternal, Newborn and Child Health at')} ${wardName}`)
-  cursorY += 15
+  cursorY += 18
 
+  doc.setFillColor(244, 242, 236)
+  doc.rect(168, cursorY-13, 35, 6, 'F')
+  doc.setTextColor(109, 114, 128)
+  doc.setFontSize(7)
+  doc.text(170, cursorY-9, `+${i18n.t('Increasing')} -${i18n.t('Decreasing')}`)
+  
   doc.setFillColor(244, 242, 236)
   doc.rect(138, cursorY-7, 30, 20 + (RMNCH.get('data').size * 5), 'F')
   doc.setTextColor(19, 88, 151)
@@ -346,7 +373,11 @@ export const generateWardPDF = (state, image) => {
     doc.setFontSize(11)
     doc.setTextColor(44, 72, 86)
     doc.setFontType("bold");
-    doc.text(10, cursorY, `${(translation && translation.get('value')) ? translation.get('value') :indicatorLabel}`)
+    let label = (translation && translation.get('value')) ? translation.get('value') : indicatorLabel
+    if (label.length > 55){
+      label = `${label.slice(0, 52)}...`
+    }
+    doc.text(10, cursorY, `${label}`)
     const prevValueLabel = it.get("totalPrevPeriod") || 'N/A'
     doc.text(122 - prevValueLabel.toString().length, cursorY, `${prevValueLabel}`)
     const currentValue = it.get('value') || 'N/A'

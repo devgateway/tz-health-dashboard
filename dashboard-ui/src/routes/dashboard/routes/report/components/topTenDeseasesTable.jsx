@@ -53,11 +53,11 @@ class TopTenDeseases extends React.Component {
             <th className="previous-period-header">%<Trans>Change</Trans></th>
           </tr>
           <tr>
-            <td className="previous-period-sub-header"><Trans>Total Count</Trans></td>
+            <td className="previous-period-sub-header"><Trans>Count</Trans></td>
             <td className="current-period-sub-header-partial"><Trans>Age</Trans>&lt; 5</td>
             <td className="current-period-sub-header-partial"><Trans>Age</Trans>{'5-60'}</td>
             <td className="current-period-sub-header-partial"><Trans>Age</Trans>{'>60'}</td>
-            <td className="current-period-sub-header"><Trans>Total Count</Trans></td>
+            <td className="current-period-sub-header"><Trans>Count</Trans></td>
             <td className="previous-period-sub-header"><Trans>in Total Cases since Last Year</Trans></td>
           </tr>
           {
