@@ -1,5 +1,5 @@
 package org.devgateway.rdi.tanzania;
-
+import java.nio.file.Paths;
 import com.opencsv.CSVReader;
 import org.devgateway.rdi.tanzania.domain.Translation;
 import org.devgateway.rdi.tanzania.repositories.TranslationRepository;
@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @Component
 public class Runner implements ApplicationRunner {
 
-    private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
+    private static String BOUNDARIES_SH_FILE = "/data/load_data.bat";
     private final String CSV_FILE = "/data/translations.csv";
 
 
@@ -49,8 +49,10 @@ public class Runner implements ApplicationRunner {
             logger.info("Adding some data into database");
 
 
-            //
-            String pdwPath = System.getenv().get("PWD");
+
+            String pdwPath =  Paths.get(".").toAbsolutePath().normalize().toString();;
+
+
             try {
                 Process p = Runtime.getRuntime().exec(pdwPath + BOUNDARIES_SH_FILE);
 
@@ -81,7 +83,7 @@ public class Runner implements ApplicationRunner {
     TranslationRepository translationRepository;
 
     private void loadTranslations() {
-        String pdwPath = System.getenv().get("PWD");
+        String pdwPath = Paths.get(".").toAbsolutePath().normalize().toString();;
 
         try (Reader reader = Files.newBufferedReader(Paths.get(pdwPath + CSV_FILE));
              CSVReader csvReader = new CSVReader(reader);) {
