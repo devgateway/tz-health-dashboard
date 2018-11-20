@@ -1,5 +1,4 @@
 import "@babel/polyfill";
-debugger;
 import React from 'react'
 import {render} from 'react-dom'
 import AppContainer from './appContainer'
