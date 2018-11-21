@@ -240,7 +240,7 @@ export const parsePeriod = (period) => {
 }
 
 export const composePeriod = (periodObject) => {
-
+  
   const { y, m, q } = periodObject
   if (y && !m && !q) {
     return 'y-' + y
