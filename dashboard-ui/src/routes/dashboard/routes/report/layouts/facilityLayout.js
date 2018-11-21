@@ -102,12 +102,14 @@ class WardLayout extends React.Component {
       }
     }
 
+
+
     return (
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
           <div className="print-icon" onClick={e => this.printReport()}></div>
-          <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
+          <PeriodSelector period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
           <div className="location-box">
