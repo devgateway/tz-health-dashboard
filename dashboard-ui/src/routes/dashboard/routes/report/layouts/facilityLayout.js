@@ -49,7 +49,8 @@ class WardLayout extends React.Component {
 
   onChangePeriod(period){
     const {params: {id}} = this.props
-    this.context.router.history.push(`/${this.props.lng}/report/facility/${id}/${period}`)
+    const lan = this.props.i18n.language
+    this.context.router.history.push(`/${lan}/report/facility/${id}/${period}`)
   }
 
   printReport(){

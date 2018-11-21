@@ -18,12 +18,30 @@ class TextSearch extends React.Component {
 
     this.state = {
       value: '',
+      inputTitle: null,
       selection: {}
     };
   }
 
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+  }
+
+  onCleanSelection() {
+    this.setState({value: ''})
+    this.setState({inputTitle: null})
+  }
+
   onChange(event, { newValue, method }) {
-    this.setState({value: newValue})
+    this.setState({value: newValue.split(' (')[0]})
+    this.setState({inputTitle: newValue})
+    this.setState({
+      suggestions: []
+    })
   }
 
   onSuggestionsFetchRequested({ value }) {
@@ -35,15 +53,16 @@ class TextSearch extends React.Component {
         getFacilitySearchResults(value)
       }
 	  }
-  };
+  }
 
   onSuggestionsClearRequested(suggestion) {
   	this.props.cleanSearchResults(this.props.searchType)
   }
 
   getSuggestionValue(suggestion) {
-    const { searchType } = this.props
+    const { searchType, onSelection } = this.props
     this.setState({selection: suggestion})
+    onSelection(suggestion)
     if (searchType === 'ward') {
       return `${suggestion.name} (Region: ${suggestion.region ? suggestion.region.name : 'Unknown'} - District: ${suggestion.district ? suggestion.district.name : 'Unknown'})`
     } else {
@@ -88,7 +107,7 @@ class TextSearch extends React.Component {
   }
 
   render() {
-    const { value, selection } = this.state;
+    const { value, selection, inputTitle } = this.state;
     const { searchType, searchResults } = this.props
     const suggestions = searchResults.getIn([searchType, 'list']).toJS()
     const inputProps = {
@@ -102,18 +121,15 @@ class TextSearch extends React.Component {
         <div className={`search-type-${searchType}`}>
           <Trans>{`${searchType} search`}</Trans>
         </div>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
-          getSuggestionValue={this.getSuggestionValue.bind(this)}
-          renderSuggestion={this.renderSuggestion.bind(this)}
-          inputProps={inputProps} />
-        {selection.id ?
-          <div className="generate-button" onClick={e => this.onGenerateReport()}><Trans>Generate Report</Trans></div>
-          :
-          <div className="generate-button-disabled"><Trans>Generate Report</Trans></div>
-        }
+        <div title={inputTitle}>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested.bind(this)}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested.bind(this)}
+            getSuggestionValue={this.getSuggestionValue.bind(this)}
+            renderSuggestion={this.renderSuggestion.bind(this)}
+            inputProps={inputProps} />
+        </div>
       </div>
     )
   }
