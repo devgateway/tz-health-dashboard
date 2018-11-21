@@ -85,7 +85,7 @@ public class WriteCsvToResponse {
         CSVWriter writer = new CSVWriter(print);
 
         String[] en_header = new String[]{"ID", "Service", "Year", "Quarter", "Month", "Count"};
-        String[] sw_header = new String[]{"ID", "Service", "Mwaka", "Robo Mwaka", "Mwezi", "Count"};
+        String[] sw_header = new String[]{"ID", "Huduma", "Mwaka", "Robo Mwaka", "Mwezi", "Idadi"};
 
 
         String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
