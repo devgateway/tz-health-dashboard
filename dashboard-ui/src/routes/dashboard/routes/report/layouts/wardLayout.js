@@ -91,14 +91,14 @@ class WardLayout extends React.Component {
       totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
     }
 
-  
+
 
     return (
       <div>
         <div className="report-header">
           <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
           <div className="print-icon" onClick={e => this.printReport()}></div>
-          <PeriodSelector period={this.props.params.period} onChangePeriod={e => this.onChangePeriod(e)}/>
+          <PeriodSelector period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
           <div className="location-box">
