@@ -5,7 +5,7 @@ body {
   position: relative; }
 
 .react-autosuggest__input {
-  width: 580px;
+  width: 800px;
   height: 30px;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
@@ -81,7 +81,7 @@ body {
     display: inline-block; }
   .text-search-container .search-type-facility {
     text-transform: capitalize;
-    width: 250px;
+    width: 350px;
     color: #fbfbfb;
     background: #ca1717;
     line-height: 55px;
@@ -95,7 +95,7 @@ body {
       vertical-align: middle; }
   .text-search-container .search-type-ward {
     text-transform: capitalize;
-    width: 250px;
+    width: 350px;
     color: #fbfbfb;
     background: #0aa3ec;
     line-height: 55px;
