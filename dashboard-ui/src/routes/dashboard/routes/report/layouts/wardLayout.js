@@ -37,6 +37,7 @@ class WardLayout extends React.Component {
   }
 
   onChangePeriod(period){
+
     const {params: {id}} = this.props
     let current = document.location.hash.substr(1)
     this.context.router.history.push(`/${this.props.lng}/report/ward/${id}/${period}`)

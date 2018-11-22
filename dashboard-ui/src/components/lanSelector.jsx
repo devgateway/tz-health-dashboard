@@ -15,14 +15,21 @@ class Selector extends Component {
   changeLanguage(e) {
     const {i18n} = this.props;
     let current = document.location.hash.substr(1)
+    
     this.props.history.push("/" + e.target.value + current.substr(3))
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.lan != this.props.i18n.language) {
+    
+    if (this.props.lan&&this.props.lan != this.props.i18n.language) {
       this.props.i18n.changeLanguage(this.props.lan);
     }
   }
+
+  componentDidMount() {
+    
+  }
+
 
   render() {
     const {t, i18n} = this.props;

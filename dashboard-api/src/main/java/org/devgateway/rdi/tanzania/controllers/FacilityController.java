@@ -37,14 +37,34 @@ public class FacilityController {
 
     @RequestMapping("/facilities")
     public List<FacilityResponse> getFacility(FacilityRequest facilityRequest) {
-            return facilityService.getFacilities(facilityRequest);
+        return facilityService.getFacilities(facilityRequest);
+    }
+
+    @RequestMapping("/facilities.json")
+    @ResponseBody
+    public void getFacilityAsCSV(HttpServletResponse response, FacilityRequest facilityRequest) throws IOException {
+
+        List<FacilityResponse> facilities = facilityService.getFacilities(facilityRequest);
+
+        String csvFileName = "facilities.csv";
+        response.setContentType("text/csv");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+        response.setHeader(headerKey, headerValue);
+
+        WriteCsvToResponse.writeFacilitiesResponse(response.getWriter(), facilities, facilityRequest.getLan());
+
     }
 
 
     @RequestMapping("/facilities/{id}")
-    public FacilityResponse getFacility(@PathVariable Long id) {
+    public ResponseEntity<FacilityResponse> getFacility(@PathVariable Long id) {
         FacilityResponse facilityResponse = ResponseUtils.facilityToResponse(facilityService.getFacility(id));
-        return facilityResponse;
+        if (facilityResponse != null) {
+            return new ResponseEntity(facilityResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     @Autowired
@@ -86,7 +106,7 @@ public class FacilityController {
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
         List<OPDByAgeResponse> opdByAgeResponses = opdDiagnosesService.getOPDByFacilityAndPeriod(f, year, quarter, month);
-        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses,lan);
+        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses, lan);
 
     }
 
