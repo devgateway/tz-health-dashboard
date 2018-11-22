@@ -37,7 +37,23 @@ public class FacilityController {
 
     @RequestMapping("/facilities")
     public List<FacilityResponse> getFacility(FacilityRequest facilityRequest) {
-            return facilityService.getFacilities(facilityRequest);
+        return facilityService.getFacilities(facilityRequest);
+    }
+
+    @RequestMapping("/facilities.json")
+    @ResponseBody
+    public void getFacilityAsCSV(HttpServletResponse response, FacilityRequest facilityRequest) throws IOException {
+
+        List<FacilityResponse> facilities = facilityService.getFacilities(facilityRequest);
+
+        String csvFileName = "facilities.csv";
+        response.setContentType("text/csv");
+        String headerKey = "Content-Disposition";
+        String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
+        response.setHeader(headerKey, headerValue);
+
+        WriteCsvToResponse.writeFacilitiesResponse(response.getWriter(), facilities, facilityRequest.getLan());
+
     }
 
 
@@ -86,7 +102,7 @@ public class FacilityController {
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
         List<OPDByAgeResponse> opdByAgeResponses = opdDiagnosesService.getOPDByFacilityAndPeriod(f, year, quarter, month);
-        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses,lan);
+        WriteCsvToResponse.writeOPDResponse(response.getWriter(), opdByAgeResponses, lan);
 
     }
 
@@ -122,7 +138,7 @@ public class FacilityController {
         response.setHeader(headerKey, headerValue);
         List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyFacilityAndPeriod(f, year, quarter, month);
 
-        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses,lan);
+        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses, lan);
 
 
     }

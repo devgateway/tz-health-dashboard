@@ -77,6 +77,7 @@ class TextSearch extends React.Component {
   }
 
   onGenerateReport() {
+    debugger;
     const lan= this.props.i18n.language
     const { searchType } = this.props
     const { selection } = this.state;
