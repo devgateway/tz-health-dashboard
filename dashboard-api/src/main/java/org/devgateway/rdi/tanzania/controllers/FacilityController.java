@@ -58,9 +58,13 @@ public class FacilityController {
 
 
     @RequestMapping("/facilities/{id}")
-    public FacilityResponse getFacility(@PathVariable Long id) {
+    public ResponseEntity<FacilityResponse> getFacility(@PathVariable Long id) {
         FacilityResponse facilityResponse = ResponseUtils.facilityToResponse(facilityService.getFacility(id));
-        return facilityResponse;
+        if (facilityResponse != null) {
+            return new ResponseEntity(facilityResponse, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     @Autowired
@@ -138,7 +142,7 @@ public class FacilityController {
         response.setHeader(headerKey, headerValue);
         List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyFacilityAndPeriod(f, year, quarter, month);
 
-        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses, lan);
+        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses,lan);
 
 
     }

@@ -75,7 +75,7 @@ const ACTION_HANDLERS = {
   ['@@router/LOCATION_CHANGE']: (state, action) => {
     const { payload: { pathname } } = action;
     const lan = pathname.substring(1, 3);
-    debugger;
+    
     state = state.setIn(['lan'], lan)
     const pattern = pathname.substring(pathname.lastIndexOf('/') + 1);
 
