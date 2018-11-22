@@ -51,7 +51,8 @@ componentDidMount() {
   const urlPeriod=this.props.params.period;
   const strPeriod = composePeriod(period.toJS())
 
-  if(urlPeriod!=strPeriod){
+  if(urlPeriod && urlPeriod!=strPeriod){
+    debugger;
     this.props.onChangePeriod(urlPeriod)
   }
   const year = period.get("y")
