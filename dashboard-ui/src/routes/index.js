@@ -12,7 +12,7 @@ class IndexRoute extends Component {
   }
 
   render() {
-
+    debugger;
     const {store} = this.props
     const i18n=this.context.i18n;
     let updateLanUrl=false;
@@ -23,10 +23,11 @@ class IndexRoute extends Component {
 
     if (userLanguage!='en' && userLanguage!='sw'){
       updateLanUrl=true
-
       selected=i18n.options.fallbackLng[0];
     }else{
-      i18n.changeLanguage(userLanguage);
+      if (i18n.language!=userLanguage){
+        i18n.changeLanguage(userLanguage);
+      }
       selected=userLanguage;
     }
 
