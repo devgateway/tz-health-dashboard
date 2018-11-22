@@ -7,6 +7,7 @@ class RMNCHTable extends React.Component {
 
   render() {
     const {id,gid, RMNCH, type, period, facilityName, i18n: {language}} = this.props
+
     let data=[]
     if (RMNCH && RMNCH.get('loading') == true) {
       return <div>Loading</div>

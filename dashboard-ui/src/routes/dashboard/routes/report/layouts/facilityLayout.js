@@ -30,7 +30,6 @@ class WardLayout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-
     if (this.props.info.getIn(['ward', 'gid']) !== prevProps.info.getIn(['ward', 'gid'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
@@ -48,6 +47,7 @@ class WardLayout extends React.Component {
 }
 
   onChangePeriod(period){
+
     const {params: {id}} = this.props
     this.context.router.history.push(`/${this.props.lng}/report/facility/${id}/${period}`)
   }
