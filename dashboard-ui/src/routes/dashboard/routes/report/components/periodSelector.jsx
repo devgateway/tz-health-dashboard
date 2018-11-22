@@ -1,7 +1,7 @@
 import React from 'react'
 import {translate, Trans, t} from "react-i18next"
 import i18n from '../../../../../i18n'
-
+import {withRouter} from 'react-router-dom';
 class PeriodSelector extends React.Component {
 
   constructor(props) {
@@ -68,6 +68,13 @@ class PeriodSelector extends React.Component {
     this.props.onChangePeriod(e.target.value)
   }
 
+  componentDidMount() {
+    const {period,match} = this.props
+    const urlPeriod=match.params.period
+
+    
+  }
+
   render() {
     const {years, months, quarters, periodType} = this.state
     const {
@@ -117,4 +124,4 @@ class PeriodSelector extends React.Component {
   }
 }
 
-export default translate("translations")(PeriodSelector)
+export default translate("translations")(withRouter(PeriodSelector))
