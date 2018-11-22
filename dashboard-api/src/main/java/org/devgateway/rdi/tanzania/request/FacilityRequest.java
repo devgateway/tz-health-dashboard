@@ -9,6 +9,8 @@ import java.util.List;
 public class FacilityRequest {
 
     String keyWord;
+    String lan;
+
     List<Long> districts;
     List<Long> wards;
     List<Long> regions;
@@ -52,5 +54,13 @@ public class FacilityRequest {
 
     public void setTypes(List<Long> types) {
         this.types = types;
+    }
+
+    public String getLan() {
+        return lan;
+    }
+
+    public void setLan(String lan) {
+        this.lan = lan;
     }
 }

@@ -18,6 +18,12 @@ public class WriteCsvToResponse {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WriteCsvToResponse.class);
 
+
+    public static void writeFacilitiesResponse(PrintWriter print, List<FacilityResponse> facilityResponses, String locale){
+
+
+    }
+
     public static void writeOPDResponse(PrintWriter print, List<OPDByAgeResponse> diagnoses, String locale) {
 
         CSVWriter writer = new CSVWriter(print);
