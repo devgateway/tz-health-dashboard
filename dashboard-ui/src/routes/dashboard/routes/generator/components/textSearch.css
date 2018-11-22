@@ -5,7 +5,7 @@ body {
   position: relative; }
 
 .react-autosuggest__input {
-  width: 800px;
+  width: 440px;
   height: 30px;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
@@ -70,11 +70,10 @@ body {
   color: #121212; }
 
 .text-search-container {
-  width: 1200px;
-  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 30px;
   -ms-flex-align: center;
   align-items: center;
-  margin: auto;
   background: white;
   border: 1px solid #acacac; }
   .text-search-container > div {
