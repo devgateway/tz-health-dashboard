@@ -87,6 +87,7 @@ class WardLayout extends React.Component {
   }
 
   onGenerateReport() {
+    debugger;
     const lan= this.props.i18n.language
 
     const { ward, facility, period, params: {reportType} } = this.props
