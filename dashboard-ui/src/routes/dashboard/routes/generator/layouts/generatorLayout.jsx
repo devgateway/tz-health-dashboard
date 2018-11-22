@@ -222,9 +222,9 @@ class WardLayout extends React.Component {
           </div>
           <div className="dashed-separator"></div>
           <div className="step-one-box">
-            <div className="step-descriptor"><div><Trans>Step one</Trans>: </div><b><Trans>Select a Facility</Trans></b> <Trans>by typing it name in the</Trans> <i><Trans>Facility Search</Trans> </i>below</div>
+            <div className="step-descriptor"><div><Trans>Step one</Trans>: </div><b><Trans>Select a {reportType}</Trans></b> <Trans>by typing it name in the</Trans> <i><Trans>{reportType} search</Trans> </i>below</div>
             <TextSearch searchType={reportType} onSelection={e => this.onKeywordSearchSelection(e)} onRef={ref => (this.child = ref)}/>
-            <div className="step-descriptor"><div><Trans>OR</Trans>: </div><b><Trans>Select a Facility</Trans></b> <Trans>by location using the</Trans> <i><Trans>Facility filter</Trans></i> box or map below</div>
+            <div className="step-descriptor"><div><Trans>OR</Trans>: </div><b><Trans>Select a {reportType}</Trans></b> <Trans>by location using the</Trans> <i><Trans>{reportType} filter</Trans> </i>box or map below</div>
             <div className="generator-by-path">
               <div className="generator-dropdowns">
                 <div className={`report-type-${reportType}`}>
