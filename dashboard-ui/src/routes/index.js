@@ -12,25 +12,29 @@ class IndexRoute extends Component {
   }
 
   render() {
-    debugger;
+
     const {store} = this.props
     const i18n=this.context.i18n;
     let updateLanUrl=false;
     let selected;
-    const userLanguage=this.context.router.history.location.pathname.substr(1,3);
+
+    const userLanguage=this.context.router.history.location.pathname.substr(1,2);
+    const target=this.context.router.history.location.pathname
+
     if (userLanguage!='en' && userLanguage!='sw'){
       updateLanUrl=true
+
       selected=i18n.options.fallbackLng[0];
     }else{
+      i18n.changeLanguage(userLanguage);
       selected=userLanguage;
     }
-
-    //i18n.language
 
     return (<div>
       <Switch>
         <Redirect exact={true} from="/" to={selected}></Redirect>
         {updateLanUrl?<Redirect exact={true} from="/:lan" to={selected}></Redirect>:null}
+
       </Switch>
       <Route path="/" render={() => <DashboardRoute store={store}/>}/>
     </div>)
