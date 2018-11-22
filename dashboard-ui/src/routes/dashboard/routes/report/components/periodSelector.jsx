@@ -1,7 +1,11 @@
 import React from 'react'
 import {translate, Trans, t} from "react-i18next"
 import i18n from '../../../../../i18n'
-import {withRouter} from 'react-router-dom';
+import  {composePeriod,parsePeriod} from '../../../../../api'
+
+import {connect} from 'react-redux';
+
+
 class PeriodSelector extends React.Component {
 
   constructor(props) {
@@ -41,24 +45,27 @@ class PeriodSelector extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const {period} = this.props
-    if (period) {
-      const periodSp = period.split('_')
-      if (periodSp.length === 1) {
-        this.setState({periodType: 'yearly'})
-      } else {
-        if (periodSp[1].startsWith('m')) {
-          this.setState({periodType: 'monthly'})
-        } else {
-          this.setState({periodType: 'quarterly'})
-        }
-      }
-    } else {
-      this.setState({periodType: 'yearly'})
-    }
 
+componentDidMount() {
+  const {period ,t,i18n} = this.props
+  const urlPeriod=this.props.params.period;
+  const strPeriod = composePeriod(period.toJS())
+
+  if(urlPeriod!=strPeriod){
+    this.props.onChangePeriod(urlPeriod)
   }
+  const year = period.get("y")
+  const quarter = period.get("q")
+  const month = period.get("m")
+  if (year && !quarter && !month) {
+    this.setState({periodType: 'yearly'})
+  } else if (year && month) {
+    this.setState({periodType: 'monthly'})
+  } else if (year && quarter) {
+    this.setState({periodType: 'quarterly'})
+  }
+
+}
 
   onChangeType(e) {
     this.setState({periodType: e.target.value})
@@ -68,20 +75,15 @@ class PeriodSelector extends React.Component {
     this.props.onChangePeriod(e.target.value)
   }
 
-  componentDidMount() {
-    const {period,match} = this.props
-    const urlPeriod=match.params.period
-
-    
-  }
-
   render() {
+
+    debugger;
+
     const {years, months, quarters, periodType} = this.state
-    const {
-      period = 'y-2017',
-      t,
-      i18n
-    } = this.props
+    const {period ,t,i18n} = this.props
+    const urlPeriod=this.props.params.period;
+
+    const strPeriod = composePeriod(period.toJS())
 
     let options = years
     if (periodType === 'quarterly') {
@@ -110,7 +112,7 @@ class PeriodSelector extends React.Component {
           </select>
         </div>
         <div className="period-selector">
-          <select className="" onChange={e => this.onChangePeriod(e)} value={period}>
+          <select className="" onChange={e => this.onChangePeriod(e)} value={strPeriod}>
             <option value={-1}>{t("Select a period")}</option>
             {
               options.map(option => {
@@ -124,4 +126,4 @@ class PeriodSelector extends React.Component {
   }
 }
 
-export default translate("translations")(withRouter(PeriodSelector))
+export default translate("translations")(PeriodSelector)
