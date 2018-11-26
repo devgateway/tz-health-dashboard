@@ -20,7 +20,6 @@ export const generateFacilityPDF = (state, image) => {
   const FONT_PAGE_HEADER = 13
   const FONT_HEADER_SPACE = 10
   let cursorY = 25
-  //const language = 'en' //this should be set from selected language
   const year = parseInt(period.get('y'))
   const quarter = parseInt(period.get('q'))
   const month = parseInt(period.get('m'))

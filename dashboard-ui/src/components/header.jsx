@@ -1,16 +1,27 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import Selector from './lanSelector'
 
-export default (props) => {
+export default class Header extends React.Component {
+	
+	static contextTypes = {
+    i18n: PropTypes.object,
+    router: PropTypes.object
+  }
 
-  return (
-    <div className="header">
-      <div className="tz-flag"></div>
-      <div className="app-name">Tanzania Health Data Dashboard</div>
-      <div className="tz-logo"></div>
-      <div className="lang-selector">
-        <Selector></Selector>
-      </div>
-    </div>)
+  render() {
+		const lan = this.context.i18n.language
+	    
+	  return (
+	    <div className="header">
+	    	<div className="header-link" onClick={e => this.context.router.history.push(`/${lan}`)}>
+		      <div className="tz-flag"></div>
+		      <div className="app-name">Tanzania Health Data Dashboard</div>
+		    </div>
+	      <div className="tz-logo"></div>
+	      <div className="lang-selector">
+	        <Selector></Selector>
+	      </div>
+	    </div>)
+	}
 }
