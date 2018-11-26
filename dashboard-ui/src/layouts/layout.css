@@ -1,6 +1,8 @@
 .app .header {
   height: 80px;
   border-bottom: 3px solid #CCC; }
+  .app .header .header-link {
+    cursor: pointer; }
   .app .header > div {
     display: inline-block; }
   .app .header .app-name {
