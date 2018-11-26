@@ -1,6 +1,9 @@
 
 .app{
 	.header{
+		.header-link{
+			cursor: pointer;
+		}
 		height: 80px;
 		border-bottom: 3px solid #CCC;
 		>div{
