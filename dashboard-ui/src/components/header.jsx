@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Selector from './lanSelector'
+import Share from './share.jsx'
 
 export default class Header extends React.Component {
 	
@@ -18,9 +19,12 @@ export default class Header extends React.Component {
 		      <div className="tz-flag"></div>
 		      <div className="app-name">Tanzania Health Data Dashboard</div>
 		    </div>
-	      <div className="tz-logo"></div>
+      	<div className="tz-logo"></div>
 	      <div className="lang-selector">
-	        <Selector></Selector>
+	        <Selector/>
+	      </div>
+	      <div className="share-container">
+	      	<Share/>
 	      </div>
 	    </div>)
 	}

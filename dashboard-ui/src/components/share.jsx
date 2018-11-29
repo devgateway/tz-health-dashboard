@@ -107,10 +107,8 @@ export default class Share extends React.Component {
 
       <ShareLink className="facebook" href="http://www.facebook.com/sharer.php?u=" title="Facebook"></ShareLink>
       <ShareLink className="gplus" href="https://plus.google.com/share?url=" title="Google +"></ShareLink>
-      <ShareLink className="in" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=" title="Linked in"></ShareLink>
       <ShareLink className="twitter" href="https://twitter.com/share?url=" title="Twitter"></ShareLink>
-      <ShareLink className="vk" href="http://vkontakte.ru/share.php?url=" title="VK"></ShareLink>
-      <CopyLinkButton>Copy Link</CopyLinkButton>
+      {/*<CopyLinkButton>Copy Link</CopyLinkButton>*/}
 
     </div>
   }
