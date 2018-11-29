@@ -9,6 +9,8 @@ import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 import {withRouter} from 'react-router-dom';
 import {composePeriod} from '../../../../../api'
+import CopyShare from '../components/copyShareLink'
+import i18n from '../../../../../i18n'
 
 class WardLayout extends React.Component {
 
@@ -47,7 +49,6 @@ class WardLayout extends React.Component {
 }
 
   onChangePeriod(period){
-
     const {params: {id}} = this.props
     const lan = this.props.i18n.language
     this.context.router.history.push(`/${lan}/report/facility/${id}/${period}`)
@@ -102,13 +103,12 @@ class WardLayout extends React.Component {
       }
     }
 
-
-
     return (
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
-          <div className="print-icon" onClick={e => this.printReport()}></div>
+          <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
+          <CopyShare/>
           <PeriodSelector period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
