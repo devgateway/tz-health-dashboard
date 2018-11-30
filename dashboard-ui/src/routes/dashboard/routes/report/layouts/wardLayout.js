@@ -7,6 +7,8 @@ import PeriodSelector from '../components/periodSelector'
 import Legends from '../components/legends'
 import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
+import CopyShare from '../components/copyShareLink'
+import i18n from '../../../../../i18n'
 import {composePeriod,getWardFacilitiesDownloadURI} from '../../../../../api'
 
 class WardLayout extends React.Component {
@@ -100,7 +102,8 @@ class WardLayout extends React.Component {
       <div>
         <div className="report-header">
           <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
-          <div className="print-icon" onClick={e => this.printReport()}></div>
+          <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
+          <CopyShare/>
           <PeriodSelector period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
