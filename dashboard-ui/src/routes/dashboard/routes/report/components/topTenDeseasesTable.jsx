@@ -1,6 +1,6 @@
 import React from 'react'
 import {translate, Trans} from "react-i18next";
-import {getMonthName,getQuarterLabel, diffPercentage,parsePeriod,getCSVURI} from '../../../../../api'
+import {getMonthName,getQuarterLabel, diffPercentage,parsePeriod,getDownloadURI} from '../../../../../api'
 import {MonthLabel,QuarterLabel} from './labels'
 
 
@@ -99,8 +99,8 @@ class TopTenDeseases extends React.Component {
       </table>
 
       <div className="download csv">
-        <a href={getCSVURI(type,'diagnoses','csv',id,period.toJS(),language)}>CSV</a>
-        <a href={getCSVURI(type,'diagnoses','json',id,period.toJS(),language)}>JSON</a>
+        <a href={getDownloadURI(type,'diagnoses','csv',id,period.toJS(),language)}>CSV</a>
+        <a href={getDownloadURI(type,'diagnoses','json',id,period.toJS(),language)}>JSON</a>
       </div>
     </div>)
   }
