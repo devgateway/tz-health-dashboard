@@ -85,7 +85,7 @@ export const getMapShape = (facilityData) => {
     if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load all districts from region
       getShapeMethod = api.findDistricts
       params = {regions: facilityData.getIn(['region', 'gid'])}
-      //get region shape 
+      //get region shape
       dispatch({type: FACILITY_MAP_REQUEST})
       api.findRegions(params).then(data => {
         dispatch({'type': FACILITY_MAP_REGION_RESPONSE, data })

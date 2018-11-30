@@ -17,6 +17,7 @@
 .download {
 	display: block;
 	text-align: right;
+	border-bottom: 3px solid #CCC;
 
 	a {
 		target:_blank;
@@ -34,6 +35,10 @@
 		content: ""
 	}
 }
+
+	.right{
+		text-align: right;
+	}
 
 .report-header {
 	color: #2C4856;
@@ -53,10 +58,6 @@
 
 	.facility-name {}
 
-	.download {
-		border: 1px solid red;
-	}
-
 	.period-selector-container {
 		float: right;
 		line-height: 45px;
@@ -66,7 +67,7 @@
 				display: inline-block;
 				line-height: 1px;
 				border-right: 1px solid #CCC;
-				
+
 				select {
 					padding-left: 12px;
 					width: 200px;
@@ -115,7 +116,6 @@
 
 .population-box {
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
 
 	> div {
 		display: inline-block;
@@ -210,7 +210,6 @@
 .top-ten-deseases {
 	padding-top: 30px;
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
 
 	.top-ten-diagnosis-table {
 		font-size: 20px;
@@ -303,7 +302,6 @@
 .RMNCH-box {
 	padding-top: 30px;
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
 
 	.RMNCH-table {
 		font-size: 20px;
@@ -383,8 +381,7 @@
 .deaths-box {
 	padding-top: 30px;
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
-
+	
 	.total-pop {
 		color: #2C4856;
 		font-size: 20px;
@@ -442,7 +439,7 @@
 		> div {}
 
 		.legend-header {
-			
+
 		}
 		.legend-toggle-expand {
 			height: 16px;

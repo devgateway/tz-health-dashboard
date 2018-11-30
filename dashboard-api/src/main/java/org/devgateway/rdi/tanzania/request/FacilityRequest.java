@@ -9,7 +9,7 @@ import java.util.List;
 public class FacilityRequest {
 
     String keyWord;
-    String lan;
+    String lan = "en";
 
     List<Long> districts;
     List<Long> wards;
