@@ -50,14 +50,14 @@ componentDidMount() {
   const {period ,t,i18n} = this.props
   const urlPeriod=this.props.params.period;
   const strPeriod = composePeriod(period.toJS())
-
   if(urlPeriod && urlPeriod!=strPeriod){
-    debugger;
     this.props.onChangePeriod(urlPeriod)
   }
+
   const year = period.get("y")
   const quarter = period.get("q")
   const month = period.get("m")
+
   if (year && !quarter && !month) {
     this.setState({periodType: 'yearly'})
   } else if (year && month) {
@@ -78,11 +78,9 @@ componentDidMount() {
 
   render() {
 
-    debugger;
 
     const {years, months, quarters, periodType} = this.state
     const {period ,t,i18n} = this.props
-    const urlPeriod=this.props.params.period;
 
     const strPeriod = composePeriod(period.toJS())
 

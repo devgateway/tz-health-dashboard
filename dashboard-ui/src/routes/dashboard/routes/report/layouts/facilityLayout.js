@@ -8,9 +8,9 @@ import Legends from '../components/legends'
 import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 import {withRouter} from 'react-router-dom';
-import {composePeriod} from '../../../../../api'
 import CopyShare from '../components/copyShareLink'
 import i18n from '../../../../../i18n'
+import {composePeriod,getFacilitiesDownloadURI} from '../../../../../api'
 
 class WardLayout extends React.Component {
 
@@ -60,7 +60,7 @@ class WardLayout extends React.Component {
 
   render() {
     const {params: {id}, mapShape, mapPoints, mapRegion, info, population, period} = this.props
-
+    const lan = this.props.i18n.language
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'),
@@ -102,6 +102,8 @@ class WardLayout extends React.Component {
         totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
       }
     }
+
+
 
     return (
       <div>
@@ -174,8 +176,15 @@ class WardLayout extends React.Component {
                   : null}
                 </div>
               </Legends>
+
             </div>
+
           </div>
+          <div className="download csv right">
+            <a href={getFacilitiesDownloadURI('csv',info,lan)}>CSV</a>
+            <a href={getFacilitiesDownloadURI('json',info,lan)}>JSON</a>
+          </div>
+
 
           <div className="top-ten-deseases">
             <TopTenDeseases  type="facilities"  period={period} id={id}  facilityName={facilityName} diagnoses={this.props.diagnoses}/>

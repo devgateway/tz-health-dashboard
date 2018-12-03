@@ -218,9 +218,23 @@ export const getQuarterLabel = (q) => {
   return { start: getMonthName(start, 'short'), end: getMonthName(end, 'short') }
 }
 
-export const getCSVURI = (type, data, format, id, period, language) => {
-
+export const getDownloadURI = (type, data, format, id, period, language) => {
   return API_ROOT_URL + "/" + type + "/" + id + "/" + data + "." + format + "?" + preparePeriodQuery(composePeriod(period)) + "&lan=" + language;
+}
+
+export const getFacilitiesDownloadURI = (format, facilityData, language) => {
+    let params = { wards: facilityData.getIn(['ward', 'gid']), type: facilityData.getIn(['type', 'dhis2Id']) }
+    if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0') { //if facility type is hospital or health center, load facilities from region
+      params = { regions: facilityData.getIn(['region', 'gid']), types: facilityData.getIn(['type', 'id']) }
+    }
+    params.lan = language;
+    return API_FACILITIES + '.' + format + '?' + prepareQuery(Object.assign({}, params))
+}
+
+export const getWardFacilitiesDownloadURI = (format, wardData, language) => {
+    let params = {districts: wardData.getIn(['district', 'gid'])}
+    params.lan = language;
+    return API_FACILITIES + '.' + format + '?' + prepareQuery(Object.assign({}, params))
 }
 
 export const parsePeriod = (period) => {
@@ -240,7 +254,7 @@ export const parsePeriod = (period) => {
 }
 
 export const composePeriod = (periodObject) => {
-  
+
   const { y, m, q } = periodObject
   if (y && !m && !q) {
     return 'y-' + y

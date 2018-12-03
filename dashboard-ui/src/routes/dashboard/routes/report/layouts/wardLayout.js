@@ -9,6 +9,7 @@ import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 import CopyShare from '../components/copyShareLink'
 import i18n from '../../../../../i18n'
+import {composePeriod,getWardFacilitiesDownloadURI} from '../../../../../api'
 
 class WardLayout extends React.Component {
 
@@ -55,6 +56,7 @@ class WardLayout extends React.Component {
 
   render() {
     const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
+    const lan = this.props.i18n.language
     const {legendVisible} = this.state
     const facilitiesFeatures = []
     const wardFacilities = []
@@ -166,8 +168,14 @@ class WardLayout extends React.Component {
                   </div>
                 </div>
               </Legends>
+
             </div>
           </div>
+          <div className="download csv right">
+            <a href={getWardFacilitiesDownloadURI('csv',info,lan)}>CSV</a>
+            <a href={getWardFacilitiesDownloadURI('json',info,lan)}>JSON</a>
+          </div>
+
           <div className="top-ten-deseases">
             <TopTenDeseases  type="wards"  id={id} period={period}  facilityName={wardName} diagnoses={this.props.diagnoses}/>
           </div>
