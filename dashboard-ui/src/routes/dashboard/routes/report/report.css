@@ -14,7 +14,8 @@
 
 .download {
   display: block;
-  text-align: right; }
+  text-align: right;
+  border-bottom: 3px solid #CCC; }
   .download a {
     target: _blank;
     color: #668DAA;
@@ -25,6 +26,9 @@
     margin: 3px; }
   .download a:nth-last-child(1):after {
     content: ""; }
+
+.right {
+  text-align: right; }
 
 .report-header {
   color: #2C4856;
@@ -39,8 +43,6 @@
   background-color: #F4F2EC; }
   .report-header > div {
     display: inline-block; }
-  .report-header .download {
-    border: 1px solid red; }
   .report-header .period-selector-container {
     float: right;
     line-height: 45px; }
@@ -83,8 +85,7 @@
   font-weight: bold; }
 
 .population-box {
-  font-weight: bold;
-  border-bottom: 3px solid #CCC; }
+  font-weight: bold; }
   .population-box > div {
     display: inline-block;
     width: 50%;
@@ -145,8 +146,7 @@
 
 .top-ten-deseases {
   padding-top: 30px;
-  font-weight: bold;
-  border-bottom: 3px solid #CCC; }
+  font-weight: bold; }
   .top-ten-deseases .top-ten-diagnosis-table {
     font-size: 20px; }
     .top-ten-deseases .top-ten-diagnosis-table table {
@@ -207,8 +207,7 @@
 
 .RMNCH-box {
   padding-top: 30px;
-  font-weight: bold;
-  border-bottom: 3px solid #CCC; }
+  font-weight: bold; }
   .RMNCH-box .RMNCH-table {
     font-size: 20px; }
     .RMNCH-box .RMNCH-table table {
@@ -256,8 +255,7 @@
 
 .deaths-box {
   padding-top: 30px;
-  font-weight: bold;
-  border-bottom: 3px solid #CCC; }
+  font-weight: bold; }
   .deaths-box .total-pop {
     color: #2C4856;
     font-size: 20px;

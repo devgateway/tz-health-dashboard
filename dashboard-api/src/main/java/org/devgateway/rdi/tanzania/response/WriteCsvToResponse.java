@@ -19,9 +19,41 @@ public class WriteCsvToResponse {
     private static final Logger LOGGER = LoggerFactory.getLogger(WriteCsvToResponse.class);
 
 
-    public static void writeFacilitiesResponse(PrintWriter print, List<FacilityResponse> facilityResponses, String locale){
+    public static void writeFacilitiesResponse(PrintWriter print, List<FacilityResponse> facilityResponses, String locale) {
+
+        CSVWriter writer = new CSVWriter(print);
+
+        String[] en_header = new String[]{"Code", "Name", "Latitude", "Longitude", "Ownership", "Detailed Ownership",
+                "Type", "Detailed Type", "Ward", "District", "Region"};
+
+        String[] sw_header = new String[]{"Code", "Jina",  "Latitude", "Longitude", "Ownership", "Detailed Ownership",
+                "Aina ya Kituo", "Detailed Type", "Kata", "Wilaya", "Mkoa"};
 
 
+        String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
+        writer.writeNext(header);
+
+        List<String[]> allData = facilityResponses.stream().map(facilityResponse -> {
+            String code = facilityResponse.getCode();
+            String name = facilityResponse.getName();
+            String latitude = Double.toString(facilityResponse.getPoint().getY());
+            String longitude = Double.toString(facilityResponse.getPoint().getX());
+            String ownership = facilityResponse.getOwnership() != null ? facilityResponse.getOwnership().getName() : null;
+            String detailedOwnership = facilityResponse.getDetailedOwnership() != null ? facilityResponse.getDetailedOwnership().getName() : null;
+            String type = facilityResponse.getType() != null ? facilityResponse.getType().getName() : null;
+            String detailedType = facilityResponse.getDetailedType() != null ? facilityResponse.getDetailedType().getName() : null;
+            String ward = facilityResponse.getWard() != null ? facilityResponse.getWard().getName() : null;
+            String district = facilityResponse.getDistrict() != null ? facilityResponse.getDistrict().getName() : null;
+            String region = facilityResponse.getRegion() != null ? facilityResponse.getRegion().getName() : null;
+
+            return new String[]{code, name, latitude, longitude, ownership, detailedOwnership, type, detailedType, ward, district, region};
+
+
+        }).collect(Collectors.toList());
+
+        allData.sort((o1, o2) -> o2[1].compareTo(o1[1]));
+
+        writer.writeAll(allData);
     }
 
     public static void writeOPDResponse(PrintWriter print, List<OPDByAgeResponse> diagnoses, String locale) {

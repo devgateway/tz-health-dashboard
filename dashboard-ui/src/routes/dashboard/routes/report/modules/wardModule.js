@@ -87,6 +87,7 @@ export const getMapShape = (wardData) => {
 };
 
 export const getMapPoints = (wardData) => {
+  debugger;
   let params = {districts: wardData.getIn(['district', 'gid'])}
   return (dispatch, getState) => {
     dispatch({type: WARD_MAP_REQUEST})
@@ -106,7 +107,7 @@ const ACTION_HANDLERS = {
   },
   [WARD_INFO_RESPONSE]: (state, action) => {
     const {data} = action;
-    
+
     return state.setIn(['reportData', 'info'], Immutable.fromJS(data)).setIn(['reportData', 'info', 'loading'], false)
   },
   [WARD_INFO_ERROR]: (state, action) => {

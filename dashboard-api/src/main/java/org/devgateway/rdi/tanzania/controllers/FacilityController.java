@@ -40,7 +40,7 @@ public class FacilityController {
         return facilityService.getFacilities(facilityRequest);
     }
 
-    @RequestMapping("/facilities.json")
+    @RequestMapping("/facilities.csv")
     @ResponseBody
     public void getFacilityAsCSV(HttpServletResponse response, FacilityRequest facilityRequest) throws IOException {
 
@@ -127,7 +127,6 @@ public class FacilityController {
 
     }
 
-
     @RequestMapping("/facilities/{id}/rmnch.csv")
     public void rmnchAsCSV(HttpServletResponse response, @PathVariable Long id,
                            @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
@@ -141,9 +140,7 @@ public class FacilityController {
         String headerValue = String.format("attachment; filename=\"%s\"", csvFileName);
         response.setHeader(headerKey, headerValue);
         List<RMNCHResponse> rmnchByAgeResponses = rmnchService.getRMNCHbyFacilityAndPeriod(f, year, quarter, month);
-
-        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses,lan);
-
+        WriteCsvToResponse.writeRMNCHResponse(response.getWriter(), rmnchByAgeResponses, lan);
 
     }
 
