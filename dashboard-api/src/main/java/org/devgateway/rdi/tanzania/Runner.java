@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @Component
 public class Runner implements ApplicationRunner {
 
-    private static String BOUNDARIES_SH_FILE = "/data/load_data.bat";
+    private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
     private final String CSV_FILE = "/data/translations.csv";
 
 
