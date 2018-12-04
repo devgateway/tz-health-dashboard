@@ -113,6 +113,12 @@ class D3Map extends React.Component {
       });
 
       if (pointFeatures) {
+        debugger;
+        pointFeatures.features.sort((a,b)=>{
+        return a.properties.selected-b.properties.selected
+
+        });
+
         vector.selectAll("circle").remove()
         vector.selectAll("circle").data(pointFeatures.features).enter().append("circle").attr("cx", d => projection(d.geometry.coordinates)[0])
         .attr("cy", d => projection(d.geometry.coordinates)[1]).attr('class', 'clickeable').attr("r", pointSize)
