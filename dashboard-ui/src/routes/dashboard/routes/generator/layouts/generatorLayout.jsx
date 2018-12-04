@@ -92,7 +92,7 @@ class WardLayout extends React.Component {
     selectDistrict(districtId)
     if (districtId) {
       getGeoItemsList('ward', {districts: [districtId],simplifyFactor:0})
-      if (reportType === 'ward') {
+      if (reportType === 'facility') {
         getGeoItemsList('facility', {districts: [districtId]})
       }
     }
@@ -102,11 +102,11 @@ class WardLayout extends React.Component {
     const wardId = e.target.value === '-1' ? null : e.target.value
     const { selectWard, getGeoItemsList, params: {reportType} } = this.props
     selectWard(wardId)
-    if (wardId) {
+    /*if (wardId) {
       if (reportType === 'facility') {
         getGeoItemsList('facility', {wards: [wardId]})
       }
-    }
+    }*/
   }
 
   onChangeFacility(e) {
@@ -122,19 +122,19 @@ class WardLayout extends React.Component {
       //do nothing
     } else if (district.get('selected')) {
       selectWard(featureId)
-      if (reportType === 'facility') {
+      /*if (reportType === 'facility') {
         getGeoItemsList('facility', {wards: [featureId]})
-      }
+      }*/
     } else if (region.get('selected')){
       selectDistrict(featureId)
-      getGeoItemsList('ward', {districts: [featureId],simplifyFactor:0})
-      if (reportType === 'ward') {
+      getGeoItemsList('ward', {districts: [featureId], simplifyFactor:0})
+      if (reportType === 'facility') {
         getGeoItemsList('facility', {districts: [featureId]})
       }
     } else {
       selectRegion(featureId)
       this.child.onCleanSelection() //clear keyword search box
-      getGeoItemsList('district', {regions: [featureId],simplifyFactor:0})
+      getGeoItemsList('district', {regions: [featureId], simplifyFactor:0})
     }
   }
 
@@ -194,18 +194,10 @@ class WardLayout extends React.Component {
 
     let mapPoints = null
 
-    if (reportType === 'ward') {
-      if (district.get('selected')) {
-        const facilitiesFeatures = []
-        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == ward.get('selected') ? '#2c772f' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
-        mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
-      }
-    } else {
-      if (ward.get('selected')) {
-        const facilitiesFeatures = []
-        facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.get('id') == facility.get('selected') ? '#980707' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
-        mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
-      }
+    if (reportType === 'facility' && district.get('selected')) {
+      const facilitiesFeatures = []
+      facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == ward.get('selected') ? '#2c772f' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
+      mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     }
     
     return (
