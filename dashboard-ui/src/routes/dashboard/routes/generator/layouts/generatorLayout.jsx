@@ -102,13 +102,15 @@ class WardLayout extends React.Component {
 
   onChangeWard(e) {
     const wardId = e.target.value === '-1' ? null : e.target.value
-    const { selectWard, getGeoItemsList, params: {reportType} } = this.props
+    const { selectWard, district, getGeoItemsList, params: {reportType} } = this.props
     selectWard(wardId)
-    /*if (wardId) {
-      if (reportType === 'facility') {
+    if (reportType === 'facility') {
+      if (wardId) {
         getGeoItemsList('facility', {wards: [wardId]})
+      } else {
+        getGeoItemsList('facility', {districts: [district.get('selected')]})
       }
-    }*/
+    }
   }
 
   onChangeFacility(e) {
