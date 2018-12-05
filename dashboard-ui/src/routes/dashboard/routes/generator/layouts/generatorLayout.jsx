@@ -63,6 +63,8 @@ class WardLayout extends React.Component {
   componentDidMount() {
     const { getGeoItemsList } = this.props
     getGeoItemsList('region', {})
+    this.onReset()
+    window.scrollTo(0, 0)
   }
 
   onKeywordSearchSelection(selection) {

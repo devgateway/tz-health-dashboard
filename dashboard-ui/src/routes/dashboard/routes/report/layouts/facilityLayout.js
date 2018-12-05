@@ -29,6 +29,7 @@ class WardLayout extends React.Component {
     onGetFacilityPopulation(id, period)
     onGetFacilityDiagnoses(id, period)
     onGetFacilityRMNCH(id,period)
+    window.scrollTo(0, 0)
   }
 
   componentDidUpdate(prevProps) {

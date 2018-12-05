@@ -237,7 +237,6 @@ export const generateFacilityPDF = (state, image) => {
     cursorY += 5
     const indicatorLabel = it.getIn(['diagnostic','name'])
     const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language)
-    debugger
     const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
     const total5to60 = it.getIn(['ranges', 'total5to60'])
     const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])

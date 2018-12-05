@@ -87,7 +87,6 @@ export const getMapShape = (wardData) => {
 };
 
 export const getMapPoints = (wardData) => {
-  debugger;
   let params = {districts: wardData.getIn(['district', 'gid'])}
   return (dispatch, getState) => {
     dispatch({type: WARD_MAP_REQUEST})
