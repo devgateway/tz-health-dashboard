@@ -94,9 +94,9 @@ class TopTenDeseases extends React.Component {
               return (<tr key={it.get("dhis2Id")}>
                 <td className="desease-name">{(translation&&translation.get('value'))?translation.get('value') :label}</td>
                 <td className="previous-value">{it.get("totalPrevPeriod")}</td>
-                <td className="current-value-partial">{expanded && <div>{totalUnder5 != -1 ? 'N/A' : totalUnder5}</div>}</td>
-                <td className="current-value-partial">{expanded && <div>{total5to60 != -1 ? 'N/A' : total5to60}</div>}</td>
-                <td className="current-value-partial">{expanded && <div>{totalAbove60 != -1 ? 'N/A' : totalAbove60}</div>}</td>
+                <td className="current-value-partial">{expanded && <div>{totalUnder5 == -1 ? 'N/A' : totalUnder5}</div>}</td>
+                <td className="current-value-partial">{expanded && <div>{total5to60 == -1 ? 'N/A' : total5to60}</div>}</td>
+                <td className="current-value-partial">{expanded && <div>{totalAbove60 == -1 ? 'N/A' : totalAbove60}</div>}</td>
                 <td className="current-value">{total}</td>
                 <td className="previous-value">{diffPercentage(it.get("totalPrevPeriod"),total)}</td>
               </tr>)
