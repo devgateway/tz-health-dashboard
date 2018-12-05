@@ -100,8 +100,16 @@ class D3Map extends React.Component {
       }).attr("width", 256).attr("height", 256);
 
       vector.selectAll("path").remove()
-      vector.selectAll("path").data(shapeFeatures.features).enter().append("path").attr("d", path).attr('fill', (d, idx) => color(idx)).attr('fill-opacity', shapeFillOpacity).attr('class', 'clickeable').attr('stroke', (d) => d.properties.strokeColor || shapeStrokeColor).attr('stroke-width', shapeStrokeWidth).on('click', (d) => {
-        tooltip.style("opacity", 0);
+      vector.selectAll("path").data(shapeFeatures.features).enter().append("path")
+      .attr("d", path)
+      .attr('fill', (d, idx) => color(idx))
+      .attr('fill-opacity', shapeFillOpacity)
+      .attr('class', 'clickeable')
+      .attr('stroke', (d) => d.properties.strokeColor || shapeStrokeColor)
+      .attr('stroke-width', shapeStrokeWidth)
+      .on('click', (d) => {
+        debugger
+        tooltip.style("opacity", 0)
         parent.props.onFeatureClick(d)
       }).on('mouseover', (d) => {
         tooltip.html('<div>' + d.properties['NAME'] + '</div>').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
@@ -113,7 +121,6 @@ class D3Map extends React.Component {
       });
 
       if (pointFeatures) {
-        debugger;
         pointFeatures.features.sort((a,b)=>{
         return a.properties.selected-b.properties.selected
 
@@ -126,6 +133,7 @@ class D3Map extends React.Component {
         .attr('stroke-width', pointStrokeWidth)
         .attr("class", (d) => d.properties.selected?"top":"regular")
         .on('click', (d) => {
+          debugger
           parent.props.onPointClick(d)
         }).on('mouseover', (d) => {
           console.log('mouseover')
