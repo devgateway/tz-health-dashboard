@@ -172,9 +172,9 @@ class WardLayout extends React.Component {
 
             </div>
           </div>
-          <div className="download csv right">
-            <a href={getWardFacilitiesDownloadURI('csv',info,lan)}>CSV</a>
-            <a href={getWardFacilitiesDownloadURI('json',info,lan)}>JSON</a>
+          <div className="download">
+            <a className="csv" href={getWardFacilitiesDownloadURI('csv',info,lan)} target="_blank"></a>
+            <a className="json" href={getWardFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
 
           <div className="top-ten-deseases">

@@ -114,9 +114,9 @@ class TopTenDeseases extends React.Component {
         </tbody>
       </table>
 
-      <div className="download csv">
-        <a href={getDownloadURI(type,'diagnoses','csv',id,period.toJS(),language)}>CSV</a>
-        <a href={getDownloadURI(type,'diagnoses','json',id,period.toJS(),language)}>JSON</a>
+      <div className="download">
+        <a className="csv" href={getDownloadURI(type,'diagnoses','csv',id,period.toJS(),language)} target="_blank"></a>
+        <a className="json" href={getDownloadURI(type,'diagnoses','json',id,period.toJS(),language)} target="_blank"></a>
       </div>
     </div>)
   }
