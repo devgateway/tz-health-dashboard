@@ -1,5 +1,5 @@
 package org.devgateway.rdi.tanzania;
-import java.nio.file.Paths;
+
 import com.opencsv.CSVReader;
 import org.devgateway.rdi.tanzania.domain.Translation;
 import org.devgateway.rdi.tanzania.repositories.TranslationRepository;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -21,21 +22,20 @@ import java.nio.file.Paths;
 @Component
 public class Runner implements ApplicationRunner {
 
-    private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
-    private final String CSV_FILE = "/data/translations.csv";
-
-
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Application.class.getName());
+
+    private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
+    private  final String CSV_FILE = "/data/translations.csv";
+    private  final String UPDATE_FACILITY = "/data/update_facilities.sh";
+
 
     @Override
     public void run(ApplicationArguments applicationArguments) {
         runInit();
     }
 
-
     @Value("${spring.jpa.hibernate.ddl-auto}")
     String dllAuto;
-
 
     /**
      * Use this function to initially populate the database.
@@ -49,9 +49,7 @@ public class Runner implements ApplicationRunner {
             logger.info("Adding some data into database");
 
 
-
-            String pdwPath =  Paths.get(".").toAbsolutePath().normalize().toString();;
-
+            String pdwPath = Paths.get(".").toAbsolutePath().normalize().toString();
 
             try {
                 Process p = Runtime.getRuntime().exec(pdwPath + BOUNDARIES_SH_FILE);
@@ -76,6 +74,7 @@ public class Runner implements ApplicationRunner {
 
             loadTranslations();
             metaDataImportService.importMedata();
+            updateWards();
         }
     }
 
@@ -83,7 +82,8 @@ public class Runner implements ApplicationRunner {
     TranslationRepository translationRepository;
 
     private void loadTranslations() {
-        String pdwPath = Paths.get(".").toAbsolutePath().normalize().toString();;
+        String pdwPath = Paths.get(".").toAbsolutePath().normalize().toString();
+        ;
 
         try (Reader reader = Files.newBufferedReader(Paths.get(pdwPath + CSV_FILE));
              CSVReader csvReader = new CSVReader(reader);) {
@@ -116,6 +116,31 @@ public class Runner implements ApplicationRunner {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void updateWards() {
+        Path pdwPath = Paths.get(".").toAbsolutePath();
+        try {
+            Process p = Runtime.getRuntime().exec(pdwPath + UPDATE_FACILITY);
+
+            InputStream is = p.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            String aux = br.readLine();
+
+            while (aux != null) {
+                // Se escribe la linea en pantalla
+                System.out.println(aux);
+
+                // y se lee la siguiente.
+                aux = br.readLine();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 }
