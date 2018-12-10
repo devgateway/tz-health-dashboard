@@ -79,18 +79,24 @@ class TopTenDeseases extends React.Component {
               const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
               const totalPrevPeriod = it.getIn(['totalPrevPeriod'])
               const total = it.get("total");
-              colsTotals['totalUnder5'] += totalUnder5
-              colsTotals['total5to60'] += total5to60
-              colsTotals['totalAbove60'] += totalAbove60
+              if (totalUnder5 != -1) {
+                colsTotals['totalUnder5'] += totalUnder5
+              }
+              if (total5to60 != -1) {
+                colsTotals['total5to60'] += total5to60
+              }
+              if (totalAbove60 != -1) {
+                colsTotals['totalAbove60'] += totalAbove60
+              }
               colsTotals['totalPrevPeriod'] += totalPrevPeriod
               colsTotals['total'] += total
 
               return (<tr key={it.get("dhis2Id")}>
                 <td className="desease-name">{(translation&&translation.get('value'))?translation.get('value') :label}</td>
                 <td className="previous-value">{it.get("totalPrevPeriod")}</td>
-                <td className="current-value-partial">{expanded && <div>{totalUnder5}</div>}</td>
-                <td className="current-value-partial">{expanded && <div>{total5to60}</div>}</td>
-                <td className="current-value-partial">{expanded && <div>{totalAbove60}</div>}</td>
+                <td className="current-value-partial">{expanded && <div>{totalUnder5 == -1 ? 'N/A' : totalUnder5}</div>}</td>
+                <td className="current-value-partial">{expanded && <div>{total5to60 == -1 ? 'N/A' : total5to60}</div>}</td>
+                <td className="current-value-partial">{expanded && <div>{totalAbove60 == -1 ? 'N/A' : totalAbove60}</div>}</td>
                 <td className="current-value">{total}</td>
                 <td className="previous-value">{diffPercentage(it.get("totalPrevPeriod"),total)}</td>
               </tr>)
@@ -108,9 +114,9 @@ class TopTenDeseases extends React.Component {
         </tbody>
       </table>
 
-      <div className="download csv">
-        <a href={getDownloadURI(type,'diagnoses','csv',id,period.toJS(),language)}>CSV</a>
-        <a href={getDownloadURI(type,'diagnoses','json',id,period.toJS(),language)}>JSON</a>
+      <div className="download">
+        <a className="csv" href={getDownloadURI(type,'diagnoses','csv',id,period.toJS(),language)} target="_blank"></a>
+        <a className="json" href={getDownloadURI(type,'diagnoses','json',id,period.toJS(),language)} target="_blank"></a>
       </div>
     </div>)
   }

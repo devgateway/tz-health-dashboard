@@ -61,8 +61,8 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
   doc.text(10, cursorY, i18n.t('Tanzania Health Data Report'))
-  const freq = period.get('q') ? i18n.t('Quarterly') : (period.get('m') ? i18n.t('Monthly') : i18n.t('Yearly'))
-  doc.text(150, cursorY, `${freq} ${i18n.t('Ward Report')}`)
+  const freq = `${period.get('q') ? i18n.t('Quarterly') : (period.get('m') ? i18n.t('Monthly') : i18n.t('Yearly'))} ${i18n.t('Facility Report')}`
+  doc.text(170 - freq.length, cursorY, freq)
   doc.setLineWidth(0.5)
   doc.setDrawColor(200, 200, 200)
   doc.line(10, cursorY+1, 200, cursorY+1)
@@ -226,30 +226,31 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(7)
   doc.text(165, cursorY-9, `+${i18n.t('Increasing')} -${i18n.t('Decreasing')}`)
   
+  doc.setFontSize(13)
   doc.setFillColor(244, 242, 236)
   doc.rect(98, cursorY-7, 63, 20 + (diagnoses.get('data').size * 5), 'F')
   
   doc.setTextColor(19, 88, 151)
   doc.text(20, cursorY, i18n.t('Top Ten Diagnoses'))
   cursorY -= 2
-  doc.setFontSize(12)
+  doc.setFontSize(11)
   doc.setTextColor(109, 114, 128)
-  doc.text(85 - prevLabel.toString().length, cursorY, `${prevLabel}`)
+  doc.text(82 - prevLabel.toString().length, cursorY, `${prevLabel}`)
   doc.text(170, cursorY, `% ${i18n.t('Change')}`)
   doc.setTextColor(156, 133, 104)
-  doc.text(130 - currentLabel.toString().length, cursorY, `${currentLabel}`)
+  doc.text(127 - currentLabel.toString().length, cursorY, `${currentLabel}`)
   cursorY += 4
   doc.setFontSize(9)
   doc.setFontType('normal')
   doc.setTextColor(109, 114, 128)
-  doc.text(78, cursorY, i18n.t('Count'))
+  doc.text(80, cursorY, i18n.t('Count'))
   doc.setTextColor(180, 181, 168)
   doc.text(100, cursorY, `${i18n.t('Age')}< 5`)
   doc.text(115, cursorY, `${i18n.t('Age')}5-60`)
   doc.text(130, cursorY, `${i18n.t('Age')}>60`)
   doc.setTextColor(109, 114, 128)
-  doc.text(143, cursorY, i18n.t('Count'))
-  doc.text(172, cursorY, `${i18n.t('since')} ${prevLabel}`)
+  doc.text(145, cursorY, i18n.t('Count'))
+  doc.text(167, cursorY, `${i18n.t('since')} ${prevLabel}`)
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)
@@ -257,7 +258,7 @@ export const generateWardPDF = (state, image) => {
   deseases.forEach((it) => {
     cursorY += 5
     const indicatorLabel = it.getIn(['diagnostic','name'])
-    const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language);
+    const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language)
     const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
     const total5to60 = it.getIn(['ranges', 'total5to60'])
     const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
@@ -312,7 +313,7 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
   doc.text(10, cursorY, i18n.t('Tanzania Health Data Report'))
-  doc.text(150, cursorY, `${freq} ${i18n.t('Ward Report')}`)
+  doc.text(170 - freq.length, cursorY, freq)
   doc.setLineWidth(0.5)
   doc.setDrawColor(200, 200, 200)
   doc.line(10, cursorY+1, 200, cursorY+1)
@@ -340,6 +341,7 @@ export const generateWardPDF = (state, image) => {
   doc.setFontSize(7)
   doc.text(170, cursorY-9, `+${i18n.t('Increasing')} -${i18n.t('Decreasing')}`)
   
+  doc.setFontSize(13)
   doc.setFillColor(244, 242, 236)
   doc.rect(138, cursorY-7, 30, 20 + (RMNCH.get('data').size * 5), 'F')
   doc.setTextColor(19, 88, 151)
@@ -357,7 +359,7 @@ export const generateWardPDF = (state, image) => {
   doc.setTextColor(109, 114, 128)
   doc.text(118, cursorY, i18n.t('Count'))
   doc.text(148, cursorY, i18n.t('Count'))
-  doc.text(173, cursorY, `${i18n.t('since')} ${prevLabel}`)
+  doc.text(168, cursorY, `${i18n.t('since')} ${prevLabel}`)
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)

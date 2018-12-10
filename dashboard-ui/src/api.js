@@ -280,7 +280,7 @@ export const diffPercentage = (prev, val) => {
 const sumValues = (dataset) => {
   let total = 0
   dataset.forEach(i => total += i.value)
-  return total
+  return dataset.length == 0 ? -1 : total
 }
 
 export const getAggregatedPopulation = (data) => {

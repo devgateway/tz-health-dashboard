@@ -27,7 +27,7 @@ class Legends extends React.Component {
         </div>
         {legendVisible ? 
           this.props.children
-        : null}
+        : <div></div>}
       </div>
     )
   }
