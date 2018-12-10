@@ -144,7 +144,7 @@ class WardLayout extends React.Component {
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
-                <D3Map selected={id} width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor={shapeStrokeColor}
+                <D3Map selected={id} width="580" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor={shapeStrokeColor}
                    shapeFeatures={shapeFeatures} pointFeatures={pointFeatures} showBasemap={true} zoomeable={true} onPointClick={d=>this.onPointClick(d)}></D3Map>
               : null}
               <Legends>
