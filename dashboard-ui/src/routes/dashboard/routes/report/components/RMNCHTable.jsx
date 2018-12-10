@@ -81,8 +81,8 @@ class RMNCHTable extends React.Component {
             </tbody>
           </table>
           <div className="download ">
-            <a href={getDownloadURI(type,'rmnch','csv',id,period.toJS(),language)}>CSV</a>
-            <a href={getDownloadURI(type,'rmnch','json',id,period.toJS(),language)}>JSON</a>
+            <a className="csv" href={getDownloadURI(type,'rmnch','csv',id,period.toJS(),language)} target="_blank"></a>
+            <a className="json" href={getDownloadURI(type,'rmnch','json',id,period.toJS(),language)} target="_blank"></a>
           </div>
         </div>
       )

@@ -13,6 +13,10 @@ class LandingLayout extends React.Component {
     this.state = {}
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
   render() {
 
     const lan= this.props.i18n.language

@@ -48,8 +48,8 @@ export const generateFacilityPDF = (state, image) => {
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
   doc.text(10, cursorY, i18n.t('Tanzania Health Data Report'))
-  const freq = period.get('q') ? i18n.t('Quarterly') : (period.get('m') ? i18n.t('Monthly') : i18n.t('Yearly'))
-  doc.text(150, cursorY, `${freq} ${i18n.t('Facility Report')}`)
+  const freq = `${period.get('q') ? i18n.t('Quarterly') : (period.get('m') ? i18n.t('Monthly') : i18n.t('Yearly'))} ${i18n.t('Facility Report')}`
+  doc.text(170 - freq.length, cursorY, freq)
   doc.setLineWidth(0.5)
   doc.setDrawColor(200, 200, 200)
   doc.line(10, cursorY+1, 200, cursorY+1)
@@ -211,12 +211,12 @@ export const generateFacilityPDF = (state, image) => {
   doc.setTextColor(19, 88, 151)
   doc.text(20, cursorY, i18n.t('Top Ten Diagnoses'))
   cursorY -= 2
-  doc.setFontSize(12)
+  doc.setFontSize(11)
   doc.setTextColor(109, 114, 128)
-  doc.text(85 - prevLabel.toString().length, cursorY, `${prevLabel}`)
+  doc.text(82 - prevLabel.toString().length, cursorY, `${prevLabel}`)
   doc.text(170, cursorY, `% ${i18n.t('Change')}`)
   doc.setTextColor(156, 133, 104)
-  doc.text(130 - currentLabel.toString().length, cursorY, `${currentLabel}`)
+  doc.text(127 - currentLabel.toString().length, cursorY, `${currentLabel}`)
   cursorY += 4
   doc.setFontSize(9)
   doc.setFontType('normal')
@@ -228,7 +228,7 @@ export const generateFacilityPDF = (state, image) => {
   doc.text(130, cursorY, `${i18n.t('Age')}>60`)
   doc.setTextColor(109, 114, 128)
   doc.text(145, cursorY, i18n.t('Count'))
-  doc.text(172, cursorY, `${i18n.t('since')} ${prevLabel}`)
+  doc.text(167, cursorY, `${i18n.t('since')} ${prevLabel}`)
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)
@@ -237,7 +237,6 @@ export const generateFacilityPDF = (state, image) => {
     cursorY += 5
     const indicatorLabel = it.getIn(['diagnostic','name'])
     const translation=it.getIn(['diagnostic','translations']).find(e=>e.get('locale')==language)
-    debugger
     const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
     const total5to60 = it.getIn(['ranges', 'total5to60'])
     const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
@@ -292,7 +291,7 @@ export const generateFacilityPDF = (state, image) => {
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
   doc.text(10, cursorY, i18n.t('Tanzania Health Data Report'))
-  doc.text(150, cursorY, `${freq} ${i18n.t('Facility Report')}`)
+  doc.text(170 - freq.length, cursorY, freq)
   doc.setLineWidth(0.5)
   doc.setDrawColor(200, 200, 200)
   doc.line(10, cursorY+1, 200, cursorY+1)
@@ -326,7 +325,7 @@ export const generateFacilityPDF = (state, image) => {
   doc.setTextColor(19, 88, 151)
   doc.text(40, cursorY, i18n.t('RMNCH Services'))
   cursorY -= 2
-  doc.setFontSize(12)
+  doc.setFontSize(11)
   doc.setTextColor(109, 114, 128)
   doc.text(122 - prevLabel.toString().length, cursorY, `${prevLabel}`)
   doc.text(172, cursorY, `% ${i18n.t('Change')}`)
@@ -338,7 +337,7 @@ export const generateFacilityPDF = (state, image) => {
   doc.setTextColor(109, 114, 128)
   doc.text(118, cursorY, i18n.t('Count'))
   doc.text(148, cursorY, i18n.t('Count'))
-  doc.text(173, cursorY, `${i18n.t('since')} ${prevLabel}`)
+  doc.text(168, cursorY, `${i18n.t('since')} ${prevLabel}`)
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)
@@ -363,7 +362,7 @@ export const generateFacilityPDF = (state, image) => {
     const currentValue = it.get('value') || 'N/A'
     doc.text(152 - currentValue.toString().length, cursorY, `${currentValue}`)
     const diffValue = diffPercentage(it.get("totalPrevPeriod"), currentValue)
-    doc.text(180 - diffValue.toString().length, cursorY, `${diffValue}`)
+    doc.text(183 - diffValue.toString().length, cursorY, `${diffValue}`)
   })
   cursorY += 2
   doc.line(10, cursorY, 200, cursorY)
@@ -375,7 +374,7 @@ export const generateFacilityPDF = (state, image) => {
   const totalValueLabel = totalCurrent || 'N/A'
   doc.text(152 - totalValueLabel.toString().length, cursorY, `${totalValueLabel}`)
   diffTotalValue = diffPercentage(totalPrevious, totalCurrent)
-  doc.text(180 - diffTotalValue.toString().length, cursorY, `${diffTotalValue}`)
+  doc.text(183 - diffTotalValue.toString().length, cursorY, `${diffTotalValue}`)
   cursorY += 2
   doc.setLineWidth(0.5)
   doc.line(10, cursorY, 200, cursorY)

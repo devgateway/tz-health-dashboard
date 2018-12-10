@@ -12,9 +12,8 @@ class IndexRoute extends Component {
   }
 
   render() {
-    debugger;
     const {store} = this.props
-    const i18n=this.context.i18n;
+    const i18n = this.context.i18n;
     let updateLanUrl=false;
     let selected;
 
@@ -31,19 +30,20 @@ class IndexRoute extends Component {
       selected=userLanguage;
     }
 
-    return (<div>
-      <Switch>
-        <Redirect exact={true} from="/" to={selected}></Redirect>
-        {updateLanUrl?<Redirect exact={true} from="/:lan" to={selected}></Redirect>:null}
-
-      </Switch>
-      <Route path="/" render={() => <DashboardRoute store={store}/>}/>
-    </div>)
+    return (
+      <div>
+        <Switch>
+          <Redirect exact={true} from="/" to={selected}></Redirect>
+          {updateLanUrl ? <Redirect exact={true} from="/:lan" to={selected}></Redirect> : null}
+        </Switch>
+        <Route path="/" render={() => <DashboardRoute store={store}/>}/>
+      </div>
+    )
   }
 }
 
 const createRoute = (props) => {
-    return (<IndexRoute></IndexRoute>)
+  return (<IndexRoute></IndexRoute>)
 }
 
 export default createRoute
