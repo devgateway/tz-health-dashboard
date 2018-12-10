@@ -14,8 +14,6 @@ export const print = (reportType, state) => {
         if (reportType === 'ward') {
           generateWardPDF(state, image)
         } else {
-          const link = document.createElement('a')
-    
           generateFacilityPDF(state, image)
         }
       })

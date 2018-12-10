@@ -143,7 +143,18 @@ i18n.use(LanguageDetector).init({
         "will not engage until you have selected a valid facility, time period, and date. First, select a facility, either through the search or filter boxes in Step One, then select a time period in Step Two.": "will not engage until you have selected a valid facility, time period, and date. First, select a facility, either through the search or filter boxes in Step One, then select a time period in Step Two.",
         "Copy link to share": "Copy link to share",
         "Print as PDF": "Print as PDF",
-        
+        "Jan": "Jan",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Apr",
+        "May": "May",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Aug",
+        "Sep": "Sep",
+        "Oct": "Oct",
+        "Nov": "Nov",
+        "Dec": "Dec",
       } 
     },
     sw: {
@@ -287,7 +298,18 @@ i18n.use(LanguageDetector).init({
         "will not engage until you have selected a valid facility, time period, and date. First, select a facility, either through the search or filter boxes in Step One, then select a time period in Step Two.": "hutajihusisha mpaka kuchaguliwa kata halali, kipindi cha muda, na tarehe. Kwanza, chagua Kituo, ama kwa njia ya utafutaji au kutumia masanduku ya kuchagua kituo katika Hatua ya Kwanza, kisha kuchagua kipindi cha muda katika hatua ya pili.",
         "Copy link to share": "Copy link to share",
         "Print as PDF": "Print as PDF",
-
+        "Jan": "Jan",
+        "Feb": "Feb",
+        "Mar": "Mar",
+        "Apr": "Apr",
+        "May": "Mei",
+        "Jun": "Jun",
+        "Jul": "Jul",
+        "Aug": "Ago",
+        "Sep": "Sep",
+        "Oct": "Okt",
+        "Nov": "Nov",
+        "Dec": "Des",
       }
     }
   },
