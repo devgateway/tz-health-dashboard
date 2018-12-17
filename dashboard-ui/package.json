@@ -10,6 +10,7 @@
     "d3-tile": "0.0.1",
     "dom-to-image": "^2.6.0",
     "dom-to-image-chrome-fix": "^2.6.0",
+    "highcharts": "^7.0.0",
     "history": "^4.7.2",
     "i18next": "^11.6.0",
     "i18next-browser-languagedetector": "^2.2.3",
