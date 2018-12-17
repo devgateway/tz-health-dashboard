@@ -56,7 +56,7 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {conf,params: {id}, mapShape, mapPoints, info, population, period} = this.props
+    const {conf,params: {id}, mapShape, mapPoints, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView} = this.props
     const lan = this.props.i18n.language
     const {legendVisible} = this.state
     const facilitiesFeatures = []
@@ -177,12 +177,21 @@ class WardLayout extends React.Component {
             <a className="json" href={getWardFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
 
-          <div className="top-ten-deseases">
-            <TopTenDeseases  type="wards"  id={id} period={period}  facilityName={wardName} diagnoses={this.props.diagnoses}/>
-          </div>
-          <div className="RMNCH-box">
-            <RMNCHTable type="wards" id={id}  period={period}  facilityName={wardName} RMNCH={this.props.RMNCH}/>
-          </div>
+          <TopTenDeseases 
+            type="wards" 
+            period={period} id={id}  
+            facilityName={wardName}
+            onSetOPDView={onSetOPDView} 
+            OPDView={OPDView}
+            diagnoses={this.props.diagnoses}/>
+
+          <RMNCHTable 
+            type="facilities"  
+            period={period} id={id} 
+            facilityName={wardName} 
+            onSetRMNCHView={onSetRMNCHView} 
+            RMNCHView={RMNCHView}
+            RMNCH={this.props.RMNCH}/>
 
         </div>
 
