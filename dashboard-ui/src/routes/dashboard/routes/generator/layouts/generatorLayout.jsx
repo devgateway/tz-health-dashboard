@@ -15,15 +15,6 @@ class WardLayout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      years: [
-        {
-          gid: 'y-2016',
-          label: '2016'
-        }, {
-          gid: 'y-2017',
-          label: '2017'
-        }
-      ],
       quarters: [
         {gid: 'q-1', label: `${i18n.t('January')}-${i18n.t('March')}`},
         {gid: 'q-2', label: `${i18n.t('April')}-${i18n.t('June')}`},
@@ -51,6 +42,7 @@ class WardLayout extends React.Component {
     }
   }
 
+
   onChangeType(e) {
     this.setState({periodType: e.target.value})
     this.setState({period: null})
@@ -61,7 +53,7 @@ class WardLayout extends React.Component {
   }
 
   componentDidMount() {
-    const { getGeoItemsList } = this.props
+    const { getGeoItemsList ,conf} = this.props
     getGeoItemsList('region', {})
     this.onReset()
     window.scrollTo(0, 0)
@@ -75,7 +67,7 @@ class WardLayout extends React.Component {
       selectFacility(selection.id)
     } else {
       selectWard(selection.gid)
-    }    
+    }
   }
 
   onChangeRegion(e) {
@@ -166,8 +158,16 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const { region, district, ward, facility, params: {reportType} } = this.props
-    const {years, months, quarters, periodType, period} = this.state
+    const {conf, region, district, ward, facility, params: {reportType} } = this.props
+    const { months, quarters, periodType, period} = this.state
+    debugger;
+    let years;
+    if (conf){
+       years=  conf.getIn(["years"]).map(y=>{return {gid: `y-${y}`,label: y}})
+    }else{
+      years=[]
+    }
+
     let mapShapes = region.get('list').toJS()
     let options = years
     if (periodType === 'quarterly') {
@@ -203,7 +203,7 @@ class WardLayout extends React.Component {
       facility.get('list').map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'), fillColor: f.getIn(['ward', 'gid']) == ward.get('selected') ? '#2c772f' : null, strokeColor: '#57595d'}, geometry: f.get('point').toJS()}))
       mapPoints = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     }
-    
+
     return (
   	  <div className="report-generator-container">
   	    <div className="">
@@ -271,7 +271,7 @@ class WardLayout extends React.Component {
                       </select>
                     </div>
                   </div>
-                : null}        
+                : null}
               </div>
               <div className="generator-map">
                 {mapShapes.features.length > 0 ?
@@ -312,7 +312,7 @@ class WardLayout extends React.Component {
                 </div>
               </div>
               <div className="period-paragraph">
-                <Trans>Click on the</Trans> <div className="generate"><Trans>Generate Report</Trans></div> <Trans>button to create your custom data report, or click on the</Trans> <div className="reset"><Trans>Reset</Trans></div> <Trans>button to clear all search and filter selections</Trans>                 
+                <Trans>Click on the</Trans> <div className="generate"><Trans>Generate Report</Trans></div> <Trans>button to create your custom data report, or click on the</Trans> <div className="reset"><Trans>Reset</Trans></div> <Trans>button to clear all search and filter selections</Trans>
               </div>
               <div className="action-buttons">
                 <div className="reset-button" onClick={e => this.onReset()}></div>
@@ -321,7 +321,7 @@ class WardLayout extends React.Component {
                 :
                   <div className="generate-button-disabled"><Trans>Generate Report</Trans></div>
                 }
-              </div>    
+              </div>
             </div>
           </div>
           <div className="info-box">
