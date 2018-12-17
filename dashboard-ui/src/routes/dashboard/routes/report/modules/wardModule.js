@@ -18,7 +18,8 @@ const WARD_MAP_SHAPE_RESPONSE = 'WARD_MAP_SHAPE_RESPONSE'
 const WARD_MAP_POINTS_RESPONSE = 'WARD_MAP_POINTS_RESPONSE'
 const WARD_MAP_ERROR = 'WARD_MAP_ERROR'
 
-
+const SET_RMNCH_VIEW = 'SET_RMNCH_VIEW'
+const SET_OPD_VIEW = 'SET_OPD_VIEW'
 const WARD_RMNCH_REQUEST = 'WARD_RMNCH_REQUEST'
 const WARD_RMNCH_RESPONSE = 'WARD_RMNCH_RESPONSE'
 const WARD_RMNCH_ERROR = 'WARD_RMNCH_ERROR'
@@ -98,6 +99,17 @@ export const getMapPoints = (wardData) => {
   }
 };
 
+export const setOPDView = (view) => {
+  return (dispatch, getState) => {
+    dispatch({type: SET_OPD_VIEW, view})
+  }
+}
+
+export const setRMNCHView = (view) => {
+  return (dispatch, getState) => {
+    dispatch({type: SET_RMNCH_VIEW, view})
+  }
+}
 
 // ------------------------------------ Action Handlers ------------------------------------
 const ACTION_HANDLERS = {
@@ -165,6 +177,14 @@ const ACTION_HANDLERS = {
   [WARD_MAP_ERROR]: (state, action) => {
     const {error} = action;
     return state.setIn(['reportData', 'map', 'error'], error).setIn(['reportData', 'map', 'loading'], false)
+  },
+  [SET_OPD_VIEW]: (state, action) => {
+    const {view} = action
+    return state.setIn(['OPDView'], view)
+  },
+  [SET_RMNCH_VIEW]: (state, action) => {
+    const {view} = action
+    return state.setIn(['RMNCHView'], view)
   }
 };
 
@@ -195,7 +215,9 @@ const initialState = Immutable.fromJS({
       'shape': {},
       'points': [],
     }
-  }
+  },
+  'OPDView': 'table',
+  'RMNCHView': 'table',
 });
 
 // reducer is returned as default

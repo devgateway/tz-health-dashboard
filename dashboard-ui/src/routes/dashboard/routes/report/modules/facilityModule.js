@@ -19,7 +19,8 @@ const FACILITY_MAP_REGION_RESPONSE = 'FACILITY_MAP_REGION_RESPONSE'
 const FACILITY_MAP_POINTS_RESPONSE = 'FACILITY_MAP_POINTS_RESPONSE'
 const FACILITY_MAP_ERROR = 'FACILITY_MAP_ERROR'
 
-
+const SET_RMNCH_VIEW = 'SET_RMNCH_VIEW'
+const SET_OPD_VIEW = 'SET_OPD_VIEW'
 const FACILITY_RMNCH_REQUEST = 'FACILITY_RMNCH_REQUEST'
 const FACILITY_RMNCH_RESPONSE = 'FACILITY_RMNCH_RESPONSE'
 const FACILITY_RMNCH_ERROR = 'FACILITY_RMNCH_ERROR'
@@ -117,6 +118,17 @@ export const getMapPoints = (facilityData) => {
   }
 };
 
+export const setOPDView = (view) => {
+  return (dispatch, getState) => {
+    dispatch({type: SET_OPD_VIEW, view})
+  }
+}
+
+export const setRMNCHView = (view) => {
+  return (dispatch, getState) => {
+    dispatch({type: SET_RMNCH_VIEW, view})
+  }
+}
 
 // ------------------------------------ Action Handlers ------------------------------------
 const ACTION_HANDLERS = {
@@ -186,6 +198,14 @@ const ACTION_HANDLERS = {
   [FACILITY_MAP_ERROR]: (state, action) => {
     const {error} = action;
     return state.setIn(['reportData', 'map', 'error'], error).setIn(['reportData', 'map', 'loading'], false)
+  },
+  [SET_OPD_VIEW]: (state, action) => {
+    const {view} = action
+    return state.setIn(['OPDView'], view)
+  },
+  [SET_RMNCH_VIEW]: (state, action) => {
+    const {view} = action
+    return state.setIn(['RMNCHView'], view)
   }
 };
 
@@ -223,7 +243,10 @@ const initialState = Immutable.fromJS({
       'points': [],
       'region': {},
     }
-  }
+  },
+  'OPDView': 'table',
+  'RMNCHView': 'table',
+
 });
 
 // reducer is returned as default
