@@ -8,6 +8,8 @@ const API_WARD_REPORT_INFO = `${API_ROOT_URL}/wards`
 const API_FACILITY_REPORT_INFO = `${API_ROOT_URL}/facilities`
 const API_FACILITIES = `${API_ROOT_URL}/facilities`
 
+const API_CONFIG = `${API_ROOT_URL}/conf`
+
 
 export const findRegions = (params) => {
 
@@ -97,6 +99,28 @@ export const findWards = (params) => {
 
 export const findFacilities = (params) => {
   const url = API_FACILITIES + '?' + prepareQuery(Object.assign({}, params))
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(
+        function(response) {
+          if (response.status !== 200) {
+            reject(response)
+          }
+          // Examine the text in the response
+          response.json().then(function(data) {
+            resolve(data);
+          });
+        }
+      )
+      .catch(function(err) {
+        reject('Fetch Error :-S', err);
+      });
+  })
+}
+
+export const getConfiguration=()=>{
+  const url = API_CONFIG
+
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(

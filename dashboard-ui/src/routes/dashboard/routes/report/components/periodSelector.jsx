@@ -11,15 +11,7 @@ class PeriodSelector extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      years: [
-        {
-          gid: 'y-2016',
-          label: '2016'
-        }, {
-          gid: 'y-2017',
-          label: '2017'
-        }
-      ],
+
       quarters: [
         {gid: 'q-1', label: `${i18n.t('January')}-${i18n.t('March')}`},
         {gid: 'q-2', label: `${i18n.t('April')}-${i18n.t('June')}`},
@@ -79,10 +71,16 @@ componentDidMount() {
   render() {
 
 
-    const {years, months, quarters, periodType} = this.state
-    const {period ,t,i18n} = this.props
+    const { months, quarters, periodType} = this.state
+    const {conf, period ,t,i18n} = this.props
 
     const strPeriod = composePeriod(period.toJS())
+    let years;
+    if (conf){
+       years=  conf.getIn(["years"]).map(y=>{return {gid: `y-${y}`,label: y}})
+    }else{
+      years=[]
+    }
 
     let options = years
     if (periodType === 'quarterly') {

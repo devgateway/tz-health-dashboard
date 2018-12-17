@@ -21,7 +21,8 @@ const mapStateToProps = state => {
     population: state.getIn(['facility', 'reportData', 'population']),
     diagnoses: state.getIn(['facility', 'reportData', 'diagnoses']),
     RMNCH: state.getIn(['facility', 'reportData', 'RMNCH']),
-    period: state.getIn(['dashboard', 'period'])
+    period: state.getIn(['dashboard', 'period']),
+    conf:state.getIn(['dashboard','conf'])
   }
 }
 
