@@ -14,6 +14,8 @@ export const CATEGORY_FACILITY = "facility"
 export const FEATURE_SELECTED = 'FEATURE_SELECTED'
 export const FIND_FACILITIES_DONE = 'FIND_FACILITIES_DONE'
 
+export const GET_CONF_DONE = 'GET_CONF_DONE'
+
 export const wardSelected = (feature) => {
   const { properties: { ID: id } } = feature
   return (dispatch, getState) => {
@@ -54,6 +56,15 @@ export const findFacilities = (params) => {
   }
 }
 
+
+export const getConfiguration=()=>{
+  return (dispatch, getState) => {
+    api.getConfiguration().then(data => {
+      data.years.sort((d,d1)=>d1-d);
+      dispatch({ 'type': 'GET_CONF_DONE', data:Immutable.fromJS(data)})
+    })
+  }
+}
 // ------------------------------------ Action Handlers ------------------------------------
 const ACTION_HANDLERS = {
   ['FIND_BOUNDARY_DONE']: (state, action) => {
@@ -70,12 +81,18 @@ const ACTION_HANDLERS = {
   },
   ['FIND_FACILITIES_DONE']: (state, action) => {
     const { data, category } = action
+
     return state.setIn([category, 'list'], data)
+  },
+  ['GET_CONF_DONE']: (state, action) => {
+    const {data} = action
+
+    return state.setIn(['conf'], data)
   },
   ['@@router/LOCATION_CHANGE']: (state, action) => {
     const { payload: { pathname } } = action;
     const lan = pathname.substring(1, 3);
-    
+
     state = state.setIn(['lan'], lan)
     const pattern = pathname.substring(pathname.lastIndexOf('/') + 1);
 

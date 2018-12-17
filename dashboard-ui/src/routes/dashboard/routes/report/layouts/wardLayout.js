@@ -56,7 +56,7 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {params: {id}, mapShape, mapPoints, info, population, period} = this.props
+    const {conf,params: {id}, mapShape, mapPoints, info, population, period} = this.props
     const lan = this.props.i18n.language
     const {legendVisible} = this.state
     const facilitiesFeatures = []
@@ -105,7 +105,7 @@ class WardLayout extends React.Component {
           <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
           <CopyShare/>
-          <PeriodSelector period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
+          <PeriodSelector conf={conf} period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
           <div className="location-box">
