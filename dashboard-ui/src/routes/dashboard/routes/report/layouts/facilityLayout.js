@@ -10,7 +10,7 @@ import {translate, Trans} from "react-i18next"
 import {withRouter} from 'react-router-dom';
 import CopyShare from '../components/copyShareLink'
 import i18n from '../../../../../i18n'
-import {composePeriod, getFacilitiesDownloadURI, getDownloadURI} from '../../../../../api'
+import {composePeriod,getFacilitiesDownloadURI} from '../../../../../api'
 
 class WardLayout extends React.Component {
 
@@ -47,7 +47,7 @@ class WardLayout extends React.Component {
       const strPeriod=composePeriod(period.toJS())
       this.props.history.push(`/${lan}/report/facility/${f.properties.ID}/`)
     }
-  }
+}
 
   onChangePeriod(period){
     const {params: {id}} = this.props
@@ -60,7 +60,7 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {params: {id}, mapShape, mapPoints, mapRegion, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView} = this.props
+    const {conf,params: {id}, mapShape, mapPoints, mapRegion, info, population, period} = this.props
     const lan = this.props.i18n.language
     const facilitiesFeatures = []
     if (mapPoints) {
@@ -104,13 +104,15 @@ class WardLayout extends React.Component {
       }
     }
 
+
+
     return (
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
           <CopyShare/>
-          <PeriodSelector period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
+          <PeriodSelector conf={conf} period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
           <div className="location-box">
@@ -184,21 +186,14 @@ class WardLayout extends React.Component {
             <a className="json" href={getFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
 
-          <TopTenDeseases 
-            type="facilities" 
-            period={period} id={id}  
-            facilityName={facilityName}
-            onSetOPDView={onSetOPDView} 
-            OPDView={OPDView}
-            diagnoses={this.props.diagnoses}/>
 
-          <RMNCHTable 
-            type="facilities"  
-            period={period} id={id} 
-            facilityName={facilityName} 
-            onSetRMNCHView={onSetRMNCHView} 
-            RMNCHView={RMNCHView}
-            RMNCH={this.props.RMNCH}/>          
+          <div className="top-ten-deseases">
+            <TopTenDeseases  type="facilities"  period={period} id={id}  facilityName={facilityName} diagnoses={this.props.diagnoses}/>
+          </div>
+
+          <div className="RMNCH-box">
+            <RMNCHTable type="facilities"   period={period} id={id} facilityName={facilityName} RMNCH={this.props.RMNCH}/>
+          </div>
 
         </div>
       </div>

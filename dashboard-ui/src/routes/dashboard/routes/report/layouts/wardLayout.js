@@ -56,7 +56,7 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {params: {id}, mapShape, mapPoints, info, population, period, onSetOPDView, OPDView, onSetRMNCHView, RMNCHView} = this.props
+    const {conf,params: {id}, mapShape, mapPoints, info, population, period} = this.props
     const lan = this.props.i18n.language
     const {legendVisible} = this.state
     const facilitiesFeatures = []
@@ -105,7 +105,7 @@ class WardLayout extends React.Component {
           <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
           <CopyShare/>
-          <PeriodSelector period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
+          <PeriodSelector conf={conf} period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
           <div className="location-box">
@@ -177,21 +177,12 @@ class WardLayout extends React.Component {
             <a className="json" href={getWardFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
 
-          <TopTenDeseases 
-            type="wards" 
-            period={period} id={id}  
-            facilityName={wardName}
-            onSetOPDView={onSetOPDView} 
-            OPDView={OPDView}
-            diagnoses={this.props.diagnoses}/>
-
-          <RMNCHTable 
-            type="facilities"  
-            period={period} id={id} 
-            facilityName={wardName} 
-            onSetRMNCHView={onSetRMNCHView} 
-            RMNCHView={RMNCHView}
-            RMNCH={this.props.RMNCH}/>
+          <div className="top-ten-deseases">
+            <TopTenDeseases  type="wards"  id={id} period={period}  facilityName={wardName} diagnoses={this.props.diagnoses}/>
+          </div>
+          <div className="RMNCH-box">
+            <RMNCHTable type="wards" id={id}  period={period}  facilityName={wardName} RMNCH={this.props.RMNCH}/>
+          </div>
 
         </div>
 
