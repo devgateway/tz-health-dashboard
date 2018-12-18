@@ -69,7 +69,7 @@ class TopTenDeseases extends React.Component {
         {OPDView === 'barChart' && <OPDBarchart period={period} id={id} facilityName={facilityName} diagnoses={this.props.diagnoses}/>}
         {OPDView === 'table' && 
           <div className="top-ten-diagnosis-table">
-            <div className="value-legend"><b>%<Trans>Change</Trans><Trans>Legend</Trans></b> +<Trans>Increasing</Trans>/ -<Trans>Decreasing</Trans></div>
+            <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans>/ -<Trans>Decreasing</Trans></div>
             <table className="">
               <tbody>
                 <tr>
