@@ -81,7 +81,6 @@ public class FacilityController {
                                                             @RequestParam(name = "y", defaultValue = "2017", required = false) Integer year,
                                                             @RequestParam(name = "q", required = false) Integer quarter,
                                                             @RequestParam(name = "m", required = false) Integer month) {
-
         Facility f = facilityService.getFacility(id);
         if (f == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
