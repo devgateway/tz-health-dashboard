@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { getWardInfo, getWardPopulation, getWardDiagnoses, getMapShape, getMapPoints ,getWardRMNCH} from '../modules/wardModule'
+import { getWardInfo, getWardPopulation, getWardDiagnoses, getMapShape, getMapPoints, getWardRMNCH, setOPDView, setRMNCHView} from '../modules/wardModule'
 import Layout from '../layouts/wardLayout'
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -10,6 +10,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   onGetWardRMNCH:getWardRMNCH,
   onGetMapPoints: getMapPoints,
   onGetMapShape: getMapShape,
+  onSetOPDView: setOPDView,
+  onSetRMNCHView: setRMNCHView
 }, dispatch)
 
 const mapStateToProps = state => {
@@ -22,7 +24,9 @@ const mapStateToProps = state => {
     diagnoses: state.getIn(['ward', 'reportData', 'diagnoses']),
     RMNCH: state.getIn(['ward', 'reportData', 'RMNCH']),
     period: state.getIn(['dashboard', 'period']),
-    conf:state.getIn(['dashboard','conf'])
+    conf:state.getIn(['dashboard','conf']),
+    OPDView: state.getIn(['ward', 'OPDView']),
+    RMNCHView: state.getIn(['ward', 'RMNCHView']),
   }
 }
 
