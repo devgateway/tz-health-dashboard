@@ -19,7 +19,10 @@ export default class ColumnChart extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {title, categories, series} = nextProps
-    if (series != null && this.props.series !== series) {
+    const newData = series.map(d => d.data)
+    const oldData = this.props.series.map(d => d.data)
+    if (newData != null && JSON.stringify(newData) !== JSON.stringify(oldData)) {
+    	debugger
       this.getChart(title, categories, series)
     }
   }

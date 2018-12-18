@@ -60,7 +60,7 @@ class RMNCHTable extends React.Component {
         {RMNCHView === 'barChart' && <RMNCHBarchart period={period} id={id} facilityName={facilityName} RMNCH={this.props.RMNCH}/>}
         {RMNCHView === 'table' && 
           <div className="RMNCH-table">
-            <div className="value-legend"><b>%<Trans>Change</Trans><Trans>Legend</Trans></b> +<Trans>Increasing</Trans>/ -<Trans>Decreasing</Trans></div>
+            <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans>/ -<Trans>Decreasing</Trans></div>
               <table className="">
                 <tbody>
                   <tr>
