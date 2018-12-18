@@ -126,6 +126,8 @@ public class OPDDiagnosesService {
                     opdByAgeResponse = new OPDByAgeResponse();
                     opdByAgeResponse.setDiagnostic(opd.getDiagnostic());
                     opdByAgeResponse.setYear(opd.getYear());
+                    opdByAgeResponse.setQuarter(opd.getQuarter());
+                    opdByAgeResponse.setMonth(opd.getMonth());
                     results.add(opdByAgeResponse);
                 }
 
