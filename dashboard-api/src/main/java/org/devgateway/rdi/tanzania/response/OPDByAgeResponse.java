@@ -1,11 +1,8 @@
 package org.devgateway.rdi.tanzania.response;
 
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvCustomBindByName;
 import org.devgateway.rdi.tanzania.domain.DataElement;
 import org.devgateway.rdi.tanzania.domain.Item;
 
-import javax.tools.Diagnostic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,20 +12,18 @@ import java.util.List;
 
 public class OPDByAgeResponse {
 
-      private DataElement diagnostic;
-
-
+    private DataElement diagnostic;
     private Integer year;
-    private Long totalPrevPeriod;
-
     private Integer quarter;
     private Integer month;
-
     private List<AgeValue> values = new ArrayList<>();
+    private Long total = 0L;
 
     public List<AgeValue> getValues() {
         return values;
     }
+
+    public List<OPDByAgeResponse> prevValues;
 
     public void setValues(List<AgeValue> values) {
         this.values = values;
@@ -51,17 +46,10 @@ public class OPDByAgeResponse {
     }
 
     public void addValue(Item age, Long value) {
+        this.total += value;
         this.values.add(new AgeValue(age, value));
-
     }
 
-    public Long getTotalPrevPeriod() {
-        return totalPrevPeriod;
-    }
-
-    public void setTotalPrevPeriod(Long totalPrevPeriod) {
-        this.totalPrevPeriod = totalPrevPeriod;
-    }
 
     public class AgeValue {
         private Item age;
@@ -89,6 +77,14 @@ public class OPDByAgeResponse {
         }
     }
 
+    public List<OPDByAgeResponse> getPrevValues() {
+        return prevValues;
+    }
+
+    public void setPrevValues(List<OPDByAgeResponse> prevValues) {
+        this.prevValues = prevValues;
+    }
+
     public Integer getQuarter() {
         return quarter;
     }
@@ -103,5 +99,13 @@ public class OPDByAgeResponse {
 
     public void setMonth(Integer month) {
         this.month = month;
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
     }
 }
