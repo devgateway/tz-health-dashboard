@@ -95,7 +95,7 @@
     </changeSet>
 
 
-    <changeSet id="add_spatial_index_to_facility" author="sdimunzio">
+    <changeSet id="add_spatial_index_to_facility" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">
             <tableExists tableName="facility" schemaName="public"></tableExists>
@@ -109,7 +109,7 @@
         </sql>
     </changeSet>
 
-    <changeSet id="populate_geometry_columns" author="sdimunzio">
+    <changeSet id="populate_geometry_columns" author="sdimunzio" failOnError="false">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="facility" schemaName="public"></tableExists>
         </preConditions>
@@ -122,6 +122,46 @@
             SELECT Populate_Geometry_Columns((table_schema::text || '.' || table_name::text)::regclass)FROM t;
         </sql>
     </changeSet>
+
+
+    <changeSet id="add_opddiagnostic_year_idx" author="sdimunzio" failOnError="false">
+
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="opddiagnostic" schemaName="public"></tableExists>
+        </preConditions>
+        <sql>
+            CREATE INDEX opddiagnostic_year_idx
+            ON public.opddiagnostic
+            USING btree
+            (year);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="add_opddiagnostic_year_facility_id_idx" author="sdimunzio" failOnError="false">
+
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="opddiagnostic" schemaName="public"></tableExists>
+        </preConditions>
+        <sql>
+            CREATE INDEX opddiagnostic_year_facility_id_idx
+            ON public.opddiagnostic
+            USING btree
+            (year, facility_id);
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="cluster_opddiagnostic" author="sdimunzio" failOnError="false">
+
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="opddiagnostic" schemaName="public"></tableExists>
+        </preConditions>
+        <sql>
+            cluster opddiagnostic using opddiagnostic_year_facility_id_idx
+        </sql>
+    </changeSet>
+
 
 
 </databaseChangeLog>
