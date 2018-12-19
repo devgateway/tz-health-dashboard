@@ -14,6 +14,7 @@ public class BoundaryRequest {
     private List<Long> wards;
     private List<Long> regions;
 
+    private Double factor = 0.05;
 
     public String getQ() {
         return q;
@@ -23,15 +24,8 @@ public class BoundaryRequest {
         this.q = q;
     }
 
-    public Double getSimplifyFactor() {
-        return simplifyFactor;
-    }
 
-    public void setSimplifyFactor(Double simplifyFactors) {
-        this.simplifyFactor = simplifyFactor;
-    }
 
-    private Double simplifyFactor = 0.005;
 
     public List<Long> getDistricts() {
         return districts;
@@ -55,5 +49,13 @@ public class BoundaryRequest {
 
     public void setRegions(List<Long> regions) {
         this.regions = regions;
+    }
+
+    public Double getFactor() {
+        return factor;
+    }
+
+    public void setFactor(Double factor) {
+        this.factor = factor;
     }
 }

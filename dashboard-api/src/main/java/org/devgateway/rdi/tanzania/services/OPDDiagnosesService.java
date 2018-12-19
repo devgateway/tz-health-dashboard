@@ -60,7 +60,7 @@ public class OPDDiagnosesService {
             if (month == 1) {
                 prevYear = year - 1;
             }
-            prevValues = opdDiagnosticRepository.getDiagnoses(f, prevYear, prevMonth, null, Arrays.asList(diagnose.getId()));
+            prevValues = opdDiagnosticRepository.getDiagnoses(f, prevYear, null, prevMonth,  Arrays.asList(diagnose.getId()));
 
 
         } else if (quarter != null) {
@@ -88,7 +88,7 @@ public class OPDDiagnosesService {
             if (month == 1) {
                 prevYear = year - 1;
             }
-            prevValues = opdDiagnosticRepository.getMonthlyTotalValuesByWard(w, prevYear, prevMonth, Arrays.asList(diagnose.getId()));
+            prevValues = opdDiagnosticRepository.getDiagnosesByWard(w, prevYear,null, prevMonth, Arrays.asList(diagnose.getId()));
 
         } else if (quarter != null) {
             Integer prevYear = year;
@@ -96,11 +96,11 @@ public class OPDDiagnosesService {
             if (quarter == 1) {
                 prevYear = year - 1;
             }
-            prevValues = opdDiagnosticRepository.getQuarterlyTotalValuesByWard(w, prevYear, prevQuarter, Arrays.asList(diagnose.getId()));
+            prevValues = opdDiagnosticRepository.getDiagnosesByWard(w, prevYear, prevQuarter,null, Arrays.asList(diagnose.getId()));
 
         } else {
             Integer prevYear = year - 1;
-            prevValues = opdDiagnosticRepository.getYearlyTotalValuesByWard(w, prevYear, Arrays.asList(diagnose.getId()));
+            prevValues = opdDiagnosticRepository.getDiagnosesByWard(w, prevYear,null,null, Arrays.asList(diagnose.getId()));
         }
 
         return aggregate(w, prevValues, false);
@@ -126,6 +126,8 @@ public class OPDDiagnosesService {
                     opdByAgeResponse = new OPDByAgeResponse();
                     opdByAgeResponse.setDiagnostic(opd.getDiagnostic());
                     opdByAgeResponse.setYear(opd.getYear());
+                    opdByAgeResponse.setQuarter(opd.getQuarter());
+                    opdByAgeResponse.setMonth(opd.getMonth());
                     results.add(opdByAgeResponse);
                 }
 
