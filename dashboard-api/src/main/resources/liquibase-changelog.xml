@@ -19,6 +19,8 @@
         </sql>
     </changeSet>
 
+
+
     <changeSet id="add_index_opddiagnostic_diagnostic_id" author="sdimunzio">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="opddiagnostic" schemaName="public."></tableExists>
@@ -30,7 +32,6 @@
             (diagnostic_id);
         </sql>
     </changeSet>
-
     <changeSet id="add_index_opddiagnostic_ward_gid" author="sdimunzio">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="opddiagnostic" schemaName="public."></tableExists>
@@ -42,8 +43,6 @@
             (ward_gid);
         </sql>
     </changeSet>
-
-
     <changeSet id="add_index_opddiagnostic_facility_id" author="sdimunzio">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="opddiagnostic" schemaName="public."></tableExists>
@@ -56,6 +55,7 @@
         </sql>
     </changeSet>
 
+
     <changeSet id="add_index_rmnch_ward_gid_idx" author="sdimunzio">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="rmnch" schemaName="public"></tableExists>
@@ -67,7 +67,6 @@
             (ward_gid);
         </sql>
     </changeSet>
-
     <changeSet id="add_index_rmnch_facility_id_idx" author="sdimunzio">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="rmnch" schemaName="public"></tableExists>
@@ -80,7 +79,6 @@
             (facility_id);
         </sql>
     </changeSet>
-
     <changeSet id="add_index_rmnch_indicator_id_idx" author="sdimunzio">
 
         <preConditions onFail="CONTINUE">
@@ -96,7 +94,6 @@
 
 
     <changeSet id="add_spatial_index_to_facility" author="sdimunzio" failOnError="false">
-
         <preConditions onFail="CONTINUE">
             <tableExists tableName="facility" schemaName="public"></tableExists>
         </preConditions>
@@ -108,7 +105,6 @@
 
         </sql>
     </changeSet>
-
     <changeSet id="populate_geometry_columns" author="sdimunzio" failOnError="false">
         <preConditions onFail="CONTINUE">
             <tableExists tableName="facility" schemaName="public"></tableExists>
@@ -123,7 +119,6 @@
         </sql>
     </changeSet>
 
-
     <changeSet id="add_opddiagnostic_year_idx" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">
@@ -136,8 +131,6 @@
             (year);
         </sql>
     </changeSet>
-
-
     <changeSet id="add_opddiagnostic_year_facility_id_idx" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">
@@ -152,6 +145,37 @@
     </changeSet>
 
 
+
+    <changeSet id="add_rmnch_year_idx" author="sdimunzio" failOnError="false">
+
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="rmnch" schemaName="public"></tableExists>
+        </preConditions>
+        <sql>
+            CREATE INDEX rmnch_year_idx
+            ON public.rmnch
+            USING btree
+            (year);
+        </sql>
+    </changeSet>
+    <changeSet id="add_rmnch_year_facility_id_idx" author="sdimunzio" failOnError="false">
+
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="rmnch" schemaName="public"></tableExists>
+        </preConditions>
+        <sql>
+            CREATE INDEX rmnch_year_facility_id_idx
+            ON public.rmnch
+            USING btree
+            (year, facility_id);
+        </sql>
+    </changeSet>
+
+
+
+
+
+
     <changeSet id="cluster_opddiagnostic" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">
@@ -162,6 +186,15 @@
         </sql>
     </changeSet>
 
+    <changeSet id="cluster_rmnch_" author="sdimunzio" failOnError="false">
+
+        <preConditions onFail="CONTINUE">
+            <tableExists tableName="rmnch" schemaName="public"></tableExists>
+        </preConditions>
+        <sql>
+            cluster rmnch using rmnch_year_facility_id_idx
+        </sql>
+    </changeSet>
 
 
 </databaseChangeLog>
