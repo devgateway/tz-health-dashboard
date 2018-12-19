@@ -12,7 +12,7 @@ import CopyShare from '../components/copyShareLink'
 import i18n from '../../../../../i18n'
 import {composePeriod,getFacilitiesDownloadURI} from '../../../../../api'
 
-class WardLayout extends React.Component {
+class Layout extends React.Component {
 
   static contextTypes = {
     router: PropTypes.object
@@ -25,7 +25,9 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { onGetFacilityInfo, onGetFacilityPopulation, onGetFacilityDiagnoses,onGetFacilityRMNCH, params: {id, period} } = this.props;
+
     onGetFacilityInfo(id, period)
+
     onGetFacilityPopulation(id, period)
     onGetFacilityDiagnoses(id, period)
     onGetFacilityRMNCH(id,period)
@@ -186,19 +188,19 @@ class WardLayout extends React.Component {
             <a className="json" href={getFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
 
-          <TopTenDeseases 
-            type="wards" 
-            period={period} id={id}  
+          <TopTenDeseases
+            type="wards"
+            period={period} id={id}
             facilityName={wardName}
-            onSetOPDView={onSetOPDView} 
+            onSetOPDView={onSetOPDView}
             OPDView={OPDView}
             diagnoses={this.props.diagnoses}/>
 
-          <RMNCHTable 
-            type="facilities"  
-            period={period} id={id} 
-            facilityName={wardName} 
-            onSetRMNCHView={onSetRMNCHView} 
+          <RMNCHTable
+            type="facilities"
+            period={period} id={id}
+            facilityName={wardName}
+            onSetRMNCHView={onSetRMNCHView}
             RMNCHView={RMNCHView}
             RMNCH={this.props.RMNCH}/>
 
@@ -208,4 +210,4 @@ class WardLayout extends React.Component {
   }
 }
 
-export default translate("translations")(withRouter(WardLayout))
+export default translate("translations")(withRouter(Layout))

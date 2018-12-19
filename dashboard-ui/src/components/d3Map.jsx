@@ -108,7 +108,7 @@ class D3Map extends React.Component {
       .attr('stroke', (d) => d.properties.strokeColor || shapeStrokeColor)
       .attr('stroke-width', shapeStrokeWidth)
       .on('click', (d) => {
-        debugger
+        
         tooltip.style("opacity", 0)
         parent.props.onFeatureClick(d)
       }).on('mouseover', (d) => {
@@ -133,7 +133,7 @@ class D3Map extends React.Component {
         .attr('stroke-width', pointStrokeWidth)
         .attr("class", (d) => d.properties.selected?"top":"regular")
         .on('click', (d) => {
-          debugger
+          
           parent.props.onPointClick(d)
         }).on('mouseover', (d) => {
           console.log('mouseover')

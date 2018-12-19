@@ -56,7 +56,7 @@ export const generateWardPDF = (state, image) => {
   const totalDefence = wardFacilities.filter(f => f.ownership.dhis2Id === 'iTwLKcbi6BX').length
 
 
-  //debugger
+  //
   //page header
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
