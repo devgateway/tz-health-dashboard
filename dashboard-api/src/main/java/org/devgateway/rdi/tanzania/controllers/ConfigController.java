@@ -24,7 +24,7 @@ public class ConfigController {
     EntityManager entityManager;
 
     @RequestMapping("/conf")
-   // @Cacheable
+    @Cacheable
     public Conf getYearRange() {
 
         HashSet<Integer> years = new HashSet<>();
