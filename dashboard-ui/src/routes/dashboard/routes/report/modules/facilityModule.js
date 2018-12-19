@@ -50,6 +50,7 @@ export const getFacilityPopulation = (id, period) => {
 };
 
 export const getFacilityDiagnoses = (id, period) => {
+  
   return (dispatch, getState) => {
     dispatch({ type: FACILITY_DIAGNOSES_REQUEST })
     api.getFacilityData(id, period, 'diagnoses').then(data => {
@@ -95,7 +96,7 @@ export const getMapShape = (facilityData) => {
       })
     }
     dispatch({type: FACILITY_MAP_REQUEST})
-    getShapeMethod(params).then(data => {
+      getShapeMethod(params).then(data => {
       dispatch({'type': FACILITY_MAP_SHAPE_RESPONSE, data })
     }).catch(error => {
       dispatch({'type': FACILITY_MAP_ERROR, error})

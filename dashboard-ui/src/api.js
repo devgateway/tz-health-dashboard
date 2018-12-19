@@ -73,7 +73,7 @@ export const findDistricts = (params) => {
 }
 
 export const findWards = (params) => {
-  debugger;
+
   const url = API_WARDS + '?' + prepareQuery(Object.assign({}, params))
    return get(url,params)
 }
@@ -194,6 +194,7 @@ export const getWardData = (id, period, type) => {
 
 
 export const getFacilityData = (id, period, type) => {
+  debugger;
   const url = `${API_FACILITY_REPORT_INFO}/${id}/${type || ''}?${preparePeriodQuery(period)}`
   return new Promise((resolve, reject) => {
     fetch(url)

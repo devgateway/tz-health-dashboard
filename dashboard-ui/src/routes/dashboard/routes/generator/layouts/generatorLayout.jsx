@@ -54,7 +54,7 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { getGeoItemsList ,conf} = this.props
-    getGeoItemsList('region', {factor:0.005})
+    getGeoItemsList('region', {factor:0.1})
     this.onReset()
     window.scrollTo(0, 0)
   }

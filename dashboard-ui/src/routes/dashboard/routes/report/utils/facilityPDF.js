@@ -43,7 +43,7 @@ export const generateFacilityPDF = (state, image) => {
     prevLabel = prev;
   }
 
-  //debugger
+  //
   //page header
   doc.setFontSize(FONT_PAGE_HEADER)
   doc.setTextColor(19, 88, 151)
