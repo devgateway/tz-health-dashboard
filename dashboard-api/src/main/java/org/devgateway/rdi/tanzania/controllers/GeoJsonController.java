@@ -9,10 +9,7 @@ import org.devgateway.rdi.tanzania.services.GeoJsonService;
 import org.devgateway.rdi.tanzania.services.WardService;
 import org.geojson.FeatureCollection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -27,14 +24,14 @@ public class GeoJsonController {
     private WardService wardService;
 
 
-    @RequestMapping("regions")
+    @RequestMapping("/regions")
     public FeatureCollection getRegions(BoundaryRequest boundaryRequest) {
         return boundaryService.findRegions(boundaryRequest);
     }
 
 
     @RequestMapping("/districts")
-    public FeatureCollection getDistrics(BoundaryRequest boundaryRequest) {
+    public FeatureCollection getDistrics( BoundaryRequest boundaryRequest) {
         return boundaryService.getDistricts(boundaryRequest);
     }
 

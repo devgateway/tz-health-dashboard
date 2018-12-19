@@ -43,7 +43,7 @@ public class GeoJsonService {
 
         List<Region> regions = regionRepository.
                 findAll(BoundarySpecifications.getRegionSpecifications(boundaryRequest),
-                        boundaryRequest.getSimplifyFactor());
+                        boundaryRequest.getFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
         regions.stream().forEach(region -> geoJsonBuilder.add(BoundaryTransformer.transform(region,true)));
@@ -62,7 +62,7 @@ public class GeoJsonService {
     @Cacheable("districts")
     public FeatureCollection getDistricts(final BoundaryRequest boundaryRequest) {
         List<District> districts = districtRepository.findAll(BoundarySpecifications.getDistricSpecifications(boundaryRequest),
-                boundaryRequest.getSimplifyFactor());
+                boundaryRequest.getFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
         districts.stream().forEach(region -> geoJsonBuilder.add(BoundaryTransformer.transform(region,true)));
@@ -82,7 +82,7 @@ public class GeoJsonService {
     @Cacheable("wards")
     public FeatureCollection findWards(final BoundaryRequest boundaryRequest) {
         List<Ward> wards = wardRepository.findAll(BoundarySpecifications.getWardSpecifications(boundaryRequest),
-                boundaryRequest.getSimplifyFactor());
+                boundaryRequest.getFactor());
 
         GeoJsonBuilder geoJsonBuilder = new GeoJsonBuilder();
         wards.stream().forEach(region -> geoJsonBuilder.add(BoundaryTransformer.transform(region,true)));
