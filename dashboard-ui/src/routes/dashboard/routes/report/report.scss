@@ -284,6 +284,9 @@
 
 		.previous-period-header {
 			color: #6D7280;
+			>div{
+				display: inline-block;
+			}
 		}
 
 		.current-period-header {
@@ -296,6 +299,12 @@
 
 		.previous-period-sub-header {
 			color: #6D7280;
+			font-size: 14px;
+			border-bottom: 2px solid #CCC;
+		}
+
+		.previous-period-sub-header-partial {
+			color: #B4B5A8;
 			font-size: 14px;
 			border-bottom: 2px solid #CCC;
 		}
@@ -321,6 +330,10 @@
 
 		.prevoius-value {
 			color: #2C4856;
+		}
+
+		.previous-value-partial {
+			color: #B4B5A8;
 		}
 
 		.current-value-partial {

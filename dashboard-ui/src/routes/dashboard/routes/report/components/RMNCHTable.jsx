@@ -60,7 +60,7 @@ class RMNCHTable extends React.Component {
         {RMNCHView === 'barChart' && <RMNCHBarchart period={period} id={id} facilityName={facilityName} RMNCH={this.props.RMNCH}/>}
         {RMNCHView === 'table' && 
           <div className="RMNCH-table">
-            <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans>/ -<Trans>Decreasing</Trans></div>
+            <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans> / -<Trans>Decreasing</Trans></div>
               <table className="">
                 <tbody>
                   <tr>
@@ -79,20 +79,21 @@ class RMNCHTable extends React.Component {
                     const translation=it.getIn(['indicator', 'translations']).find(e=>e.get('locale') == language);
                     totalPrevious += it.get('totalPrevPeriod')
                     totalCurrent += it.get('value')
+                    const diffPercent = diffPercentage(it.get('totalPrevPeriod'), it.get('value'))
                     return (
                       <tr>
                         <td className="desease-name">{(translation && translation.get('value'))?translation.get('value') :indicatorLabel}</td>
-                        <td className="previous-value">{it.get('totalPrevPeriod')}</td>
-                        <td className="current-value">{it.get('value')}</td>
-                        <td className="previous-value">{diffPercentage(it.get('totalPrevPeriod'),it.get('value'))}</td>
+                        <td className="previous-value">{it.get('totalPrevPeriod') || 'N/A'}</td>
+                        <td className="current-value">{it.get('value') || 'N/A'}</td>
+                        <td className="previous-value">{`${diffPercent > 0 ? '+' : ''}${diffPercent}%`}</td>
                       </tr>
                     )
                   })}
                   <tr className="total-values">
                     <td className="desease-name"><Trans>Total</Trans></td>
-                    <td className="previous-value">{totalPrevious}</td>
-                    <td className="current-value">{totalCurrent}</td>
-                    <td className="previous-value">{diffPercentage(totalPrevious,totalCurrent)}</td>
+                    <td className="previous-value">{totalPrevious || 'N/A'}</td>
+                    <td className="current-value">{totalCurrent || 'N/A'}</td>
+                    <td className="previous-value">{`${diffPercentage(totalPrevious, totalCurrent) > 0 ? '+' : ''}${diffPercentage(totalPrevious, totalCurrent)}%`}</td>
                   </tr>
                 </tbody>
               </table>

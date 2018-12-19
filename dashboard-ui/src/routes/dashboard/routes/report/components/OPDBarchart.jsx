@@ -19,19 +19,33 @@ class OPDBarchart extends React.Component {
       } 
     })
     const OPDSeries = [{
-        name: 'Total Prev',
-        data: OPDData.map(d => d.totalPrevPeriod),
+        color: '#9C9487',
+        name: `${i18n.t('Age')}<5 (${getPeriodLabels(period).prevLabel})`,
+        data: OPDData.map(d => d.ranges.totalUnder5Prev !== -1 ? d.ranges.totalUnder5Prev : 0),
         stack: getPeriodLabels(period).prevLabel
     }, {
-        name: `${i18n.t('Age')}<5`,
+        color: '#BDACAB',
+        name: `${i18n.t('Age')}5-60 (${getPeriodLabels(period).prevLabel})`,
+        data: OPDData.map(d => d.ranges.total5to60Prev !== -1 ? d.ranges.total5to60Prev : 0),
+        stack: getPeriodLabels(period).prevLabel
+    }, {
+        color: '#A09CB0',
+        name: `${i18n.t('Age')}>60 (${getPeriodLabels(period).prevLabel})`,
+        data: OPDData.map(d => d.ranges.totalAbove60Prev !== -1 ? d.ranges.totalAbove60Prev : 0),
+        stack: getPeriodLabels(period).prevLabel
+    }, {
+        color: '#776D5A',
+        name: `${i18n.t('Age')}<5 (${getPeriodLabels(period).currentLabel})`,
         data: OPDData.map(d => d.ranges.totalUnder5 !== -1 ? d.ranges.totalUnder5 : 0),
         stack: getPeriodLabels(period).currentLabel
     }, {
-        name: `${i18n.t('Age')}5-60`,
+        color: '#987D7C',
+        name: `${i18n.t('Age')}5-60 (${getPeriodLabels(period).currentLabel})`,
         data: OPDData.map(d => d.ranges.total5to60 !== -1 ? d.ranges.total5to60 : 0),
         stack: getPeriodLabels(period).currentLabel
     }, {
-        name: `${i18n.t('Age')}>60`,
+        color: '#928EA0',
+        name: `${i18n.t('Age')}>60 (${getPeriodLabels(period).currentLabel})`,
         data: OPDData.map(d => d.ranges.totalAbove60 !== -1 ? d.ranges.totalAbove60 : 0),
         stack: getPeriodLabels(period).currentLabel
     }]
