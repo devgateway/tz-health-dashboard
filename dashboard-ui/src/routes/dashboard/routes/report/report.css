@@ -210,6 +210,8 @@
       border-bottom: 2px solid #CCC; }
     .top-ten-deseases .top-ten-diagnosis-table .previous-period-header {
       color: #6D7280; }
+      .top-ten-deseases .top-ten-diagnosis-table .previous-period-header > div {
+        display: inline-block; }
     .top-ten-deseases .top-ten-diagnosis-table .current-period-header {
       background-color: #F4F2EC;
       color: #9C8568; }
@@ -217,6 +219,10 @@
         display: inline-block; }
     .top-ten-deseases .top-ten-diagnosis-table .previous-period-sub-header {
       color: #6D7280;
+      font-size: 14px;
+      border-bottom: 2px solid #CCC; }
+    .top-ten-deseases .top-ten-diagnosis-table .previous-period-sub-header-partial {
+      color: #B4B5A8;
       font-size: 14px;
       border-bottom: 2px solid #CCC; }
     .top-ten-deseases .top-ten-diagnosis-table .current-period-sub-header-partial {
@@ -234,6 +240,8 @@
       color: #2C4856; }
     .top-ten-deseases .top-ten-diagnosis-table .prevoius-value {
       color: #2C4856; }
+    .top-ten-deseases .top-ten-diagnosis-table .previous-value-partial {
+      color: #B4B5A8; }
     .top-ten-deseases .top-ten-diagnosis-table .current-value-partial {
       color: #B4B5A8;
       background-color: #F4F2EC; }

@@ -19,10 +19,12 @@ class RMNCHBarchart extends React.Component {
       } 
     })
     const RMNCHSeries = [{
+        color: '#9C9487',
         name: getPeriodLabels(period).prevLabel,
         data: RMNCHData.map(d => d.totalPrevPeriod),
         stack: getPeriodLabels(period).prevLabel
     }, {
+        color: '#776D5A',
         name: getPeriodLabels(period).currentLabel,
         data: RMNCHData.map(d => d.value !== -1 ? d.value : 0),
         stack: getPeriodLabels(period).currentLabel

@@ -8,11 +8,15 @@ class TopTenDeseases extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {expanded: true};
+    this.state = {currentExpanded: true, previousExpanded: false};
   }
 
-  onToggleExpand(){
-    this.setState({expanded: !this.state.expanded})
+  onToggleExpand(column){
+    if (column === 'current') {
+      this.setState({currentExpanded: !this.state.currentExpanded})
+    } else {
+      this.setState({previousExpanded: !this.state.previousExpanded})
+    }
   }
 
   setOPDView(view){
@@ -22,7 +26,7 @@ class TopTenDeseases extends React.Component {
 
   render() {
     const {id,type,period,facilityName, i18n: {language}, OPDView} = this.props
-    const {expanded} = this.state    
+    const {currentExpanded, previousExpanded} = this.state    
     const year = parseInt(period.get('y'))
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
@@ -52,10 +56,12 @@ class TopTenDeseases extends React.Component {
       totalUnder5: 0,
       total5to60: 0,
       totalAbove60: 0,
+      totalUnder5Prev: 0,
+      total5to60Prev: 0,
+      totalAbove60Prev: 0,
       totalPrevPeriod: 0,
       total: 0
     }
-
     return (
       <div className="top-ten-deseases">
         <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName}</div>
@@ -69,20 +75,23 @@ class TopTenDeseases extends React.Component {
         {OPDView === 'barChart' && <OPDBarchart period={period} id={id} facilityName={facilityName} diagnoses={this.props.diagnoses}/>}
         {OPDView === 'table' && 
           <div className="top-ten-diagnosis-table">
-            <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans>/ -<Trans>Decreasing</Trans></div>
+            <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans> / -<Trans>Decreasing</Trans></div>
             <table className="">
               <tbody>
                 <tr>
                   <th className="diagnosis-header" rowSpan="2"><Trans>Top Ten Diagnoses</Trans></th>
-                  <th className="previous-period-header">{prevLabel}</th>
-                  <th className="current-period-header" colSpan="4"><div>{currentLabel}</div><div className={expanded ? 'collapse-column' : 'expand-column'} onClick={e => this.onToggleExpand()}></div></th>
+                  <th className="previous-period-header" colSpan="4"><div>{prevLabel}</div><div className={previousExpanded ? 'collapse-column' : 'expand-column'} onClick={e => this.onToggleExpand('previous')}></div></th>
+                  <th className="current-period-header" colSpan="4"><div>{currentLabel}</div><div className={currentExpanded ? 'collapse-column' : 'expand-column'} onClick={e => this.onToggleExpand('current')}></div></th>
                   <th className="previous-period-header">%<Trans>Change</Trans></th>
                 </tr>
                 <tr>
+                  <td className="previous-period-sub-header-partial">{previousExpanded && <div><Trans>Age</Trans>&lt; 5</div>}</td>
+                  <td className="previous-period-sub-header-partial">{previousExpanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
+                  <td className="previous-period-sub-header-partial">{previousExpanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
                   <td className="previous-period-sub-header"><Trans>Count</Trans></td>
-                  <td className="current-period-sub-header-partial">{expanded && <div><Trans>Age</Trans>&lt; 5</div>}</td>
-                  <td className="current-period-sub-header-partial">{expanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
-                  <td className="current-period-sub-header-partial">{expanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
+                  <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>&lt; 5</div>}</td>
+                  <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
+                  <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
                   <td className="current-period-sub-header"><Trans>Count</Trans></td>
                   <td className="previous-period-sub-header"><Trans>in Total Cases since</Trans> {prevLabel}</td>
                 </tr>
@@ -93,7 +102,10 @@ class TopTenDeseases extends React.Component {
                     const totalUnder5 = it.getIn(['ranges', 'totalUnder5'])
                     const total5to60 = it.getIn(['ranges', 'total5to60'])
                     const totalAbove60 = it.getIn(['ranges', 'totalAbove60'])
-                    const totalPrevPeriod = it.getIn(['totalPrevPeriod'])
+                    const totalUnder5Prev = it.getIn(['ranges', 'totalUnder5Prev'])
+                    const total5to60Prev = it.getIn(['ranges', 'total5to60Prev'])
+                    const totalAbove60Prev = it.getIn(['ranges', 'totalAbove60Prev'])
+                    const totalPrevPeriod = it.getIn(['ranges', 'totalPrev'])
                     const total = it.get("total");
                     if (totalUnder5 != -1) {
                       colsTotals['totalUnder5'] += totalUnder5
@@ -104,28 +116,43 @@ class TopTenDeseases extends React.Component {
                     if (totalAbove60 != -1) {
                       colsTotals['totalAbove60'] += totalAbove60
                     }
+                    if (totalUnder5Prev != -1) {
+                      colsTotals['totalUnder5Prev'] += totalUnder5Prev
+                    }
+                    if (total5to60Prev != -1) {
+                      colsTotals['total5to60Prev'] += total5to60Prev
+                    }
+                    if (totalAbove60Prev != -1) {
+                      colsTotals['totalAbove60Prev'] += totalAbove60Prev
+                    }
                     colsTotals['totalPrevPeriod'] += totalPrevPeriod
                     colsTotals['total'] += total
-
+                    const diffPercent = diffPercentage(totalPrevPeriod, total)
                     return (<tr key={it.get("dhis2Id")}>
                       <td className="desease-name">{(translation&&translation.get('value'))?translation.get('value') :label}</td>
-                      <td className="previous-value">{it.get("totalPrevPeriod")}</td>
-                      <td className="current-value-partial">{expanded && <div>{totalUnder5 == -1 ? 'N/A' : totalUnder5}</div>}</td>
-                      <td className="current-value-partial">{expanded && <div>{total5to60 == -1 ? 'N/A' : total5to60}</div>}</td>
-                      <td className="current-value-partial">{expanded && <div>{totalAbove60 == -1 ? 'N/A' : totalAbove60}</div>}</td>
-                      <td className="current-value">{total}</td>
-                      <td className="previous-value">{diffPercentage(it.get("totalPrevPeriod"),total)}</td>
+                      <td className="previous-value-partial">{previousExpanded && <div>{totalUnder5Prev == -1 ? 'N/A' : totalUnder5Prev}</div>}</td>
+                      <td className="previous-value-partial">{previousExpanded && <div>{total5to60Prev == -1 ? 'N/A' : total5to60Prev}</div>}</td>
+                      <td className="previous-value-partial">{previousExpanded && <div>{totalAbove60Prev == -1 ? 'N/A' : totalAbove60Prev}</div>}</td>
+                      <td className="previous-value">{totalPrevPeriod == -1 ? 'N/A' : totalPrevPeriod}</td>
+                      <td className="current-value-partial">{currentExpanded && <div>{totalUnder5 == -1 ? 'N/A' : totalUnder5}</div>}</td>
+                      <td className="current-value-partial">{currentExpanded && <div>{total5to60 == -1 ? 'N/A' : total5to60}</div>}</td>
+                      <td className="current-value-partial">{currentExpanded && <div>{totalAbove60 == -1 ? 'N/A' : totalAbove60}</div>}</td>
+                      <td className="current-value">{total == -1 ? 'N/A' : total}</td>
+                      <td className="previous-value">{totalPrevPeriod == -1 || total == -1 ? 'N/A' : `${diffPercent > 0 ? '+' : ''}${diffPercent}%` }</td>
                     </tr>)
                   })
                 }
                 <tr className="total-values">
                   <td className="desease-name"><Trans>Total</Trans></td>
+                  <td className="previous-value-partial">{previousExpanded && <div>{colsTotals['totalUnder5Prev']}</div>}</td>
+                  <td className="previous-value-partial">{previousExpanded && <div>{colsTotals['total5to60Prev']}</div>}</td>
+                  <td className="previous-value-partial">{previousExpanded && <div>{colsTotals['totalAbove60Prev']}</div>}</td>
                   <td className="previous-value">{colsTotals['totalPrevPeriod']}</td>
-                  <td className="current-value-partial">{expanded && <div>{colsTotals['totalUnder5']}</div>}</td>
-                  <td className="current-value-partial">{expanded && <div>{colsTotals['total5to60']}</div>}</td>
-                  <td className="current-value-partial">{expanded && <div>{colsTotals['totalAbove60']}</div>}</td>
+                  <td className="current-value-partial">{currentExpanded && <div>{colsTotals['totalUnder5']}</div>}</td>
+                  <td className="current-value-partial">{currentExpanded && <div>{colsTotals['total5to60']}</div>}</td>
+                  <td className="current-value-partial">{currentExpanded && <div>{colsTotals['totalAbove60']}</div>}</td>
                   <td className="current-value">{colsTotals['total']}</td>
-                  <td className="previous-value"> {diffPercentage(colsTotals['totalPrevPeriod'],colsTotals['total'])}</td>
+                  <td className="previous-value">{`${diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total']) > 0 ? '+' : ''}${diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total'])}%`}</td>
                 </tr>
               </tbody>
             </table>

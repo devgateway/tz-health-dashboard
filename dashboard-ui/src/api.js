@@ -297,7 +297,7 @@ export const diffPercentage = (prev, val) => {
   if (prev == null || prev == 0) {
     return 'N/A'
   }
-  return Math.round(((((prev - val) / prev) * 100) * -1)) + "%"
+  return Math.round(((((prev - val) / prev) * 100) * -1))
 }
 
 
@@ -321,15 +321,22 @@ export const getAggregatedPopulation = (data) => {
 export const getAggregatedDiagnosis = (data) => {
   const parsedData = []
   data.forEach(d => {
-    const { values, diagnostic, totalPrevPeriod } = d
+    const { values, diagnostic, totalPrevPeriod, prevValues } = d
     // "xLoqtMo0pI";"Umri chini ya mwezi 1" // "i3RHRoyrkuO";"Umri mwezi 1 hadi umri chini ya mwaka 1" // "Cw0V80VVLNX";"Umri mwaka 1 hadi umri chini ya miaka 5"
     const totalUnder5 = sumValues(values.filter(i => i.age.dhis2Id === "xLotqtMo0pI" || i.age.dhis2Id === "i3RHRoyrkuO" || i.age.dhis2Id === "Cw0V80VVLNX"))
+    const totalUnder5Prev = prevValues.length > 0 ? sumValues(prevValues[0].values.filter(i => i.age.dhis2Id === "xLotqtMo0pI" || i.age.dhis2Id === "i3RHRoyrkuO" || i.age.dhis2Id === "Cw0V80VVLNX")) : -1
     // "GF4Nq9E8x6l";"Umri miaka 5 hadi umri chini ya miaka 60"
     const total5to60 = sumValues(values.filter(i => i.age.dhis2Id === "GF4Nq9E8x6l"))
+    const total5to60Prev = prevValues.length > 0 ? sumValues(prevValues[0].values.filter(i => i.age.dhis2Id === "GF4Nq9E8x6l")) : -1
     // "UsRGaDRgUTs";"Umri miaka 60 au zaidi"
     const totalAbove60 = sumValues(values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs"))
+    const totalAbove60Prev = prevValues.length > 0 ? sumValues(prevValues[0].values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs")) : -1
     const total = sumValues(values)
-    parsedData.push({ dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, ranges: { totalUnder5, total5to60, totalAbove60, total } })
+    const totalPrev = prevValues.length > 0 ? sumValues(prevValues[0].values) : -1
+    parsedData.push({ 
+      dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, 
+      ranges: { totalUnder5, total5to60, totalAbove60, total, totalUnder5Prev, total5to60Prev, totalAbove60Prev, totalPrev } 
+    })
   })
   return parsedData
 }
