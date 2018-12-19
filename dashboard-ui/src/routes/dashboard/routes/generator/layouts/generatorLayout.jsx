@@ -54,7 +54,7 @@ class WardLayout extends React.Component {
 
   componentDidMount() {
     const { getGeoItemsList ,conf} = this.props
-    getGeoItemsList('region', {})
+    getGeoItemsList('region', {factor:0.005})
     this.onReset()
     window.scrollTo(0, 0)
   }
@@ -76,7 +76,7 @@ class WardLayout extends React.Component {
     selectRegion(regionId)
     this.child.onCleanSelection() //clear keyword search box
     if (regionId) {
-      getGeoItemsList('district', {regions: [regionId],simplifyFactor:0})
+      getGeoItemsList('district', {regions: [regionId],factor:0})
     }
   }
 
@@ -85,7 +85,7 @@ class WardLayout extends React.Component {
     const { selectDistrict, getGeoItemsList, params: {reportType} } = this.props
     selectDistrict(districtId)
     if (districtId) {
-      getGeoItemsList('ward', {districts: [districtId],simplifyFactor:0})
+      getGeoItemsList('ward', {districts: [districtId],factor:0.05})
       if (reportType === 'facility') {
         getGeoItemsList('facility', {districts: [districtId]})
       }
@@ -123,14 +123,14 @@ class WardLayout extends React.Component {
       }*/
     } else if (region.get('selected')){
       selectDistrict(featureId)
-      getGeoItemsList('ward', {districts: [featureId], simplifyFactor:0})
+      getGeoItemsList('ward', {districts: [featureId], factor:0})
       if (reportType === 'facility') {
         getGeoItemsList('facility', {districts: [featureId]})
       }
     } else {
       selectRegion(featureId)
       this.child.onCleanSelection() //clear keyword search box
-      getGeoItemsList('district', {regions: [featureId], simplifyFactor:0})
+      getGeoItemsList('district', {regions: [featureId], factor:0})
     }
   }
 
@@ -160,7 +160,7 @@ class WardLayout extends React.Component {
   render() {
     const {conf, region, district, ward, facility, params: {reportType} } = this.props
     const { months, quarters, periodType, period} = this.state
-    debugger;
+
     let years;
     if (conf){
        years=  conf.getIn(["years"]).map(y=>{return {gid: `y-${y}`,label: y}})

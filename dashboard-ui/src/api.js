@@ -11,11 +11,17 @@ const API_FACILITIES = `${API_ROOT_URL}/facilities`
 const API_CONFIG = `${API_ROOT_URL}/conf`
 
 
-export const findRegions = (params) => {
 
-  const url = API_REGIONS + '?' + prepareQuery(Object.assign({}, params))
+const post=(url,params)=>{
   return new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(url, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(params)
+      })
       .then(
         function(response) {
           if (response.status !== 200) {
@@ -32,16 +38,17 @@ export const findRegions = (params) => {
   })
 }
 
-export const findDistricts = (params) => {
 
-  const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({}, params))
+const get=(url)=>{
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(
         function(response) {
+
           if (response.status !== 200) {
             reject(response)
           }
+          // Examine the text in the response
           response.json().then(function(data) {
             resolve(data);
           });
@@ -51,6 +58,24 @@ export const findDistricts = (params) => {
         reject('Fetch Error :-S', err);
       });
   })
+}
+
+export const findRegions = (params) => {
+//  params.factor = 0.005
+  const url = API_REGIONS + '?' + prepareQuery(Object.assign({}, params))
+  return get(url,params)
+}
+
+export const findDistricts = (params) => {
+  //params.factor = 0.001
+  const url = API_DISTRICTS + '?' + prepareQuery(Object.assign({}, params))
+   return get(url)
+}
+
+export const findWards = (params) => {
+  debugger;
+  const url = API_WARDS + '?' + prepareQuery(Object.assign({}, params))
+   return get(url,params)
 }
 
 export const searchWards = (keyword) => {
@@ -74,28 +99,6 @@ export const searchWards = (keyword) => {
   })
 }
 
-export const findWards = (params) => {
-
-  const url = API_WARDS + '?' + prepareQuery(Object.assign({}, params))
-  return new Promise((resolve, reject) => {
-    fetch(url)
-      .then(
-        function(response) {
-
-          if (response.status !== 200) {
-            reject(response)
-          }
-          // Examine the text in the response
-          response.json().then(function(data) {
-            resolve(data);
-          });
-        }
-      )
-      .catch(function(err) {
-        reject('Fetch Error :-S', err);
-      });
-  })
-}
 
 export const findFacilities = (params) => {
   const url = API_FACILITIES + '?' + prepareQuery(Object.assign({}, params))
@@ -118,7 +121,7 @@ export const findFacilities = (params) => {
   })
 }
 
-export const getConfiguration=()=>{
+export const getConfiguration = () => {
   const url = API_CONFIG
 
   return new Promise((resolve, reject) => {
@@ -247,18 +250,18 @@ export const getDownloadURI = (type, data, format, id, period, language) => {
 }
 
 export const getFacilitiesDownloadURI = (format, facilityData, language) => {
-    let params = { wards: facilityData.getIn(['ward', 'gid']), type: facilityData.getIn(['type', 'dhis2Id']) }
-    if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0') { //if facility type is hospital or health center, load facilities from region
-      params = { regions: facilityData.getIn(['region', 'gid']), types: facilityData.getIn(['type', 'id']) }
-    }
-    params.lan = language;
-    return API_FACILITIES + '.' + format + '?' + prepareQuery(Object.assign({}, params))
+  let params = { wards: facilityData.getIn(['ward', 'gid']), type: facilityData.getIn(['type', 'dhis2Id']) }
+  if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0') { //if facility type is hospital or health center, load facilities from region
+    params = { regions: facilityData.getIn(['region', 'gid']), types: facilityData.getIn(['type', 'id']) }
+  }
+  params.lan = language;
+  return API_FACILITIES + '.' + format + '?' + prepareQuery(Object.assign({}, params))
 }
 
 export const getWardFacilitiesDownloadURI = (format, wardData, language) => {
-    let params = {districts: wardData.getIn(['district', 'gid'])}
-    params.lan = language;
-    return API_FACILITIES + '.' + format + '?' + prepareQuery(Object.assign({}, params))
+  let params = { districts: wardData.getIn(['district', 'gid']) }
+  params.lan = language;
+  return API_FACILITIES + '.' + format + '?' + prepareQuery(Object.assign({}, params))
 }
 
 export const parsePeriod = (period) => {
