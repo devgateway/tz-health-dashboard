@@ -177,19 +177,19 @@ class WardLayout extends React.Component {
             <a className="json" href={getWardFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
 
-          <TopTenDeseases 
-            type="wards" 
-            period={period} id={id}  
+          <TopTenDeseases
+            type="wards"
+            period={period} id={id}
             facilityName={wardName}
-            onSetOPDView={onSetOPDView} 
+            onSetOPDView={onSetOPDView}
             OPDView={OPDView}
             diagnoses={this.props.diagnoses}/>
 
-          <RMNCHTable 
-            type="facilities"  
-            period={period} id={id} 
-            facilityName={wardName} 
-            onSetRMNCHView={onSetRMNCHView} 
+          <RMNCHTable
+            type="wards"  
+            period={period} id={id}
+            facilityName={wardName}
+            onSetRMNCHView={onSetRMNCHView}
             RMNCHView={RMNCHView}
             RMNCH={this.props.RMNCH}/>
 

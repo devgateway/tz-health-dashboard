@@ -189,7 +189,7 @@ class Layout extends React.Component {
           </div>
 
           <TopTenDeseases
-            type="wards"
+            type="facilities"
             period={period} id={id}
             facilityName={wardName}
             onSetOPDView={onSetOPDView}
