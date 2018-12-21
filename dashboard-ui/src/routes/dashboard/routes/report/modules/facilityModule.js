@@ -8,17 +8,14 @@ const FACILITY_INFO_ERROR = 'FACILITY_INFO_ERROR'
 const FACILITY_POPULATION_REQUEST = 'FACILITY_POPULATION_REQUEST'
 const FACILITY_POPULATION_RESPONSE = 'FACILITY_POPULATION_RESPONSE'
 const FACILITY_POPULATION_ERROR = 'FACILITY_POPULATION_ERROR'
-
 const FACILITY_DIAGNOSES_REQUEST = 'FACILITY_DIAGNOSES_REQUEST'
 const FACILITY_DIAGNOSES_RESPONSE = 'FACILITY_DIAGNOSES_RESPONSE'
 const FACILITY_DIAGNOSES_ERROR = 'FACILITY_DIAGNOSES_ERROR'
-
 const FACILITY_MAP_REQUEST = 'FACILITY_MAP_SHAPE_REQUEST'
 const FACILITY_MAP_SHAPE_RESPONSE = 'FACILITY_MAP_SHAPE_RESPONSE'
 const FACILITY_MAP_REGION_RESPONSE = 'FACILITY_MAP_REGION_RESPONSE'
 const FACILITY_MAP_POINTS_RESPONSE = 'FACILITY_MAP_POINTS_RESPONSE'
 const FACILITY_MAP_ERROR = 'FACILITY_MAP_ERROR'
-
 const SET_RMNCH_VIEW = 'SET_RMNCH_VIEW'
 const SET_OPD_VIEW = 'SET_OPD_VIEW'
 const FACILITY_RMNCH_REQUEST = 'FACILITY_RMNCH_REQUEST'
@@ -50,7 +47,6 @@ export const getFacilityPopulation = (id, period) => {
 };
 
 export const getFacilityDiagnoses = (id, period) => {
-  
   return (dispatch, getState) => {
     dispatch({ type: FACILITY_DIAGNOSES_REQUEST })
     api.getFacilityData(id, period, 'diagnoses').then(data => {
@@ -60,7 +56,6 @@ export const getFacilityDiagnoses = (id, period) => {
     })
   }
 };
-
 
 export const getFacilityRMNCH = (id, period) => {
   return (dispatch, getState) => {
@@ -73,9 +68,7 @@ export const getFacilityRMNCH = (id, period) => {
   }
 };
 
-
 export const getMapShape = (facilityData) => {
-
   let getShapeMethod = api.findWards
   let params = {wards: facilityData.getIn(['ward', 'gid'])}
   if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load all districts from region
@@ -144,19 +137,18 @@ const ACTION_HANDLERS = {
     const {error} = action;
     return state.setIn(['reportData', 'info', 'error'], error).setIn(['reportData', 'info', 'loading'], false)
   },
-
   [FACILITY_POPULATION_REQUEST]: (state, action) => {
     return state.setIn(['reportData', 'population', 'loading'], true)
   },
   [FACILITY_POPULATION_RESPONSE]: (state, action) => {
     const {data} = action;
+    debugger;
     return state.setIn(['reportData', 'population', 'data'], Immutable.fromJS(api.getAggregatedPopulation(data))).setIn(['reportData', 'population', 'loading'], false)
   },
   [FACILITY_POPULATION_ERROR]: (state, action) => {
     const {error} = action;
     return state.setIn(['reportData', 'population', 'error'], error).setIn(['reportData', 'population', 'loading'], false)
   },
-
   [FACILITY_DIAGNOSES_REQUEST]: (state, action) => {
     return state.setIn(['reportData', 'diagnoses', 'loading'], true)
   },
@@ -180,7 +172,6 @@ const ACTION_HANDLERS = {
     const {error} = action;
     return state.setIn(['reportData', 'RMNCH', 'error'], error).setIn(['reportData', 'RMNCH', 'loading'], false)
   },
-
   [FACILITY_MAP_REQUEST]: (state, action) => {
     return state.setIn(['reportData', 'map', 'loading'], true)
   },
@@ -217,7 +208,6 @@ const sumValues = (dataset) => {
   dataset.forEach(i => total += i.value)
   return total
 }
-
 
 
 // ------------------------------------ Reducer ------------------------------------

@@ -27,7 +27,6 @@ class Layout extends React.Component {
     const { onGetFacilityInfo, onGetFacilityPopulation, onGetFacilityDiagnoses,onGetFacilityRMNCH, params: {id, period} } = this.props;
 
     onGetFacilityInfo(id, period)
-
     onGetFacilityPopulation(id, period)
     onGetFacilityDiagnoses(id, period)
     onGetFacilityRMNCH(id,period)
@@ -64,6 +63,7 @@ class Layout extends React.Component {
   render() {
     const {conf,params: {id}, mapShape, mapPoints, mapRegion, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView} = this.props
     const lan = this.props.i18n.language
+    debugger;
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'),
@@ -135,14 +135,25 @@ class Layout extends React.Component {
               </div>
               <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
 
-              {/*}
-              <div className="ages">
-                <div className="value-label"><div><Trans>by Age</Trans></div></div>
-                <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
-                <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
-                <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
-              </div>
-              */}
+
+
+                  {
+                  population.getIn(['data','total']) > 0?<div>
+
+                  <div className="ages">
+                    <div className="total-pop"><span>{population.getIn(['data','total'])}</span> <Trans>Total population in facility catchment </Trans></div>
+                    <div className="value-label"><div><Trans>by Age</Trans></div></div>
+                    <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
+                    <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
+                    <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
+                  </div>
+
+                    <div className="population-disclaimer"><Trans>Source: DHIS2</Trans></div>
+
+
+                  </div>:null
+                  }
+
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
