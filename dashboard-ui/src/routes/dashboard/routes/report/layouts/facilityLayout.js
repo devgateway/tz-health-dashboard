@@ -143,9 +143,9 @@ class Layout extends React.Component {
                   <div className="ages">
                     <div className="total-pop"><span>{population.getIn(['data','total'])}</span> <Trans>Total population in facility catchment </Trans></div>
                     <div className="value-label"><div><Trans>by Age</Trans></div></div>
-                    <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
-                    <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
-                    <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
+                    <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])>-1?population.getIn(['data', 'totalUnder5']):0}</div></div>
+                    <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])>-1?population.getIn(['data', 'total5to60']):0}</div></div>
+                    <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])>-1?population.getIn(['data', 'totalAbove60']):0}</div></div>
                   </div>
 
                     <div className="population-disclaimer"><Trans>Source: DHIS2</Trans></div>
