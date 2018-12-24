@@ -9,6 +9,8 @@ import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 import {withRouter} from 'react-router-dom';
 import CopyShare from '../components/copyShareLink'
+import BackButton from '../components/backButton'
+
 import i18n from '../../../../../i18n'
 import {composePeriod,getFacilitiesDownloadURI} from '../../../../../api'
 
@@ -112,9 +114,14 @@ class Layout extends React.Component {
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
+
+
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
-          <CopyShare/>
-          <PeriodSelector conf={conf} period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
+
+        <CopyShare/>
+        <BackButton/>
+
+        <PeriodSelector conf={conf} period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
           <div className="location-box">

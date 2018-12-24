@@ -10,6 +10,7 @@ import {translate, Trans} from "react-i18next"
 import CopyShare from '../components/copyShareLink'
 import i18n from '../../../../../i18n'
 import {composePeriod,getWardFacilitiesDownloadURI} from '../../../../../api'
+import BackButton from '../components/backButton'
 
 class WardLayout extends React.Component {
 
@@ -104,8 +105,10 @@ class WardLayout extends React.Component {
         <div className="report-header">
           <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
-          <CopyShare/>
-          <PeriodSelector conf={conf} period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
+
+        <CopyShare/>
+  <BackButton/>
+        <PeriodSelector conf={conf} period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
           <div className="location-box">
@@ -186,7 +189,7 @@ class WardLayout extends React.Component {
             diagnoses={this.props.diagnoses}/>
 
           <RMNCHTable
-            type="wards"  
+            type="wards"
             period={period} id={id}
             facilityName={wardName}
             onSetRMNCHView={onSetRMNCHView}
