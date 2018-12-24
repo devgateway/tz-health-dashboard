@@ -10,15 +10,15 @@ public class RMNCHResponse {
 
     private DataElement indicator;
 
-    private Integer year;
+    private Integer year = null;
 
-    private Integer quarter;
+    private Integer quarter = null;
 
-    private Integer month;
+    private Integer month = null;
 
-    private Long value;
+    private Long value = null;
 
-    private Long totalPrevPeriod;
+    private Long totalPrevPeriod = null;
 
     public RMNCHResponse(DataElement indicator, Integer year, Long value) {
         this.indicator = indicator;
