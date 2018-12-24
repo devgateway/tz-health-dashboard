@@ -60,7 +60,7 @@ public class RMNCHRepositoryImpl implements RMNCHRepositoryCustom {
         }
         if (month != null) {
             if (quarter == null) {
-                selection.add(cb.literal(0)); // add dummy value in order to full fill OPDResponse constructor
+                selection.add(cb.literal(-1)); // add dummy value in order to full fill OPDResponse constructor
             }
             selection.add(from.get(RMNCH_.month));
             queryFilter.add(cb.equal(from.get(RMNCH_.month), month));
