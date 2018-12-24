@@ -85,7 +85,8 @@ public class WriteCsvToResponse {
 
             String month = opdByAgeResponse.getMonth() != null ? opdByAgeResponse.getMonth().toString() : null;
 
-            String quarter = opdByAgeResponse.getQuarter() != null ? opdByAgeResponse.getQuarter().toString() : null;
+
+            String quarter = opdByAgeResponse.getQuarter() != null && opdByAgeResponse.getQuarter() != -1 ? opdByAgeResponse.getQuarter().toString() : null;
 
             Long less5 = 0L;
             Long between5And60 = 0L;
