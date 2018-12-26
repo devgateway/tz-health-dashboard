@@ -15,7 +15,7 @@ const FACILITY_DIAGNOSES_ERROR = 'FACILITY_DIAGNOSES_ERROR'
 
 const FACILITY_MAP_REQUEST = 'FACILITY_MAP_SHAPE_REQUEST'
 const FACILITY_MAP_SHAPE_RESPONSE = 'FACILITY_MAP_SHAPE_RESPONSE'
-const FACILITY_MAP_REGION_RESPONSE = 'FACILITY_MAP_REGION_RESPONSE'
+const FACILITY_MAP_BORDER_RESPONSE = 'FACILITY_MAP_BORDER_RESPONSE'
 const FACILITY_MAP_POINTS_RESPONSE = 'FACILITY_MAP_POINTS_RESPONSE'
 const FACILITY_MAP_ERROR = 'FACILITY_MAP_ERROR'
 
@@ -75,41 +75,46 @@ export const getFacilityRMNCH = (id, period) => {
 
 
 export const getMapShape = (facilityData) => {
-
-  let getShapeMethod = api.findWards
-  let params = {wards: facilityData.getIn(['ward', 'gid'])}
-  if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load all districts from region
-    getShapeMethod = api.findDistricts
-    params = {regions: facilityData.getIn(['region', 'gid'])}
-  }
   return (dispatch, getState) => {
-    let params = {wards: facilityData.getIn(['ward', 'gid'])}
-    if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load all districts from region
-      getShapeMethod = api.findDistricts
-      params = {regions: facilityData.getIn(['region', 'gid'])}
-      //get region shape
+    const detailedType = facilityData.getIn(['detailedType', 'dhis2Id'])
+    const typeMapping = getState().getIn(['facility', 'typeMapping']).toJS()
+    const typeDetails = typeMapping.find(t => t.id === detailedType)
+    let params = {}
+    params[typeDetails.paramField] = facilityData.getIn([typeDetails.paramValue, 'gid'])
+
+    if (typeDetails.getShapeMethod) {
       dispatch({type: FACILITY_MAP_REQUEST})
-      api.findRegions(params).then(data => {
-        dispatch({'type': FACILITY_MAP_REGION_RESPONSE, data })
+      typeDetails.getShapeMethod(params).then(data => {
+        dispatch({'type': FACILITY_MAP_SHAPE_RESPONSE, data })
       }).catch(error => {
         dispatch({'type': FACILITY_MAP_ERROR, error})
       })
+    } else {
+      dispatch({'type': FACILITY_MAP_SHAPE_RESPONSE, data: {} })
     }
+
     dispatch({type: FACILITY_MAP_REQUEST})
-      getShapeMethod(params).then(data => {
-      dispatch({'type': FACILITY_MAP_SHAPE_RESPONSE, data })
+    typeDetails.getBorderMethod(params).then(data => {
+      dispatch({'type': FACILITY_MAP_BORDER_RESPONSE, data })
     }).catch(error => {
       dispatch({'type': FACILITY_MAP_ERROR, error})
     })
   }
-};
+}
 
 export const getMapPoints = (facilityData) => {
-  let params = {wards: facilityData.getIn(['ward', 'gid']), type: facilityData.getIn(['type', 'dhis2Id'])}
-  if (facilityData.getIn(['type', 'dhis2Id']) === 'FgLhM6ea9dS' || facilityData.getIn(['type', 'dhis2Id']) === 'WK2vj3N9aA0' ) { //if facility type is hospital or health center, load facilities from region
-    params = {regions: facilityData.getIn(['region', 'gid']), types: facilityData.getIn(['type', 'id'])}
-  }
   return (dispatch, getState) => {
+    const detailedType = facilityData.getIn(['detailedType', 'dhis2Id'])
+    const typeMapping = getState().getIn(['facility', 'typeMapping']).toJS()
+    const typeDetails = typeMapping.find(t => t.id === detailedType)
+    let params = {}
+    params[typeDetails.paramField] = facilityData.getIn([typeDetails.paramValue, 'gid'])
+    const typeDetailsToFilter = typeMapping.map(t => {
+      if (t.maskType === typeDetails.maskType) {
+        return t.id
+      }
+    })
+    params['detailedType'] = typeDetailsToFilter
     dispatch({type: FACILITY_MAP_REQUEST})
     api.findFacilities(params).then(data => {
       dispatch({'type': FACILITY_MAP_POINTS_RESPONSE, data })
@@ -117,7 +122,7 @@ export const getMapPoints = (facilityData) => {
       dispatch({'type': FACILITY_MAP_ERROR, error})
     })
   }
-};
+}
 
 export const setOPDView = (view) => {
   return (dispatch, getState) => {
@@ -188,9 +193,9 @@ const ACTION_HANDLERS = {
     const {data} = action;
     return state.setIn(['reportData', 'map', 'shape'], Immutable.fromJS(data)).setIn(['reportData', 'map', 'loading'], false)
   },
-  [FACILITY_MAP_REGION_RESPONSE]: (state, action) => {
+  [FACILITY_MAP_BORDER_RESPONSE]: (state, action) => {
     const {data} = action;
-    return state.setIn(['reportData', 'map', 'region'], Immutable.fromJS(data)).setIn(['reportData', 'map', 'loading'], false)
+    return state.setIn(['reportData', 'map', 'border'], Immutable.fromJS(data)).setIn(['reportData', 'map', 'loading'], false)
   },
   [FACILITY_MAP_POINTS_RESPONSE]: (state, action) => {
     const {data} = action;
@@ -242,12 +247,30 @@ const initialState = Immutable.fromJS({
       'loading': false,
       'shape': {},
       'points': [],
-      'region': {},
+      'border': {},
     }
   },
   'OPDView': 'table',
   'RMNCHView': 'table',
-
+  'typeMapping': [
+    {'id': 'FgLhM6ea9dS', 'typeName': 'Health Center', 'maskType': 'Health Center', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'O4hfhLGzu8H', 'typeName': 'Regional Referral Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findDistricts, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'YUJl1RAk6Gt', 'typeName': 'Health Labs', 'maskType': 'Hospital', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'DvJehvyBpEQ', 'typeName': 'Dispensary', 'maskType': 'Dispensary', 'boundary': 'ward', 'getShapeMethod': null, 'getBorderMethod': api.findWards, 'paramField': 'wards', 'paramValue': 'ward'},
+    {'id': 'LdiS9jKDmYj', 'typeName': 'District Hospital', 'maskType': 'Hospital', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'P9dlUDycTwP', 'typeName': 'National Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findDistricts, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'gJQCkKyX8ph', 'typeName': 'Nursing Home', 'maskType': 'Health Center', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'xlorplD1QwS', 'typeName': 'Referral Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findDistricts, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'v4blQv4R67J', 'typeName': 'Designated District Hospital', 'maskType': 'Hospital', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'rHjr1oAqSIS', 'typeName': 'National Super Specialist Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findDistricts, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'xQDiGgEFknR', 'typeName': 'Eye Clinic', 'maskType': 'Clinic', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'Y6oYSbQE2Tp', 'typeName': 'Regional Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findDistricts, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'tnz6uusQqSf', 'typeName': 'Other Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findDistricts, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'I326qTfkdwh', 'typeName': 'Zonal Super Specialist Hospital', 'maskType': 'Hospital', 'boundary': 'regional', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findRegions, 'paramField': 'regions', 'paramValue': 'region'},
+    {'id': 'LGk92i9DOFU', 'typeName': 'Dental Clinic', 'maskType': 'Clinic', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'AMbDPYNQ2ha', 'typeName': 'Other Clinic', 'maskType': 'Clinic', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+    {'id': 'gKAkwmPuTLz', 'typeName': 'Maternity Home', 'maskType': 'Health Center', 'boundary': 'district', 'getShapeMethod': api.findWards, 'getBorderMethod': api.findDistricts, 'paramField': 'districts', 'paramValue': 'district'},
+  ]
 });
 
 // reducer is returned as default

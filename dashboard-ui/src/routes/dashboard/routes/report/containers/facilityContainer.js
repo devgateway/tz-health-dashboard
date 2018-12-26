@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 const mapStateToProps = state => {
   return {
-    mapRegion: state.getIn(['facility', 'reportData', 'map', 'region']),
+    mapBorder: state.getIn(['facility', 'reportData', 'map', 'border']),
     mapShape: state.getIn(['facility', 'reportData', 'map', 'shape']),
     mapPoints: state.getIn(['facility', 'reportData', 'map', 'points']),
     info: state.getIn(['facility', 'reportData', 'info']),
@@ -27,6 +27,7 @@ const mapStateToProps = state => {
     conf:state.getIn(['dashboard','conf']),
     OPDView: state.getIn(['facility', 'OPDView']),
     RMNCHView: state.getIn(['facility', 'RMNCHView']),
+    typeMapping: state.getIn(['facility', 'typeMapping']),
   }
 }
 
