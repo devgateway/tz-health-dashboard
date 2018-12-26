@@ -10,7 +10,7 @@ import {translate, Trans} from "react-i18next"
 import {withRouter} from 'react-router-dom';
 import CopyShare from '../components/copyShareLink'
 import i18n from '../../../../../i18n'
-import {composePeriod,getFacilitiesDownloadURI} from '../../../../../api'
+import {composePeriod, getFacilitiesDownloadURI} from '../../../../../api'
 
 class Layout extends React.Component {
 
@@ -35,7 +35,7 @@ class Layout extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.info.getIn(['ward', 'gid']) !== prevProps.info.getIn(['ward', 'gid'])) {
+    if (this.props.info.getIn(['id']) !== prevProps.info.getIn(['id'])) {
       const { onGetMapPoints, onGetMapShape, info } = this.props;
       onGetMapPoints(info)
       onGetMapShape(info)
@@ -49,7 +49,7 @@ class Layout extends React.Component {
       const strPeriod=composePeriod(period.toJS())
       this.props.history.push(`/${lan}/report/facility/${f.properties.ID}/`)
     }
-}
+  }
 
   onChangePeriod(period){
     const {params: {id}} = this.props
@@ -62,7 +62,7 @@ class Layout extends React.Component {
   }
 
   render() {
-    const {conf,params: {id}, mapShape, mapPoints, mapRegion, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView} = this.props
+    const {conf,params: {id}, mapShape, mapPoints, mapBorder, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView, typeMapping} = this.props
     const lan = this.props.i18n.language
     const facilitiesFeatures = []
     if (mapPoints) {
@@ -78,35 +78,34 @@ class Layout extends React.Component {
     const wardName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
     const regionName = info.getIn(['region', 'name'])
-
-    const shapeFeatures = mapShape.toJS()
-    let shapeStrokeColor = '#9C8568'
-    let regionFeature
-    if ((facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") && mapRegion.getIn(['features']) && mapShape.getIn(['features'])) {
-      regionFeature = mapRegion.getIn(['features']).toJS()[0]
-      Object.assign(regionFeature.properties, {strokeColor: '#9C8568'})
-      shapeStrokeColor = '#6C8EAD'
-      shapeFeatures.features.push(regionFeature)
+    let shapeFeatures, borderFeature
+    let shapeStrokeColor = '#6C8EAD'
+      
+    debugger
+    if (mapShape.getIn(['features'])) {
+      shapeFeatures = mapShape.toJS()
+      if (mapBorder.getIn(['features']) && mapShape.getIn(['features'])) {
+        borderFeature = mapBorder.getIn(['features']).toJS()[0]
+        Object.assign(borderFeature.properties, {strokeColor: '#9C8568'})
+        shapeFeatures.features.push(borderFeature)
+      }
+    } else {
+      shapeFeatures = {'type': 'FeatureCollection', 'features': []}
+      if (mapBorder.getIn(['features'])) {
+        borderFeature = mapBorder.getIn(['features']).toJS()[0]
+        Object.assign(borderFeature.properties, {strokeColor: '#9C8568'})
+        shapeFeatures.features.push(borderFeature)
+      }
     }
 
     let totalPopulation = 0
     let totalPopMale = 0
     let totalPopFemale = 0
-    if (facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0") {
-      if (regionFeature) {
-        totalPopulation = regionFeature.properties.POPULATION || 0
-        totalPopMale = regionFeature.properties.POPULATION_MALE || 0
-        totalPopFemale = regionFeature.properties.POPULATION_FEMALE || 0
-      }
-    } else {
-      if (shapeFeatures.features) {
-        totalPopulation = shapeFeatures.features[0].properties.POPULATION || 0
-        totalPopMale = shapeFeatures.features[0].properties.POPULATION_MALE || 0
-        totalPopFemale = shapeFeatures.features[0].properties.POPULATION_FEMALE || 0
-      }
+    if (borderFeature) {
+      totalPopulation = borderFeature.properties.POPULATION || 0
+      totalPopMale = borderFeature.properties.POPULATION_MALE || 0
+      totalPopFemale = borderFeature.properties.POPULATION_FEMALE || 0
     }
-
-
 
     return (
       <div>
@@ -145,7 +144,7 @@ class Layout extends React.Component {
               */}
             </div>
             <div className="map" id="map1">
-              {facilitiesFeatures.length > 0 && mapShape.getIn(['features']) ?
+              {facilitiesFeatures.length > 0 && shapeFeatures.features.length > 0 ?
                 <D3Map selected={id} width="580" height="450" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2' shapeStrokeColor={shapeStrokeColor}
                    shapeFeatures={shapeFeatures} pointFeatures={pointFeatures} showBasemap={true} zoomeable={true} onPointClick={d=>this.onPointClick(d)}></D3Map>
               : null}
