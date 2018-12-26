@@ -26,7 +26,7 @@ public class WriteCsvToResponse {
         String[] en_header = new String[]{"Code", "Name", "Latitude", "Longitude", "Ownership", "Detailed Ownership",
                 "Type", "Detailed Type", "Ward", "District", "Region"};
 
-        String[] sw_header = new String[]{"Code", "Jina",  "Latitude", "Longitude", "Ownership", "Detailed Ownership",
+        String[] sw_header = new String[]{"Code", "Jina", "Latitude", "Longitude", "Ownership", "Detailed Ownership",
                 "Aina ya Kituo", "Detailed Type", "Kata", "Wilaya", "Mkoa"};
 
 
@@ -85,7 +85,8 @@ public class WriteCsvToResponse {
 
             String month = opdByAgeResponse.getMonth() != null ? opdByAgeResponse.getMonth().toString() : null;
 
-            String quarter = opdByAgeResponse.getQuarter() != null ? opdByAgeResponse.getQuarter().toString() : null;
+
+            String quarter = opdByAgeResponse.getQuarter() != null && opdByAgeResponse.getQuarter() != -1 ? opdByAgeResponse.getQuarter().toString() : null;
 
             Long less5 = 0L;
             Long between5And60 = 0L;
@@ -147,7 +148,7 @@ public class WriteCsvToResponse {
 
             String month = rmnchResponse.getMonth() != null ? rmnchResponse.getMonth().toString() : null;
 
-            String quarter = rmnchResponse.getQuarter() != null ? rmnchResponse.getQuarter().toString() : null;
+            String quarter = rmnchResponse.getQuarter() != null && rmnchResponse.getQuarter() != -1 ? rmnchResponse.getQuarter().toString() : null;
 
 
             return new String[]{id, name, year, quarter, month, rmnchResponse.getValue().toString()};

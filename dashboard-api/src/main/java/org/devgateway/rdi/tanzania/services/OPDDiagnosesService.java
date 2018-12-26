@@ -126,7 +126,9 @@ public class OPDDiagnosesService {
                     opdByAgeResponse = new OPDByAgeResponse();
                     opdByAgeResponse.setDiagnostic(opd.getDiagnostic());
                     opdByAgeResponse.setYear(opd.getYear());
-                    opdByAgeResponse.setQuarter(opd.getQuarter());
+
+
+                    opdByAgeResponse.setQuarter(opd.getQuarter()!=null && opd.getQuarter() !=-1?opd.getQuarter():null);
                     opdByAgeResponse.setMonth(opd.getMonth());
                     results.add(opdByAgeResponse);
                 }
@@ -162,7 +164,7 @@ public class OPDDiagnosesService {
                     opdByAgeResponse.setDiagnostic(opd.getDiagnostic());
                     opdByAgeResponse.setYear(opd.getYear());
                     opdByAgeResponse.setMonth(opd.getMonth());
-                    opdByAgeResponse.setQuarter(opd.getQuarter());
+                    opdByAgeResponse.setQuarter(opd.getQuarter()!=null && opd.getQuarter() !=-1?opd.getQuarter():null);
                     results.add(opdByAgeResponse);
                 }
                 if (includePrevValues) {

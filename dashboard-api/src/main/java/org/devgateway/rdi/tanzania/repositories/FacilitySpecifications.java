@@ -25,7 +25,9 @@ public class FacilitySpecifications {
                 if (facilityRequest.getTypes() != null && facilityRequest.getTypes().size() > 0) {
                     predicates.add(root.get(Facility_.type).in(facilityRequest.getTypes()));
                 }
-
+                if (facilityRequest.getDetailedType() != null && facilityRequest.getDetailedType().size() > 0) {
+                    predicates.add(root.get(Facility_.detailedType).in(facilityRequest.getDetailedType()));
+                }
 
                 if (facilityRequest.getWards() != null && facilityRequest.getWards().size() > 0) {
                     predicates.add(root.get(Facility_.ward).in(facilityRequest.getWards()));

@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf'
-import {hexToRgb, colorCodeByName} from './colorsUtil'
+import {hexToRgb} from './colorsUtil'
 import {getMonthName, getQuarterLabel, diffPercentage} from '../../../../../api'
 import i18n from '../../../../../i18n'
 
@@ -61,14 +61,14 @@ export const generateFacilityPDF = (state, image) => {
   doc.text(10, cursorY, facilityName)
   doc.text(190 - (currentLabel.length * 3), cursorY, currentLabel)
   cursorY += 5
-  
+
   //location breadcrumb
   doc.setDrawColor(204, 204, 204)
   doc.setFillColor(244, 242, 236)
   doc.rect(10, cursorY, 48, 14, 'FD')
   doc.rect(58, cursorY, 48, 14, 'FD')
   doc.rect(106, cursorY, 48, 14, 'FD')
-  doc.rect(152, cursorY, 48, 14, 'FD') 
+  doc.rect(152, cursorY, 48, 14, 'FD')
   doc.setTextColor(44, 72, 86)
   doc.setFontSize(9)
   doc.setFontType("normal")
@@ -203,11 +203,11 @@ export const generateFacilityPDF = (state, image) => {
   doc.setTextColor(109, 114, 128)
   doc.setFontSize(7)
   doc.text(165, cursorY-9, `+${i18n.t('Increasing')} -${i18n.t('Decreasing')}`)
-  
+
   doc.setFontSize(13)
   doc.setFillColor(244, 242, 236)
   doc.rect(98, cursorY-7, 63, 20 + (diagnoses.get('data').size * 5), 'F')
-  
+
   doc.setTextColor(19, 88, 151)
   doc.text(20, cursorY, i18n.t('Top Ten Diagnoses'))
   cursorY -= 2
@@ -232,7 +232,7 @@ export const generateFacilityPDF = (state, image) => {
   cursorY += 2
   doc.setLineWidth(0.25)
   doc.line(10, cursorY, 200, cursorY)
-  
+
   deseases.forEach((it) => {
     cursorY += 5
     const indicatorLabel = it.getIn(['diagnostic','name'])
@@ -284,7 +284,7 @@ export const generateFacilityPDF = (state, image) => {
   cursorY += 2
   doc.setLineWidth(0.5)
   doc.line(10, cursorY, 200, cursorY)
-  
+
   doc.addPage()
   cursorY = 25
   //page header
@@ -318,7 +318,7 @@ export const generateFacilityPDF = (state, image) => {
   doc.setTextColor(109, 114, 128)
   doc.setFontSize(7)
   doc.text(170, cursorY-9, `+${i18n.t('Increasing')} -${i18n.t('Decreasing')}`)
-  
+
   doc.setFontSize(13)
   doc.setFillColor(244, 242, 236)
   doc.rect(138, cursorY-7, 30, 20 + (RMNCH.get('data').size * 5), 'F')
