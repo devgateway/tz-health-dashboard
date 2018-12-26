@@ -91,15 +91,11 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
         if (incremental) {
             dhis2RMNNCHService.clean(region, year);
         }
-
-        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT,
-                QueryUtil.MONTHS_OFF(year));
-
+        dhis2RMNNCHService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT, QueryUtil.MONTHS_OFF(year));
     }
 
 
     public void importData(Region region, Integer year, Boolean incremental) {
-
         population(region, year, incremental);
         OPDDiagnoses(region, year, incremental);
         RMNNCH(region, year, incremental);

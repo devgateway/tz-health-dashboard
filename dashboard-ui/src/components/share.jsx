@@ -20,7 +20,6 @@ class ShareLink extends React.Component {
   }
 
   render() {
-
     const {className, href, title} = this.props
     const target = document.location.href
     const url = href + encodeURIComponent(target)
@@ -32,6 +31,7 @@ export default class Share extends React.Component {
 
   render() {
     return <div className="share-buttons" id="share-buttons">
+
       <ShareLink className="facebook" href="http://www.facebook.com/sharer.php?u=" title="Facebook"></ShareLink>
       <ShareLink className="gplus" href="https://plus.google.com/share?url=" title="Google +"></ShareLink>
       <ShareLink className="twitter" href="https://twitter.com/share?url=" title="Twitter"></ShareLink>

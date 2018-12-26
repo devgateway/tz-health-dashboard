@@ -9,6 +9,8 @@ import {print} from '../utils/printUtil'
 import {translate, Trans} from "react-i18next"
 import {withRouter} from 'react-router-dom';
 import CopyShare from '../components/copyShareLink'
+import BackButton from '../components/backButton'
+
 import i18n from '../../../../../i18n'
 import {composePeriod, getFacilitiesDownloadURI} from '../../../../../api'
 
@@ -27,7 +29,6 @@ class Layout extends React.Component {
     const { onGetFacilityInfo, onGetFacilityPopulation, onGetFacilityDiagnoses,onGetFacilityRMNCH, params: {id, period} } = this.props;
 
     onGetFacilityInfo(id, period)
-
     onGetFacilityPopulation(id, period)
     onGetFacilityDiagnoses(id, period)
     onGetFacilityRMNCH(id,period)
@@ -64,6 +65,7 @@ class Layout extends React.Component {
   render() {
     const {conf,params: {id}, mapShape, mapPoints, mapBorder, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView, typeMapping} = this.props
     const lan = this.props.i18n.language
+    debugger;
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'),
@@ -111,9 +113,14 @@ class Layout extends React.Component {
       <div>
         <div className="report-header">
           <div className="facility-name">{facilityName}</div>
+
+
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
-          <CopyShare/>
-          <PeriodSelector conf={conf} period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
+
+        <CopyShare/>
+        <BackButton/>
+
+        <PeriodSelector conf={conf} period={period} params={this.props.params}   onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="facility-report-container">
           <div className="location-box">
@@ -134,14 +141,25 @@ class Layout extends React.Component {
               </div>
               <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
 
-              {/*}
-              <div className="ages">
-                <div className="value-label"><div><Trans>by Age</Trans></div></div>
-                <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])}</div></div>
-                <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])}</div></div>
-                <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])}</div></div>
-              </div>
-              */}
+
+
+                  {
+                  population.getIn(['data','total']) > 0?<div>
+
+                  <div className="ages">
+                    <div className="total-pop"><span>{population.getIn(['data','total'])}</span> <Trans>Total population in facility catchment </Trans></div>
+                    <div className="value-label"><div><Trans>by Age</Trans></div></div>
+                    <div className="value-item"><div>{'<5'}</div><div>{population.getIn(['data', 'totalUnder5'])>-1?population.getIn(['data', 'totalUnder5']):0}</div></div>
+                    <div className="value-item"><div>{'5-60'}</div><div>{population.getIn(['data', 'total5to60'])>-1?population.getIn(['data', 'total5to60']):0}</div></div>
+                    <div className="value-item"><div>{'>60'}</div><div>{population.getIn(['data', 'totalAbove60'])>-1?population.getIn(['data', 'totalAbove60']):0}</div></div>
+                  </div>
+
+                    <div className="population-disclaimer"><Trans>Source: DHIS2</Trans></div>
+
+
+                  </div>:null
+                  }
+
             </div>
             <div className="map" id="map1">
               {facilitiesFeatures.length > 0 && shapeFeatures.features.length > 0 ?
@@ -188,7 +206,7 @@ class Layout extends React.Component {
           </div>
 
           <TopTenDeseases
-            type="wards"
+            type="facilities"
             period={period} id={id}
             facilityName={wardName}
             onSetOPDView={onSetOPDView}

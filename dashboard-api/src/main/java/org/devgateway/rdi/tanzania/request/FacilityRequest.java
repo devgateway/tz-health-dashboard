@@ -15,6 +15,7 @@ public class FacilityRequest {
     List<Long> wards;
     List<Long> regions;
     List<Long> types;
+    List<Long> detailedType;
 
     public List<Long> getDistricts() {
         return districts;
@@ -62,5 +63,13 @@ public class FacilityRequest {
 
     public void setLan(String lan) {
         this.lan = lan;
+    }
+
+    public List<Long> getDetailedType() {
+        return detailedType;
+    }
+
+    public void setDetailedType(List<Long> detailedType) {
+        this.detailedType = detailedType;
     }
 }

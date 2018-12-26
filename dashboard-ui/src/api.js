@@ -311,6 +311,7 @@ const sumValues = (dataset) => {
 }
 
 export const getAggregatedPopulation = (data) => {
+  debugger;
   const total = sumValues(data)
   const totalMale = sumValues(data.filter(i => i.gender.name === 'ME'))
   const totalFemale = sumValues(data.filter(i => i.gender.name === 'KE'))
@@ -336,9 +337,9 @@ export const getAggregatedDiagnosis = (data) => {
     const totalAbove60Prev = prevValues.length > 0 ? sumValues(prevValues[0].values.filter(i => i.age.dhis2Id === "UsRGaDRgUTs")) : -1
     const total = sumValues(values)
     const totalPrev = prevValues.length > 0 ? sumValues(prevValues[0].values) : -1
-    parsedData.push({ 
-      dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod, 
-      ranges: { totalUnder5, total5to60, totalAbove60, total, totalUnder5Prev, total5to60Prev, totalAbove60Prev, totalPrev } 
+    parsedData.push({
+      dhis2Id: diagnostic.dhis2Id, diagnostic: diagnostic, total, totalPrevPeriod,
+      ranges: { totalUnder5, total5to60, totalAbove60, total, totalUnder5Prev, total5to60Prev, totalAbove60Prev, totalPrev }
     })
   })
   return parsedData
