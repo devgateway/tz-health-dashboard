@@ -155,7 +155,7 @@ i18n.use(LanguageDetector).init({
         "Oct": "Oct",
         "Nov": "Nov",
         "Dec": "Dec",
-      } 
+      }
     },
     sw: {
       translations: {
@@ -168,7 +168,6 @@ i18n.use(LanguageDetector).init({
         "Age":"Umri",
         "in Total Cases since Last Year":"katika kesi zote tangu mwaka jana",
         "Change":"Badilisha",
-
         "Data Report Generator": "Jenerator ya taarifa ya data",
         "This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.": "Dashibodi hii inaonyesha habari muhimu kutoka kwa mfumo wa usimamizi wa habari za afya Tanzania, dhis2. Unaweza kuchunguza na kupakua data ya kimataifa juu ya watu wa huduma; magonjwa ya nje; uzazi, uzazi, mtoto mchanga, na afya ya mtoto; fedha za afya; utumishi; na vifo vya jamii. Tumia vifungo chini ili kupiga mbizi zaidi ndani ya data, kwa ama kituo cha kibinafsi au kata.",
         "Facility Report Generator": "Jenerator ya taarifa ya Kituo",
