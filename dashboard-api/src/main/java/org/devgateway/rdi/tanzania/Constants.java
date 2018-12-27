@@ -27,8 +27,13 @@ public class Constants {
 
     public static final String GROUP_CHILD_HEALTH_VACCINATION_SERVICES = "KcgUK6kdmwE";
 
-    public static final String GROUP_CHILD_HEALTH_GROWTH_VIT_A_DEWORMING= "kCG34b9rbRd";
+    public static final String GROUP_CHILD_HEALTH_GROWTH_VIT_A_DEWORMING = "kCG34b9rbRd";
 
-    public static final String ANC_MALARIA_AND_OTHER_SERVICES= "YBxXipG7Iid";
+    public static final String ANC_MALARIA_AND_OTHER_SERVICES = "YBxXipG7Iid";
+
+
+    public static final String DETEAILED_TYPE_DIMENSION = "X4NKFlvMewI";
 
 }
+
+

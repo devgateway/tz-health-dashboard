@@ -2,10 +2,7 @@ package org.devgateway.rdi.tanzania.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +28,9 @@ public class Item{
 
     @JsonIgnore
     @ManyToMany(targetEntity = Dimension.class)
+    @JoinTable(name = "dimension_items", joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "dimension_id"))
+
     List<Dimension> dimensions;
 
     public Long getId() {

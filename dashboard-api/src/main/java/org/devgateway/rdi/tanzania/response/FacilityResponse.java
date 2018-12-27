@@ -33,6 +33,18 @@ public class FacilityResponse {
 
     private Point point;
 
+
+    private String combinedType;
+
+    public String getCombinedType() {
+        //this.type,
+        //this.detailedType
+
+        return combinedType;
+    }
+
+
+
     public Long getId() {
         return id;
     }
