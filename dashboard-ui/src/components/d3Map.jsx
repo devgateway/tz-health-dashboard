@@ -110,7 +110,7 @@ class D3Map extends React.Component {
       .on('click', (d) => {
 
         tooltip.style("opacity", 0)
-        //parent.props.onFeatureClick(d)
+        parent.props.onFeatureClick(d)
       }).on('mouseover', (d) => {
         tooltip.html('<div>' + d.properties['NAME'] + '</div>').style("left", (d3.event.pageX) + "px").style("top", (d3.event.pageY - 28) + "px");
         tooltip.style("opacity", .9)
