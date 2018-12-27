@@ -22,6 +22,10 @@ public class Dimension {
 
     @JsonIgnore
     @ManyToMany(targetEntity = Item.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+
+    @JoinTable(name = "dimension_items", joinColumns = @JoinColumn(name = "dimension_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+
     private List<Item> items;
 
     public Dimension() {
