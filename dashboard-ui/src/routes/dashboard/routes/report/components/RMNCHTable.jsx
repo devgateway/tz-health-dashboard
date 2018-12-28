@@ -58,7 +58,7 @@ class RMNCHTable extends React.Component {
           <div className={RMNCHView === 'barChart' ? 'barChart-selected' : 'barChart'} onClick={e => this.setRMNCHView('barChart')}></div>
         </div>
         {RMNCHView === 'barChart' && <RMNCHBarchart period={period} id={id} facilityName={facilityName} RMNCH={this.props.RMNCH}/>}
-        {RMNCHView === 'table' && 
+        {RMNCHView === 'table' &&
           <div className="RMNCH-table">
             <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans> / -<Trans>Decreasing</Trans></div>
               <table className="">
@@ -93,7 +93,8 @@ class RMNCHTable extends React.Component {
                     <td className="desease-name"><Trans>Total</Trans></td>
                     <td className="previous-value">{totalPrevious || 'N/A'}</td>
                     <td className="current-value">{totalCurrent || 'N/A'}</td>
-                    <td className="previous-value">{`${diffPercentage(totalPrevious, totalCurrent) > 0 ? '+' : ''}${diffPercentage(totalPrevious, totalCurrent)}%`}</td>
+                    <td className="previous-value">{`${diffPercentage(totalPrevious, totalCurrent) > 0 ? '+' : ''}
+                    ${diffPercentage(totalPrevious, totalCurrent)==null?"N/A":diffPercentage(totalPrevious, totalCurrent)+"%"}`}</td>
                   </tr>
                 </tbody>
               </table>

@@ -298,7 +298,7 @@ export const composePeriod = (periodObject) => {
 export const diffPercentage = (prev, val) => {
 
   if (prev == null || prev == 0) {
-    return 'N/A'
+    return null
   }
   return Math.round(((((prev - val) / prev) * 100) * -1))
 }
