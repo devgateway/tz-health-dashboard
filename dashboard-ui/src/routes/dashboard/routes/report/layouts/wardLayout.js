@@ -149,7 +149,7 @@ class WardLayout extends React.Component {
                   <div className="value-item"><div><Trans>Faith Based</Trans></div><div>{totalFaithBased}</div></div>
                   <div className="value-item"><div><Trans>Parastatal</Trans></div><div>{totalParastatal}</div></div>
                   <div className="value-item"><div><Trans>Defense</Trans></div><div>{totalDefence}</div></div>
-                  <div className="value-item"><div><Trans>Undefined</Trans></div><div>{totalUndefined}</div></div>
+                  {totalUndefined >0?<div className="value-item"><div><Trans>Undefined</Trans></div><div>{totalUndefined}</div></div>:null}
                 </div>
               </div>
             </div>
