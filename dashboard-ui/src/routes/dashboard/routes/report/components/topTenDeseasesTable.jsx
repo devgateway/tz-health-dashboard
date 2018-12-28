@@ -26,11 +26,13 @@ class TopTenDeseases extends React.Component {
 
   render() {
     const {id,type,period,facilityName, i18n: {language}, OPDView} = this.props
-    const {currentExpanded, previousExpanded} = this.state    
+    const {currentExpanded, previousExpanded} = this.state
     const year = parseInt(period.get('y'))
     const quarter = parseInt(period.get('q'))
     const month = parseInt(period.get('m'))
     let current, currentLabel, prev, prevLabel
+
+
 
     if (month) {
       current = month
@@ -73,7 +75,7 @@ class TopTenDeseases extends React.Component {
           <div className={OPDView === 'barChart' ? 'barChart-selected' : 'barChart'} onClick={e => this.setOPDView('barChart')}></div>
         </div>
         {OPDView === 'barChart' && <OPDBarchart period={period} id={id} facilityName={facilityName} diagnoses={this.props.diagnoses}/>}
-        {OPDView === 'table' && 
+        {OPDView === 'table' &&
           <div className="top-ten-diagnosis-table">
             <div className="value-legend"><b>% <Trans>Change</Trans> <Trans>Legend</Trans></b> +<Trans>Increasing</Trans> / -<Trans>Decreasing</Trans></div>
             <table className="">
@@ -107,6 +109,7 @@ class TopTenDeseases extends React.Component {
                     const totalAbove60Prev = it.getIn(['ranges', 'totalAbove60Prev'])
                     const totalPrevPeriod = it.getIn(['ranges', 'totalPrev'])
                     const total = it.get("total");
+
                     if (totalUnder5 != -1) {
                       colsTotals['totalUnder5'] += totalUnder5
                     }
@@ -125,7 +128,12 @@ class TopTenDeseases extends React.Component {
                     if (totalAbove60Prev != -1) {
                       colsTotals['totalAbove60Prev'] += totalAbove60Prev
                     }
-                    colsTotals['totalPrevPeriod'] += totalPrevPeriod
+
+                    if (totalPrevPeriod != -1) {
+                      colsTotals['totalPrevPeriodHasValue']=true
+                      colsTotals['totalPrevPeriod'] += totalPrevPeriod
+                    }
+
                     colsTotals['total'] += total
                     const diffPercent = diffPercentage(totalPrevPeriod, total)
                     return (<tr key={it.get("dhis2Id")}>
@@ -147,12 +155,16 @@ class TopTenDeseases extends React.Component {
                   <td className="previous-value-partial">{previousExpanded && <div>{colsTotals['totalUnder5Prev']}</div>}</td>
                   <td className="previous-value-partial">{previousExpanded && <div>{colsTotals['total5to60Prev']}</div>}</td>
                   <td className="previous-value-partial">{previousExpanded && <div>{colsTotals['totalAbove60Prev']}</div>}</td>
-                  <td className="previous-value">{colsTotals['totalPrevPeriod']}</td>
+                  <td className="previous-value">{colsTotals['totalPrevPeriodHasValue']?colsTotals['totalPrevPeriod'] :'N/A'} </td>
                   <td className="current-value-partial">{currentExpanded && <div>{colsTotals['totalUnder5']}</div>}</td>
                   <td className="current-value-partial">{currentExpanded && <div>{colsTotals['total5to60']}</div>}</td>
                   <td className="current-value-partial">{currentExpanded && <div>{colsTotals['totalAbove60']}</div>}</td>
                   <td className="current-value">{colsTotals['total']}</td>
-                  <td className="previous-value">{`${diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total']) > 0 ? '+' : ''}${diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total'])}%`}</td>
+                  <td className="previous-value right">{`${diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total']) > 0 ? '+' : ''}
+
+                  ${diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total'])?diffPercentage(colsTotals['totalPrevPeriod'], colsTotals['total'])+"%":"N/A"}
+
+                  `}</td>
                 </tr>
               </tbody>
             </table>
