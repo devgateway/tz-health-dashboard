@@ -78,7 +78,7 @@ public class Dhis2OPDDiagnosesService extends Dhis2AnalyticImport<OPDDiagnostic>
             QueryDimension dx = QueryUtil.dxDimension(QueryUtil.dataElemenst2Items(elements));
 
             QueryDimension ageDimension = new QueryDimension(age).
-                    setItems(QueryUtil.items2Items(age.getItems()));
+                    setItems(QueryUtil.items2Items(new ArrayList<>(age.getItems())));
 
 
             QueryDimension ouDimension = QueryUtil.ouDimension(QueryUtil.org2sItems(facilities));

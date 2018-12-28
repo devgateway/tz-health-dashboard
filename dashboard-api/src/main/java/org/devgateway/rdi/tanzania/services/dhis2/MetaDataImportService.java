@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,14 +82,28 @@ public class MetaDataImportService {
         facilityService.cleanFacilities();
 
         dhis2DimensionService.cleanDimensions();
-
     }
 
-    public List<Dimension> dimensions() {
-        LOGGER.info("Getting dimensions");
-        List<Dimension> dimensions = dhis2DimensionService.getAllDimensions(true);
-        return dhis2DimensionService.save(dimensions);
+    public List<Item> dimensionsItems() {
 
+        HashSet<Item> items = new HashSet<>();
+
+        LOGGER.info("Getting dimensions");
+        List<Dimension> dimensions = dhis2DimensionService.getAllDimensions();
+
+
+        dimensions.forEach(dimension -> {
+
+            dhis2DimensionService.save(dimension);
+            List<Item> its = dhis2DimensionService.getDimensionItems(dimension);
+            its.forEach(item -> {
+                item.addDimension(dimension);
+
+                items.add(item);
+            });
+
+        });
+        return dhis2DimensionService.saveItems(new ArrayList<>(items));
     }
 
 
@@ -178,7 +194,7 @@ public class MetaDataImportService {
     }
 
     public void importMedata() {
-        dimensions();
+        dimensionsItems();
 
         orgUnitsGroups();
 

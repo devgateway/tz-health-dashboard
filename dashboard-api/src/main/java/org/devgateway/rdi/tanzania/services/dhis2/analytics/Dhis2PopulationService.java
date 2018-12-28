@@ -75,10 +75,10 @@ public class Dhis2PopulationService extends Dhis2AnalyticImport<ServiceAreaPopul
         Dimension age = dimensionRepository.findOneByDhis2Id("Cow9nZikDgD");
 
         QueryDimension ageDimension = new QueryDimension(age.getDhis2Id(), age.getName());
-        ageDimension.setItems(QueryUtil.items2Items(age.getItems()));
+        ageDimension.setItems(QueryUtil.items2Items(new ArrayList<>(age.getItems())));
         QueryDimension dx = QueryUtil.dxDimension(QueryUtil.dataElement2Item(population));
         QueryDimension genderDimension = new QueryDimension(gender.getDhis2Id(), gender.getName());
-        genderDimension.setItems(QueryUtil.items2Items(gender.getItems()));
+        genderDimension.setItems(QueryUtil.items2Items(new ArrayList<>(gender.getItems())));
 
 
         List<Item> items = QueryUtil.org2sItems(list);
