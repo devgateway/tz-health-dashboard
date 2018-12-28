@@ -85,7 +85,7 @@ class RMNCHTable extends React.Component {
                         <td className="desease-name">{(translation && translation.get('value'))?translation.get('value') :indicatorLabel}</td>
                         <td className="previous-value">{it.get('totalPrevPeriod') || 'N/A'}</td>
                         <td className="current-value">{it.get('value') || 'N/A'}</td>
-                        <td className="previous-value">{`${diffPercent > 0 ? '+' : ''}${diffPercent}%`}</td>
+                        <td className="previous-value">{`${diffPercent > 0 ? '+' : ''}${diffPercent==null?"N/A":diffPercent+"%"}`}</td>
                       </tr>
                     )
                   })}
