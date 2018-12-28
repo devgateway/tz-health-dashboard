@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Sebastian Dimunzio
@@ -21,12 +22,11 @@ public class Dimension {
     private String name;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Item.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Item.class, cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 
     @JoinTable(name = "dimension_items", joinColumns = @JoinColumn(name = "dimension_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))
-
-    private List<Item> items;
+    private Set<Item> items;
 
     public Dimension() {
     }
@@ -36,11 +36,12 @@ public class Dimension {
         this.name = name;
     }
 
-    public List<Item> getItems() {
+
+    public Set<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 
