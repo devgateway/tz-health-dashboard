@@ -78,10 +78,12 @@ class WardLayout extends React.Component {
     //totals by ownership types
 
     const totalPrivate = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'UE4MHrqMzfd').length
-      const totalFaithBased = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'rj0MuRMJYCj').length
+    const totalFaithBased = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'rj0MuRMJYCj').length
     const totalPublic = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'm16TP0k7LVw').length
     const totalParastatal = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'G6Mg194YpDy').length
     const totalDefence = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'iTwLKcbi6BX').length
+
+    debugger; 
 
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const wardName = info.getIn(['name'])

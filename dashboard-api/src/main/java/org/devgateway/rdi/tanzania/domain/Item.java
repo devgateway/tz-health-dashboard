@@ -3,14 +3,15 @@ package org.devgateway.rdi.tanzania.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Sebastian Dimunzio
  */
 @Entity
-public class Item{
+public class Item {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @javax.persistence.Id
@@ -27,11 +28,10 @@ public class Item{
     }
 
     @JsonIgnore
-    @ManyToMany(targetEntity = Dimension.class)
+    @ManyToMany(targetEntity = Dimension.class, cascade = CascadeType.MERGE)
     @JoinTable(name = "dimension_items", joinColumns = @JoinColumn(name = "item_id"),
             inverseJoinColumns = @JoinColumn(name = "dimension_id"))
-
-    List<Dimension> dimensions;
+    Set<Dimension> dimensions;
 
     public Long getId() {
         return id;
@@ -57,20 +57,33 @@ public class Item{
         this.dhis2Id = dhis2Id;
     }
 
-    public List<Dimension> getDimensions() {
+
+    public Set<Dimension> getDimensions() {
         return dimensions;
     }
 
-    public void setDimensions(List<Dimension> dimensions) {
+    public void setDimensions(Set<Dimension> dimensions) {
         this.dimensions = dimensions;
     }
 
     public void addDimension(Dimension dimension) {
         if (this.dimensions == null) {
-            this.dimensions = new ArrayList<>();
+            this.dimensions = new HashSet<>();
         }
         this.dimensions.add(dimension);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(dhis2Id, item.dhis2Id);
+    }
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(dhis2Id);
+    }
 }

@@ -51,7 +51,7 @@ public class ConfigController {
         conf.setYears(new ArrayList<>(years));
 
         Dimension d = dimensionRepository.findOneByDhis2Id(Constants.DETEAILED_TYPE_DIMENSION);
-        conf.setDetailedTypes(d.getItems());
+        conf.setDetailedTypes(new ArrayList<>(d.getItems()));
         return conf;
 
     }
