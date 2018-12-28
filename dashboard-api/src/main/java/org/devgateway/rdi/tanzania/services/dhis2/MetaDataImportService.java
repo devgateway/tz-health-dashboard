@@ -96,10 +96,19 @@ public class MetaDataImportService {
 
             dhis2DimensionService.save(dimension);
             List<Item> its = dhis2DimensionService.getDimensionItems(dimension);
-            its.forEach(item -> {
-                item.addDimension(dimension);
 
-                items.add(item);
+            its.forEach(item -> {
+                Item theFinalItem = item;
+
+                if (items.stream().filter(item1 -> item1.getDhis2Id().equalsIgnoreCase(item.getDhis2Id())).count() > 0) {
+                    theFinalItem = items.stream().filter(item1 -> item1.getDhis2Id().equalsIgnoreCase(item.getDhis2Id())).findFirst().get();
+                    LOGGER.info("Reused " + item.getName());
+                }
+
+                theFinalItem.addDimension(dimension);
+                items.add(theFinalItem)
+
+                ;
             });
 
         });
