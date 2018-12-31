@@ -6,7 +6,7 @@ import org.devgateway.rdi.tanzania.domain.Dimension;
 import org.devgateway.rdi.tanzania.repositories.DimensionRepository;
 import org.devgateway.rdi.tanzania.response.Conf;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +32,9 @@ public class ConfigController {
 
     @Autowired
     DimensionRepository dimensionRepository;
+
+    @Autowired
+    CacheManager cacheManager;
 
     @RequestMapping("/conf")
     @Cacheable("configuration")
@@ -59,9 +62,10 @@ public class ConfigController {
 
     }
 
-    @CacheEvict(value = "first", allEntries = true)
     @RequestMapping("cache/clean")
     public ResponseEntity evictAllCacheValues() {
+        cacheManager.getCacheNames().stream()
+                .forEach(cacheName -> cacheManager.getCache(cacheName).clear());
         return new ResponseEntity(HttpStatus.OK);
     }
 }
