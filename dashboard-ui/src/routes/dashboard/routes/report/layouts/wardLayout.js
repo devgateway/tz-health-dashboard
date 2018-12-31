@@ -57,7 +57,7 @@ class WardLayout extends React.Component {
   }
 
   render() {
-    const {conf,params: {id}, mapShape, mapPoints, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView} = this.props
+    const {conf,params: {id}, mapShape, mapPoints, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView, typeMapping} = this.props
     const lan = this.props.i18n.language
     const {legendVisible} = this.state
     const facilitiesFeatures = []
@@ -76,14 +76,23 @@ class WardLayout extends React.Component {
     }
 
     //totals by ownership types
-
     const totalPrivate = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'UE4MHrqMzfd').length
     const totalFaithBased = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'rj0MuRMJYCj').length
     const totalPublic = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'm16TP0k7LVw').length
     const totalParastatal = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'G6Mg194YpDy').length
     const totalDefence = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'iTwLKcbi6BX').length
     const totalUndefined=  wardFacilities.filter(f => !f.ownership ).length
-    debugger;
+    
+    //totals by facility types
+    const hospitalDHIS2ids = typeMapping.filter(f => f.maskType === 'Hospital').map(f => f.dhis2Id)
+    const totalHospital = wardFacilities.filter(f => f.detailedType && hospitalDHIS2ids.indexOf(f.detailedType.dhis2Id) !== -1).length
+    const healthCenterDHIS2ids = typeMapping.filter(f => f.maskType === 'Health Center').map(f => f.dhis2Id)
+    const totalHealthCenter = wardFacilities.filter(f => f.detailedType && healthCenterDHIS2ids.indexOf(f.detailedType.dhis2Id) !== -1).length
+    const clinicDHIS2ids = typeMapping.filter(f => f.maskType === 'Clinic').map(f => f.dhis2Id)
+    const totalClinic = wardFacilities.filter(f => f.detailedType && clinicDHIS2ids.indexOf(f.detailedType.dhis2Id) !== -1).length
+    const dispensaryDHIS2ids = typeMapping.filter(f => f.maskType === 'Dispensary').map(f => f.dhis2Id)
+    const totalDispensary = wardFacilities.filter(f => f.detailedType && dispensaryDHIS2ids.indexOf(f.detailedType.dhis2Id) !== -1).length
+    const totalTypeUndefined = wardFacilities.filter(f => !f.detailedType ).length
 
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const wardName = info.getIn(['name'])
@@ -107,10 +116,9 @@ class WardLayout extends React.Component {
         <div className="report-header">
           <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
-
-        <CopyShare/>
-  <BackButton/>
-        <PeriodSelector conf={conf} period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
+          <CopyShare/>
+          <BackButton/>
+          <PeriodSelector conf={conf} period={period} params={this.props.params} onChangePeriod={e => this.onChangePeriod(e)}/>
         </div>
         <div className="ward-report-container">
           <div className="location-box">
@@ -142,7 +150,6 @@ class WardLayout extends React.Component {
               </div>
               <div className="info">
                 <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans></div>
-
                 <div className="types">
                   <div className="value-item"><div><Trans>Public</Trans></div><div>{totalPublic}</div></div>
                   <div className="value-item"><div><Trans>Private</Trans></div><div>{totalPrivate}</div></div>
@@ -150,6 +157,15 @@ class WardLayout extends React.Component {
                   <div className="value-item"><div><Trans>Parastatal</Trans></div><div>{totalParastatal}</div></div>
                   <div className="value-item"><div><Trans>Defense</Trans></div><div>{totalDefence}</div></div>
                   {totalUndefined >0?<div className="value-item"><div><Trans>Undefined</Trans></div><div>{totalUndefined}</div></div>:null}
+                </div>
+              </div>
+              <div className="info">
+                <div className="types">
+                  <div className="value-item"><div><Trans>Hospital</Trans></div><div>{totalHospital}</div></div>
+                  <div className="value-item"><div><Trans>Health Center</Trans></div><div>{totalHealthCenter}</div></div>
+                  <div className="value-item"><div><Trans>Clinic</Trans></div><div>{totalClinic}</div></div>
+                  <div className="value-item"><div><Trans>Dispensary</Trans></div><div>{totalDispensary}</div></div>
+                  {totalTypeUndefined >0?<div className="value-item"><div><Trans>Undefined</Trans></div><div>{totalTypeUndefined}</div></div>:null}
                 </div>
               </div>
             </div>
