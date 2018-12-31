@@ -61,7 +61,7 @@ export const getConfiguration=()=>{
   return (dispatch, getState) => {
     api.getConfiguration().then(data => {
       data.years.sort((d,d1)=>d1-d);
-      dispatch({ 'type': 'GET_CONF_DONE', data:Immutable.fromJS(data)})
+      dispatch({ 'type': 'GET_CONF_DONE', data: Immutable.fromJS(data)})
     })
   }
 }
@@ -81,28 +81,23 @@ const ACTION_HANDLERS = {
   },
   ['FIND_FACILITIES_DONE']: (state, action) => {
     const { data, category } = action
-
     return state.setIn([category, 'list'], data)
   },
   ['GET_CONF_DONE']: (state, action) => {
     const {data} = action
-
     return state.setIn(['conf'], data)
   },
   ['@@router/LOCATION_CHANGE']: (state, action) => {
     const { payload: { pathname } } = action;
     const lan = pathname.substring(1, 3);
-
     state = state.setIn(['lan'], lan)
     const pattern = pathname.substring(pathname.lastIndexOf('/') + 1);
-
     if (pattern) {
       const parsed = api.parsePeriod(pattern);
       if (parsed != null) {
         return state.setIn(['period'], Immutable.fromJS(parsed))
       }
     }
-
     return state;
   }
 };
