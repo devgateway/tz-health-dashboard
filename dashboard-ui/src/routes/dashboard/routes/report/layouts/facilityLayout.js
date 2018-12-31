@@ -65,7 +65,6 @@ class Layout extends React.Component {
   render() {
     const {conf,params: {id}, mapShape, mapPoints, mapBorder, info, population, period, OPDView, onSetOPDView, RMNCHView, onSetRMNCHView, typeMapping} = this.props
     const lan = this.props.i18n.language
-    debugger;
     const facilitiesFeatures = []
     if (mapPoints) {
       mapPoints.map(f => facilitiesFeatures.push({properties: {ID: f.get('id'), NAME: f.get('name'),
@@ -75,6 +74,7 @@ class Layout extends React.Component {
     }
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
+    const facilityTypeMapped = typeMapping.toJS().find(f => f.dhis2Id === info.getIn(['detailedType', 'dhis2Id'])) || {}
     const facilityType = info.getIn(['type', 'name'])
     const facilityTypeId = info.getIn(['type', 'dhis2Id'])
     const wardName = info.getIn(['ward', 'name'])
@@ -82,8 +82,17 @@ class Layout extends React.Component {
     const regionName = info.getIn(['region', 'name'])
     let shapeFeatures, borderFeature
     let shapeStrokeColor = '#6C8EAD'
-      
-    debugger
+    let shapeBoundary = null
+    switch(facilityTypeMapped.boundary) {
+      case 'region':
+        shapeBoundary = 'district'
+        break;
+      case 'district':
+        shapeBoundary = 'ward'
+        break;
+    }
+
+
     if (mapShape.getIn(['features'])) {
       shapeFeatures = mapShape.toJS()
       if (mapBorder.getIn(['features']) && mapShape.getIn(['features'])) {
@@ -124,7 +133,7 @@ class Layout extends React.Component {
         </div>
         <div className="facility-report-container">
           <div className="location-box">
-            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityType}</Trans></div></div>
+            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityTypeMapped.maskType}</Trans></div></div>
             <div><div className="location-title"><Trans>Ward</Trans></div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title"><Trans>District</Trans></div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title"><Trans>Region</Trans></div><div className="location-value">{regionName}</div></div>
@@ -174,24 +183,16 @@ class Layout extends React.Component {
                   </div>
                   <div className="legend-item">
                     <div className="other-icon"/>
-                    {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                      <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same region</Trans></div>
-                    :
-                      <div className="legend-name"><Trans>Other Facility in ward</Trans></div>
-                    }
+                    <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityTypeMapped.maskType}</Trans> <Trans>in same {facilityTypeMapped.boundary}</Trans></div>
                   </div>
                   <div className="legend-item">
                     <div className="boundary-icon"/>
-                    {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
-                      <div className="legend-name"><Trans>Region boundary</Trans></div>
-                    :
-                      <div className="legend-name"><Trans>Ward boundary</Trans></div>
-                    }
+                    <div className="legend-name"><Trans>{facilityTypeMapped.boundary} boundary</Trans></div>          
                   </div>
-                  {facilityTypeId === "FgLhM6ea9dS" || facilityTypeId === "WK2vj3N9aA0" ?
+                  {shapeBoundary ?
                     <div className="legend-item">
                       <div className="district-boundary-icon"/>
-                      <div className="legend-name"><Trans>District boundary</Trans></div>
+                      <div className="legend-name"><Trans>{shapeBoundary} boundary</Trans></div>
                     </div>
                   : null}
                 </div>
