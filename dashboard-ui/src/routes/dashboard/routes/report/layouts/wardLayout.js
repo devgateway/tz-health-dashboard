@@ -82,8 +82,8 @@ class WardLayout extends React.Component {
     const totalPublic = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'm16TP0k7LVw').length
     const totalParastatal = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'G6Mg194YpDy').length
     const totalDefence = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'iTwLKcbi6BX').length
-
-    debugger; 
+    const totalUndefined=  wardFacilities.filter(f => !f.ownership ).length
+    debugger;
 
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const wardName = info.getIn(['name'])
@@ -143,12 +143,13 @@ class WardLayout extends React.Component {
               <div className="info">
                 <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans></div>
 
-                <div className="ages">
+                <div className="types">
                   <div className="value-item"><div><Trans>Public</Trans></div><div>{totalPublic}</div></div>
                   <div className="value-item"><div><Trans>Private</Trans></div><div>{totalPrivate}</div></div>
                   <div className="value-item"><div><Trans>Faith Based</Trans></div><div>{totalFaithBased}</div></div>
                   <div className="value-item"><div><Trans>Parastatal</Trans></div><div>{totalParastatal}</div></div>
                   <div className="value-item"><div><Trans>Defense</Trans></div><div>{totalDefence}</div></div>
+                  {totalUndefined >0?<div className="value-item"><div><Trans>Undefined</Trans></div><div>{totalUndefined}</div></div>:null}
                 </div>
               </div>
             </div>
