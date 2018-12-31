@@ -27,7 +27,7 @@ const mapStateToProps = state => {
     conf:state.getIn(['dashboard','conf']),
     OPDView: state.getIn(['facility', 'OPDView']),
     RMNCHView: state.getIn(['facility', 'RMNCHView']),
-    typeMapping: state.getIn(['facility', 'typeMapping']),
+    typeMapping: state.getIn(['dashboard', 'typeMapping']),
   }
 }
 
