@@ -56,7 +56,7 @@ public class WriteCsvToResponse {
             String type = facilityResponse.getType() != null ? facilityResponse.getType().getName() : null;
             String detailedType = facilityResponse.getDetailedType() != null ? facilityResponse.getDetailedType().getName() : null;
 
-            String combinedType=facilityResponse.getCombinedType() != null ? facilityResponse.getCombinedType() : null;
+            String combinedType=facilityResponse.getFacilityType() != null ? facilityResponse.getFacilityType() : null;
 
 
             String ward = facilityResponse.getWard() != null ? facilityResponse.getWard().getName() : null;

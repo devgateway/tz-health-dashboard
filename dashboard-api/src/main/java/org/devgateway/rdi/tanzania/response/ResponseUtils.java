@@ -44,15 +44,15 @@ public class ResponseUtils {
                     case "xQDiGgEFknR": // "xQDiGgEFknR";"Eye Clinic"
                     case "LGk92i9DOFU": // "LGk92i9DOFU";"Dental Clinic"
                     case "AMbDPYNQ2ha": // "AMbDPYNQ2ha";"Other Clinic"
-                        facilityResponse.setCombinedType("Clinic");
+                        facilityResponse.setFacilityType("Clinic");
                         break;
                     case "DvJehvyBpEQ": // "DvJehvyBpEQ";"Dispensary"
-                        facilityResponse.setCombinedType("Dispensary");
+                        facilityResponse.setFacilityType("Dispensary");
                         break;
                     case "FgLhM6ea9dS": // "FgLhM6ea9dS";"Health Center"
                     case "gJQCkKyX8ph": // "gJQCkKyX8ph";"Nursing Home"
                     case "gKAkwmPuTLz": // "gKAkwmPuTLz";"Maternity Home"
-                        facilityResponse.setCombinedType("Health Center");
+                        facilityResponse.setFacilityType("Health Center");
                         break;
                     case "O4hfhLGzu8H": // "O4hfhLGzu8H";"Regional Referral Hospital"
                     case "YUJl1RAk6Gt": // "YUJl1RAk6Gt";"Health Labs"
@@ -64,10 +64,10 @@ public class ResponseUtils {
                     case "Y6oYSbQE2Tp": // "Y6oYSbQE2Tp";"Regional Hospital"
                     case "tnz6uusQqSf": // "tnz6uusQqSf";"Other Hospital"
                     case "I326qTfkdwh": // "I326qTfkdwh";"Zonal Super Specialist Hospital"
-                        facilityResponse.setCombinedType("Hospital");
+                        facilityResponse.setFacilityType("Hospital");
                         break;
                     default:
-                        facilityResponse.setCombinedType(null);
+                        facilityResponse.setFacilityType(null);
 
                 }
             }

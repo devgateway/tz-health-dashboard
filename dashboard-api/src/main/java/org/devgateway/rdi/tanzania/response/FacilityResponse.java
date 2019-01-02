@@ -33,15 +33,15 @@ public class FacilityResponse {
 
     private Point point;
 
-    private String combinedType;
+    private String facilityType;
 
 
-    public String getCombinedType() {
-        return combinedType;
+    public String getFacilityType() {
+        return facilityType;
     }
 
-    public void setCombinedType(String combinedType) {
-        this.combinedType = combinedType;
+    public void setFacilityType(String facilityType) {
+        this.facilityType = facilityType;
     }
 
     public Long getId() {
