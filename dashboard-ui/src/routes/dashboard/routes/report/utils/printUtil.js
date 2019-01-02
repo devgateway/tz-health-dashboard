@@ -3,7 +3,23 @@ import { generateFacilityPDF } from './facilityPDF'
 import { generateWardPDF } from './wardPDF'
 import { imagesToBase64 } from '../../../../../api'
 
+
+const isIE=()=>{
+  var ua = window.navigator.userAgent;
+  var msie = ua.indexOf('MSIE') >-1;
+  var trident = ua.indexOf('Trident') >-1;
+  var edge = ua.indexOf('Edge') >-1;
+
+  return msie || trident || edge
+}
+
+
+
 export const print = (reportType, state) => {
+
+  if(isIE){
+    window.print()
+  }else{
   const el = document.getElementById("map1");
   var images = el.getElementsByTagName("image");
 
@@ -21,4 +37,5 @@ export const print = (reportType, state) => {
         console.error('oops, something went wrong!', error);
       });
   })
+  }
 }
