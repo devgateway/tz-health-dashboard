@@ -63,10 +63,7 @@ public class Runner implements ApplicationRunner {
                 String aux = br.readLine();
 
                 while (aux != null) {
-                    // Se escribe la linea en pantalla
                     System.out.println(aux);
-
-                    // y se lee la siguiente.
                     aux = br.readLine();
                 }
 
