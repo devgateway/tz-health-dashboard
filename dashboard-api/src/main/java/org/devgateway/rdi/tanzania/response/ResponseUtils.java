@@ -35,6 +35,42 @@ public class ResponseUtils {
                 facilityResponse.setCoordinates(new Double[]{facility.getPoint().getCoordinate().x, facility.getPoint().getCoordinate().y});
                 facilityResponse.setPoint(facility.getPoint());
             }
+
+
+
+            if (facility.getDetailedType() != null) {
+                switch (facility.getDetailedType().getDhis2Id()) {
+
+                    case "xQDiGgEFknR": // "xQDiGgEFknR";"Eye Clinic"
+                    case "LGk92i9DOFU": // "LGk92i9DOFU";"Dental Clinic"
+                    case "AMbDPYNQ2ha": // "AMbDPYNQ2ha";"Other Clinic"
+                        facilityResponse.setCombinedType("Clinic");
+                        break;
+                    case "DvJehvyBpEQ": // "DvJehvyBpEQ";"Dispensary"
+                        facilityResponse.setCombinedType("Dispensary");
+                        break;
+                    case "FgLhM6ea9dS": // "FgLhM6ea9dS";"Health Center"
+                    case "gJQCkKyX8ph": // "gJQCkKyX8ph";"Nursing Home"
+                    case "gKAkwmPuTLz": // "gKAkwmPuTLz";"Maternity Home"
+                        facilityResponse.setCombinedType("Health Center");
+                        break;
+                    case "O4hfhLGzu8H": // "O4hfhLGzu8H";"Regional Referral Hospital"
+                    case "YUJl1RAk6Gt": // "YUJl1RAk6Gt";"Health Labs"
+                    case "LdiS9jKDmYj": // "LdiS9jKDmYj";"District Hospital"
+                    case "P9dlUDycTwP": // "P9dlUDycTwP";"National Hospital"
+                    case "xlorplD1QwS": // "xlorplD1QwS";"Referral Hospital"
+                    case "v4blQv4R67J": // "v4blQv4R67J";"Designated District Hospital"
+                    case "rHjr1oAqSIS": // "rHjr1oAqSIS";"National Super Specialist Hospital"
+                    case "Y6oYSbQE2Tp": // "Y6oYSbQE2Tp";"Regional Hospital"
+                    case "tnz6uusQqSf": // "tnz6uusQqSf";"Other Hospital"
+                    case "I326qTfkdwh": // "I326qTfkdwh";"Zonal Super Specialist Hospital"
+                        facilityResponse.setCombinedType("Hospital");
+                        break;
+                    default:
+                        facilityResponse.setCombinedType(null);
+
+                }
+            }
             return facilityResponse;
         } else {
             return null;
