@@ -37,7 +37,6 @@ public class WriteCsvToResponse {
                 messages.getString("Ownership"),
                 messages.getString("Detailed_Ownership"),
                 messages.getString("Facility_Type"),
-                messages.getString("Detailed_Type"),
                 messages.getString("Ward"),
                 messages.getString("District"),
                 messages.getString("Region")};
@@ -56,14 +55,14 @@ public class WriteCsvToResponse {
             String type = facilityResponse.getType() != null ? facilityResponse.getType().getName() : null;
             String detailedType = facilityResponse.getDetailedType() != null ? facilityResponse.getDetailedType().getName() : null;
 
-            String combinedType=facilityResponse.getFacilityType() != null ? facilityResponse.getFacilityType() : null;
+            String facilityType = facilityResponse.getFacilityType() != null ? facilityResponse.getFacilityType() : null;
 
 
             String ward = facilityResponse.getWard() != null ? facilityResponse.getWard().getName() : null;
             String district = facilityResponse.getDistrict() != null ? facilityResponse.getDistrict().getName() : null;
             String region = facilityResponse.getRegion() != null ? facilityResponse.getRegion().getName() : null;
 
-            return new String[]{code, name, latitude, longitude, ownership, detailedOwnership, combinedType, detailedType, ward, district, region};
+            return new String[]{code, name, latitude, longitude, ownership, detailedOwnership, facilityType, ward, district, region};
 
 
         }).collect(Collectors.toList());
