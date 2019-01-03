@@ -34,6 +34,7 @@ public class FacilityResponse {
     private Point point;
 
     private String facilityType;
+    private String boundaryLevel;
 
 
     public String getFacilityType() {
@@ -138,5 +139,13 @@ public class FacilityResponse {
 
     public void setPoint(Point point) {
         this.point = point;
+    }
+
+    public String getBoundaryLevel() {
+        return boundaryLevel;
+    }
+
+    public void setBoundaryLevel(String boundaryLevel) {
+        this.boundaryLevel = boundaryLevel;
     }
 }
