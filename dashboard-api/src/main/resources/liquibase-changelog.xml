@@ -13,10 +13,10 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_extension" author="sdimunzio">
-        <sql>
-            CREATE EXTENSION postgis
-            SCHEMA public
-        </sql>
+            <sql>
+                CREATE EXTENSION postgis
+                SCHEMA public
+            </sql>
     </changeSet>
 
 
@@ -119,6 +119,7 @@
         </sql>
     </changeSet>
 
+
     <changeSet id="add_opddiagnostic_year_idx" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">
@@ -143,7 +144,6 @@
             (year, facility_id);
         </sql>
     </changeSet>
-
 
 
     <changeSet id="add_rmnch_year_idx" author="sdimunzio" failOnError="false">
@@ -172,10 +172,6 @@
     </changeSet>
 
 
-
-
-
-
     <changeSet id="cluster_opddiagnostic" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">
@@ -185,7 +181,6 @@
             cluster opddiagnostic using opddiagnostic_year_facility_id_idx
         </sql>
     </changeSet>
-
     <changeSet id="cluster_rmnch_" author="sdimunzio" failOnError="false">
 
         <preConditions onFail="CONTINUE">

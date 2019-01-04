@@ -64,11 +64,9 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     ImportLogRepository importLogRepository;
 
     public void population(Region region, Integer year, boolean incremental) {
-
         if (!incremental) {
             dhis2PopulationService.clean(region, year);
         }
-
         dhis2PopulationService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT,
                 QueryUtil.Y(year));
     }
@@ -78,16 +76,12 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
         if (!incremental) {
             dhis2OPDDiagnosesService.clean(region, year);
         }
-
         dhis2OPDDiagnosesService.byRegion(region, Dhis2AnalyticImport.Grouping.DISTRICT,
                 QueryUtil.MONTHS_OFF(year));
-
-
     }
 
 
     public void RMNNCH(Region region, Integer year, boolean incremental) {
-
         if (incremental) {
             dhis2RMNNCHService.clean(region, year);
         }
@@ -99,36 +93,27 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
         population(region, year, incremental);
         OPDDiagnoses(region, year, incremental);
         RMNNCH(region, year, incremental);
-
         LOGGER.info("........................ALL DONE ........................");
-
     }
 
 
     @Override
     public void run(String... strings) {
-
         CommandLineParser parser = new DefaultParser();
-
         Options options = new Options();
         options.addOption("c", false, "Clean");
         options.addOption("r", true, "Region");
         options.addOption("y", true, "Year");
         options.addOption("d", true, "Data");
-
         CommandLine cmd = null;
         Boolean incremental = true;
         ImportLog importLog = new ImportLog();
         try {
 
             cmd = parser.parse(options, strings);
-
             if (cmd.hasOption("r") && cmd.hasOption("y")) {
-
                 Region region = regionRepository.findOneByName(cmd.getOptionValue('r'));
-
                 Integer year = Integer.parseInt(cmd.getOptionValue("y"));
-
                 if (region == null) {
                     System.out.println("......................................");
                     System.out.println(".                                     .");
@@ -170,7 +155,6 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
 
                 }
             } else {
-
                 System.out.println("......................................");
                 System.out.println(".                                     .");
                 System.out.println(".                                     .");
@@ -184,10 +168,8 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
         } catch (ParseException e) {
             importLog.setStatus("ERROR");
             importLogRepository.save(importLog);
-
             LOGGER.error(e.getMessage(), e);
         }
-
 
         System.exit(3);
     }
