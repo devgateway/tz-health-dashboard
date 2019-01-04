@@ -13,10 +13,10 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create_extension" author="sdimunzio">
-        <sql>
-            CREATE EXTENSION postgis
-            SCHEMA public
-        </sql>
+            <sql>
+                CREATE EXTENSION postgis
+                SCHEMA public
+            </sql>
     </changeSet>
 
 
