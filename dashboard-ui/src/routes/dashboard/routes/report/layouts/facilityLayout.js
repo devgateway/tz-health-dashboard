@@ -74,8 +74,10 @@ class Layout extends React.Component {
     }
     const pointFeatures = {'type': 'FeatureCollection', 'features': facilitiesFeatures}
     const facilityName = info.getIn(['name'])
-    const facilityTypeMapped = typeMapping.toJS().find(f => f.dhis2Id === info.getIn(['detailedType', 'dhis2Id'])) || {}
-    const facilityType = info.getIn(['type', 'name'])
+    //const facilityTypeMapped = typeMapping.toJS().find(f => f.dhis2Id === info.getIn(['detailedType', 'dhis2Id'])) || {}
+    const boundaryLevel = info.get('boundaryLevel')
+    const facilityType = info.get('facilityType')
+    //const facilityType = info.getIn(['type', 'name'])
     const facilityTypeId = info.getIn(['type', 'dhis2Id'])
     const wardName = info.getIn(['ward', 'name'])
     const districtName = info.getIn(['district', 'name'])
@@ -83,11 +85,14 @@ class Layout extends React.Component {
     let shapeFeatures, borderFeature
     let shapeStrokeColor = '#6C8EAD'
     let shapeBoundary = null
-    switch(facilityTypeMapped.boundary) {
+    let admLevelName = wardName
+    switch(boundaryLevel) {
       case 'region':
+        admLevelName = regionName
         shapeBoundary = 'district'
         break;
       case 'district':
+        admLevelName = districtName
         shapeBoundary = 'ward'
         break;
     }
@@ -133,14 +138,14 @@ class Layout extends React.Component {
         </div>
         <div className="facility-report-container">
           <div className="location-box">
-            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityTypeMapped.maskType}</Trans></div></div>
+            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityType}</Trans></div></div>
             <div><div className="location-title"><Trans>Ward</Trans></div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title"><Trans>District</Trans></div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title"><Trans>Region</Trans></div><div className="location-value">{regionName}</div></div>
           </div>
           <div className="population-box">
             <div className="info">
-              <div className="sub-title"><Trans>Availability of Health Services in</Trans> {regionName} <Trans>Region</Trans></div>
+              <div className="sub-title"><Trans>Availability of Health Services in</Trans> {regionName} <Trans>{boundaryLevel}</Trans></div>
               <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans></div>
 
               <div className="ages">
@@ -183,11 +188,11 @@ class Layout extends React.Component {
                   </div>
                   <div className="legend-item">
                     <div className="other-icon"/>
-                    <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityTypeMapped.maskType}</Trans> <Trans>in same {facilityTypeMapped.boundary}</Trans></div>
+                    <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same {boundaryLevel}</Trans></div>
                   </div>
                   <div className="legend-item">
                     <div className="boundary-icon"/>
-                    <div className="legend-name"><Trans>{facilityTypeMapped.boundary} boundary</Trans></div>          
+                    <div className="legend-name"><Trans>{boundaryLevel} boundary</Trans></div>          
                   </div>
                   {shapeBoundary ?
                     <div className="legend-item">
