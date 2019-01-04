@@ -77,14 +77,30 @@ export const getFacilityRMNCH = (id, period) => {
 export const getMapShape = (facilityData) => {
   return (dispatch, getState) => {
     const detailedType = facilityData.getIn(['detailedType', 'dhis2Id'])
-    const typeMapping = getState().getIn(['dashboard', 'typeMapping']).toJS()
-    const typeDetails = typeMapping.find(t => t.dhis2Id === detailedType)
+    const boundaryLevel = facilityData.get('boundaryLevel')
     let params = {}
-    params[typeDetails.paramField] = facilityData.getIn([typeDetails.paramValue, 'gid'])
-
-    if (typeDetails.getShapeMethod) {
+    let getShapeMethod = null
+    let getBorderMethod = null
+    switch(boundaryLevel) {
+      case 'region':
+        getBorderMethod = api.findRegions
+        getShapeMethod = api.findDistricts
+        params.regions = facilityData.getIn(['region', 'gid'])
+        break;
+      case 'district':
+        getBorderMethod = api.findDistricts
+        getShapeMethod = api.findWards
+        params.districts = facilityData.getIn(['district', 'gid'])
+        break;
+      case 'ward':
+        getBorderMethod = api.findWards
+        params.wards = facilityData.getIn(['ward', 'gid'])
+        break;
+    }
+    
+    if (getShapeMethod) {
       dispatch({type: FACILITY_MAP_REQUEST})
-      typeDetails.getShapeMethod(params).then(data => {
+      getShapeMethod(params).then(data => {
         dispatch({'type': FACILITY_MAP_SHAPE_RESPONSE, data })
       }).catch(error => {
         dispatch({'type': FACILITY_MAP_ERROR, error})
@@ -94,7 +110,7 @@ export const getMapShape = (facilityData) => {
     }
 
     dispatch({type: FACILITY_MAP_REQUEST})
-    typeDetails.getBorderMethod(params).then(data => {
+    getBorderMethod(params).then(data => {
       dispatch({'type': FACILITY_MAP_BORDER_RESPONSE, data })
     }).catch(error => {
       dispatch({'type': FACILITY_MAP_ERROR, error})
@@ -107,8 +123,19 @@ export const getMapPoints = (facilityData) => {
     const detailedType = facilityData.getIn(['detailedType', 'dhis2Id'])
     const typeMapping = getState().getIn(['dashboard', 'typeMapping']).toJS()
     const typeDetails = typeMapping.find(t => t.dhis2Id === detailedType)
+    const boundaryLevel = facilityData.get('boundaryLevel')
     let params = {}
-    params[typeDetails.paramField] = facilityData.getIn([typeDetails.paramValue, 'gid'])
+    switch(boundaryLevel) {
+      case 'region':
+        params.regions = facilityData.getIn(['region', 'gid'])
+        break;
+      case 'district':
+        params.districts = facilityData.getIn(['district', 'gid'])
+        break;
+      case 'ward':
+        params.wards = facilityData.getIn(['ward', 'gid'])
+        break;
+    }
     const typeDetailsToFilter = typeMapping.map(t => {
       if (t.maskType === typeDetails.maskType) {
         return t.id
