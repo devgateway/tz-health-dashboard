@@ -1,40 +1,143 @@
-import React from 'react'
-import PropTypes from "prop-types"
-import {translate, Trans} from "react-i18next"
-import BarChart from '../../../../../components/stackedGroupedColumnChart'
+import React from 'react';
 import {getPeriodLabels} from '../utils/labelsUtil'
 import i18n from '../../../../../i18n'
 
-class RMNCHBarchart extends React.Component {
+import createPlotlyComponent from 'react-plotlyjs';
+import Plotly from 'plotly.js/dist/plotly-basic.min';
+const PlotlyComponent = createPlotlyComponent(Plotly);
 
-  render() {
-    const {period, RMNCH, i18n: {language}} = this.props
+export default class RMNCHChart extends React.Component {
+
+  constructor(props) {
+    super()
+    this.state = {}
+  }
+
+  handleResize() {
+    this.forceUpdate()
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize.bind(this))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize.bind(this))
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const a = this.props.RMNCH.toJS()
+    const b = nextProps.RMNCH.toJS()
+    if (a.length != b.length) return true
+    if (JSON.stringify(a) === JSON.stringify(b)) return false
+    return true
+  }
+
+  wordWrap(str, maxWidth) {
+    let newLineStr = "<br>"
+    let done = false
+    let res = ''
+    const testWhite = (x) => {
+      var white = new RegExp(/^\s$/);
+      return white.test(x.charAt(0));
+    }
+    do {                    
+      let found = false;
+      // Inserts new line at first whitespace of the line
+      for (let i = maxWidth - 1; i >= 0; i--) {
+        if (testWhite(str.charAt(i))) {
+          res = res + [str.slice(0, i), newLineStr].join('');
+          str = str.slice(i + 1);
+          found = true;
+          break;
+        }
+      }
+      // Inserts new line at maxWidth position, the word is too long to wrap
+      if (!found) {
+        res += [str.slice(0, maxWidth), newLineStr].join('');
+        str = str.slice(maxWidth);
+      }
+      if (str.length < maxWidth) {
+        done = true
+      }
+    } while (!done)
+    return res + str
+  }
+
+  generateChartData() {
+    const {period, RMNCH} = this.props
     const RMNCHData = RMNCH.get('data').toJS()
+    const {prevLabel, currentLabel} = getPeriodLabels(period)
+    const chartData = []
+    const layout = {
+      'showticklabels': false,
+      'showgrid': true,
+      'height': 400,
+      'barmode': 'group',
+      'showlegend': false,
+      'legend': {
+        visible: false
+      },
+      'margin':{
+        't':10,
+        'b':90,
+        'l':60,
+        'r':20
+      },
+      'title': '',
+    }
+    const config = {
+      'modeBarButtonsToRemove': ['toImage', 'sendDataToCloud','hoverCompareCartesian', 'zoom2d', 'pan2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d', 'hoverClosestCartesian', 'hoverClosestGl2d', 'hoverClosestPie', 'toggleHover', 'resetViews', 'toggleSpikelines'],
+      'showLink': false,
+      'displaylogo': false
+    }
     const RMNCHCategories = RMNCHData.map(d => { 
-      const tr = d.indicator.translations.find(e => e.locale === language)
+      const tr = d.indicator.translations.find(e => e.locale === i18n.language)
       if (tr && tr.value){
-        return tr.value
+        return this.wordWrap(tr.value, 20)
       } else {
-        return d.indicator.name
+        return this.wordWrap(d.indicator.name, 20)
       } 
     })
-    const RMNCHSeries = [{
-        color: '#9C9487',
-        name: getPeriodLabels(period).prevLabel,
-        data: RMNCHData.map(d => d.totalPrevPeriod),
-        stack: getPeriodLabels(period).prevLabel
+    const data = [{
+        x: RMNCHCategories,
+        y: RMNCHData.map(d => d.totalPrevPeriod !== -1 ? d.totalPrevPeriod : 0),
+        name: prevLabel,
+        type: 'bar',
+        marker:{
+          color: '#9C9487',
+        },
     }, {
-        color: '#776D5A',
-        name: getPeriodLabels(period).currentLabel,
-        data: RMNCHData.map(d => d.value !== -1 ? d.value : 0),
-        stack: getPeriodLabels(period).currentLabel
+        x: RMNCHCategories,
+        y: RMNCHData.map(d => d.value !== -1 ? d.value : 0),
+        name: currentLabel,
+        type: 'bar',
+        marker:{
+          color: '#776D5A',
+        },
     }]
+    return {config, layout, data}
+  }
+
+  render() {
+    const {period} = this.props
+    const {prevLabel, currentLabel} = getPeriodLabels(period)
+    const {layout, config, data} = this.generateChartData()
+    const key = new Date().getTime()
     return (
-      <div className="">
-        <BarChart categories={RMNCHCategories} series={RMNCHSeries} chartId="RMNCHbc"/>
+      <div className="chart" ref="chartContainer">
+        <div className="chart-legends">
+          <div className="legend-color" style={{'background': '#9C9487'}}/><div className="legend-label">{prevLabel}</div>
+          <div className="legend-color" style={{'background': '#776D5A'}}/><div className="legend-label">{currentLabel}</div>
+        </div>
+        <PlotlyComponent
+          key={key}
+          data={data}
+          layout={layout}
+          config={config}/>
       </div>
-    )
+    );
   }
 }
 
-export default translate("translations")(RMNCHBarchart)
+

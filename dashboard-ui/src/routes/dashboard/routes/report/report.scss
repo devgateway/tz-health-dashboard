@@ -661,3 +661,46 @@
   height: 15px;
   width: 20px;
 }
+
+.js-plotly-plot {
+  .trace.bars {
+    path {
+      pointer-events: none !important;
+    }
+  }
+}
+
+.chart-legends{
+	padding-left: 30px;
+	>div{
+		display: inline-block;
+	}
+	.legend-color{
+		width: 16px;
+		height: 16px;
+	}
+	.legend-label{
+		padding: 0px 20px 0px 5px;
+	    font-size: 12px;
+	    height: 16px;
+	    color: rgb(68, 68, 68);
+	    line-height: 10px;
+	    vertical-align: middle;
+	}
+}
+
+.infolayer{
+	text{
+		font-size: 11px !important;
+    	fill: rgb(68, 68, 68) !important;
+    	font-weight: bold !important;
+	}
+}
+
+.xaxislayer-above{
+	text{
+		font-size: 11px !important;
+    	fill: rgb(68, 68, 68) !important;
+    	font-weight: bold !important;
+	}
+}
