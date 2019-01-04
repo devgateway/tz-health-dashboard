@@ -33,17 +33,17 @@ public class FacilityResponse {
 
     private Point point;
 
+    private String facilityType;
+    private String boundaryLevel;
 
-    private String combinedType;
 
-    public String getCombinedType() {
-        //this.type,
-        //this.detailedType
-
-        return combinedType;
+    public String getFacilityType() {
+        return facilityType;
     }
 
-
+    public void setFacilityType(String facilityType) {
+        this.facilityType = facilityType;
+    }
 
     public Long getId() {
         return id;
@@ -139,5 +139,13 @@ public class FacilityResponse {
 
     public void setPoint(Point point) {
         this.point = point;
+    }
+
+    public String getBoundaryLevel() {
+        return boundaryLevel;
+    }
+
+    public void setBoundaryLevel(String boundaryLevel) {
+        this.boundaryLevel = boundaryLevel;
     }
 }

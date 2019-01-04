@@ -30,6 +30,26 @@ public class FacilityService {
 
     public List<FacilityResponse> getFacilities(FacilityRequest facilityRequest) {
         List<Facility> facilities = facilityRepository.findAll(FacilitySpecifications.facilityFilters(facilityRequest));
+
+        /*  Regional Referral Hospital -    HOSPITAL        - REGIONAL
+            Health Labs District Hospital - HOSPITAL        - DISTRICT
+            National Hospital -             HOSPITAL        - REGIONAL
+            Dispensary -                    DISPENSARY      - WARD
+            Nursing Home -                  HEALTH CENTER   - DISTRICT
+            Referral Hospital -             HOSPITAL        - REGIONAL
+            Designated District Hospital -  HOSPITAL        - DISTRICT
+            National Super Specialist Hospital - HOSPITAL - REGIONAL?
+            Eye Clinic - CLINIC - DISTRICT
+            Regional Hospital - HOSPITAL - REGIONAL
+            Other Hospital - HOSPITAL - REGIONAL
+            Zonal Super Specialist Hospital - HOSPITAL - REGIONAL?
+            Dental Clinic - CLINIC - DISTRICT
+            Other Clinic - CLINIC - DISTRICT
+            Maternity Home - HEALTH CENTER - DISTRICT?
+            Health Center - HEALTH CENTER - DISTRICT?
+        */
+
+
         return facilities.stream().map(f -> ResponseUtils.facilityToResponse(f)).collect(Collectors.toList());
 
     }

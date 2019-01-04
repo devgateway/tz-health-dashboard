@@ -1,6 +1,7 @@
 package org.devgateway.rdi.tanzania;
 
 import com.opencsv.CSVReader;
+import org.apache.commons.lang3.SystemUtils;
 import org.devgateway.rdi.tanzania.domain.Translation;
 import org.devgateway.rdi.tanzania.repositories.TranslationRepository;
 import org.devgateway.rdi.tanzania.services.dhis2.MetaDataImportService;
@@ -24,9 +25,11 @@ public class Runner implements ApplicationRunner {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Application.class.getName());
 
-    private static String BOUNDARIES_SH_FILE = "/data/load_data.sh";
-    private  final String CSV_FILE = "/data/translations.csv";
-    private  final String UPDATE_FACILITY = "/data/update_facilities.sh";
+    private static String BOUNDARIES_SH_FILE = "/data/load_boundaries.sh";
+    private static String BOUNDARIES_BAT_FILE_ = "/data/load_boundaries.bat";
+    private final String CSV_FILE = "/data/translations.csv";
+    private final String UPDATE_FACILITY_SH_FILE = "/data/update_facilities.sh";
+    private final String UPDATE_FACILITY_BAT_FILE = "/data/update_facilities.bat";
 
 
     @Override
@@ -51,18 +54,16 @@ public class Runner implements ApplicationRunner {
 
             String pdwPath = Paths.get(".").toAbsolutePath().normalize().toString();
 
+
             try {
-                Process p = Runtime.getRuntime().exec(pdwPath + BOUNDARIES_SH_FILE);
+                Process p = Runtime.getRuntime().exec(pdwPath + ((SystemUtils.IS_OS_WINDOWS) ? BOUNDARIES_BAT_FILE_ : BOUNDARIES_SH_FILE));
 
                 InputStream is = p.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String aux = br.readLine();
 
                 while (aux != null) {
-                    // Se escribe la linea en pantalla
                     System.out.println(aux);
-
-                    // y se lee la siguiente.
                     aux = br.readLine();
                 }
 
@@ -122,7 +123,7 @@ public class Runner implements ApplicationRunner {
     private void updateWards() {
         Path pdwPath = Paths.get(".").toAbsolutePath();
         try {
-            Process p = Runtime.getRuntime().exec(pdwPath + UPDATE_FACILITY);
+            Process p = Runtime.getRuntime().exec(pdwPath + ((SystemUtils.IS_OS_WINDOWS) ? UPDATE_FACILITY_BAT_FILE : UPDATE_FACILITY_SH_FILE));
 
             InputStream is = p.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

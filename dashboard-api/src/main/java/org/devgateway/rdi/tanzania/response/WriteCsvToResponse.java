@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -21,16 +23,24 @@ public class WriteCsvToResponse {
 
     public static void writeFacilitiesResponse(PrintWriter print, List<FacilityResponse> facilityResponses, String locale) {
 
+        Locale aLocale = new Locale(locale);
+
+        ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", aLocale);
+
         CSVWriter writer = new CSVWriter(print);
 
-        String[] en_header = new String[]{"Code", "Name", "Latitude", "Longitude", "Ownership", "Detailed Ownership",
-                "Type", "Detailed Type", "Ward", "District", "Region"};
+        String[] header = new String[]{
+                messages.getString("Code"),
+                messages.getString("Name"),
+                messages.getString("Latitude"),
+                messages.getString("Longitude"),
+                messages.getString("Ownership"),
+                messages.getString("Detailed_Ownership"),
+                messages.getString("Facility_Type"),
+                messages.getString("Ward"),
+                messages.getString("District"),
+                messages.getString("Region")};
 
-        String[] sw_header = new String[]{"Code", "Jina", "Latitude", "Longitude", "Ownership", "Detailed Ownership",
-                "Aina ya Kituo", "Detailed Type", "Kata", "Wilaya", "Mkoa"};
-
-
-        String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
         writer.writeNext(header);
 
         List<String[]> allData = facilityResponses.stream().map(facilityResponse -> {
@@ -38,15 +48,21 @@ public class WriteCsvToResponse {
             String name = facilityResponse.getName();
             String latitude = Double.toString(facilityResponse.getPoint().getY());
             String longitude = Double.toString(facilityResponse.getPoint().getX());
+
             String ownership = facilityResponse.getOwnership() != null ? facilityResponse.getOwnership().getName() : null;
             String detailedOwnership = facilityResponse.getDetailedOwnership() != null ? facilityResponse.getDetailedOwnership().getName() : null;
+
             String type = facilityResponse.getType() != null ? facilityResponse.getType().getName() : null;
             String detailedType = facilityResponse.getDetailedType() != null ? facilityResponse.getDetailedType().getName() : null;
+
+            String facilityType = facilityResponse.getFacilityType() != null ? facilityResponse.getFacilityType() : null;
+
+
             String ward = facilityResponse.getWard() != null ? facilityResponse.getWard().getName() : null;
             String district = facilityResponse.getDistrict() != null ? facilityResponse.getDistrict().getName() : null;
             String region = facilityResponse.getRegion() != null ? facilityResponse.getRegion().getName() : null;
 
-            return new String[]{code, name, latitude, longitude, ownership, detailedOwnership, type, detailedType, ward, district, region};
+            return new String[]{code, name, latitude, longitude, ownership, detailedOwnership, facilityType, ward, district, region};
 
 
         }).collect(Collectors.toList());
@@ -58,12 +74,26 @@ public class WriteCsvToResponse {
 
     public static void writeOPDResponse(PrintWriter print, List<OPDByAgeResponse> diagnoses, String locale) {
 
+
+        Locale aLocale = new Locale(locale);
+
+        ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", aLocale);
+
+
         CSVWriter writer = new CSVWriter(print);
 
-        String[] en_header = new String[]{"ID", "Name", "Year", "Quarter", "Month", "Age< 5", "Age5-60", "Age>60", "Total"};
-        String[] sw_header = new String[]{"ID", "Jina", "Mwaka", "Robo Mwaka", "Mwezi", "Umri< 5", "Umri-60", "Umri>60", "Umri"};
+        String[] header = new String[]{
+                messages.getString("Code"),
+                messages.getString("Name"),
+                messages.getString("Year"),
+                messages.getString("Quarter"),
+                messages.getString("Month"),
+                messages.getString("Age<5"),
+                messages.getString("Age5-60"),
+                messages.getString("Age>60"),
+                messages.getString("Total")};
 
-        String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
+
         writer.writeNext(header);
 
 
@@ -82,10 +112,7 @@ public class WriteCsvToResponse {
             }
 
             String year = opdByAgeResponse.getYear() != null ? opdByAgeResponse.getYear().toString() : null;
-
             String month = opdByAgeResponse.getMonth() != null ? opdByAgeResponse.getMonth().toString() : null;
-
-
             String quarter = opdByAgeResponse.getQuarter() != null && opdByAgeResponse.getQuarter() != -1 ? opdByAgeResponse.getQuarter().toString() : null;
 
             Long less5 = 0L;
@@ -120,14 +147,21 @@ public class WriteCsvToResponse {
 
 
     public static void writeRMNCHResponse(PrintWriter print, List<RMNCHResponse> rmnchResponses, String locale) {
+        Locale aLocale = new Locale(locale);
+
+        ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", aLocale);
+
 
         CSVWriter writer = new CSVWriter(print);
 
-        String[] en_header = new String[]{"ID", "Service", "Year", "Quarter", "Month", "Count"};
-        String[] sw_header = new String[]{"ID", "Huduma", "Mwaka", "Robo Mwaka", "Mwezi", "Idadi"};
+        String[] header = new String[]{messages.getString("Code"),
+                messages.getString("Service"),
+                messages.getString("Year"),
+                messages.getString("Quarter"),
+                messages.getString("Month"),
+                messages.getString("Count")};
 
 
-        String[] header = locale.equalsIgnoreCase("en") ? en_header : sw_header;
         writer.writeNext(header);
 
         List<String[]> allData = rmnchResponses.stream().map(rmnchResponse -> {

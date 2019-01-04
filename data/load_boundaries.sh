@@ -5,7 +5,7 @@ echo "$BASEDIR"
 
 cd "$BASEDIR"
 
- psql -Upostgres -d tanzania -c 'truncate table boundary'
+ psql -Upostgres -d tanzania -c 'truncate table boundary cascade'
 
 
  psql -Upostgres -d tanzania -c 'drop table if exists region'
