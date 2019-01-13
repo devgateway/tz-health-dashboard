@@ -1,7 +1,7 @@
 .home-container {
   float: right;
-  margin-top: 14px;
-  margin-right: 20px;
+  margin-top: 18px;
+  margin-right: 15px;
   border-right: 1px solid #EEE; }
   .home-container .homeButton {
     cursor: pointer;
@@ -12,7 +12,7 @@
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA3XAAAN1wFCKJt4AAAAB3RJTUUH4gwVEwMNfpNo0gAAA2tJREFUWMPNmF2ITVEUx393z6BBNMlHM08iV6KM4ySGFA2JUigkXhRNiQdzkpEkzKjtI8MDr+SFF0peru/wslt5kXzkI2XG9yDTzQxzvewznTnm3rvPvSPW0z37rvPf//Pfa6+19k6R0LzAnwBUA2OAjcDPyN+VwDngE9Ap2rxNgp0qMjGiTfh7hZ18PlDjgN0O3AXOiTZX4njOZGIkpgNngTpKtwfAJtHmYSFSqQKqVAHHga0Mnu0GToo2XU7KeIEPUGW/Js3gWg54alXOxtVRMRIhkUt/gUj48WmLXxWbt78ydmnKVSQXw83lCYcnQJ1ok+2nTITd8RKJ9Ma+fj2wGWi0ZAaytJ2vb/5URJU08LgEInvtFl4A7AJGiDZR3HvAvALvzwh3mYoMlkKkWbQ5CNwSbQ4AC4EfXuCft0SGABVFMM7Gl2l/CURaRJvWaM4QbQRYBqzyAr9NtOlxwKnzAn85QMoL/KHANSuzq+0QbdryJUsv8LcBJ4HLwHCgoQjebWCJsjVmWgIiWrRpi27J0CwRRJtTgAZWOhABmA6MTXmBvwa4WI4iBbL4duCEo/tU5cg8jJEBFSlQ39qAFkf8hoqa+toGYE4RxwuiTSNAx/12J+TQr+N++42a+toeYHGRV14rh8B9JdqsdVUkj0ItwMtiiVM5tAbtLr1PPrNBPQv4VcxXOeDN9QL/nWiTK6NeXQcmu5A55lBpR5RZrYe4OClgJP+HDasEMsCWEgKzApgIDI0MdwMvRZtfSfEU6nAlILbDr0z4fjVwC6iNjL0BZgIfE2J96qU3q4CvwPMSm6hsbCxboH8pZI+AD0q0+Qzc+cfxclO06VY2F2xxTWBJE55jLtoHoDzPC0VfX2hreoGfjnXzPQMsSc6ORxPe1CJbe12/htxr8kGhyJEBFuULMmBPZLKR9nlcxOc9cAj4bp8r7LnLy4N5wxbqXtEmdjrY6U9BYYBRDl1/ufYNmC3aPPvz3NTkI0fNU6tMd9JzeULrBhaJNs+icdVHRo70xYPYbr7rL+2cLosvYVy5nLUbgCBB8+ViGdu2Zpyrtu1BMsBSoHWQiLQCS0WbTL4tr/L1IGHQijbNwCTgjD2SJrEnwGlgksXJxZcmUVDG7mqqgfHABnthtBoYHXF/AVwFvgDngXeiTafLRRHAbzynOdGGwWx6AAAAAElFTkSuQmCC"); }
   .home-container .homeText {
     font-family: "Open Sans";
-    font-size: 10px;
+    font-size: 14px;
     line-height: 45px;
     float: right;
     color: #337535;
