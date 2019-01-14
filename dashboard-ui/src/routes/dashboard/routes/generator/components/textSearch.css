@@ -75,7 +75,7 @@ body {
   -ms-flex-align: center;
   align-items: center;
   background: white;
-  border: 1px solid #acacac; }
+  border: 2px solid #eeeeee; }
   .text-search-container > div {
     display: inline-block; }
   .text-search-container .search-type-facility {
@@ -88,8 +88,8 @@ body {
     font-size: 20px;
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiNGRkZGRkY7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTcuOCw5Mi4yYzIuNywyLjYsNy4xLDIuNSw5LjctMC4ybDIwLjQtMjEuNGM1LjksNC4yLDEzLDYuNiwyMC43LDYuNmMxOS44LDAsMzUuOC0xNiwzNS44LTM1LjhTNzguNCw1LjYsNTguNiw1LjZzLTM1LjgsMTYtMzUuOCwzNS44YzAsNy4xLDIuMSwxMy43LDUuNiwxOS4zTDcuNiw4Mi41QzUsODUuMyw1LjEsODkuNiw3LjgsOTIuMnogTTU4LjUsNjYuMmMtMTMuNywwLTI0LjgtMTEuMS0yNC44LTI0LjhzMTEuMS0yNC44LDI0LjgtMjQuOHMyNC44LDExLjEsMjQuOCwyNC44UzcyLjIsNjYuMiw1OC41LDY2LjJ6Ii8+PC9zdmc+);
     background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: 32px 17px; }
+    background-size: 32px 32px;
+    background-position: 15px center; }
     .text-search-container .search-type-facility div {
       vertical-align: middle; }
   .text-search-container .search-type-ward {
@@ -102,8 +102,8 @@ body {
     font-size: 20px;
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiNGRkZGRkY7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTcuOCw5Mi4yYzIuNywyLjYsNy4xLDIuNSw5LjctMC4ybDIwLjQtMjEuNGM1LjksNC4yLDEzLDYuNiwyMC43LDYuNmMxOS44LDAsMzUuOC0xNiwzNS44LTM1LjhTNzguNCw1LjYsNTguNiw1LjZzLTM1LjgsMTYtMzUuOCwzNS44YzAsNy4xLDIuMSwxMy43LDUuNiwxOS4zTDcuNiw4Mi41QzUsODUuMyw1LjEsODkuNiw3LjgsOTIuMnogTTU4LjUsNjYuMmMtMTMuNywwLTI0LjgtMTEuMS0yNC44LTI0LjhzMTEuMS0yNC44LDI0LjgtMjQuOHMyNC44LDExLjEsMjQuOCwyNC44UzcyLjIsNjYuMiw1OC41LDY2LjJ6Ii8+PC9zdmc+);
     background-repeat: no-repeat;
-    background-size: 20px 20px;
-    background-position: 32px 17px; }
+    background-size: 32px 32px;
+    background-position: 15px center; }
     .text-search-container .search-type-ward div {
       vertical-align: middle; }
   .text-search-container input {
