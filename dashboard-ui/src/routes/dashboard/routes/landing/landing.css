@@ -28,6 +28,8 @@
       font-size: 25px;
       color: #b59666;
       margin-bottom: 50px; }
+    .landing-page-wrapper .landing-page .button-description {
+      margin-bottom: -5px; }
     .landing-page-wrapper .landing-page .report-options {
       align-items: center;
       margin: auto;
