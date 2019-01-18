@@ -18,6 +18,12 @@
 	display: block;
 	text-align: right;
 	margin-bottom: 40px;
+	margin: 0 5%;
+	overflow: hidden;
+	width: 90%;
+	&.full{
+		margin-bottom: -80px;
+	}
 	a {
 		color: #668DAA;
 		font-size: 11px;
@@ -81,7 +87,7 @@
 	}
 	.separator {
 	    margin: 0px 10px;
-	    border-left: 1px solid;
+	    border-left: 2px solid #eeeeee;
 	    height: 30px;
 	    height: 35px;
 	    display: inline-block;
@@ -91,15 +97,14 @@
 
 .report-header {
 	color: #2C4856;
-	font-size: 30px;
-	font-weight: bold;
-	border-top: 1px solid #CCC;
-	border-bottom: 4px solid #CCC;
-	padding-left: 25px;
-	height: 60px;
-	line-height: 60px;
-	margin-bottom: 20px;
-	background-color: #F4F2EC;
+	font-size: 34px;
+	font-weight: 500;
+	height: 90px;
+	line-height: 80px;
+	background-color: #f5f6f8;
+	width:90%;
+	padding-left: 5%;
+	padding-right: 5%;
 
 	> div {
 		display: inline-block;
@@ -114,6 +119,7 @@
 	.period-selector-container {
 		float: right;
 		line-height: 45px;
+		margin-top:15px;
 
 		> div {
 			> div {
@@ -140,7 +146,7 @@
 .location-box {
 	>div {
 		width: calc(25% - 2px);
-		height: 50px;
+		height: 60px;
 		background-color: #F4F2EC;
 		border-top: 2px solid #CCC;
 		border-bottom: 2px solid #CCC;
@@ -152,14 +158,15 @@
 
 	div {
 		display: inline-block;
-		line-height: 30px;
+		line-height: 40px;
 		text-align: center;
 		color: #2C4856;
 	}
 
 	.location-title {
 		padding: 10px;
-		font-size: 13px;
+		font-size: 14px;
+		font-weight: 600;
 	}
 
 	.location-value {
@@ -170,7 +177,10 @@
 
 .population-box {
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
+	border-bottom: 3px solid #eeeeee;
+	width:90%;
+	margin: 30px 5%;
+	padding-bottom: 30px;
 
 	> div {
 		display: inline-block;
@@ -191,11 +201,17 @@
 			font-size: 30px;
 		}
 	}
-
+	.value-label{
+		margin-bottom: 10px;
+	}
 	.value-item {
 		display: inline-block;
-		padding: 14px;
-		border-right: 1px solid #CCC;
+		border-right: 2px solid #eeeeee;
+		padding-left: 0;
+		padding-right:10px;
+		margin-right:10px;
+		margin-bottom: 10px;
+		width:15%;
 
 		div:first-child {
 			font-size: 14px;
@@ -265,25 +281,56 @@
 .top-ten-deseases {
 	padding-top: 30px;
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
+	border-bottom: 3px solid #eeeeee;
+	margin-left: 5%;
+	margin-right: 5%;
+	width:90%;
+	
+	.sub-title{
+		padding: 20px 10px 10px 0;
+	}
+	
+	.download{
+		margin:30px 0 0 0;
+		width: 100%;
+	}
 
 	.top-ten-diagnosis-table {
-		font-size: 20px;
+		font-size: 18px;
+		padding-top: 10px;
+		
+		.sub-title{
+			margin-bottom:30px;
+		}
 
 		table {
 			width: 100%;
 			text-align: center;
 			vertical-align: top;
 			border-collapse: collapse;
+			tr:nth-child(even){
+				background-color: #f6f6f6;
+			}
+			tr:nth-child(2){
+				background-color: #ffffff;
+			}
+			td{
+				padding-bottom: 7px;
+				padding-top: 7px;
+			}
 		}
 
 		.diagnosis-header {
+			background-color: #ffffff;
 			color: #135897;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
+			text-align: left;
 		}
 
 		.previous-period-header {
-			color: #6D7280;
+			background-color: #ffffff;
+			color: #967f63;
+			padding-top: 7px;
 			>div{
 				display: inline-block;
 			}
@@ -292,40 +339,42 @@
 		.current-period-header {
 			background-color: #F4F2EC;
 			color: #9C8568;
+			padding-top: 7px;
 			>div{
 				display: inline-block;
 			}
 		}
 
 		.previous-period-sub-header {
-			color: #6D7280;
+			color: #967f63;
 			font-size: 14px;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
 		}
 
 		.previous-period-sub-header-partial {
-			color: #B4B5A8;
+			color: #967f63;
 			font-size: 14px;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
+			background-color: #ffffff;
 		}
 
 		.current-period-sub-header-partial {
-			color: #B4B5A8;
+			color: #967f63;
 			font-size: 14px;
 			background-color: #F4F2EC;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
 		}
 
 		.current-period-sub-header {
-			color: #6D7280;
+			color: #967f63;
 			font-size: 14px;
 			background-color: #F4F2EC;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
 		}
 
 		.desease-name {
 			text-align: left;
-			color: #2C4856;
+			color: #5b5b5b;
 		}
 
 		.prevoius-value {
@@ -337,7 +386,7 @@
 		}
 
 		.current-value-partial {
-			color: #B4B5A8;
+			color: #676767;
 			background-color: #F4F2EC;
 		}
 
@@ -348,7 +397,7 @@
 
 		.total-values {
 			td {
-				border-top: 2px solid #CCC;
+				border-top: 2px solid #eeeeee;
 			}
 
 			.desease-name {
@@ -359,8 +408,8 @@
 }
 
 .value-legend{
-	float: left;
-    font-size: 15px;
+		float: left;
+    font-size: 13px;
     font-weight: normal;
     color: #2c4856;
     word-spacing: 5px;
@@ -369,57 +418,81 @@
 
 
 .RMNCH-box {
-	padding-top: 30px;
+	padding-top: 80px;
 	font-weight: bold;
-	border-bottom: 3px solid #CCC;
+	border-bottom: 3px solid #eeeeee;
+	margin-bottom: 50px;
+	margin-left: 5%;
+	margin-right:5%;
+	width: 90%;
+	
+	.download{
+		margin:0;
+		width: 100%;
+	}
 
 	.RMNCH-table {
-		font-size: 20px;
-
+		font-size: 18px;
+		.sub-title{
+			padding: 20px 10px 10px 0;
+		}
 		table {
 			width: 100%;
 			text-align: center;
 			vertical-align: top;
 			border-collapse: collapse;
+			tr:nth-child(even){
+				background-color: #f6f6f6;
+			}
+			tr:nth-child(2){
+				background-color: #ffffff;
+			}
+			td{
+				padding-bottom: 7px;
+				padding-top: 7px;
+			}
 		}
 
 		.diagnosis-header {
-			color: #135897;
-			border-bottom: 2px solid #CCC;
+			color: #967f63;
+			border-bottom: 2px solid #eeeeee;
+			text-align: left;
 		}
 
 		.previous-period-header {
-			color: #6D7280;
+			color: #967f63;
+			padding-top: 7px;
 		}
 
 		.current-period-header {
 			background-color: #F4F2EC;
-			color: #9C8568;
+			color: #967f63;
+			padding-top: 7px;
 		}
 
 		.previous-period-sub-header {
-			color: #6D7280;
+			color: #967f63;
 			font-size: 14px;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
 		}
 
 		.current-period-sub-header-partial {
 			color: #B4B5A8;
 			font-size: 14px;
 			background-color: #F4F2EC;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
 		}
 
 		.current-period-sub-header {
-			color: #6D7280;
+			color: #967f63;
 			font-size: 14px;
 			background-color: #F4F2EC;
-			border-bottom: 2px solid #CCC;
+			border-bottom: 2px solid #eeeeee;
 		}
 
 		.desease-name {
 			text-align: left;
-			color: #2C4856;
+			color: #5b5b5b;
 		}
 
 		.prevoius-value {
@@ -432,13 +505,13 @@
 		}
 
 		.current-value {
-			color: #2C4856;
+			color: #676767;
 			background-color: #F4F2EC;
 		}
 
 		.total-values {
 			td {
-				border-top: 2px solid #CCC;
+				border-top: 2px solid #eeeeee;
 			}
 
 			.desease-name {
@@ -468,7 +541,7 @@
 	.value-item {
 		display: inline-block;
 		padding: 6px;
-		border-right: 1px solid #CCC;
+		border-right: 2px solid #eee;
 		display: inline-block;
 		padding: 0 20px;
 
@@ -490,7 +563,7 @@
 	overflow: hidden;
 
 	.map-container {
-		float: none;
+		float: right;
 	}
 
 	.legend-box:hover {
@@ -581,11 +654,10 @@
 }
 
 .ward-report-container {
-	width: 1150px;
-	max-width: 1150px;
 	align-items: center;
 	margin: auto;
 	overflow-x: auto;
+	width: 100%;
 
 	.location-box {
 		>div {
@@ -601,6 +673,7 @@
   background-size: 25px 25px;
   background-position: center;
   height: 25px;
+	margin-top: 17px;
   width: 25px;
   padding: 15px 10px;
   cursor: pointer;
@@ -614,6 +687,7 @@
   background-size: 25px 25px;
   background-position: center;
   height: 25px;
+	margin-top: 17px;
   width: 25px;
   padding: 15px 10px;
   cursor: pointer;
@@ -626,6 +700,7 @@
   background-size: 25px 25px;
   background-position: center;
   height: 25px;
+	margin-top:17px;
   width: 25px;
   padding: 15px 10px;
   cursor: pointer;

@@ -84,13 +84,13 @@ class TopTenDeseases extends React.Component {
                   <th className="diagnosis-header" rowSpan="2"><Trans>Top Ten Diagnoses</Trans></th>
                   <th className="previous-period-header" colSpan="4"><div>{prevLabel}</div><div className={previousExpanded ? 'collapse-column' : 'expand-column'} onClick={e => this.onToggleExpand('previous')}></div></th>
                   <th className="current-period-header" colSpan="4"><div>{currentLabel}</div><div className={currentExpanded ? 'collapse-column' : 'expand-column'} onClick={e => this.onToggleExpand('current')}></div></th>
-                  <th className="previous-period-header">%<Trans>Change</Trans></th>
+                  <th className="previous-period-header left-align">%<Trans>Change</Trans></th>
                 </tr>
                 <tr>
                   <td className="previous-period-sub-header-partial">{previousExpanded && <div><Trans>Age</Trans>&lt; 5</div>}</td>
                   <td className="previous-period-sub-header-partial">{previousExpanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
                   <td className="previous-period-sub-header-partial">{previousExpanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
-                  <td className="previous-period-sub-header"><Trans>Count</Trans></td>
+                  <td className="previous-period-sub-header left-align"><Trans>Count</Trans></td>
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>&lt; 5</div>}</td>
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
