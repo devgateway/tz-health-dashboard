@@ -1,9 +1,8 @@
 .facility-report-container {
-  width: 1150px;
-  max-width: 1150px;
   align-items: center;
   margin: auto;
-  overflow-x: auto; }
+  overflow-x: auto;
+  width: 100%; }
 
 .sub-title {
   padding: 10px;
@@ -118,11 +117,11 @@
   width: calc(25% - 2px);
   height: 60px;
   background-color: #F4F2EC;
-  border-top: 2px solid #CCC;
-  border-bottom: 2px solid #CCC; }
+  border-top: 2px solid #d9d9d9;
+  border-bottom: 2px solid #d9d9d9; }
 
 .location-box > div:not(:last-child) {
-  border-right: 2px solid #CCC; }
+  border-right: 2px solid #d9d9d9; }
 
 .location-box div {
   display: inline-block;

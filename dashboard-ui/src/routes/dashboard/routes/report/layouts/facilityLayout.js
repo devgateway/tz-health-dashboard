@@ -206,7 +206,7 @@ class Layout extends React.Component {
             </div>
 
           </div>
-          <div className="download">
+          <div className="download full">
             <a className="csv" href={getFacilitiesDownloadURI('csv',info,lan)} target="_blank"></a>
             <a className="json" href={getFacilitiesDownloadURI('json',info,lan)} target="_blank"></a>
           </div>
