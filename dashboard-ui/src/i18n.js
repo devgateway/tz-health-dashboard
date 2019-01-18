@@ -126,7 +126,7 @@ i18n.use(LanguageDetector).init({
         "facility filter": "Facility Filter",
         "box or map below": "box or map below",
         "Step Two": "Step Two",
-        "Select a Timeframe": "Select a Timeframe",
+        "Select a Timeframe": " Select a Timeframe",
         "Date Filter": "Date Filter",
         "After selecting a ward select the time period (yearly, quarterly, or monthly) and desired dates": "After selecting a ward select the time period (yearly, quarterly, or monthly) and desired dates",
         "After selecting a facility select the time period (yearly, quarterly, or monthly) and desired dates": "After selecting a facility select the time period (yearly, quarterly, or monthly) and desired dates",
