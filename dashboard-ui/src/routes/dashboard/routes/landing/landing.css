@@ -46,6 +46,9 @@
         width: 480px; }
         .landing-page-wrapper .landing-page .report-options > .report-box.first {
           margin-left: 0; }
+        .landing-page-wrapper .landing-page .report-options > .report-box:hover {
+          border: 2px solid #ededed;
+          background-color: #f2f2f2; }
       .landing-page-wrapper .landing-page .report-options .option-title {
         height: 85px;
         line-height: 120px;
