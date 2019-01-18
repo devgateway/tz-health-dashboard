@@ -327,7 +327,7 @@ class WardLayout extends React.Component {
           <div className="info-box">
             <div className="info-icon"></div>
             <div className="info-paragraph">
-              <Trans>The</Trans> <div className="generate"><Trans>Generate Report</Trans></div> <Trans>will not engage until you have selected a valid {reportType}, time period, and date. First, select a {reportType}, either through the search or filter boxes in Step One, then select a time period in Step Two.</Trans>
+            <Trans>The</Trans> <div className="generate"><Trans>Generate Report</Trans></div> <Trans>button will not engage until you have selected a valid {reportType}, time period, and date range. First, select a {reportType} through either the search or filter boxes in Step One. Then, select the timeframe for the data report in Step Two.</Trans>
             </div>
           </div>
         </div>

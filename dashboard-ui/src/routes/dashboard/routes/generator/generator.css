@@ -67,9 +67,10 @@
       text-transform: capitalize;
       width: 350px;
       color: #fbfbfb;
-      line-height: 50px;
-      text-align: center;
-      font-size: 20px;
+      line-height: 57px;
+      text-align: left;
+      font-size: 22px;
+      text-indent: 75px;
       background-repeat: no-repeat;
       background-size: 30px 30px;
       background-position: 15px 10px;
@@ -82,9 +83,10 @@
       text-transform: capitalize;
       width: 350px;
       color: #fbfbfb;
-      line-height: 50px;
-      text-align: center;
-      font-size: 20px;
+      line-height: 57px;
+      text-align: left;
+      font-size: 22px;
+      text-indent: 75px;
       background-repeat: no-repeat;
       background-size: 50px 50px;
       background-position: 10px 0;
