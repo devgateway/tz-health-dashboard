@@ -20,9 +20,6 @@
 	margin: 0 5%;
 	overflow: hidden;
 	width: 90%;
-	&.full{
-		margin-bottom: -80px;
-	}
 	a {
 		color: #668DAA;
 		font-size: 11px;
@@ -290,7 +287,7 @@
 	}
 	
 	.download{
-		margin:30px 0 0 0;
+		margin:-40px 0 0 0;
 		width: 100%;
 	}
 
@@ -426,7 +423,7 @@
 	width: 90%;
 	
 	.download{
-		margin:0;
+		margin:-30px 0 0 0;
 		width: 100%;
 	}
 
