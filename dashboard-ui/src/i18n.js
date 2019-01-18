@@ -117,7 +117,7 @@ i18n.use(LanguageDetector).init({
         "Step one": "Step One",
         "Select a ward": "Select a ward",
         "Select a facility": "Select a facility",
-        "by typing it name in the": "by typing it name in the",
+        "by typing it name in the": "by typing its name in the",
         "ward search": "Ward Search",
         "facility search": "Facility Search",
         "below": "below",
