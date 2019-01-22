@@ -23,11 +23,12 @@ class Legends extends React.Component {
       <div className="legend-box">
         <div className="legend-header">
           <div className="legend-title"><Trans>Legend</Trans></div>
-          <div className={legendVisible ? 'legend-toggle-colapse' : 'legend-toggle-expand'} onClick={this.onToggleLegend.bind(this)}></div>
+          <div className={legendVisible ? 'legend-toggle-colapse' : 'legend-toggle-expand'} onClick={this.onToggleLegend.bind(this)}>
+          </div>
         </div>
         {legendVisible ? 
           this.props.children
-        : <div></div>}
+        : <div className="legend-body"></div>}
       </div>
     )
   }
