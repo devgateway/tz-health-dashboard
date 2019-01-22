@@ -3,6 +3,10 @@
   margin-top: 18px;
   margin-right: 15px;
   border-right: 1px solid #EEE; }
+  @media screen and (max-width: 767px) {
+    .home-container {
+      margin-right: 5px;
+      padding-right: 5px; } }
   .home-container .homeButton {
     cursor: pointer;
     width: 35px;
@@ -17,6 +21,9 @@
     float: right;
     color: #337535;
     margin-right: 15px; }
+    @media screen and (max-width: 1024px) {
+      .home-container .homeText {
+        display: none; } }
 
 .share-container {
   float: right; }
