@@ -13,6 +13,9 @@
 
 .landing-page-wrapper {
   background: #f7f7f7; }
+  @media screen and (max-width: 1024px) {
+    .landing-page-wrapper {
+      width: 100%; } }
   .landing-page-wrapper .landing-page {
     width: 1200px;
     max-width: 1200px;
@@ -20,6 +23,10 @@
     margin: auto;
     overflow-x: auto;
     padding: 30px; }
+    @media screen and (max-width: 1024px) {
+      .landing-page-wrapper .landing-page {
+        overflow-x: hidden;
+        width: 90%; } }
     .landing-page-wrapper .landing-page .landing-title {
       color: #2C4856;
       font-size: 20px;
@@ -30,10 +37,16 @@
       margin-bottom: 50px; }
     .landing-page-wrapper .landing-page .button-description {
       margin-bottom: -5px; }
+      @media screen and (max-width: 1024px) {
+        .landing-page-wrapper .landing-page .button-description {
+          margin-bottom: 30px; } }
     .landing-page-wrapper .landing-page .report-options {
       align-items: center;
       margin: auto;
       width: 1200px; }
+      @media screen and (max-width: 1024px) {
+        .landing-page-wrapper .landing-page .report-options {
+          width: 100%; } }
       .landing-page-wrapper .landing-page .report-options > .report-box {
         background-color: #ffffff;
         border: 2px solid #eeeeee;
@@ -44,8 +57,26 @@
         margin: 20px;
         padding-left: 60px;
         width: 480px; }
+        @media screen and (max-width: 1024px) {
+          .landing-page-wrapper .landing-page .report-options > .report-box {
+            clear: both;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-left: 5%;
+            padding-left: 0; } }
+        @media screen and (max-width: 767px) {
+          .landing-page-wrapper .landing-page .report-options > .report-box {
+            margin-left: 0;
+            padding: 20px;
+            width: 90%; } }
         .landing-page-wrapper .landing-page .report-options > .report-box.first {
           margin-left: 0; }
+          @media screen and (max-width: 1024px) {
+            .landing-page-wrapper .landing-page .report-options > .report-box.first {
+              margin-left: 5%; } }
+          @media screen and (max-width: 767px) {
+            .landing-page-wrapper .landing-page .report-options > .report-box.first {
+              margin-left: 0; } }
         .landing-page-wrapper .landing-page .report-options > .report-box:hover {
           border: 2px solid #ededed;
           background-color: #f2f2f2; }
@@ -55,12 +86,26 @@
         padding-left: 120px;
         color: #2C4856;
         font-size: 20px; }
+        @media screen and (max-width: 767px) {
+          .landing-page-wrapper .landing-page .report-options .option-title {
+            font-size: 22px;
+            line-height: 100%;
+            padding-left: 80px;
+            height: auto;
+            padding-top: 5px; } }
       .landing-page-wrapper .landing-page .report-options .option-paragraph {
         height: 85px;
         padding-left: 120px;
         padding-right: 20px;
         color: #2C4856;
         font-size: 14px; }
+        @media screen and (max-width: 767px) {
+          .landing-page-wrapper .landing-page .report-options .option-paragraph {
+            height: auto;
+            padding-left: 0;
+            clear: both;
+            margin-top: 30px;
+            width: 100%; } }
       .landing-page-wrapper .landing-page .report-options .facility-icon {
         width: 100px;
         height: 100%;
@@ -70,6 +115,12 @@
         background-size: 100px 100px;
         background-position: center;
         float: left; }
+        @media screen and (max-width: 767px) {
+          .landing-page-wrapper .landing-page .report-options .facility-icon {
+            background-position: center center;
+            background-size: 50px 50px;
+            height: 50px;
+            width: 50px; } }
       .landing-page-wrapper .landing-page .report-options .ward-icon {
         width: 100px;
         height: 100%;
@@ -79,9 +130,19 @@
         background-size: 100px 100px;
         background-position: center;
         float: left; }
+        @media screen and (max-width: 767px) {
+          .landing-page-wrapper .landing-page .report-options .ward-icon {
+            background-position: center center;
+            background-size: 50px 50px;
+            height: 50px;
+            width: 50px; } }
     .landing-page-wrapper .landing-page .info-box {
       margin-top: 50px;
       height: 200px; }
+      @media screen and (max-width: 767px) {
+        .landing-page-wrapper .landing-page .info-box {
+          height: auto;
+          padding-bottom: 80px; } }
       .landing-page-wrapper .landing-page .info-box .info-icon {
         width: 30px;
         height: 30px;

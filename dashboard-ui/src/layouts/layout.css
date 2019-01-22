@@ -13,6 +13,9 @@
       color: #5d6471;
       font-size: 22px;
       font-weight: 300; }
+      @media screen and (max-width: 1024px) {
+        .app .header .app-name {
+          font-size: 17px; } }
     .app .header .tz-flag {
       background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgNzIgNDgiPg0KPHBhdGggZD0iTTAsNDhWMEg3MnoiIGZpbGw9IiMxZWI1M2EiLz4NCjxwYXRoIGQ9Ik0wLDQ4SDcyVjB6IiBmaWxsPSIjMDBhM2RkIi8+DQo8cGF0aCBkPSJNMCw0OCA3MiwwIiBzdHJva2U9IiNmY2QxMTYiIHN0cm9rZS13aWR0aD0iMTkiLz4NCjxwYXRoIGQ9Ik0wLDQ4IDcyLDAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxMyIvPg0KPC9zdmc+");
       background-repeat: no-repeat;
