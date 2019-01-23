@@ -7,8 +7,17 @@
     max-width: 1200px;
     align-items: center;
     margin: auto; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container > div {
+        width: 100%;
+        padding: 20px;
+        overflow-x: hidden; } }
   .report-generator-container .report-generator-paragraph {
     line-height: 60px; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container .report-generator-paragraph {
+        line-height: 120%;
+        margin-bottom: 30px; } }
     .report-generator-container .report-generator-paragraph > div {
       display: inline-block; }
     .report-generator-container .report-generator-paragraph .facility-icon {
@@ -20,6 +29,10 @@
       background-size: 75px 75px;
       background-position: center;
       float: left; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .report-generator-paragraph .facility-icon {
+          width: 90%;
+          background-position: center center; } }
     .report-generator-container .report-generator-paragraph .ward-icon {
       width: 80px;
       height: 80px;
@@ -29,11 +42,22 @@
       background-size: 75px 75px;
       background-position: center;
       float: left; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .report-generator-paragraph .ward-icon {
+          width: 90%;
+          background-position: center center; } }
     .report-generator-container .report-generator-paragraph span {
       font-size: 25px;
       color: #555555;
       margin-bottom: 40px;
       margin-left: 8px; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .report-generator-paragraph span {
+          font-size: 20px;
+          display: block;
+          margin-bottom: 0;
+          text-align: center;
+          width: 90%; } }
     .report-generator-container .report-generator-paragraph .highlighted-ward {
       display: inline-block;
       margin-top: 10px;
@@ -46,6 +70,14 @@
       margin-top: 10px;
       padding-left: 20px;
       text-transform: capitalize; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .report-generator-paragraph .highlighted-facility {
+          display: block;
+          clear: both;
+          padding-top: 30px;
+          text-align: center;
+          padding-left: 0;
+          width: 90%; } }
   .report-generator-container .dashed-separator {
     border-bottom: 1px dashed #ada8a8;
     height: 1px;
@@ -57,6 +89,11 @@
     margin: auto;
     overflow-x: auto;
     border: 2px solid #eeeeee; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container .generator-by-path {
+        height: auto;
+        margin: 0;
+        width: 90%; } }
     .report-generator-container .generator-by-path > div {
       display: inline-block;
       height: 100%;
@@ -75,6 +112,9 @@
       background-size: 30px 30px;
       background-position: 15px 10px;
       padding: unset !important; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .generator-by-path .report-type-facility {
+          width: 100%; } }
       .report-generator-container .generator-by-path .report-type-facility div {
         vertical-align: middle; }
     .report-generator-container .generator-by-path .report-type-ward {
@@ -91,11 +131,17 @@
       background-size: 50px 50px;
       background-position: 10px 0;
       padding: unset !important; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .generator-by-path .report-type-ward {
+          width: 100%; } }
       .report-generator-container .generator-by-path .report-type-ward div {
         vertical-align: middle; }
     .report-generator-container .generator-by-path .generator-dropdowns {
       width: 350px;
       background: white; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .generator-by-path .generator-dropdowns {
+          width: 100%; } }
       .report-generator-container .generator-by-path .generator-dropdowns > div {
         padding: 12px 35px; }
       .report-generator-container .generator-by-path .generator-dropdowns select {
@@ -116,11 +162,18 @@
     .report-generator-container .generator-by-path .generator-map {
       width: 490px;
       overflow: hidden; }
+      @media screen and (max-width: 1024px) {
+        .report-generator-container .generator-by-path .generator-map {
+          height: 500px;
+          width: 100%; } }
   .report-generator-container .generator-period {
     width: 347px;
     background: white;
     height: 586px;
     border: 2px solid #eeeeee; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container .generator-period {
+        width: 90%; } }
     .report-generator-container .generator-period > div {
       padding: 12px 35px; }
     .report-generator-container .generator-period select {
@@ -238,17 +291,29 @@
     width: 840px;
     max-width: 850px;
     display: inline-block; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container .step-one-box {
+        width: 100%; } }
   .report-generator-container .step-two-box {
     width: 340px;
     max-width: 350px;
     display: inline-block;
     float: right; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container .step-two-box {
+        clear: both;
+        float: none;
+        max-width: 100%;
+        width: 100%; } }
   .report-generator-container .step-two-box.disabled {
     opacity: 0.5;
     pointer-events: none; }
   .report-generator-container .step-descriptor {
     color: #555;
     margin-bottom: 15px; }
+    @media screen and (max-width: 1024px) {
+      .report-generator-container .step-descriptor {
+        margin-top: 20px; } }
     .report-generator-container .step-descriptor > div {
       color: #222;
       display: inline-block;

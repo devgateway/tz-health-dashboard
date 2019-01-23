@@ -3,6 +3,11 @@
 	margin: auto;
 	overflow-x: auto;
 	width: 100%;
+	.location-box{
+		@media screen and (max-width: 1024px){
+			margin-top: 20px;
+		}
+	}
 }
 
 .sub-title {
@@ -166,11 +171,17 @@
 		padding: 10px;
 		font-size: 14px;
 		font-weight: 600;
+		@media screen and (max-width: 1024px){
+			display: block;
+		}
 	}
 
 	.location-value {
 		width: 60% !important;
 		font-weight: bold;
+		@media screen and (max-width: 1024px){
+			font-size: 17px;
+		}
 	}
 }
 
