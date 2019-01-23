@@ -10,6 +10,9 @@
   font-size: 20px;
   font-weight: bold;
   display: inline-block; }
+  @media screen and (max-width: 1024px) {
+    .sub-title {
+      font-size: 17px; } }
 
 .download {
   display: block;
@@ -68,7 +71,7 @@
     display: inline-block;
     float: right;
     cursor: pointer;
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOm5vbmU7c3Ryb2tlOiMxM2MxMjI7c3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fS5zdDF7ZmlsbDpub25lO3N0cm9rZTojMTNjMTIyO3N0cm9rZS13aWR0aDoyO3N0cm9rZS1taXRlcmxpbWl0OjEwO308L3N0eWxlPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjQ5LjYiIGN5PSI0OS42IiByPSI0NC4yIi8+PGc+PHJlY3QgeD0iMjYiIHk9IjM2LjgiIGNsYXNzPSJzdDEiIHdpZHRoPSIxNS4yIiBoZWlnaHQ9IjguNSIvPjxyZWN0IHg9IjI2IiB5PSIyOC4zIiBjbGFzcz0ic3QxIiB3aWR0aD0iMTUuMiIgaGVpZ2h0PSI4LjUiLz48cmVjdCB4PSI0MS4zIiB5PSIzNi44IiBjbGFzcz0ic3QxIiB3aWR0aD0iMzIiIGhlaWdodD0iOC41Ii8+PHJlY3QgeD0iMjYiIHk9IjQ1LjMiIGNsYXNzPSJzdDEiIHdpZHRoPSIxNS4yIiBoZWlnaHQ9IjguNSIvPjxyZWN0IHg9IjQxLjMiIHk9IjQ1LjMiIGNsYXNzPSJzdDEiIHdpZHRoPSIzMiIgaGVpZ2h0PSI4LjUiLz48cmVjdCB4PSIyNiIgeT0iNTMuOSIgY2xhc3M9InN0MSIgd2lkdGg9IjE1LjIiIGhlaWdodD0iOC41Ii8+PHJlY3QgeD0iNDEuMyIgeT0iNTMuOSIgY2xhc3M9InN0MSIgd2lkdGg9IjMyIiBoZWlnaHQ9IjguNSIvPjxyZWN0IHg9IjI2IiB5PSI2Mi40IiBjbGFzcz0ic3QxIiB3aWR0aD0iMTUuMiIgaGVpZ2h0PSI4LjUiLz48cmVjdCB4PSI0MS4zIiB5PSI2Mi40IiBjbGFzcz0ic3QxIiB3aWR0aD0iMzIiIGhlaWdodD0iOC41Ii8+PC9nPjwvc3ZnPg==);
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTAwIDEwMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOm5vbmU7c3Ryb2tlOiMzNGJkMzk7c3Ryb2tlLXdpZHRoOjI7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MTA7fS5zdDF7ZmlsbDpub25lO3N0cm9rZTojMzRiZDM5O3N0cm9rZS13aWR0aDoyO3N0cm9rZS1taXRlcmxpbWl0OjEwO308L3N0eWxlPjxjaXJjbGUgY2xhc3M9InN0MCIgY3g9IjQ5LjYiIGN5PSI0OS42IiByPSI0NC4yIi8+PGc+PHJlY3QgeD0iMjYiIHk9IjM2LjgiIGNsYXNzPSJzdDEiIHdpZHRoPSIxNS4yIiBoZWlnaHQ9IjguNSIvPjxyZWN0IHg9IjI2IiB5PSIyOC4zIiBjbGFzcz0ic3QxIiB3aWR0aD0iMTUuMiIgaGVpZ2h0PSI4LjUiLz48cmVjdCB4PSI0MS4zIiB5PSIzNi44IiBjbGFzcz0ic3QxIiB3aWR0aD0iMzIiIGhlaWdodD0iOC41Ii8+PHJlY3QgeD0iMjYiIHk9IjQ1LjMiIGNsYXNzPSJzdDEiIHdpZHRoPSIxNS4yIiBoZWlnaHQ9IjguNSIvPjxyZWN0IHg9IjQxLjMiIHk9IjQ1LjMiIGNsYXNzPSJzdDEiIHdpZHRoPSIzMiIgaGVpZ2h0PSI4LjUiLz48cmVjdCB4PSIyNiIgeT0iNTMuOSIgY2xhc3M9InN0MSIgd2lkdGg9IjE1LjIiIGhlaWdodD0iOC41Ii8+PHJlY3QgeD0iNDEuMyIgeT0iNTMuOSIgY2xhc3M9InN0MSIgd2lkdGg9IjMyIiBoZWlnaHQ9IjguNSIvPjxyZWN0IHg9IjI2IiB5PSI2Mi40IiBjbGFzcz0ic3QxIiB3aWR0aD0iMTUuMiIgaGVpZ2h0PSI4LjUiLz48cmVjdCB4PSI0MS4zIiB5PSI2Mi40IiBjbGFzcz0ic3QxIiB3aWR0aD0iMzIiIGhlaWdodD0iOC41Ii8+PC9nPjwvc3ZnPg==);
     background-repeat: no-repeat; }
   .download .separator {
     margin: 0px 10px;
@@ -146,6 +149,11 @@
     display: inline-block;
     width: 50%;
     vertical-align: text-top; }
+    @media screen and (max-width: 1024px) {
+      .population-box > div {
+        display: block;
+        clear: both;
+        width: 100%; } }
   .population-box .info > div {
     padding: 10px; }
   .population-box .total-pop {
@@ -397,6 +405,10 @@
   width: 600px; }
   .map .map-container {
     float: right; }
+    @media screen and (max-width: 1024px) {
+      .map .map-container {
+        float: none;
+        margin-top: 20px; } }
     .map .map-container svg {
       border: 2px solid #eeeeee; }
   .map .legend-box {
@@ -410,6 +422,10 @@
     right: 0;
     top: auto;
     width: 265px; }
+    @media screen and (max-width: 1024px) {
+      .map .legend-box {
+        left: 0;
+        right: auto; } }
     .map .legend-box:hover {
       opacity: 1; }
     .map .legend-box .legend-header {
@@ -482,8 +498,14 @@
   margin: auto;
   overflow-x: auto;
   width: 100%; }
+  @media screen and (max-width: 1024px) {
+    .ward-report-container .location-box {
+      margin-top: 20px; } }
   .ward-report-container .location-box > div {
     width: calc(33% + 2px) !important; }
+    @media screen and (max-width: 1024px) {
+      .ward-report-container .location-box > div {
+        width: calc(33% + 1px) !important; } }
 
 .backButton {
   float: right;
