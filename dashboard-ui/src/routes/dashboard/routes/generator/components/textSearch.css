@@ -76,6 +76,9 @@ body {
   align-items: center;
   background: white;
   border: 2px solid #eeeeee; }
+  @media screen and (max-width: 1024px) {
+    .text-search-container {
+      width: 90%; } }
   .text-search-container > div {
     display: inline-block; }
   .text-search-container .search-type-facility {
@@ -91,6 +94,9 @@ body {
     background-repeat: no-repeat;
     background-size: 32px 32px;
     background-position: 15px center; }
+    @media screen and (max-width: 1024px) {
+      .text-search-container .search-type-facility {
+        width: 100%; } }
     .text-search-container .search-type-facility div {
       vertical-align: middle; }
   .text-search-container .search-type-ward {
@@ -106,6 +112,9 @@ body {
     background-repeat: no-repeat;
     background-size: 32px 32px;
     background-position: 15px center; }
+    @media screen and (max-width: 1024px) {
+      .text-search-container .search-type-ward {
+        width: 100%; } }
     .text-search-container .search-type-ward div {
       vertical-align: middle; }
   .text-search-container input {

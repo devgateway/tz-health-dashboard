@@ -3,6 +3,9 @@
   margin: auto;
   overflow-x: auto;
   width: 100%; }
+  @media screen and (max-width: 1024px) {
+    .facility-report-container .location-box {
+      margin-top: 20px; } }
 
 .sub-title {
   padding: 10px;
@@ -134,10 +137,16 @@
   padding: 10px;
   font-size: 14px;
   font-weight: 600; }
+  @media screen and (max-width: 1024px) {
+    .location-box .location-title {
+      display: block; } }
 
 .location-box .location-value {
   width: 60% !important;
   font-weight: bold; }
+  @media screen and (max-width: 1024px) {
+    .location-box .location-value {
+      font-size: 17px; } }
 
 .population-box {
   font-weight: bold;

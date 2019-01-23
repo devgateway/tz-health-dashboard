@@ -91,6 +91,9 @@ body {
   align-items: center;
   background: white;
   border: 2px solid #eeeeee;
+    @media screen and (max-width: 1024px){
+      width: 90%;
+    }
   >div{
     display: inline-block;
   }
@@ -107,6 +110,9 @@ body {
     background-repeat: no-repeat;
     background-size: 32px 32px;
     background-position: 15px center;
+    @media screen and (max-width: 1024px){
+      width: 100%;
+    }
     div{
       vertical-align: middle;
     }
@@ -124,6 +130,9 @@ body {
     background-repeat: no-repeat;
     background-size: 32px 32px;
     background-position: 15px center;
+    @media screen and (max-width: 1024px){
+      width: 100%;
+    }
     div{
       vertical-align: middle;
     }

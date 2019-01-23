@@ -8,9 +8,18 @@
 	    max-width: 1200px;
 	    align-items: center;
 	    margin: auto;
+			@media screen and (max-width: 1024px){
+				width: 100%;
+				padding: 20px;
+				overflow-x: hidden;
+			}
 	}
 	.report-generator-paragraph{
 		line-height: 60px;
+		@media screen and (max-width: 1024px){
+			line-height: 120%;
+			margin-bottom: 30px;
+		}
 		>div{
 			display: inline-block;
 		}
@@ -23,6 +32,10 @@
 		  background-size: 75px 75px;
 		  background-position: center;
 		  float: left;
+			  @media screen and (max-width: 1024px){
+					width: 90%;
+					background-position: center center;
+				}
 		}
 		.ward-icon{
 			width: 80px;
@@ -33,12 +46,23 @@
 			background-size: 75px 75px;
 			background-position: center;
 		  float: left;
+			@media screen and (max-width: 1024px){
+				width: 90%;
+				background-position: center center;
+			}
 		}
 	    span{
 	    	font-size: 25px;
 		    color: #555555;
 		    margin-bottom: 40px;
 				margin-left: 8px;
+				@media screen and (max-width: 1024px){
+					font-size: 20px;
+					display: block;
+					margin-bottom: 0;
+					text-align: center;
+					width: 90%;
+				}
 	    }
 	    .highlighted-ward{
 				display: inline-block;
@@ -53,6 +77,14 @@
 				margin-top: 10px;
 				padding-left: 20px;
 	    	text-transform: capitalize;
+				@media screen and (max-width: 1024px){
+					display:block;
+					clear: both;
+					padding-top: 30px;
+					text-align: center;
+					padding-left: 0;
+					width: 90%;
+				}
 	    }
 	}
 	.dashed-separator{
@@ -67,6 +99,11 @@
 	    margin: auto;
 	    overflow-x: auto;
 	    border: 2px solid #eeeeee;
+			  @media screen and (max-width: 1024px){
+					height: auto;
+					margin: 0;
+					width: 90%;
+				}
 		>div{
 			display: inline-block;
 			height: 100%;
@@ -87,6 +124,9 @@
 		    background-size: 30px 30px;
 		    background-position: 15px 10px;
 		    padding: unset !important;
+				  @media screen and (max-width: 1024px){
+						width: 100%;
+					}
 			div{
 				vertical-align: middle;
 			}
@@ -106,6 +146,9 @@
 				background-size: 50px 50px;
 		    background-position: 10px 0;
 		    padding: unset !important;
+				@media screen and (max-width: 1024px){
+					width: 100%;
+				}
 			div{
 				vertical-align: middle;
 			}
@@ -113,6 +156,9 @@
 		.generator-dropdowns{
 			width: 350px;
 			background: white;
+			  @media screen and (max-width: 1024px){
+					width: 100%;
+				}
 			>div{
 				padding: 12px 35px;
 			}
@@ -137,6 +183,10 @@
 		.generator-map{
 			width: 490px;
 			overflow: hidden;
+			  @media screen and (max-width: 1024px){
+					height: 500px;
+					width: 100%;
+				}
 		}
 		
 	}
@@ -145,6 +195,9 @@
 		background: white;
 		height: 586px;
 		border: 2px solid #eeeeee;
+		  @media screen and (max-width: 1024px){
+				width: 90%;
+			}
 		>div{
 			padding: 12px 35px;
 		}
@@ -284,12 +337,21 @@
 		width: 840px;
 		max-width: 850px;
 		display: inline-block;
+		@media screen and (max-width: 1024px){
+			width: 100%;
+		}
 	}
 	.step-two-box{
 		width: 340px;
 		max-width: 350px;
 		display: inline-block;
 		float: right;
+		  @media screen and (max-width: 1024px){
+				clear: both;
+				float: none;
+				max-width: 100%;
+				width: 100%;
+			}
 	}
 	.step-two-box.disabled{
 		opacity: 0.5;
@@ -298,6 +360,9 @@
 	.step-descriptor{
 		color: #555;
 		margin-bottom: 15px;
+		  @media screen and (max-width: 1024px){
+				margin-top: 20px;
+			}
 		>div{
 			color: #222;
 			display: inline-block;
