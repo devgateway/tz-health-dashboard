@@ -129,8 +129,8 @@ class WardLayout extends React.Component {
           <div className="population-box">
             <div>
               <div className="info">
-                <div className="sub-title"><Trans>Availability of Health Services in</Trans> {wardName} <Trans>Ward</Trans></div>
-                <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans></div>
+                <div className="sub-title"><Trans>Availability of Health Services</div>
+                <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans>  in</Trans> {wardName} <Trans>Ward</Trans></div>
 
                 <div className="ages">
                   <div className="value-label"><div><Trans>by Gender</Trans></div></div>
