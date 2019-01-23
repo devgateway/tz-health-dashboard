@@ -788,24 +788,33 @@
 
 .chart-legends{
 	padding-left: 30px;
+	overflow: hidden;
 	>div{
 		display: inline-block;
-	}
-	.legend-group{
-		display: blok;
-		float: left; 
-		margin-right: 30px;
 	}
 	.legend-color{
 		width: 16px;
 		height: 16px;
 	}
+	.legend-group{
+		display: block;
+		float: left; 
+		width: 33%;
+		.legend-sub-group{
+			float: left;
+			width: 45%;
+			.legend-color{
+				float: left;
+				margin-right: 8px;
+			}
+		}
+	}
 	.legend-label{
-		padding: 0px 20px 0px 5px;
+		padding: 0px 10px 0px 5px;
 	    font-size: 12px;
 	    height: 16px;
 	    color: rgb(68, 68, 68);
-	    line-height: 10px;
+	    line-height: 15px;
 	    vertical-align: middle;
 	}
 }

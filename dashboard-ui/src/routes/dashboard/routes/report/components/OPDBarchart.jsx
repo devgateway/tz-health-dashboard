@@ -125,7 +125,7 @@ export default class OPDChart extends React.Component {
         showlegend: false,
         barmode: 'stack', 
         marker:{
-          color: ['#C0C19B', '#5C887E']
+          color: ['#d5d6af', '#87894b']
         }
       })
       chartData.push({
@@ -168,18 +168,24 @@ export default class OPDChart extends React.Component {
         <div className="chart-legends">
           
           <div className="legend-group">
+          <div class="legend-sub-group">  
           <div className="legend-color" style={{'background': '#fbdbb7'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
           <div className="legend-color" style={{'background': '#f8c287'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
           </div>
+          </div>
         
           <div className="legend-group">
-          <div className="legend-color" style={{'background': '#C0C19B'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${prevLabel})`}</div>
-          <div className="legend-color" style={{'background': '#5C887E'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${currentLabel})`}</div>
+          <div class="legend-sub-group">  
+          <div className="legend-color" style={{'background': '#d5d6af'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${prevLabel})`}</div>
+          <div className="legend-color" style={{'background': '#87894b'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${currentLabel})`}</div>
+          </div>
           </div>
           
           <div className="legend-group">
+          <div class="legend-sub-group">  
           <div className="legend-color" style={{'background': '#CDB6BA'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${prevLabel})`}</div>
           <div className="legend-color" style={{'background': '#885d65'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${currentLabel})`}</div>
+          </div>
           </div>
           
         </div>
