@@ -111,7 +111,7 @@ export default class OPDChart extends React.Component {
         showlegend: false,
         barmode: 'stack', 
         marker:{
-          color: ['#fbe4ca', '#B59066']
+          color: ['#fbdbb7', '#f8c287']
         }
       })
       chartData.push({
@@ -125,7 +125,7 @@ export default class OPDChart extends React.Component {
         showlegend: false,
         barmode: 'stack', 
         marker:{
-          color: ['#f8c58c', '#886C4D']
+          color: ['#C0C19B', '#5C887E']
         }
       })
       chartData.push({
@@ -139,7 +139,7 @@ export default class OPDChart extends React.Component {
         showlegend: false,
         barmode: 'stack', 
         marker:{
-          color: ['#cba273', '#5B4833']
+          color: ['#CDB6BA', '#885d65']
         }
       })
       //Assign new xaxis to layout
@@ -166,12 +166,22 @@ export default class OPDChart extends React.Component {
     return (
       <div className="chart" ref="chartContainer">
         <div className="chart-legends">
-          <div className="legend-color" style={{'background': '#fbe4ca'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
-          <div className="legend-color" style={{'background': '#f8c58c'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${prevLabel})`}</div>
-          <div className="legend-color" style={{'background': '#cba273'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${prevLabel})`}</div>
-          <div className="legend-color" style={{'background': '#B59066'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
-          <div className="legend-color" style={{'background': '#886C4D'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${currentLabel})`}</div>
-          <div className="legend-color" style={{'background': '#5B4833'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${currentLabel})`}</div>
+          
+          <div className="legend-group">
+          <div className="legend-color" style={{'background': '#fbdbb7'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
+          <div className="legend-color" style={{'background': '#f8c287'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
+          </div>
+        
+          <div className="legend-group">
+          <div className="legend-color" style={{'background': '#C0C19B'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${prevLabel})`}</div>
+          <div className="legend-color" style={{'background': '#5C887E'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${currentLabel})`}</div>
+          </div>
+          
+          <div className="legend-group">
+          <div className="legend-color" style={{'background': '#CDB6BA'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${prevLabel})`}</div>
+          <div className="legend-color" style={{'background': '#885d65'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${currentLabel})`}</div>
+          </div>
+          
         </div>
         <PlotlyComponent
           key={key}

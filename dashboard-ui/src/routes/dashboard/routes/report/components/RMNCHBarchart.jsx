@@ -105,7 +105,7 @@ export default class RMNCHChart extends React.Component {
         name: prevLabel,
         type: 'bar',
         marker:{
-          color: '#E6B89C',
+          color: '#F8C58C',
         },
     }, {
         x: RMNCHCategories,
@@ -113,7 +113,7 @@ export default class RMNCHChart extends React.Component {
         name: currentLabel,
         type: 'bar',
         marker:{
-          color: '#776D5A',
+          color: '#FF8863',
         },
     }]
     return {config, layout, data}
@@ -127,8 +127,8 @@ export default class RMNCHChart extends React.Component {
     return (
       <div className="chart" ref="chartContainer">
         <div className="chart-legends">
-          <div className="legend-color" style={{'background': '#E6B89C'}}/><div className="legend-label">{prevLabel}</div>
-          <div className="legend-color" style={{'background': '#776D5A'}}/><div className="legend-label">{currentLabel}</div>
+          <div className="legend-color" style={{'background': '#F8C58C'}}/><div className="legend-label">{prevLabel}</div>
+          <div className="legend-color" style={{'background': '#FF8863'}}/><div className="legend-label">{currentLabel}</div>
         </div>
         <PlotlyComponent
           key={key}
