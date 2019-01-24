@@ -16,7 +16,6 @@ public class Constants {
 
     public static final String AGE_YEAR_OVER_60 = "UsRGaDRgUTs"; //"Umri miaka 60 au zaidi"
 
-
     public static final String GROUP_POPULATION = "JbrSbymncXF";
 
     public static final String GROUP_OPD_DIAGNOSES = "jfnNzTy6eUL";
@@ -30,7 +29,6 @@ public class Constants {
     public static final String GROUP_CHILD_HEALTH_GROWTH_VIT_A_DEWORMING = "kCG34b9rbRd";
 
     public static final String ANC_MALARIA_AND_OTHER_SERVICES = "YBxXipG7Iid";
-
 
     public static final String DETEAILED_TYPE_DIMENSION = "X4NKFlvMewI";
 

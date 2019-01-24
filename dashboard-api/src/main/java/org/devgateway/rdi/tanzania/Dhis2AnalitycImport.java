@@ -42,7 +42,6 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     @Autowired
     RegionRepository regionRepository;
 
-
     @Autowired
     Dhis2PopulationService dhis2PopulationService;
 
@@ -52,16 +51,15 @@ public class Dhis2AnalitycImport implements CommandLineRunner {
     @Autowired
     Dhis2RMNCHService dhis2RMNNCHService;
 
-
     @Autowired
     OPDDiagnosticRepository opdDiagnosticRepository;
 
     @Autowired
     FacilityRepository facilityRepository;
 
-
     @Autowired
     ImportLogRepository importLogRepository;
+
 
     public void population(Region region, Integer year, boolean incremental) {
         if (!incremental) {

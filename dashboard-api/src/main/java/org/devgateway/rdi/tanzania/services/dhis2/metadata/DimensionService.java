@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class DimensionService extends Dhis2Service {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FeatureCollection.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DimensionService.class);
 
     private static String PATH = "/29/dimensions/";
 

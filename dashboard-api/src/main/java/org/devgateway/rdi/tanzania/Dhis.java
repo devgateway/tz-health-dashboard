@@ -26,14 +26,12 @@ public class Dhis {
     @Value("${dhis.instance.password}")
     private String password;
 
-
     @Bean
     public Dhis2Config dhis2() {
         Dhis2Config config = new Dhis2Config(
                 url,
                 userName,
                 password);
-
         return config;
     }
 }
