@@ -150,7 +150,7 @@ export default class OPDChart extends React.Component {
         title: {
           text: this.wordWrap(OPDLabel, 20),
           font: {
-            size: 12
+            size: 11
           }
         }
       }

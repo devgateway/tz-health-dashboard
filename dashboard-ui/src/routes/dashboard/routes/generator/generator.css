@@ -190,6 +190,9 @@
       font-size: 12px;
       margin-left: 5px;
       text-indent: 30px; }
+      @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+        .report-generator-container .generator-period select {
+          background-image: none; } }
     .report-generator-container .generator-period .dropdown-title {
       font-size: 13px;
       padding: 7px;
