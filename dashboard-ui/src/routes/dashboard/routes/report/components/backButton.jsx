@@ -11,7 +11,7 @@ class Back extends React.Component {
     this.props.history.push(`/${lan}/generate/${reportType}`)
   }
   render() {
-    return (<div title={`${i18n.t('Back to gegenerator')}`} className="backButton" onClick={e => this.onClick()}></div>)
+    return (<div title={`${i18n.t('Back to generator')}`} className="backButton" onClick={e => this.onClick()}></div>)
   }
 }
 export default translate("translations")(withRouter(Back))

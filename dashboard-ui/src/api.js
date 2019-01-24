@@ -311,7 +311,6 @@ const sumValues = (dataset) => {
 }
 
 export const getAggregatedPopulation = (data) => {
-  debugger;
   const total = sumValues(data)
   const totalMale = sumValues(data.filter(i => i.gender.name === 'ME'))
   const totalFemale = sumValues(data.filter(i => i.gender.name === 'KE'))
