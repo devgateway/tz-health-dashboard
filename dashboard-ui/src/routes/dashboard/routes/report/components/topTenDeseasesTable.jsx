@@ -66,7 +66,7 @@ class TopTenDeseases extends React.Component {
     }
     return (
       <div className="top-ten-deseases">
-        <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName}</div>
+        <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName} <Trans>Ward</Trans></div>
         <div className="download">
           <a className="csv" href={getDownloadURI(type,'diagnoses','csv', id, period.toJS(), language)} target="_blank"></a>
           <a className="json" href={getDownloadURI(type,'diagnoses','json', id, period.toJS(), language)} target="_blank"></a>

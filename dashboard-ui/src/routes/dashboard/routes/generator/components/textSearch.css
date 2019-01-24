@@ -78,7 +78,7 @@ body {
   border: 2px solid #eeeeee; }
   @media screen and (max-width: 1024px) {
     .text-search-container {
-      width: 90%; } }
+      width: 100%; } }
   .text-search-container > div {
     display: inline-block; }
   .text-search-container .search-type-facility {
@@ -119,6 +119,9 @@ body {
       vertical-align: middle; }
   .text-search-container input {
     border: none; }
+    @media screen and (max-width: 767px) {
+      .text-search-container input {
+        width: 90%; } }
   .text-search-container .generate-button-disabled {
     padding: 12px 35px;
     width: 150px;
