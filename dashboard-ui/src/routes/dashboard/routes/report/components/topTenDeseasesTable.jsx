@@ -95,7 +95,7 @@ class TopTenDeseases extends React.Component {
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
                   <td className="current-period-sub-header"><Trans>Count</Trans></td>
-                  <td className="previous-period-sub-header"><Trans>in Total Cases since</Trans> {prevLabel}</td>
+                  <td className="previous-period-sub-header"><Trans>since</Trans> {prevLabel}</td>
                 </tr>
                 {
                   deseases.map((it) => {

@@ -202,7 +202,7 @@ class WardLayout extends React.Component {
           <TopTenDeseases
             type="wards"
             period={period} id={id}
-            facilityName={wardName}
+            facilityName={`${wardName} ${i18n.t('ward')}`}
             onSetOPDView={onSetOPDView}
             OPDView={OPDView}
             diagnoses={this.props.diagnoses}/>
@@ -210,7 +210,7 @@ class WardLayout extends React.Component {
           <RMNCHTable
             type="wards"
             period={period} id={id}
-            facilityName={wardName}
+            facilityName={`${wardName} ${i18n.t('ward')}`}
             onSetRMNCHView={onSetRMNCHView}
             RMNCHView={RMNCHView}
             RMNCH={this.props.RMNCH}/>

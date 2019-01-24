@@ -214,7 +214,7 @@ class Layout extends React.Component {
           <TopTenDeseases
             type="facilities"
             period={period} id={id}
-            facilityName={wardName}
+            facilityName={facilityName}
             onSetOPDView={onSetOPDView}
             OPDView={OPDView}
             diagnoses={this.props.diagnoses}/>
@@ -222,7 +222,7 @@ class Layout extends React.Component {
           <RMNCHTable
             type="facilities"
             period={period} id={id}
-            facilityName={wardName}
+            facilityName={facilityName}
             onSetRMNCHView={onSetRMNCHView}
             RMNCHView={RMNCHView}
             RMNCH={this.props.RMNCH}/>
