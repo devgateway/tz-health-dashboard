@@ -18,6 +18,8 @@
 	display: inline-block;
 		@media screen and (max-width: 1024px){
 			font-size: 17px;
+			margin-bottom: 30px;
+			overflow: hidden;
 		}
 }
 
@@ -113,6 +115,9 @@
 	width:90%;
 	padding-left: 5%;
 	padding-right: 5%;
+	@media screen and (max-width: 767px){
+		font-size: 22px;
+	}
 
 	> div {
 		display: inline-block;
@@ -134,6 +139,9 @@
 				display: inline-block;
 				line-height: 1px;
 				border-right: 1px solid #CCC;
+				@media screen and (max-width: 767px){
+					border-right: none;
+				}
 
 				select {
 					padding-left: 12px;
@@ -158,10 +166,18 @@
 		background-color: #F4F2EC;
 		border-top: 2px solid #d9d9d9;
 		border-bottom: 2px solid #d9d9d9;
+		@media screen and (max-width: 767px){
+			width: calc(45% + 1px) !important;
+			border-top: none;
+			border-bottom: none;
+		}
 	}
 
 	> div:not(:last-child) {
 		border-right: 2px solid #d9d9d9;
+		@media screen and (max-width: 767px){
+			border-right: none;
+		}
 	}
 
 	div {
@@ -169,6 +185,9 @@
 		line-height: 40px;
 		text-align: center;
 		color: #2C4856;
+		@media screen and (max-width: 767px){
+			line-height: 120%;
+		}
 	}
 
 	.location-title {
@@ -178,13 +197,29 @@
 		@media screen and (max-width: 1024px){
 			display: block;
 		}
+		@media screen and (max-width: 767px){
+			font-size: 14px;
+			line-height: 120%;
+			padding: 10px 10px 0 10px;
+		}
 	}
 
 	.location-value {
 		width: 60% !important;
 		font-weight: bold;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: block;
+		float: right;
+		margin-top: 10px;
+		padding-right: 10px;
 		@media screen and (max-width: 1024px){
 			font-size: 17px;
+		}
+		@media screen and (max-width: 767px){
+			font-size: 14px;
+			line-height: 120%;
 		}
 	}
 }
@@ -213,6 +248,9 @@
 		color: #2C4856;
 		font-size: 20px;
 		font-weight: bold;
+		@media screen and (max-width: 767px){
+			font-size: 17px;
+		}
 
 		span {
 			font-size: 30px;
@@ -296,6 +334,7 @@
 }
 
 .top-ten-deseases {
+	padding-bottom: 30px;
 	padding-top: 30px;
 	font-weight: bold;
 	border-bottom: 3px solid #eeeeee;
@@ -315,6 +354,10 @@
 	.top-ten-diagnosis-table {
 		font-size: 18px;
 		padding-top: 10px;
+		@media screen and (max-width: 767px){
+			font-size: 13px;
+			overflow: hidden;
+		}
 		
 		.sub-title{
 			margin-bottom:30px;
@@ -366,6 +409,9 @@
 			color: #967f63;
 			font-size: 14px;
 			border-bottom: 2px solid #eeeeee;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.previous-period-sub-header-partial {
@@ -373,6 +419,9 @@
 			font-size: 14px;
 			border-bottom: 2px solid #eeeeee;
 			background-color: #ffffff;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.current-period-sub-header-partial {
@@ -380,6 +429,9 @@
 			font-size: 14px;
 			background-color: #F4F2EC;
 			border-bottom: 2px solid #eeeeee;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.current-period-sub-header {
@@ -387,6 +439,9 @@
 			font-size: 14px;
 			background-color: #F4F2EC;
 			border-bottom: 2px solid #eeeeee;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.desease-name {
@@ -435,6 +490,7 @@
 
 
 .RMNCH-box {
+	padding-bottom: 30px;
 	padding-top: 80px;
 	font-weight: bold;
 	border-bottom: 3px solid #eeeeee;
@@ -442,7 +498,7 @@
 	margin-left: 5%;
 	margin-right:5%;
 	width: 90%;
-	
+
 	.download{
 		margin:-30px 0 0 0;
 		width: 100%;
@@ -450,6 +506,9 @@
 
 	.RMNCH-table {
 		font-size: 18px;
+		@media screen and (max-width: 767px){
+			font-size: 12px;
+		}
 		.sub-title{
 			padding: 20px 10px 10px 0;
 		}
@@ -491,6 +550,9 @@
 			color: #967f63;
 			font-size: 14px;
 			border-bottom: 2px solid #eeeeee;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.current-period-sub-header-partial {
@@ -498,6 +560,9 @@
 			font-size: 14px;
 			background-color: #F4F2EC;
 			border-bottom: 2px solid #eeeeee;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.current-period-sub-header {
@@ -505,6 +570,9 @@
 			font-size: 14px;
 			background-color: #F4F2EC;
 			border-bottom: 2px solid #eeeeee;
+			@media screen and (max-width: 767px){
+				font-size: 12px;
+			}
 		}
 
 		.desease-name {
@@ -549,6 +617,9 @@
 		font-weight: bold;
 		display: inline-block;
 		padding: 20px;
+		@media screen and (max-width: 767px){
+			font-size: 17px;
+		}
 
 		span {
 			font-size: 30px;
@@ -702,8 +773,13 @@
 		>div {
 			width: calc(33% + 2px) !important;
 			  @media screen and (max-width: 1024px){
+					line-height: 120%;
 					width: calc(33% + 1px) !important;
+					font-size: 14px;
 				}
+				@media screen and (max-width: 767px){
+					width: calc(45% + 1px) !important;
+  			}
 		}
 	}
 }
@@ -787,14 +863,18 @@
 }
 
 .chart-legends{
-	padding-left: 30px;
+	margin-bottom: 20px;
+	margin-top: 20px;
 	overflow: hidden;
+	padding-left: 30px;
 	>div{
 		display: inline-block;
 	}
 	.legend-color{
 		width: 16px;
 		height: 16px;
+		float: left;
+		margin-right: 5px;
 	}
 	.legend-group{
 		display: block;
