@@ -726,6 +726,9 @@
       .chart-legends .legend-group .legend-sub-group .legend-color {
         float: left;
         margin-right: 5px; }
+        @media screen and (max-width: 767px) {
+          .chart-legends .legend-group .legend-sub-group .legend-color {
+            margin-top: 10px; } }
   .chart-legends .legend-label {
     padding: 0 10px 0 0;
     float: left;
@@ -735,6 +738,9 @@
     line-height: 15px;
     vertical-align: middle;
     margin-right: 10px; }
+    @media screen and (max-width: 767px) {
+      .chart-legends .legend-label {
+        margin-bottom: 10px; } }
 
 .infolayer text {
   font-size: 11px !important;

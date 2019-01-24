@@ -939,6 +939,9 @@
 			.legend-color{
 				float: left;
 				margin-right: 5px;
+				@media screen and (max-width: 767px){
+					margin-top: 10px;
+				}
 			}
 		}
 	}
@@ -951,6 +954,9 @@
 	    line-height: 15px;
 	    vertical-align: middle;
 			margin-right: 10px;
+			@media screen and (max-width: 767px){
+				margin-bottom: 10px;
+			}
 	}
 }
 
