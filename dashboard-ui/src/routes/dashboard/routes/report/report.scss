@@ -194,6 +194,9 @@
 		padding: 10px;
 		font-size: 14px;
 		font-weight: 600;
+		&.first{
+			margin-left:10px;
+		}
 		@media screen and (max-width: 1024px){
 			display: block;
 		}
@@ -216,10 +219,14 @@
 		padding-right: 10px;
 		@media screen and (max-width: 1024px){
 			font-size: 17px;
+			float: none;
+			line-height: 120%;
+			text-align: center;
+			margin-left: 40px;
+			color: #967f63;
 		}
 		@media screen and (max-width: 767px){
 			font-size: 14px;
-			line-height: 120%;
 		}
 	}
 }
@@ -659,6 +666,9 @@
 		}
 		svg{
 			border: 2px solid #eeeeee;
+			@media screen and (max-width: 1024px){
+				width:98%;
+			}
 		}
 	}
 	
