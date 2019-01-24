@@ -35,6 +35,10 @@
       font-size: 25px;
       color: #b59666;
       margin-bottom: 50px; }
+      @media screen and (max-width: 767px) {
+        .landing-page-wrapper .landing-page .landing-paragrph {
+          font-size: 22px;
+          width: 90%; } }
     .landing-page-wrapper .landing-page .button-description {
       margin-bottom: -5px; }
       @media screen and (max-width: 1024px) {
@@ -68,6 +72,7 @@
             width: 80%; } }
         @media screen and (max-width: 767px) {
           .landing-page-wrapper .landing-page .report-options > .report-box {
+            height: 150px;
             margin-left: 0;
             padding: 20px;
             width: 80%; } }
@@ -157,3 +162,7 @@
         padding-left: 45px;
         color: #2C4856;
         font-size: 20px; }
+        @media screen and (max-width: 767px) {
+          .landing-page-wrapper .landing-page .info-box .info-paragraph {
+            font-size: 16px;
+            width: 70%; } }
