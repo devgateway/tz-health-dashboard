@@ -159,6 +159,8 @@
   padding: 10px;
   font-size: 14px;
   font-weight: 600; }
+  .location-box .location-title.first {
+    margin-left: 10px; }
   @media screen and (max-width: 1024px) {
     .location-box .location-title {
       display: block; } }
@@ -180,11 +182,15 @@
   padding-right: 10px; }
   @media screen and (max-width: 1024px) {
     .location-box .location-value {
-      font-size: 17px; } }
+      font-size: 17px;
+      float: none;
+      line-height: 120%;
+      text-align: center;
+      margin-left: 40px;
+      color: #967f63; } }
   @media screen and (max-width: 767px) {
     .location-box .location-value {
-      font-size: 14px;
-      line-height: 120%; } }
+      font-size: 14px; } }
 
 .population-box {
   font-weight: bold;
@@ -492,6 +498,9 @@
         margin-top: 20px; } }
     .map .map-container svg {
       border: 2px solid #eeeeee; }
+      @media screen and (max-width: 1024px) {
+        .map .map-container svg {
+          width: 98%; } }
   .map .legend-box {
     background: #f5f6f8;
     border: 2px solid #eeeeee;

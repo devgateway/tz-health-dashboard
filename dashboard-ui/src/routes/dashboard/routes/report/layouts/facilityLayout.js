@@ -138,7 +138,7 @@ class Layout extends React.Component {
         </div>
         <div className="facility-report-container">
           <div className="location-box">
-            <div><div className="location-title"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityType}</Trans></div></div>
+            <div><div className="location-title first"><Trans>Facility Type</Trans></div><div className="location-value"><Trans>{facilityType}</Trans></div></div>
             <div><div className="location-title"><Trans>Ward</Trans></div><div className="location-value">{wardName}</div></div>
             <div><div className="location-title"><Trans>District</Trans></div><div className="location-value">{districtName}</div></div>
             <div><div className="location-title"><Trans>Region</Trans></div><div className="location-value">{regionName}</div></div>
