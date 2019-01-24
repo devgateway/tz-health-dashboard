@@ -594,20 +594,21 @@
   .chart-legends .legend-group {
     display: block;
     float: left;
-    width: 33%; }
+    width: 30%; }
     .chart-legends .legend-group .legend-sub-group {
-      float: left;
-      width: 45%; }
+      float: left; }
       .chart-legends .legend-group .legend-sub-group .legend-color {
         float: left;
-        margin-right: 8px; }
+        margin-right: 5px; }
   .chart-legends .legend-label {
-    padding: 0px 10px 0px 5px;
+    padding: 0 10px 0 0;
+    float: left;
     font-size: 12px;
     height: 16px;
     color: #444444;
     line-height: 15px;
-    vertical-align: middle; }
+    vertical-align: middle;
+    margin-right: 10px; }
 
 .infolayer text {
   font-size: 11px !important;
