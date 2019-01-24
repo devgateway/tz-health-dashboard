@@ -1,6 +1,7 @@
 import React from 'react';
 import {getPeriodLabels} from '../utils/labelsUtil'
 import i18n from '../../../../../i18n'
+import {translate, Trans} from "react-i18next"
 
 import createPlotlyComponent from 'react-plotlyjs';
 import Plotly from 'plotly.js/dist/plotly-basic.min';
@@ -124,17 +125,22 @@ export default class RMNCHChart extends React.Component {
     const {prevLabel, currentLabel} = getPeriodLabels(period)
     const {layout, config, data} = this.generateChartData()
     const key = new Date().getTime()
+    
     return (
       <div className="chart" ref="chartContainer">
         <div className="chart-legends">
           <div className="legend-color" style={{'background': '#F8C58C'}}/><div className="legend-label">{prevLabel}</div>
           <div className="legend-color" style={{'background': '#FF8863'}}/><div className="legend-label">{currentLabel}</div>
         </div>
-        <PlotlyComponent
-          key={key}
-          data={data}
-          layout={layout}
-          config={config}/>
+        {data[0].x.length === 0 && data[1].x.length === 0?
+          <div className="no-chart-data"><Trans>No Data</Trans></div>
+        :
+          <PlotlyComponent
+            key={key}
+            data={data}
+            layout={layout}
+            config={config}/>
+        }
       </div>
     );
   }
