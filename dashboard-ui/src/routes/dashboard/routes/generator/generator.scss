@@ -104,6 +104,7 @@
 					margin: 0;
 					width: 90%;
 				}
+				
 		>div{
 			display: inline-block;
 			height: 100%;
@@ -185,6 +186,13 @@
 			overflow: hidden;
 			  @media screen and (max-width: 1024px){
 					height: 500px;
+					margin-top:30px;
+					padding-left: 15%;
+    			width: 80%;
+				}
+				@media screen and (max-width: 767px){
+					height: auto;
+					padding-left: 0;
 					width: 100%;
 				}
 		}
@@ -271,7 +279,10 @@
 	    border-radius: 4px;
 	    color: #f4f6f7;
 	    font-size: 15px;
-	    display: inline-block;	    
+	    display: inline-block;	
+			@media screen and (max-width: 767px){
+				width:155px;
+			}
 	}
 	.generate-button{
 		cursor: pointer;
@@ -285,6 +296,9 @@
 	    border-radius: 4px;
 	    color: #f4f6f7;
 	    font-size: 15px;
+			@media screen and (max-width: 767px){
+				width:155px;
+			}
 	}
 	.generate-button:hover {
 	  	background: #227925;
@@ -315,6 +329,9 @@
 	}
 	.info-box{
 		margin-top: 30px;
+		@media screen and (max-width: 767px){
+			width:80%;
+		}
    		.info-icon {
 			width: 30px;
 			height: 30px;

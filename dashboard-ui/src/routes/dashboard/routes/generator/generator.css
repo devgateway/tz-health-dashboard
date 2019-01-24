@@ -165,6 +165,13 @@
       @media screen and (max-width: 1024px) {
         .report-generator-container .generator-by-path .generator-map {
           height: 500px;
+          margin-top: 30px;
+          padding-left: 15%;
+          width: 80%; } }
+      @media screen and (max-width: 767px) {
+        .report-generator-container .generator-by-path .generator-map {
+          height: auto;
+          padding-left: 0;
           width: 100%; } }
   .report-generator-container .generator-period {
     width: 347px;
@@ -236,6 +243,9 @@
     color: #f4f6f7;
     font-size: 15px;
     display: inline-block; }
+    @media screen and (max-width: 767px) {
+      .report-generator-container .generate-button-disabled {
+        width: 155px; } }
   .report-generator-container .generate-button {
     cursor: pointer;
     width: 195px;
@@ -248,6 +258,9 @@
     border-radius: 4px;
     color: #f4f6f7;
     font-size: 15px; }
+    @media screen and (max-width: 767px) {
+      .report-generator-container .generate-button {
+        width: 155px; } }
   .report-generator-container .generate-button:hover {
     background: #227925; }
   .report-generator-container .reset-button {
@@ -274,6 +287,9 @@
     background-position: center; }
   .report-generator-container .info-box {
     margin-top: 30px; }
+    @media screen and (max-width: 767px) {
+      .report-generator-container .info-box {
+        width: 80%; } }
     .report-generator-container .info-box .info-icon {
       width: 30px;
       height: 30px;
