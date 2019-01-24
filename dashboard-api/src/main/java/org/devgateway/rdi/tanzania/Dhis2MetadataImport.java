@@ -40,14 +40,14 @@ public class Dhis2MetadataImport implements CommandLineRunner {
     @Override
 
     public void run(String... strings) {
-         dhis2MetaDataImportService.clean();
-        dhis2MetaDataImportService.importMedata();
+        dhis2MetaDataImportService.clean();
+        dhis2MetaDataImportService.importMetadata();
         System.exit(3);
     }
 
 
     public static void main(String[] args) throws Exception {
-        new SpringApplicationBuilder(Dhis2MetadataImport.class).web(false).build().run(args);
+        new SpringApplicationBuilder(Dhis2MetadataImport.class).web(false).logStartupInfo(false).build().run(args);
     }
 
     @PreDestroy

@@ -2,6 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
     <property name="LOG_FILE" value="tanzania-dashboard.log"/>
     <property name="LOG_DIR" value="."/>
@@ -32,11 +33,16 @@
         </layout>
     </appender>
 
+
     <!-- Setting the root level of logging to INFO -->
     <root level="INFO">
-        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
+
+
+
+
 </configuration>
 
 
