@@ -74,7 +74,7 @@ public class Runner implements ApplicationRunner {
 
 
             loadTranslations();
-            metaDataImportService.importMedata();
+            metaDataImportService.importMetadata();
             updateWards();
         }
     }

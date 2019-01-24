@@ -202,7 +202,7 @@ public class MetaDataImportService {
         return facilityService.saveGroups(facilityGroups);
     }
 
-    public void importMedata() {
+    public void importMetadata() {
         dimensionsItems();
 
         orgUnitsGroups();
