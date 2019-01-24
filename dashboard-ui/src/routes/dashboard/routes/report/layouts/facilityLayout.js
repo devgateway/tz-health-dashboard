@@ -146,7 +146,7 @@ class Layout extends React.Component {
           <div className="population-box">
             <div className="info">
               <div className="sub-title"><Trans>Availability of Health Services</Trans></div>
-              <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans> <Trans>in</Trans> {regionName} <Trans>{boundaryLevel}</Trans></div>
+              <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans> <Trans>in</Trans> {admLevelName} <Trans>{boundaryLevel}</Trans></div>
 
               <div className="ages">
                 <div className="value-label"><div><Trans>by Gender</Trans></div></div>
