@@ -3,6 +3,9 @@
   margin: auto;
   overflow-x: auto;
   width: 100%; }
+  @media screen and (max-width: 767px) {
+    .facility-report-container {
+      padding-top: 105px; } }
   @media screen and (max-width: 1024px) {
     .facility-report-container .location-box {
       margin-top: 20px; } }
@@ -18,6 +21,9 @@
       font-size: 17px;
       margin-bottom: 30px;
       overflow: hidden; } }
+  @media screen and (max-width: 767px) {
+    .sub-title {
+      margin-bottom: 0; } }
 
 .download {
   display: block;
@@ -101,11 +107,10 @@
   padding-right: 5%; }
   @media screen and (max-width: 767px) {
     .report-header {
-      font-size: 22px; } }
+      font-size: 20px;
+      float: left; } }
   .report-header > div {
     display: inline-block; }
-  .report-header .download {
-    border: 1px solid red; }
   .report-header .period-selector-container {
     float: right;
     line-height: 45px;
@@ -136,9 +141,10 @@
   border-bottom: 2px solid #d9d9d9; }
   @media screen and (max-width: 767px) {
     .location-box > div {
-      width: calc(45% + 1px) !important;
+      width: 50% !important;
       border-top: none;
-      border-bottom: none; } }
+      border-bottom: none;
+      margin-bottom: 5px; } }
 
 .location-box > div:not(:last-child) {
   border-right: 2px solid #d9d9d9; }
@@ -210,12 +216,16 @@
   .population-box .total-pop {
     color: #2C4856;
     font-size: 20px;
-    font-weight: bold; }
+    font-weight: bold;
+    text-transform: capitalize; }
     @media screen and (max-width: 767px) {
       .population-box .total-pop {
         font-size: 17px; } }
     .population-box .total-pop span {
       font-size: 30px; }
+      @media screen and (max-width: 767px) {
+        .population-box .total-pop span {
+          display: block; } }
   .population-box .value-label {
     margin-bottom: 10px; }
   .population-box .value-item {
@@ -226,9 +236,16 @@
     margin-right: 10px;
     margin-bottom: 10px;
     width: 15%; }
+    @media screen and (max-width: 767px) {
+      .population-box .value-item {
+        float: left;
+        width: 17%; } }
     .population-box .value-item div:first-child {
       font-size: 14px;
       color: #B4B5A8; }
+      @media screen and (max-width: 767px) {
+        .population-box .value-item div:first-child {
+          font-size: 12px; } }
     .population-box .value-item div:last-child {
       font-size: 20px;
       color: #6D7280; }
@@ -278,6 +295,9 @@
   width: 90%; }
   .top-ten-deseases .sub-title {
     padding: 20px 10px 10px 0; }
+    @media screen and (max-width: 767px) {
+      .top-ten-deseases .sub-title {
+        margin-bottom: 30px; } }
   .top-ten-deseases .download {
     margin: -40px 0 0 0;
     width: 100%; }
@@ -375,6 +395,10 @@
   color: #2c4856;
   word-spacing: 5px;
   margin-right: 15px; }
+  @media screen and (max-width: 767px) {
+    .value-legend {
+      margin-top: 20px;
+      margin-bottom: 20px; } }
 
 .RMNCH-box {
   padding-bottom: 30px;
@@ -385,6 +409,12 @@
   margin-left: 5%;
   margin-right: 5%;
   width: 90%; }
+  @media screen and (max-width: 767px) {
+    .RMNCH-box {
+      padding-top: 30px; } }
+  @media screen and (max-width: 767px) {
+    .RMNCH-box .sub-title {
+      margin-bottom: 30px; } }
   .RMNCH-box .download {
     margin: -30px 0 0 0;
     width: 100%; }
@@ -466,7 +496,8 @@
     font-size: 20px;
     font-weight: bold;
     display: inline-block;
-    padding: 20px; }
+    padding: 20px;
+    text-transform: capitalize; }
     @media screen and (max-width: 767px) {
       .deaths-box .total-pop {
         font-size: 17px; } }
@@ -481,6 +512,9 @@
     .deaths-box .value-item div:first-child {
       font-size: 14px;
       color: #B4B5A8; }
+      @media screen and (max-width: 767px) {
+        .deaths-box .value-item div:first-child {
+          font-size: 12px; } }
     .deaths-box .value-item div:last-child {
       font-size: 20px;
       color: #6D7280; }
@@ -588,6 +622,9 @@
   margin: auto;
   overflow-x: auto;
   width: 100%; }
+  @media screen and (max-width: 767px) {
+    .ward-report-container {
+      padding-top: 105px; } }
   @media screen and (max-width: 1024px) {
     .ward-report-container .location-box {
       margin-top: 20px; } }
@@ -689,6 +726,9 @@
       .chart-legends .legend-group .legend-sub-group .legend-color {
         float: left;
         margin-right: 5px; }
+        @media screen and (max-width: 767px) {
+          .chart-legends .legend-group .legend-sub-group .legend-color {
+            margin-top: 10px; } }
   .chart-legends .legend-label {
     padding: 0 10px 0 0;
     float: left;
@@ -698,13 +738,28 @@
     line-height: 15px;
     vertical-align: middle;
     margin-right: 10px; }
+    @media screen and (max-width: 767px) {
+      .chart-legends .legend-label {
+        margin-bottom: 10px; } }
 
 .infolayer text {
   font-size: 11px !important;
   fill: #444444 !important;
   font-weight: bold !important; }
+  @media screen and (max-width: 1024px) {
+    .infolayer text {
+      font-size: 9px !important; } }
+  @media screen and (max-width: 767px) {
+    .infolayer text {
+      display: none; } }
 
 .xaxislayer-above text {
   font-size: 11px !important;
   fill: #444444 !important;
   font-weight: bold !important; }
+  @media screen and (max-width: 1024px) {
+    .xaxislayer-above text {
+      font-size: 9px !important; } }
+  @media screen and (max-width: 767px) {
+    .xaxislayer-above text {
+      display: none; } }

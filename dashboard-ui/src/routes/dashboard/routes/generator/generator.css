@@ -9,7 +9,7 @@
     margin: auto; }
     @media screen and (max-width: 1024px) {
       .report-generator-container > div {
-        width: 100%;
+        width: 90%;
         padding: 20px;
         overflow-x: hidden; } }
   .report-generator-container .report-generator-paragraph {
@@ -93,7 +93,7 @@
       .report-generator-container .generator-by-path {
         height: auto;
         margin: 0;
-        width: 90%; } }
+        width: 100%; } }
     .report-generator-container .generator-by-path > div {
       display: inline-block;
       height: 100%;
@@ -180,7 +180,7 @@
     border: 2px solid #eeeeee; }
     @media screen and (max-width: 1024px) {
       .report-generator-container .generator-period {
-        width: 90%; } }
+        width: 100%; } }
     .report-generator-container .generator-period > div {
       padding: 12px 35px; }
     .report-generator-container .generator-period select {
@@ -313,6 +313,9 @@
     @media screen and (max-width: 1024px) {
       .report-generator-container .step-one-box {
         width: 100%; } }
+    @media screen and (max-width: 676px) {
+      .report-generator-container .step-one-box {
+        width: 96%; } }
   .report-generator-container .step-two-box {
     width: 340px;
     max-width: 350px;
