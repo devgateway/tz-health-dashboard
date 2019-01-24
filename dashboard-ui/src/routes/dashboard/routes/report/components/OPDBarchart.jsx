@@ -1,6 +1,7 @@
 import React from 'react';
 import {getPeriodLabels} from '../utils/labelsUtil'
 import i18n from '../../../../../i18n'
+import {translate, Trans} from "react-i18next"
 
 import createPlotlyComponent from 'react-plotlyjs';
 import Plotly from 'plotly.js/dist/plotly-basic.min';
@@ -101,7 +102,7 @@ export default class OPDChart extends React.Component {
         OPDLabel = d.diagnostic.name
       }
       chartData.push({
-        x: [`${prevLabel}`, `${currentLabel}`],
+        x: [`${OPDLabel} (${prevLabel})`, `${OPDLabel} (${currentLabel})`],
         y: [(d.ranges.totalUnder5Prev !== -1 ? d.ranges.totalUnder5Prev : 0), (d.ranges.totalUnder5 !== -1 ? d.ranges.totalUnder5 : 0)],
         width: 0.6,
         //offset: -0.4,
@@ -115,7 +116,7 @@ export default class OPDChart extends React.Component {
         }
       })
       chartData.push({
-        x: [`${prevLabel}`, `${currentLabel}`],
+        x: [`${OPDLabel} (${prevLabel})`, `${OPDLabel} (${currentLabel})`],
         y: [(d.ranges.total5to60Prev !== -1 ? d.ranges.total5to60Prev : 0), (d.ranges.total5to60 !== -1 ? d.ranges.total5to60 : 0)],
         width: 0.6,
         //offset: -0.4,
@@ -129,7 +130,7 @@ export default class OPDChart extends React.Component {
         }
       })
       chartData.push({
-        x: [`${prevLabel}`, `${currentLabel}`],
+        x: [`${OPDLabel} (${prevLabel})`, `${OPDLabel} (${currentLabel})`],
         y: [(d.ranges.totalAbove60Prev !== -1 ? d.ranges.totalAbove60Prev : 0), (d.ranges.totalAbove60 !== -1 ? d.ranges.totalAbove60 : 0)],
         width: 0.6,
         //offset: -0.4,
@@ -168,32 +169,36 @@ export default class OPDChart extends React.Component {
         <div className="chart-legends">
           
           <div className="legend-group">
-          <div class="legend-sub-group">  
+          <div className="legend-sub-group">  
           <div className="legend-color" style={{'background': '#fbdbb7'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
           <div className="legend-color" style={{'background': '#f8c287'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
           </div>
           </div>
         
           <div className="legend-group">
-          <div class="legend-sub-group">  
+          <div className="legend-sub-group">  
           <div className="legend-color" style={{'background': '#d5d6af'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${prevLabel})`}</div>
           <div className="legend-color" style={{'background': '#87894b'}}/><div className="legend-label">{`${i18n.t('Age')}5-60 (${currentLabel})`}</div>
           </div>
           </div>
           
           <div className="legend-group">
-          <div class="legend-sub-group">  
+          <div className="legend-sub-group">  
           <div className="legend-color" style={{'background': '#CDB6BA'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${prevLabel})`}</div>
           <div className="legend-color" style={{'background': '#885d65'}}/><div className="legend-label">{`${i18n.t('Age')}>60 (${currentLabel})`}</div>
           </div>
           </div>
           
         </div>
-        <PlotlyComponent
-          key={key}
-          data={data}
-          layout={layout}
-          config={config}/>
+        {data.length === 0 ?
+          <div className="no-chart-data"><Trans>No Data</Trans></div>
+        :
+          <PlotlyComponent
+            key={key}
+            data={data}
+            layout={layout}
+            config={config}/>
+        }
       </div>
     );
   }
