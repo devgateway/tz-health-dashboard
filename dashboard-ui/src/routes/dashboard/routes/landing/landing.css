@@ -63,12 +63,14 @@
             margin-bottom: 10px;
             margin-top: 10px;
             margin-left: 5%;
-            padding-left: 0; } }
+            padding-left: 30px;
+            padding-right: 30px;
+            width: 80%; } }
         @media screen and (max-width: 767px) {
           .landing-page-wrapper .landing-page .report-options > .report-box {
             margin-left: 0;
             padding: 20px;
-            width: 90%; } }
+            width: 80%; } }
         .landing-page-wrapper .landing-page .report-options > .report-box.first {
           margin-left: 0; }
           @media screen and (max-width: 1024px) {
