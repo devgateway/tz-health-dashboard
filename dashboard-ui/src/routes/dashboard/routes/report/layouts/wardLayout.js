@@ -130,7 +130,7 @@ class WardLayout extends React.Component {
             <div>
               <div className="info">
                 <div className="sub-title"><Trans>Availability of Health Services</Trans></div>
-                <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans> in {wardName} <Trans>Ward</Trans></div>
+                <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans> <Trans>in</Trans> {wardName} <Trans>Ward</Trans></div>
 
                 <div className="ages">
                   <div className="value-label"><div><Trans>by Gender</Trans></div></div>
@@ -149,7 +149,7 @@ class WardLayout extends React.Component {
                 */}
               </div>
               <div className="info">
-                <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans></div>
+                <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans> <Trans>in</Trans> {wardName} <Trans>Ward</Trans></div>
                 <div className="types">
                   <div className="value-item"><div><Trans>Public</Trans></div><div>{totalPublic}</div></div>
                   <div className="value-item"><div><Trans>Private</Trans></div><div>{totalPrivate}</div></div>

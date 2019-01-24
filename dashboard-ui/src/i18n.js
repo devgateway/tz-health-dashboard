@@ -52,7 +52,7 @@ i18n.use(LanguageDetector).init({
         "District": "District",
         "Region": "Region",
         "Availability of Health Services in": "Availability of Health Services in",
-        "Availability of Health Services": "Availability of Health Services in ",
+        "Availability of Health Services": "Availability of Health Services",
         "in": "in ",
         "Total Population": "Total Population",
         "by Gender": "by Gender",
