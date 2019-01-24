@@ -139,6 +139,9 @@ body {
   }
   input{
     border: none;
+    @media screen and (max-width: 767px){
+      width: 90%;
+    }
   }
   .generate-button-disabled{
     padding: 12px 35px;

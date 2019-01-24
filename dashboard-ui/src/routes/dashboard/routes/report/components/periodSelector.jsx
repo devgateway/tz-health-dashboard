@@ -100,7 +100,7 @@ componentDidMount() {
     }
 
     return (<div className="period-selector-container">
-      <div className="">
+      <div className="period-selector-wrapper">
         <div className="period-type-selector">
           <select value={periodType} className="" onChange={e => this.onChangeType(e)}>
             <option value="monthly">{t("Monthly")}</option>
