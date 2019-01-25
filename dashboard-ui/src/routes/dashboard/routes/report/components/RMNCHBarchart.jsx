@@ -102,7 +102,7 @@ export default class RMNCHChart extends React.Component {
     })
     const data = [{
         x: RMNCHCategories,
-        y: RMNCHData.map(d => d.totalPrevPeriod !== -1 ? d.totalPrevPeriod : 0),
+        y: RMNCHData.map(d => d.totalPrevPeriod === -1 ? null : d.totalPrevPeriod),
         name: prevLabel,
         type: 'bar',
         marker:{
@@ -110,7 +110,7 @@ export default class RMNCHChart extends React.Component {
         },
     }, {
         x: RMNCHCategories,
-        y: RMNCHData.map(d => d.value !== -1 ? d.value : 0),
+        y: RMNCHData.map(d => d.value === -1 ? null : d.value),
         name: currentLabel,
         type: 'bar',
         marker:{

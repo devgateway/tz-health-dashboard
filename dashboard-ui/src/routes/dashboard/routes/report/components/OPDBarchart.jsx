@@ -103,7 +103,7 @@ export default class OPDChart extends React.Component {
       }
       chartData.push({
         x: [`${OPDLabel} (${prevLabel})`, `${OPDLabel} (${currentLabel})`],
-        y: [(d.ranges.totalUnder5Prev !== -1 ? d.ranges.totalUnder5Prev : 0), (d.ranges.totalUnder5 !== -1 ? d.ranges.totalUnder5 : 0)],
+        y: [(d.ranges.totalUnder5Prev === -1 ? null : d.ranges.totalUnder5Prev), (d.ranges.totalUnder5 === -1 ? null : d.ranges.totalUnder5)],
         width: 0.6,
         //offset: -0.4,
         type: "bar",
@@ -117,7 +117,7 @@ export default class OPDChart extends React.Component {
       })
       chartData.push({
         x: [`${OPDLabel} (${prevLabel})`, `${OPDLabel} (${currentLabel})`],
-        y: [(d.ranges.total5to60Prev !== -1 ? d.ranges.total5to60Prev : 0), (d.ranges.total5to60 !== -1 ? d.ranges.total5to60 : 0)],
+        y: [(d.ranges.total5to60Prev === -1 ? null : d.ranges.total5to60Prev), (d.ranges.total5to60 === -1 ? null : d.ranges.total5to60)],
         width: 0.6,
         //offset: -0.4,
         type: "bar",
@@ -131,7 +131,7 @@ export default class OPDChart extends React.Component {
       })
       chartData.push({
         x: [`${OPDLabel} (${prevLabel})`, `${OPDLabel} (${currentLabel})`],
-        y: [(d.ranges.totalAbove60Prev !== -1 ? d.ranges.totalAbove60Prev : 0), (d.ranges.totalAbove60 !== -1 ? d.ranges.totalAbove60 : 0)],
+        y: [(d.ranges.totalAbove60Prev === -1 ? null : d.ranges.totalAbove60Prev), (d.ranges.totalAbove60 === -1 ? null : d.ranges.totalAbove60)],
         width: 0.6,
         //offset: -0.4,
         type: "bar",
@@ -164,6 +164,7 @@ export default class OPDChart extends React.Component {
     const {prevLabel, currentLabel} = getPeriodLabels(period)
     const {layout, config, data} = this.generateChartData()
     const key = new Date().getTime()
+    
     return (
       <div className="chart" ref="chartContainer">
         <div className="chart-legends">
