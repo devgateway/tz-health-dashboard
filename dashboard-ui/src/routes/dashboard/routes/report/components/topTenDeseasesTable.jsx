@@ -66,7 +66,7 @@ class TopTenDeseases extends React.Component {
     }
     return (
       <div className="top-ten-deseases">
-        <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName} <Trans>Ward</Trans></div>
+        <div className="sub-title"><Trans>Out-Patient Diseases (OPD) at</Trans> {facilityName} </div>
         <div className="download">
           <a className="csv" href={getDownloadURI(type,'diagnoses','csv', id, period.toJS(), language)} target="_blank"></a>
           <a className="json" href={getDownloadURI(type,'diagnoses','json', id, period.toJS(), language)} target="_blank"></a>
@@ -95,7 +95,7 @@ class TopTenDeseases extends React.Component {
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'5-60'}</div>}</td>
                   <td className="current-period-sub-header-partial">{currentExpanded && <div><Trans>Age</Trans>{'>60'}</div>}</td>
                   <td className="current-period-sub-header"><Trans>Count</Trans></td>
-                  <td className="previous-period-sub-header"><Trans>in Total Cases since</Trans> {prevLabel}</td>
+                  <td className="previous-period-sub-header"><Trans>since</Trans> {prevLabel}</td>
                 </tr>
                 {
                   deseases.map((it) => {

@@ -284,7 +284,7 @@ class WardLayout extends React.Component {
             </div>
           </div>
           <div className={(reportType === 'facility' && facility.get('selected')) || (reportType === 'ward' && ward.get('selected')) ? 'step-two-box' : 'step-two-box disabled'}>
-            <div className="step-descriptor"><div><Trans>Step Two</Trans>: </div><b><Trans>Select a Timeframe</Trans></b></div>
+            <div className="step-descriptor"><div><Trans>Step Two</Trans>: </div><b> <Trans>Select a Timeframe</Trans></b></div>
             <div className="generator-period">
               <div className={`period-header-${reportType}`}><Trans>Date Filter</Trans></div>
               <div className="period-paragraph"><Trans>After selecting a {reportType} select the time period (yearly, quarterly, or monthly) and desired dates</Trans></div>

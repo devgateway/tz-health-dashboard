@@ -121,6 +121,7 @@ export const getMapShape = (facilityData) => {
 export const getMapPoints = (facilityData) => {
   return (dispatch, getState) => {
     const detailedType = facilityData.getIn(['detailedType', 'dhis2Id'])
+    const facilityType = facilityData.getIn(['facilityType'])
     const typeMapping = getState().getIn(['dashboard', 'typeMapping']).toJS()
     const typeDetails = typeMapping.find(t => t.dhis2Id === detailedType)
     const boundaryLevel = facilityData.get('boundaryLevel')
@@ -137,8 +138,14 @@ export const getMapPoints = (facilityData) => {
         break;
     }
     const typeDetailsToFilter = typeMapping.map(t => {
-      if (t.maskType === typeDetails.maskType) {
-        return t.id
+      if (typeDetails){
+        if (t.maskType === typeDetails.maskType) {
+          return t.id
+        }
+      } else {
+        if (t.maskType === facilityType) {
+          return t.id
+        }
       }
     })
     params['detailedType'] = typeDetailsToFilter.filter(Boolean).join()
