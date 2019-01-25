@@ -111,7 +111,7 @@ export default class OPDChart extends React.Component {
         showlegend: false,
         barmode: 'stack', 
         marker:{
-          color: ['#fbdbb7', '#f8c287']
+          color: ['#EBA963', '#D16924']
         }
       })
       chartData.push({
