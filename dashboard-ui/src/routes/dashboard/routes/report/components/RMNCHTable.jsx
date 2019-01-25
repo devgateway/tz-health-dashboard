@@ -49,7 +49,7 @@ class RMNCHTable extends React.Component {
 
       return (
       <div className="RMNCH-box">
-        <div className="sub-title"><Trans>Reproductive Maternal, Newborn and Child Health at</Trans> {facilityName} <Trans>Ward</Trans></div>
+        <div className="sub-title"><Trans>Reproductive Maternal, Newborn and Child Health at</Trans> {facilityName}</div>
         <div className="download">
           <a className="csv" href={getDownloadURI(type,'rmnch','csv', id, period.toJS(), language)} target="_blank"></a>
           <a className="json" href={getDownloadURI(type,'rmnch','json', id, period.toJS(), language)} target="_blank"></a>
