@@ -171,8 +171,8 @@ export default class OPDChart extends React.Component {
           
           <div className="legend-group">
           <div className="legend-sub-group">  
-          <div className="legend-color" style={{'background': '#fbdbb7'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
-          <div className="legend-color" style={{'background': '#f8c287'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
+          <div className="legend-color" style={{'background': '#EBA963'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
+          <div className="legend-color" style={{'background': '#D16924'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
           </div>
           </div>
         
