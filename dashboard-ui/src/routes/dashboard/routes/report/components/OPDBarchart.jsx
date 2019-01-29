@@ -166,7 +166,7 @@ export default class OPDChart extends React.Component {
     const key = new Date().getTime()
     
     return (
-      <div className="chart" ref="chartContainer">
+      <div className="chart" ref="chartContainer" id="opd-chart" style={{'paddingBottom': '20px'}}>
         <div className="chart-legends">
           
           <div className="legend-group">

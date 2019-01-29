@@ -127,7 +127,7 @@ export default class RMNCHChart extends React.Component {
     const key = new Date().getTime()
     
     return (
-      <div className="chart" ref="chartContainer">
+      <div className="chart" ref="chartContainer" id="rmnch-chart" style={{'paddingBottom': '20px'}}>
         <div className="chart-legends">
           <div className="legend-color" style={{'background': '#F8C58C'}}/><div className="legend-label">{prevLabel}</div>
           <div className="legend-color" style={{'background': '#FF8863'}}/><div className="legend-label">{currentLabel}</div>

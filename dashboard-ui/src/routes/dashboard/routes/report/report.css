@@ -525,7 +525,9 @@
   position: relative;
   width: 600px; }
   .map .map-container {
-    float: right; }
+    float: right;
+    width: 580px;
+    height: 450px; }
     @media screen and (max-width: 1024px) {
       .map .map-container {
         float: none;
