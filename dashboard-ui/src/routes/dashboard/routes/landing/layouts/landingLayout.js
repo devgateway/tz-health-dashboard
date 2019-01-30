@@ -25,7 +25,7 @@ class LandingLayout extends React.Component {
   	  <div class="landing-page-wrapper">
       <div className="landing-page">
   	    <div className="landing-title"><Trans>Data Report Generator</Trans></div>
-  	    <div className="landing-paragrph"><Trans>This dashboard visualizes key information from Tanzania’s health information management system, dhis2. You can explore and download subnational data on service populations; out-patient diseases; reproductive, maternal, newborn, and child health; health financing; staffing; and community deaths. Use the buttons below to dive deeper into the data, by either an individual facility or ward.</Trans></div>
+  	    <div className="landing-paragrph"><Trans>Landing description</Trans></div>
   	   	<div className="report-options">
         <div className="button-description"><Trans>Use the buttons below</Trans></div>
   		    <div onClick={e => this.context.router.history.push(`${lan}/generate/facility`)} className="report-box first">
