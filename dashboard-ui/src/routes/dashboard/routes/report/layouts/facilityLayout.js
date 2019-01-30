@@ -146,7 +146,9 @@ class Layout extends React.Component {
           <div className="population-box">
             <div className="info">
               <div className="sub-title"><Trans>Availability of Health Services</Trans></div>
-              <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans> <Trans>in</Trans> {admLevelName} <Trans>{boundaryLevel}</Trans></div>
+              <div className="total-pop"><span>{totalPopulation} </span>
+               <Trans>Total Population</Trans>  <Trans>in</Trans>  {(lan=="sw")?<Trans>{boundaryLevel?boundaryLevel.toLowerCase():""}</Trans>:""} {(lan=="sw")?"ya":""} {admLevelName} {(lan=="en")?<Trans>{boundaryLevel}</Trans>:""}
+              </div>
 
               <div className="ages">
                 <div className="value-label"><div><Trans>by Gender</Trans></div></div>
@@ -154,7 +156,7 @@ class Layout extends React.Component {
                 <div className="value-item"><div><Trans>Female</Trans></div><div>{totalPopFemale}</div></div>
               </div>
               <div className="population-disclaimer"><Trans>Source</Trans>: <Trans>census 2012</Trans></div>
-              {population.getIn(['data','total']) > 0 ? 
+              {population.getIn(['data','total']) > 0 ?
                 <div>
                   <div className="ages">
                     <div className="total-pop"><span>{population.getIn(['data','total'])}</span> <Trans>Total population in facility catchment</Trans></div>
@@ -180,11 +182,11 @@ class Layout extends React.Component {
                   </div>
                   <div className="legend-item">
                     <div className="other-icon"/>
-                    <div className="legend-name"><Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same {boundaryLevel}</Trans></div>
+                    <div className="legend-name"> <Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same {boundaryLevel}</Trans></div>
                   </div>
                   <div className="legend-item">
                     <div className="boundary-icon"/>
-                    <div className="legend-name"><Trans>{boundaryLevel} boundary</Trans></div>          
+                    <div className="legend-name"><Trans>{boundaryLevel} boundary</Trans></div>
                   </div>
                   {shapeBoundary ?
                     <div className="legend-item">

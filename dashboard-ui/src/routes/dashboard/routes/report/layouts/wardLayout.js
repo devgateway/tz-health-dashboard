@@ -82,7 +82,7 @@ class WardLayout extends React.Component {
     const totalParastatal = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'G6Mg194YpDy').length
     const totalDefence = wardFacilities.filter(f => f.ownership && f.ownership.dhis2Id === 'iTwLKcbi6BX').length
     const totalUndefined=  wardFacilities.filter(f => !f.ownership ).length
-    
+
     //totals by facility types
     const hospitalDHIS2ids = typeMapping.filter(f => f.maskType === 'Hospital').map(f => f.dhis2Id)
     const totalHospital = wardFacilities.filter(f => f.detailedType && hospitalDHIS2ids.indexOf(f.detailedType.dhis2Id) !== -1).length
@@ -114,7 +114,8 @@ class WardLayout extends React.Component {
     return (
       <div>
         <div className="report-header">
-          <div className="ward-name">{wardName} <Trans>Ward</Trans></div>
+          <div className="ward-name">{lan=="sw"?<Trans>Ward</Trans>:""} {lan=="sw"?"Ya":""} {wardName} {lan=="en"?<Trans>Ward</Trans>:""}
+          </div>
           <div title={`${i18n.t('Print as PDF')}`} className="print-icon" onClick={e => this.printReport()}></div>
           <CopyShare/>
           <BackButton/>
@@ -130,14 +131,17 @@ class WardLayout extends React.Component {
             <div>
               <div className="info">
                 <div className="sub-title"><Trans>Availability of Health Services</Trans></div>
-                <div className="total-pop"><span>{totalPopulation}</span> <Trans>Total Population</Trans> <Trans>in</Trans> {wardName} <Trans>Ward</Trans></div>
+                <div className="total-pop">
+                <span>{totalPopulation}</span> <Trans>Total Population</Trans>  <Trans>in</Trans>  {(lan=="sw")?<Trans>ward</Trans>:""} {(lan=="sw")?"ya":""} {wardName} {(lan=="en")?<Trans>ward</Trans>:""}
+
+                </div>
 
                 <div className="ages">
                   <div className="value-label"><div><Trans>by Gender</Trans></div></div>
                   <div className="value-item"><div><Trans>Male</Trans></div><div>{totalPopMale}</div></div>
                   <div className="value-item"><div><Trans>Female</Trans></div><div>{totalPopFemale}</div></div>
                 </div>
-                <div className="population-disclaimer"><Trans>Source: census 2012</Trans></div>
+                <div className="population-disclaimer"><Trans>census 2012</Trans></div>
 
                 {/*}
                 <div className="ages">
@@ -149,7 +153,8 @@ class WardLayout extends React.Component {
                 */}
               </div>
               <div className="info">
-                <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans> <Trans>in</Trans> {wardName} <Trans>Ward</Trans></div>
+                <div className="total-pop"><span>{wardFacilities.length}</span> <Trans>Total Health Facilities</Trans> <Trans>in</Trans>  {(lan=="sw")?<Trans>ward</Trans>:""} {(lan=="sw")?"ya":""} {wardName} {(lan=="en")?<Trans>ward</Trans>:""}
+                </div>
                 <div className="types">
                   <div className="value-item"><div><Trans>Public</Trans></div><div>{totalPublic}</div></div>
                   <div className="value-item"><div><Trans>Private</Trans></div><div>{totalPrivate}</div></div>
@@ -163,7 +168,7 @@ class WardLayout extends React.Component {
                 <div className="types">
                   <div className="value-item"><div><Trans>Hospital</Trans></div><div>{totalHospital}</div></div>
                   <div className="value-item"><div><Trans>Health Center</Trans></div><div>{totalHealthCenter}</div></div>
-                  <div className="value-item"><div><Trans>Clinic</Trans></div><div>{totalClinic}</div></div>
+                  <div className="value-item"><div><Trans>Clinics</Trans></div><div>{totalClinic}</div></div>
                   <div className="value-item"><div><Trans>Dispensary</Trans></div><div>{totalDispensary}</div></div>
                   {totalTypeUndefined >0?<div className="value-item"><div><Trans>Undefined</Trans></div><div>{totalTypeUndefined}</div></div>:null}
                 </div>
@@ -179,7 +184,10 @@ class WardLayout extends React.Component {
                 <div>
                   <div className="legend-item">
                     <div className="current-icon"/>
-                    <div className="legend-name"><Trans>Facility in</Trans> {wardName} <Trans>Ward</Trans></div>
+                    <div className="legend-name"><Trans>Facility in</Trans> {(lan=="sw")?<Trans>ward</Trans>:""} {(lan=="sw")?"ya":""} {wardName} {(lan=="en")?<Trans>ward</Trans>:""}
+
+                    </div>
+
                   </div>
                   <div className="legend-item">
                     <div className="other-icon"/>
@@ -202,7 +210,7 @@ class WardLayout extends React.Component {
           <TopTenDeseases
             type="wards"
             period={period} id={id}
-            facilityName={`${wardName} ${i18n.t('ward')}`}
+            facilityName={`${(lan=='sw')?i18n.t('ward'):''} ${(lan=='sw')?"ya":''}  ${wardName} ${(lan=='en')?i18n.t('ward'):''}`}
             onSetOPDView={onSetOPDView}
             OPDView={OPDView}
             diagnoses={this.props.diagnoses}/>
@@ -210,7 +218,8 @@ class WardLayout extends React.Component {
           <RMNCHTable
             type="wards"
             period={period} id={id}
-            facilityName={`${wardName} ${i18n.t('ward')}`}
+            facilityName={`${(lan=='sw')?i18n.t('ward'):''} ${(lan=='sw')?"ya":''}  ${wardName} ${(lan=='en')?i18n.t('ward'):''}`}
+
             onSetRMNCHView={onSetRMNCHView}
             RMNCHView={RMNCHView}
             RMNCH={this.props.RMNCH}/>
