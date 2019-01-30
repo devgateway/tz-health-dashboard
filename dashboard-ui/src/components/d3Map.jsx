@@ -160,7 +160,7 @@ class D3Map extends React.Component {
   render() {
 
     const {shapeFeatures, pointFeatures, children} = this.props
-    return (<div className="map-container" ref="mapElement">
+    return (<div className="map-container" ref="mapElement"  id="map1">
       {
         shapeFeatures || pointFeatures
           ? ""

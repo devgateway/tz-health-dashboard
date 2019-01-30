@@ -166,13 +166,13 @@ export default class OPDChart extends React.Component {
     const key = new Date().getTime()
     
     return (
-      <div className="chart" ref="chartContainer">
+      <div className="chart" ref="chartContainer" id="opd-chart" style={{'paddingBottom': '20px'}}>
         <div className="chart-legends">
           
           <div className="legend-group">
           <div className="legend-sub-group">  
-          <div className="legend-color" style={{'background': '#fbdbb7'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
-          <div className="legend-color" style={{'background': '#f8c287'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
+          <div className="legend-color" style={{'background': '#EBA963'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${prevLabel})`}</div>
+          <div className="legend-color" style={{'background': '#D16924'}}/><div className="legend-label">{`${i18n.t('Age')}<5 (${currentLabel})`}</div>
           </div>
           </div>
         

@@ -694,6 +694,8 @@
 
 	.map-container {
 		float: right;
+		width: 580px;
+		height: 450px;
 		@media screen and (max-width: 1024px){
 			float: none;
 			margin-top: 20px;

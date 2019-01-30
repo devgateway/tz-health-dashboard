@@ -169,7 +169,7 @@ class WardLayout extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="map" id="map1">
+            <div className="map">
               {mapShape.getIn(['features']) ?
                 <D3Map width="600" height="460" colors={["#FF8C42", '#0C4700']} shapeFillOpacity="0" shapeStrokeWidth='2'
                   shapeStrokeColor="#9C8568" shapeFeatures={mapShape.toJS()} pointFeatures={pointFeatures} showBasemap={true}
