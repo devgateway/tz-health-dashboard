@@ -52,6 +52,7 @@ i18n.use(LanguageDetector).init({
         "Ward": "Ward",
         "District": "District",
         "Region": "Region",
+        "region": "region",
         "Availability of Health Services in": "Availability of Health Services in",
         "Availability of Health Services": "Availability of Health Services",
         "in": "in",
@@ -64,8 +65,11 @@ i18n.use(LanguageDetector).init({
         "in same region": "in same region",
         "Other Facility in ward": "Other Facility in ward",
         "Legend": "Legend",
-        "District boundary": "District boundary",
-        "Ward boundary": "Ward boundary",
+
+        "district boundary": "District boundary",
+        "ward boundary": "Ward boundary",
+        "region boundary": "Region boundary",
+
         "Reproductive Maternal, Newborn and Child Health at": "Reproductive Maternal, Newborn and Child Health in",
         "Total Health Facilities": "Total Health Facilities",
         "Public": "Public",
@@ -161,6 +165,12 @@ i18n.use(LanguageDetector).init({
         "Source": "Source",
         "census 2012": "Source: census:  2012",
         "Total population in facility catchment": "Total population in facility catchment",
+        "Others":"Others",
+        "hospitals":"hospitals ",
+        "health centers":"health centers",
+        "clinics":"clinics",
+        "dispensaries":"dispensaries",
+        "in same":"in same"
       }
     },
     sw: {
@@ -210,6 +220,7 @@ i18n.use(LanguageDetector).init({
         "Ward": "Kata",
         "District": "Wilaya",
         "Region": "Mkoa",
+        "region": "mkoa",
         "Availability of Health Services in": "Upatikanaji wa Huduma za Afya katika ",
         "Availability of Health Services": "Upatikanaji wa Huduma za Afya ",
         "in": "katika",
@@ -222,8 +233,10 @@ i18n.use(LanguageDetector).init({
         "in same region": "Katika mkoa huo",
         "Other Facility in ward": "Vituo katika kata nyingine",
         "Legend": "Ufunguo",
-        "District boundary": "Mpaka wa Wilaya",
-        "Ward boundary": "Mipaka ya kata",
+        "district boundary": "Mipaka ya Wilaya",
+        "ward boundary": "Mipaka ya Kata",
+        "region boundary": "Mipaka ya Mkoa",
+
         "Reproductive Maternal, Newborn and Child Health at": "Afya ya uzazi, mama, mtoto mchanga na afya ya mtoto katika ",
         "Total Health Facilities": "Idadi ya vituo vya afya",
         "Public": "Umma",
@@ -321,6 +334,12 @@ i18n.use(LanguageDetector).init({
         "Source": "Kutoka",
         "census 2012": "Tarakimu ya sensa 2012",
         "Total population in facility catchment": "Jumla ya idadi ya watu wanaopaswa kuhudumiwa kwa kituo hiki",
+        "Others":"Nyingine",
+        "hospitals":"hospitali ",
+        "health centers":"vituo vya afya",
+        "clinics":"kliniki",
+        "dispensaries":"zahanati",
+        "in same":"katika"
       }
     }
   },

@@ -182,7 +182,15 @@ class Layout extends React.Component {
                   </div>
                   <div className="legend-item">
                     <div className="other-icon"/>
-                    <div className="legend-name"> <Trans>Other</Trans> <Trans>{facilityType}</Trans> <Trans>in same {boundaryLevel}</Trans></div>
+                    <div className="legend-name">
+                    {(lan=="en")?<Trans>Others</Trans>:""}
+                    <span> </span>
+                    {facilityType=="Hospital"?<Trans>hospitals</Trans>:""}
+                    {facilityType=="Health Center"?<Trans>health centers</Trans>:""}
+                    {facilityType=="Clinic"?<Trans>clinics</Trans>:""}
+                    {facilityType=="Dispensary"?<Trans>dispensaries</Trans>:""}  {(lan=="sw")?<Trans>Others</Trans>:""} <Trans>in same</Trans> <Trans>{boundaryLevel}</Trans>
+
+                    </div>
                   </div>
                   <div className="legend-item">
                     <div className="boundary-icon"/>
