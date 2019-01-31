@@ -32,14 +32,14 @@ class LandingLayout extends React.Component {
             <div className="facility-icon"></div>
             <div className="">
               <div className="option-title"><Trans>Facility Report Generator</Trans></div>
-              <div className="option-paragraph"><Trans>Search and filter facility-level data to generate a monthly, quarterly, or annual health data report.</Trans></div>
+              <div className="option-paragraph"><Trans>Facility Report Description</Trans></div>
             </div>
           </div>
           <div onClick={e => this.context.router.history.push(`${lan}/generate/ward`)} className="report-box">
             <div className="ward-icon"></div>
             <div>
               <div className="option-title"><Trans>Ward Report Generator</Trans></div>
-              <div className="option-paragraph"><Trans>Search and filter ward-level data to generate a monthly, quarterly, or annual health data report.</Trans></div>
+              <div className="option-paragraph"><Trans>Ward Report Description</Trans></div>
             </div>
           </div>
   		  </div>

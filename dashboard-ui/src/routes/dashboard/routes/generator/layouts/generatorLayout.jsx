@@ -218,9 +218,9 @@ class WardLayout extends React.Component {
           </div>
           <div className="dashed-separator"></div>
           <div className="step-one-box">
-            <div className="step-descriptor"><div><Trans>Step one</Trans>: </div><b> <Trans>Select a {reportType}</Trans></b> <Trans>by typing it name in the</Trans> <i><Trans>{reportType} search</Trans> </i>below</div>
+            <div className="step-descriptor"><div><Trans>Step one</Trans>: </div><b> <Trans>Select a {reportType}</Trans></b> <Trans>by typing it name in the</Trans> <i><Trans>{reportType} search</Trans> </i><Trans>below</Trans></div>
             <TextSearch searchType={reportType} onSelection={e => this.onKeywordSearchSelection(e)} onRef={ref => (this.child = ref)}/>
-            <div className="step-descriptor"><div><Trans>OR</Trans>: </div><b> <Trans>Select a {reportType}</Trans></b> <Trans>by location using the</Trans> <i><Trans>{reportType} filter</Trans> </i>box or map below</div>
+            <div className="step-descriptor"><div><Trans>OR</Trans>: </div><b> <Trans>Select a {reportType}</Trans></b> <Trans>by location using the</Trans> <i><Trans>{reportType} filter</Trans> </i><Trans>box or map below</Trans></div>
             <div className="generator-by-path">
               <div className="generator-dropdowns">
                 <div className={`report-type-${reportType}`}>
@@ -287,7 +287,7 @@ class WardLayout extends React.Component {
             <div className="step-descriptor"><div><Trans>Step Two</Trans>: </div><b> <Trans>Select a Timeframe</Trans></b></div>
             <div className="generator-period">
               <div className={`period-header-${reportType}`}><Trans>Date Filter</Trans></div>
-              <div className="period-paragraph"><Trans>After selecting a {reportType} select the time period (yearly, quarterly, or monthly) and desired dates</Trans></div>
+              <div className="period-paragraph"><Trans>Selecting period message {reportType}</Trans></div>
               <div className="path-dropdown">
                 <div className="dropdown-title"><Trans>Time Period</Trans></div>
                 <div className="">
@@ -327,7 +327,7 @@ class WardLayout extends React.Component {
           <div className="info-box">
             <div className="info-icon"></div>
             <div className="info-paragraph">
-            <Trans>The </Trans><div className="generate"> <Trans>Generate Report</Trans></div> <Trans>Help {reportType} Report Generator.</Trans>
+            <Trans>The</Trans><div className="generate"> <Trans>Generate Report</Trans></div> <Trans>Help {reportType} Report Generator.</Trans>
             </div>
           </div>
         </div>
