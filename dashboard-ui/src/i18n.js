@@ -184,7 +184,7 @@ i18n.use(LanguageDetector).init({
         "Age":"Umri",
         "in Total Cases since":"katika Idadi ya Wagonjwa Wote tangu",
         "Change":"Badilisha",
-        "Data Report Generator": "Jenerator ya taarifa ya data",
+        "Data Report Generator": "Muundo wa taarifa",
         "Landing description": "Dashibodi hii inaonesha habari muhimu kutoka kwenye mfumo wa taarifa za afya Tanzania, dhis2. Unaweza kuchunguza na kupakua taarifa za wilaya na kata juu ya idadi ya wanaohudumiwa, magonjwa ya nje, huduma za uzazi na afya ya mama na mtoto.",
         "Use the buttons below":"Bonyeza kitufe kifuatacho kuingia kiundani kupata taarifa za kutuo binafsi au kwa kata.",
         "Facility Report Generator": "Muundo wa taarifa ya kituo",
